@@ -8,7 +8,10 @@ import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
+        company_name: '',
+        first_name: '',
+        last_name: '',
+        address: '',
         email: '',
         password: '',
         password_confirmation: '',
@@ -32,20 +35,100 @@ export default function Register() {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="company_name">Company Name <small>(facultative)</small></InputLabel>
 
                     <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
+                        id="company_name"
+                        name="company_name"
+                        value={data.company_name}
                         className="mt-1 block w-full"
-                        autoComplete="name"
+                        autoComplete="organization"
                         isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
+                        onChange={(e) => setData('company_name', e.target.value)}
+                    />
+
+                    <InputError message={errors.company_name} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="first_name" value="First Name" />
+
+                    <TextInput
+                        id="first_name"
+                        name="first_name"
+                        value={data.first_name}
+                        className="mt-1 block w-full"
+                        autoComplete="given-name"
+                        onChange={(e) => setData('first_name', e.target.value)}
                         required
                     />
 
-                    <InputError message={errors.name} className="mt-2" />
+                    <InputError message={errors.first_name} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="last_name" value="Last Name" />
+
+                    <TextInput
+                        id="last_name"
+                        name="last_name"
+                        value={data.last_name}
+                        className="mt-1 block w-full"
+                        autoComplete="family-name"
+                        onChange={(e) => setData('last_name', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.last_name} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="address" value="Address" />
+
+                    <TextInput
+                        id="address"
+                        name="address"
+                        value={data.address}
+                        className="mt-1 block w-full"
+                        autoComplete="street-address"
+                        onChange={(e) => setData('address', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.address} className="mt-2" />
+                </div>
+
+                <div className="flex gap-4 mt-4">
+                    <div className='basis-3/5'>
+                        <InputLabel htmlFor="city" value="City" />
+
+                        <TextInput
+                            id="city"
+                            name="city"
+                            value={data.city}
+                            className="mt-1 block w-full"
+                            autoComplete="address-level2"
+                            onChange={(e) => setData('city', e.target.value)}
+                            required
+                        />
+
+                        <InputError message={errors.city} className="mt-2" />
+                    </div>
+                    <div className='basis-2/5'>
+                        <InputLabel htmlFor="npa" value="NPA" />
+
+                        <TextInput
+                            id="npa"
+                            name="npa"
+                            value={data.npa}
+                            className="mt-1 block w-full"
+                            autoComplete="postal-code"
+                            onChange={(e) => setData('npa', e.target.value)}
+                            required
+                        />
+
+                        <InputError message={errors.npa} className="mt-2" />
+                    </div>
                 </div>
 
                 <div className="mt-4">
@@ -91,7 +174,6 @@ export default function Register() {
                         name="password_confirmation"
                         value={data.password_confirmation}
                         className="mt-1 block w-full"
-                        autoComplete="new-password"
                         onChange={(e) => setData('password_confirmation', e.target.value)}
                         required
                     />
