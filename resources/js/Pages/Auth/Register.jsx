@@ -12,6 +12,8 @@ export default function Register() {
         first_name: '',
         last_name: '',
         address: '',
+        city: '',
+        npa: '',
         email: '',
         password: '',
         password_confirmation: '',
