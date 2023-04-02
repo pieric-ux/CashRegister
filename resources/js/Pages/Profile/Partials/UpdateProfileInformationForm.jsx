@@ -9,13 +9,13 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     const user = usePage().props.auth.user;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
-        company_name: user.company_name,
+        company_name: user.company_name || '',
         first_name: user.first_name,
         last_name: user.last_name,
         address: user.address,
         npa: user.npa,
         city: user.city,
-        phone: user.phone,
+        phone: user.phone || '',
         email: user.email,
     });
 
