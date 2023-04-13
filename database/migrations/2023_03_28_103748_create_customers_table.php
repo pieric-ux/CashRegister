@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -26,6 +27,10 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::table('customers')->insert([
+            ['company_name' => 'TechInnovate', 'first_name' => 'Pieric', 'last_name' => 'Demont', 'address' => 'Av. Maurice-Troillet 63', 'npa' => '1950', 'city' => 'Sion', 'email' => '123@123.ch', 'password' => '$2y$10$Z7YOgW.eMXRI7ggTUaxp3.Tm4L3Z87MwrK.nghP3WGVsuG772.Yzu'],
+        ]);
     }
 
     /**
