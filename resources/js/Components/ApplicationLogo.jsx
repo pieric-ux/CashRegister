@@ -1,6 +1,6 @@
 export default function ApplicationLogo(props) {
     return (
-        <svg id="Logo_Rectangle" data-name="Logo Rectangle" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="185.762" height="50" viewBox="0 0 185.762 50">
+        <svg {...props} id="Logo_Rectangle" data-name="Logo Rectangle" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="185.762" height="50" viewBox="0 0 185.762 50">
             <defs>
                 <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
                     <stop offset="0" stopColor="#d0ebfc" />
