@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import ApplicationLogoDark from './ApplicationLogoDark';
 import SideBarLink from "@/Components/SideBarLink";
 
 export default function SideBar() {
@@ -8,7 +9,8 @@ export default function SideBar() {
             {/* SideBar Header*/}
             <header className="p-4">
                 <Link href="/">
-                    <ApplicationLogo className="block m-auto" />
+                    <ApplicationLogo className="block m-auto dark:hidden" />
+                    <ApplicationLogoDark className="hidden dark:block m-auto" />
                 </Link>
             </header>
             {/* SideBar Header*/}
