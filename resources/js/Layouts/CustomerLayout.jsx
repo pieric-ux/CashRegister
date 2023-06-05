@@ -4,7 +4,7 @@ import Sidebar from "@/Components/SideBar";
 export default function CustomerLayout({ user, children }) {
 
     return (
-        <div className="bg-gray-100 dark:bg-gray-900">
+        <div className="bg-gray-100 dark:bg-gray-900 transition ease-linear duration-300">
 
             <div className="flex h-screen overflow-hidden">
                 {/* SideBar Start*/}

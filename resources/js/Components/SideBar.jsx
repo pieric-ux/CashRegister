@@ -4,7 +4,7 @@ import SideBarLink from "@/Components/SideBarLink";
 
 export default function SideBar() {
     return (
-        <aside className="hidden sm:flex flex-col z-50 w-72 min-h-screen overflow-y-hidden bg-gray-50 dark:bg-gray-800">
+        <aside className="hidden sm:flex flex-col z-50 w-72 min-h-screen overflow-y-hidden bg-gray-50 dark:bg-gray-800 transition ease-linear duration-300">
             {/* SideBar Header*/}
             <header className="p-4">
                 <Link href="/">

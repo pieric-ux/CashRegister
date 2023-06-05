@@ -13,18 +13,18 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
             <Head title="Profile" />
 
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
                     <UpdateProfileInformationForm
                         mustVerifyEmail={mustVerifyEmail}
                         status={status}
                         className="max-w-xl"
                     />
                 </div>
-                <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
                     <UpdatePasswordForm className="max-w-xl" />
                 </div>
 
-                <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
                     <DeleteUserForm className="max-w-xl" />
                 </div>
             </div>

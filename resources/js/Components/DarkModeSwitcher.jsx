@@ -1,29 +1,13 @@
-import { useEffect } from "react";
 import useColorMode from "@/Hooks/useColorMode";
 
 export default function DarkModeSwitcher() {
+    {/* Importe et utilise le hook useColorMode personnalisé */ }
     const [colorMode, setColorMode] = useColorMode();
 
-    useEffect(() => {
-        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        const handleColorSchemeChange = event => {
-            const prefersDarkMode = event.matches;
-            const newTheme = prefersDarkMode ? 'dark' : 'light';
-            setColorMode(newTheme);
-        };
-
-        darkModeMediaQuery.addEventListener('change', handleColorSchemeChange);
-        handleColorSchemeChange(darkModeMediaQuery);
-
-        return () => {
-            darkModeMediaQuery.removeEventListener('change', handleColorSchemeChange);
-        };
-    }, [setColorMode]);
-
+    {/* Gère le changement de thème en alternant entre 'light' et 'dark' */ }
     const handleThemeChange = () => {
         const newTheme = colorMode === 'light' ? 'dark' : 'light';
         setColorMode(newTheme);
-        localStorage.setItem('theme', newTheme);
     };
 
     return (

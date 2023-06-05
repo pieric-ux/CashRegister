@@ -8,7 +8,7 @@ export default function Header({ user }) {
 
 
     return (
-        <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 drop-shadow-sm dark:drop-shadow-none">
+        <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 drop-shadow-sm dark:drop-shadow-none transition ease-linear duration-300">
             <div className="flex items-center place-content-end max-w-7xl h-20 mx-auto px-4 sm:gap-2 gap-4 sm:px-6 lg:px-8">
                 <DarkModeSwitcher />
                 <div className="hidden sm:flex ">
@@ -17,7 +17,7 @@ export default function Header({ user }) {
                             <span className="inline-flex rounded-md">
                                 <button
                                     type="button"
-                                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-900 dark:text-white bg-white dark:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none"
+                                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-900 dark:text-white bg-white dark:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none transition ease-linear duration-300"
                                 >
                                     {user.first_name}
 
