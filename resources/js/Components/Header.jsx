@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Dropdown from '@/Components/Dropdown';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import DarkModeSwitcher from './DarkModeSwitcher';
 
 export default function Header({ user }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
@@ -8,14 +9,15 @@ export default function Header({ user }) {
 
     return (
         <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 drop-shadow-sm dark:drop-shadow-none">
-            <div className="flex items-center place-content-end max-w-7xl h-20 mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center place-content-end max-w-7xl h-20 mx-auto px-4 sm:gap-2 gap-4 sm:px-6 lg:px-8">
+                <DarkModeSwitcher />
                 <div className="hidden sm:flex ">
                     <Dropdown>
                         <Dropdown.Trigger>
                             <span className="inline-flex rounded-md">
                                 <button
                                     type="button"
-                                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-900 dark:text-white bg-white dark:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none transition ease-in-out duration-150"
+                                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-900 dark:text-white bg-white dark:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none"
                                 >
                                     {user.first_name}
 
