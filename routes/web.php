@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -29,10 +30,20 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/applications', [ApplicationsController::class, 'index'])->name('applications.index');
+    Route::get('/applications/create', [ApplicationsController::class, 'create'])->name('applications.create');
+    Route::post('/applications', [ApplicationsController::class, 'store'])->name('applications.store');
+    Route::get('/applications/{app}', [ApplicationsController::class, 'show'])->name('applications.show');
+    Route::get('/applications/{app}/edit', [ApplicationsController::class, 'edit'])->name('applications.edit');
+    Route::patch('/applications/{app}', [ApplicationsController::class, 'update'])->name('applications.update');
+    Route::delete('/applications/{app}', [ApplicationsController::class, 'destroy'])->name('applications.destroy');
+});
+
+require __DIR__ . '/auth.php';
