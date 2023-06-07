@@ -40,10 +40,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/applications', [ApplicationsController::class, 'index'])->name('applications.index');
     Route::get('/applications/create', [ApplicationsController::class, 'create'])->name('applications.create');
     Route::post('/applications', [ApplicationsController::class, 'store'])->name('applications.store');
-    Route::get('/applications/{app}', [ApplicationsController::class, 'show'])->name('applications.show');
-    Route::get('/applications/{app}/edit', [ApplicationsController::class, 'edit'])->name('applications.edit');
-    Route::patch('/applications/{app}', [ApplicationsController::class, 'update'])->name('applications.update');
-    Route::delete('/applications/{app}', [ApplicationsController::class, 'destroy'])->name('applications.destroy');
+    Route::get('/{app}', [ApplicationsController::class, 'show'])->name('applications.show');
+    Route::get('/{app}/edit', [ApplicationsController::class, 'edit'])->name('applications.edit');
+    Route::patch('/{app}', [ApplicationsController::class, 'update'])->name('applications.update');
+    Route::delete('/{app}', [ApplicationsController::class, 'destroy'])->name('applications.destroy');
 });
 
 require __DIR__ . '/auth.php';

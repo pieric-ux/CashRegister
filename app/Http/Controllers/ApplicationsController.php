@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Applications\CreateApplicationRequest;
+use App\Http\Requests\Applications\ShowApplicationsRequest;
 use App\Http\Requests\Applications\UpdateApplicationRequest;
 use App\Models\CR_App;
 use Illuminate\Support\Facades\Auth;
@@ -39,20 +40,20 @@ class ApplicationsController extends Controller
     {
         $customerId = Auth::id();
 
-        $applications = new CR_App();
-        $applications->name = $request->input('name');
-        $applications->fk_customer_id = $customerId;
-        $applications->save();
+        CR_App::create([
+            'name' => $request->input('name'),
+            'fk_customer_id' => $customerId,
+        ]);
 
-        return Redirect::route('application.index');
+        return Redirect::route('applications.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(CR_App $app)
+    public function show(ShowApplicationsRequest $request, CR_App $app)
     {
-        return Inertia::render('Application/Show', [
+        return Inertia::render('Applications/Show', [
             'application' => $app,
         ]);
     }
