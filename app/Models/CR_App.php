@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class CR_App extends Model
 {
@@ -18,6 +19,7 @@ class CR_App extends Model
      */
     protected $fillable = [
         'name',
+        'slug',
         'fk_customer_id',
     ];
 
