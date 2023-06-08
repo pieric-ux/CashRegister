@@ -1,4 +1,5 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import ApplicationLogoDark from '@/Components/ApplicationLogoDark';
 import { Link } from '@inertiajs/react';
 
 export default function Guest({ children }) {
@@ -6,7 +7,8 @@ export default function Guest({ children }) {
         <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
             <div>
                 <Link href="/">
-                    <ApplicationLogo className="block m-auto" />
+                    <ApplicationLogo className="block m-auto dark:hidden" />
+                    <ApplicationLogoDark className="hidden dark:block m-auto" />
                 </Link>
             </div>
 

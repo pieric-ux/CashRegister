@@ -37,13 +37,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/applications', [ApplicationsController::class, 'index'])->name('applications.index');
-    Route::get('/applications/create', [ApplicationsController::class, 'create'])->name('applications.create');
-    Route::post('/applications', [ApplicationsController::class, 'store'])->name('applications.store');
-    Route::get('/{app}', [ApplicationsController::class, 'show'])->name('applications.show');
-    Route::get('/{app}/edit', [ApplicationsController::class, 'edit'])->name('applications.edit');
-    Route::patch('/{app}', [ApplicationsController::class, 'update'])->name('applications.update');
-    Route::delete('/{app}', [ApplicationsController::class, 'destroy'])->name('applications.destroy');
+    Route::get('/apps', [ApplicationsController::class, 'index'])->name('applications.index');
+    Route::get('/apps/create', [ApplicationsController::class, 'create'])->name('applications.create');
+    Route::post('/apps', [ApplicationsController::class, 'store'])->name('applications.store');
+    Route::get('/apps/{app}', [ApplicationsController::class, 'show'])->name('applications.show');
+    Route::get('/apps/{app}/edit', [ApplicationsController::class, 'edit'])->name('applications.edit');
+    Route::patch('/apps/{app}', [ApplicationsController::class, 'update'])->name('applications.update');
+    Route::delete('/apps/{app}', [ApplicationsController::class, 'destroy'])->name('applications.destroy');
 });
 
 require __DIR__ . '/auth.php';

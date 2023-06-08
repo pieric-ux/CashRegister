@@ -8,6 +8,7 @@ use App\Http\Requests\Applications\UpdateApplicationRequest;
 use App\Models\CR_App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class ApplicationsController extends Controller
@@ -42,6 +43,7 @@ class ApplicationsController extends Controller
 
         CR_App::create([
             'name' => $request->input('name'),
+            'slug' => Str::slug($request->input('name')),
             'fk_customer_id' => $customerId,
         ]);
 
