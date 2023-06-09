@@ -77,6 +77,7 @@ class ApplicationsController extends Controller
     {
 
         $app->name = $request->input('name');
+        $app->slug = Str::slug($request->input('name'));
         $app->save();
 
         return Redirect::route('applications.index');

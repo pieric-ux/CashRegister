@@ -7,9 +7,9 @@ import { Head, useForm } from '@inertiajs/react';
 import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
 
-export default function Create({ auth, status }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
+export default function Edit({ application, auth, status }) {
+    const { data, setData, patch, processing, errors, reset } = useForm({
+        name: application.name,
     });
 
     useEffect(() => {
@@ -27,14 +27,14 @@ export default function Create({ auth, status }) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('applications.store'));
+        patch(route('applications.update', application.slug));
     }
 
     return (
         <CustomerLayout user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Create Applications</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Edit {application.name}</h2>}
         >
-            <Head title="Create App" />
+            <Head title={application.name} />
 
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg transition ease-linear duration-300">
@@ -61,7 +61,7 @@ export default function Create({ auth, status }) {
                                     Cancel
                                 </SecondaryButton>
                                 <PrimaryButton disabled={processing}>
-                                    Create
+                                    Save
                                 </PrimaryButton>
                             </div>
                         </form>
