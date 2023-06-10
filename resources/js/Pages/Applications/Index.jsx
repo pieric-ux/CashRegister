@@ -36,7 +36,7 @@ export default function Index({ applications, auth }) {
                     </ul>
                 ) : (
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
-                        <p>No application found.</p>
+                        <p className='text-gray-900 dark:text-gray-100'>No application found.</p>
                     </div>
                 )}
 
