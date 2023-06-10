@@ -71,6 +71,10 @@ class ApplicationsController extends Controller
      */
     public function destroy(DeleteApplicationRequest $request, CR_App $app)
     {
+        $request->validate([
+            'password' => ['required', 'current_password'],
+        ]);
+
         $app->delete();
 
         return Redirect::route('applications.index');
