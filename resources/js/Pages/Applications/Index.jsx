@@ -1,8 +1,12 @@
 import { Link } from '@inertiajs/react';
-import CustomerLayout from '@/Layouts/CustomerLayout';
 import { Head } from '@inertiajs/react';
+import CustomerLayout from '@/Layouts/CustomerLayout';
+import CreateAppForm from './Partials/CreateAppForm';
+import UpdateAppForm from './Partials/UpdateAppForm';
+import DeleteAppForm from './Partials/DeleteAppForm';
 
 export default function Index({ applications, auth }) {
+
     return (
         <CustomerLayout
             user={auth.user}
@@ -10,32 +14,30 @@ export default function Index({ applications, auth }) {
         >
             <Head title="Applications" />
 
-            <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-                <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg transition ease-linear duration-300">
-                    <div className="p-6 text-gray-900 dark:text-gray-100">
-                        <Link href={route('applications.create')}>
-                            + Créer une application +
-                        </Link>
-                    </div>
+            <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
+                    <CreateAppForm className="max-w-xl" />
                 </div>
-                <h1 className='mt-4'>Liste des applications</h1>
+
                 {applications.length > 0 ? (
                     <ul>
                         {applications.map((application) => (
                             <li className='my-4' key={application.id}>
-                                <Link href={route('applications.show', application.slug)}>
-                                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg transition ease-linear duration-300">
-                                        <div className="p-6 text-gray-900 dark:text-gray-100">
-                                            {application.name}
-                                        </div>
+                                <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
+                                    <div className="flex gap-4 p-6 text-gray-900 dark:text-gray-100">
+                                        {application.name}
+                                        <Link href={route('applications.show', application.slug)}>Show</Link>
+                                        <UpdateAppForm application={application} />
+                                        <DeleteAppForm application={application} />
                                     </div>
-                                </Link>
+                                </div>
                             </li>
                         ))}
                     </ul>
                 ) : (
-                    <p>Aucune application trouvée.</p>
+                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
+                        <p>No application found.</p>
+                    </div>
                 )}
 
             </div>

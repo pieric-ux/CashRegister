@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Applications\CreateApplicationRequest;
+use App\Http\Requests\Applications\StoreApplicationRequest;
 use App\Http\Requests\Applications\ShowApplicationsRequest;
 use App\Http\Requests\Applications\UpdateApplicationRequest;
+use App\Http\Requests\Applications\DeleteApplicationRequest;
 use App\Models\CR_App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -27,17 +28,9 @@ class ApplicationsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return Inertia::render('Applications/Create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateApplicationRequest $request)
+    public function store(StoreApplicationRequest $request)
     {
         $customerId = Auth::id();
 
@@ -61,16 +54,6 @@ class ApplicationsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(CR_App $app)
-    {
-        return Inertia::render('Applications/Edit', [
-            'application' => $app,
-        ]);
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateApplicationRequest $request, CR_App $app)
@@ -86,7 +69,7 @@ class ApplicationsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CR_App $app)
+    public function destroy(DeleteApplicationRequest $request, CR_App $app)
     {
         $app->delete();
 

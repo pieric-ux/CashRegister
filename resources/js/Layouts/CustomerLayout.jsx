@@ -1,8 +1,32 @@
 import Header from "@/Components/Header";
 import Sidebar from "@/Components/SideBar";
 import SideBarLink from "@/Components/SideBarLink";
+import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
+import Dropdown from "@/Components/Dropdown";
 
 export default function CustomerLayout({ user, children }) {
+    const RespNavLink = (
+        <>
+            <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
+                Dashboard
+            </ResponsiveNavLink>
+            <ResponsiveNavLink href={route('profile.edit')} active={route().current('profile.edit')}>
+                Profile
+            </ResponsiveNavLink>
+            <ResponsiveNavLink href={route('applications.index')} active={route().current('applications.index')}>
+                Applications
+            </ResponsiveNavLink>
+            <ResponsiveNavLink method="post" href={route('logout')} as="button">
+                Log Out
+            </ResponsiveNavLink>
+        </>
+    );
+    const DropdownLink = (
+        <>
+            <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
+            <Dropdown.Link href={route('logout')} method="post" as="button">Log Out</Dropdown.Link>
+        </>
+    );
 
     return (
         <div className="bg-gray-100 dark:bg-gray-900 transition ease-linear duration-300">
@@ -38,7 +62,12 @@ export default function CustomerLayout({ user, children }) {
 
                 {/* Content Area Start*/}
                 <div className="flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
-                    <Header user={user} />
+                    {/* Header Start*/}
+                    <Header user={user} RespNavLink={RespNavLink} DropdownLink={DropdownLink} />
+
+
+                    {/* Header End*/}
+
                     {/* Main Content Start*/}
                     <main>
                         <div className="max-w-7xl mx-auto py-12">

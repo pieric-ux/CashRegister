@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import Dropdown from '@/Components/Dropdown';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import DarkModeSwitcher from './DarkModeSwitcher';
 
-export default function Header({ user }) {
+export default function Header({ user, RespNavLink, DropdownLink }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
 
@@ -38,8 +37,7 @@ export default function Header({ user }) {
                         </Dropdown.Trigger>
 
                         <Dropdown.Content>
-                            <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                            <Dropdown.Link href={route('logout')} method="post" as="button">Log Out</Dropdown.Link>
+                            {DropdownLink}
                         </Dropdown.Content>
                     </Dropdown>
                 </div>
@@ -76,15 +74,7 @@ export default function Header({ user }) {
                     </div>
 
                     <div className="mt-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Dashboard
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('profile.edit')} active={route().current('profile.edit')}>
-                            Profile
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                            Log Out
-                        </ResponsiveNavLink>
+                        {RespNavLink}
                     </div>
                 </div>
             </div>
