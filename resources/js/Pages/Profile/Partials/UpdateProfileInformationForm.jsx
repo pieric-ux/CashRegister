@@ -41,6 +41,7 @@ export default function UpdateProfileInformation({ className = '' }) {
 
                     <TextInput
                         id="company_name"
+                        name="company_name"
                         value={data.company_name}
                         className="mt-1 block w-full"
                         autoComplete="organization"
@@ -56,6 +57,7 @@ export default function UpdateProfileInformation({ className = '' }) {
 
                     <TextInput
                         id="first_name"
+                        name="first_name"
                         value={data.first_name}
                         className="mt-1 block w-full"
                         autoComplete="given-name"
@@ -71,6 +73,7 @@ export default function UpdateProfileInformation({ className = '' }) {
 
                     <TextInput
                         id="last_name"
+                        name="last_name"
                         value={data.last_name}
                         className="mt-1 block w-full"
                         autoComplete="family-name"
@@ -86,6 +89,7 @@ export default function UpdateProfileInformation({ className = '' }) {
 
                     <TextInput
                         id="address"
+                        name="address"
                         value={data.address}
                         className="mt-1 block w-full"
                         autoComplete="street-address"
@@ -102,6 +106,7 @@ export default function UpdateProfileInformation({ className = '' }) {
 
                         <TextInput
                             id="city"
+                            name="city"
                             value={data.city}
                             className="mt-1 block w-full"
                             autoComplete="address-level2"
@@ -116,6 +121,7 @@ export default function UpdateProfileInformation({ className = '' }) {
 
                         <TextInput
                             id="npa"
+                            name="npa"
                             value={data.npa}
                             className="mt-1 block w-full"
                             autoComplete="postal-code"
@@ -132,6 +138,7 @@ export default function UpdateProfileInformation({ className = '' }) {
 
                     <TextInput
                         id="phone"
+                        name="phone"
                         type="tel"
                         value={data.phone}
                         className="mt-1 block w-full"
@@ -147,6 +154,7 @@ export default function UpdateProfileInformation({ className = '' }) {
 
                     <TextInput
                         id="email"
+                        name="email"
                         type="email"
                         value={data.email}
                         className="mt-1 block w-full"

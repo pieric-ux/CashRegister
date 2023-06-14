@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ApplicationsController;
+use App\Http\Controllers\MediasController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,6 +44,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/apps/{app}', [ApplicationsController::class, 'show'])->name('applications.show');
     Route::patch('/apps/{app}', [ApplicationsController::class, 'update'])->name('applications.update');
     Route::delete('/apps/{app}', [ApplicationsController::class, 'destroy'])->name('applications.destroy');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::post('upload-avatar', [MediasController::class, 'uploadAvatar'])->name('upload.avatar');
 });
 
 require __DIR__ . '/auth.php';

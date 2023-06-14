@@ -7,17 +7,19 @@ use App\Http\Requests\Applications\ShowApplicationsRequest;
 use App\Http\Requests\Applications\UpdateApplicationRequest;
 use App\Http\Requests\Applications\DeleteApplicationRequest;
 use App\Models\CR_App;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class ApplicationsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
         $customerId = Auth::id();
         $applications = CR_App::where('fk_customer_id', $customerId)->get();
@@ -30,7 +32,7 @@ class ApplicationsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreApplicationRequest $request)
+    public function store(StoreApplicationRequest $request): RedirectResponse
     {
         $customerId = Auth::id();
 
@@ -46,7 +48,7 @@ class ApplicationsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ShowApplicationsRequest $request, CR_App $app)
+    public function show(ShowApplicationsRequest $request, CR_App $app): Response
     {
         return Inertia::render('Applications/Show', [
             'application' => $app,
@@ -56,7 +58,7 @@ class ApplicationsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateApplicationRequest $request, CR_App $app)
+    public function update(UpdateApplicationRequest $request, CR_App $app): RedirectResponse
     {
 
         $app->name = $request->input('name');
@@ -69,7 +71,7 @@ class ApplicationsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeleteApplicationRequest $request, CR_App $app)
+    public function destroy(DeleteApplicationRequest $request, CR_App $app): RedirectResponse
     {
         $request->validate([
             'password' => ['required', 'current_password'],

@@ -29,7 +29,7 @@ return new class extends Migration
         });
 
         DB::table('customers')->insert([
-            ['company_name' => 'TechInnovate', 'first_name' => 'Pieric', 'last_name' => 'Demont', 'address' => 'Av. Maurice-Troillet 63', 'npa' => '1950', 'city' => 'Sion', 'email' => '123@123.ch', 'password' => '$2y$10$Z7YOgW.eMXRI7ggTUaxp3.Tm4L3Z87MwrK.nghP3WGVsuG772.Yzu'],
+            ['company_name' => '', 'first_name' => 'Pieric', 'last_name' => 'Demont', 'address' => 'Av. Maurice-Troillet 63', 'npa' => '1950', 'city' => 'Sion', 'email' => '123@123.ch', 'password' => '$2y$10$Z7YOgW.eMXRI7ggTUaxp3.Tm4L3Z87MwrK.nghP3WGVsuG772.Yzu'],
         ]);
     }
 
