@@ -17,6 +17,16 @@ class MediasController extends Controller
         $file = $request->file('avatar');
         $name = $file->hashName();
 
+        $user = auth()->user();
+        $oldAvatar = CR_Media::where('fk_customer_id', $user->id)
+            ->where('collection', 'avatar')
+            ->first();
+
+        if ($oldAvatar) {
+            Storage::disk($oldAvatar->disk)->delete($oldAvatar->path);
+            $oldAvatar->delete();
+        }
+
         Storage::disk('local')->put("media/avatar/", $file);
 
         CR_Media::query()->create([
