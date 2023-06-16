@@ -16,7 +16,7 @@ export default function Index({ applications, auth }) {
 
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
-                    <CreateAppForm className="max-w-xl" />
+                    <CreateAppForm className="max-w-xl mx-auto" />
                 </div>
 
                 {applications.length > 0 ? (
@@ -35,7 +35,7 @@ export default function Index({ applications, auth }) {
                         ))}
                     </ul>
                 ) : (
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
+                    <div className="p-4 sm:p-8 text-center bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
                         <p className='text-gray-900 dark:text-gray-100'>No application found.</p>
                     </div>
                 )}

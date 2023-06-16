@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Medias\UploadAvatarRequest;
 use App\Models\CR_Media;
+use App\Models\Customer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,7 +13,7 @@ class MediasController extends Controller
     /**
      * Upload an avatar file.
      */
-    public function uploadAvatar(UploadAvatarRequest $request, CR_Media $media): RedirectResponse
+    public function uploadAvatar(UploadAvatarRequest $request, Customer $customer, CR_Media $media): RedirectResponse
     {
         $file = $request->file('avatar');
         $name = $file->hashName();
@@ -28,6 +29,10 @@ class MediasController extends Controller
         }
 
         Storage::disk('public')->put("media/avatar/", $file);
+
+        $customer::query()->update([
+            'avatar' => "storage/media/avatar/{$name}",
+        ]);
 
         $media::query()->create([
             'name' => $name,

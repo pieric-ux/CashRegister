@@ -20,6 +20,7 @@ class Customer extends Authenticatable //implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
+        'avatar',
         'company_name',
         'first_name',
         'last_name',

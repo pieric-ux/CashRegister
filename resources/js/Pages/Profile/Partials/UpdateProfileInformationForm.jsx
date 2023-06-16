@@ -2,7 +2,7 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Link, useForm, usePage } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 
 export default function UpdateProfileInformation({ className = '' }) {
@@ -45,7 +45,6 @@ export default function UpdateProfileInformation({ className = '' }) {
                         value={data.company_name}
                         className="mt-1 block w-full"
                         autoComplete="organization"
-                        isFocused
                         onChange={(e) => setData('company_name', e.target.value)}
                     />
 
