@@ -1,18 +1,28 @@
+import { useEffect } from 'react';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
-import PrimaryButton from '@/Components/PrimaryButton';
 import { useForm } from '@inertiajs/react';
-import { Transition } from '@headlessui/react';
 
 export default function UpdateUserAvatar({ avatarPath, className }) {
-    const { setData, post, errors, processing, recentlySuccessful } = useForm({
+    const { data, setData, post, errors } = useForm({
         avatar: '',
-    })
+    });
 
-    const submit = (e) => {
-        e.preventDefault();
+    const handleAvatarChange = (e) => {
+        setData('avatar', e.target.files[0]);
+    };
 
-        post(route('upload.avatar'));
+    useEffect(() => {
+        if (data.avatar) {
+            submit();
+        }
+    }, [data.avatar]);
+
+    const submit = () => {
+        const formData = new FormData();
+        formData.append('avatar', data.avatar);
+
+        post(route('upload.avatar'), formData);
     };
 
     return (
@@ -24,7 +34,7 @@ export default function UpdateUserAvatar({ avatarPath, className }) {
                     Update your avatar's profile.
                 </p>
             </header>
-            <form onSubmit={submit} className="flex flex-col items-center justify-center mt-6 space-y-4" encType="multipart/form-data">
+            <form className="flex flex-col items-center justify-center mt-6 space-y-4" encType="multipart/form-data">
                 <div className='relative z-30 mx-auto bg-gray-100 dark:bg-gray-900 h-52 w-52 rounded-full backdrop-blur-md transition ease-linear duration-300'>
                     <div className='relative drop-shadow-md w-full h-full'>
                         <img src={avatarPath ? avatarPath : 'storage/media/avatar/default-avatar.png'} alt="avatar" className="h-48 w-48 rounded-full absolute ml-2 mt-2" />
@@ -55,26 +65,12 @@ export default function UpdateUserAvatar({ avatarPath, className }) {
                                 name="avatar"
                                 type="file"
                                 className="sr-only"
-                                onChange={(e) => setData('avatar', e.target.files[0])}
+                                onChange={handleAvatarChange}
                             />
                         </label>
                     </div>
                 </div>
-
                 <InputError className='mt-2' message={errors.avatar} />
-
-                <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
-
-                    <Transition
-                        show={recentlySuccessful}
-                        enterFrom="opacity-0"
-                        leaveTo="opacity-0"
-                        className="transition ease-in-out"
-                    >
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
-                    </Transition>
-                </div>
             </form>
         </section>
     );
