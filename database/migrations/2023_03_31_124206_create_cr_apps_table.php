@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('slug');
+            $table->string('desciption');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('location');
+            $table->string('website');
             $table->unsignedBigInteger('fk_customer_id');
             $table->foreign('fk_customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->timestamps();

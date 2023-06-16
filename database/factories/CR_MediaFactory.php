@@ -26,14 +26,14 @@ class CR_MediaFactory extends Factory
 
         $file = new File($image);
         $filename = $file->getFilename();
-        $path = Storage::disk('local')->put($storagePath, $file);
+        $path = Storage::disk('public')->put($storagePath, $file);
 
         return [
             'name' => fake()->word(),
             'file_name' => $filename,
             'mime_type' => $file->getMimeType(),
             'path' => $path,
-            'disk' => 'local',
+            'disk' => 'public',
             'file_hash' => fake()->unique()->sha256(),
             'collection' => $collection,
             'size' => $file->getSize(),

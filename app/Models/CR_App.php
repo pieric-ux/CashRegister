@@ -19,6 +19,11 @@ class CR_App extends Model
     protected $fillable = [
         'name',
         'slug',
+        'description',
+        'start_date',
+        'end_date',
+        'location',
+        'website',
         'fk_customer_id',
     ];
 
