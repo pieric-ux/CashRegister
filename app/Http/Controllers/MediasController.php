@@ -12,29 +12,29 @@ class MediasController extends Controller
     /**
      * Upload an avatar file.
      */
-    public function uploadAvatar(UploadAvatarRequest $request): RedirectResponse
+    public function uploadAvatar(UploadAvatarRequest $request, CR_Media $media): RedirectResponse
     {
         $file = $request->file('avatar');
         $name = $file->hashName();
 
         $user = auth()->user();
-        $oldAvatar = CR_Media::where('fk_customer_id', $user->id)
+        $oldAvatar = $media::where('fk_customer_id', $user->id)
             ->where('collection', 'avatar')
             ->first();
 
         if ($oldAvatar) {
-            Storage::disk($oldAvatar->disk)->delete($oldAvatar->path);
+            Storage::disk('public')->delete($oldAvatar->path);
             $oldAvatar->delete();
         }
 
-        Storage::disk('local')->put("media/avatar/", $file);
+        Storage::disk('public')->put("media/avatar/", $file);
 
-        CR_Media::query()->create([
+        $media::query()->create([
             'name' => $name,
             'file_name' => $file->getClientOriginalName(),
             'mime_type' => $file->getClientMimeType(),
             'path' => "media/avatar/{$name}",
-            'disk' => 'local',
+            'disk' => 'public',
             'file_hash' => hash_file('sha256', $file->path()),
             'collection' => 'avatar',
             'size' => $file->getSize(),
