@@ -28,17 +28,17 @@ class MediasController extends Controller
             $oldAvatar->delete();
         }
 
-        Storage::disk('public')->put("media/avatar/", $file);
+        Storage::disk('public')->put("/media/avatar/", $file);
 
         $customer::query()->update([
-            'avatar' => "storage/media/avatar/{$name}",
+            'avatar' => "/storage/media/avatar/{$name}",
         ]);
 
         $media::query()->create([
             'name' => $name,
             'file_name' => $file->getClientOriginalName(),
             'mime_type' => $file->getClientMimeType(),
-            'path' => "media/avatar/{$name}",
+            'path' => "/media/avatar/{$name}",
             'disk' => 'public',
             'file_hash' => hash_file('sha256', $file->path()),
             'collection' => 'avatar',
