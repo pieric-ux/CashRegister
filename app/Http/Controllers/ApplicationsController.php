@@ -10,6 +10,7 @@ use App\Models\CR_App;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -39,6 +40,11 @@ class ApplicationsController extends Controller
         CR_App::create([
             'name' => $request->input('name'),
             'slug' => Str::slug($request->input('name')),
+            'description' => $request->input('description'),
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'location' => $request->input('location'),
+            'website' => $request->input('website'),
             'fk_customer_id' => $customerId,
         ]);
 
@@ -63,6 +69,11 @@ class ApplicationsController extends Controller
 
         $app->name = $request->input('name');
         $app->slug = Str::slug($request->input('name'));
+        $app->description = $request->input('description');
+        $app->start_date = $request->input('start_date');
+        $app->end_date = $request->input('end_date');
+        $app->location = $request->input('location');
+        $app->website = $request->input('website');
         $app->save();
 
         return Redirect::route('applications.index');

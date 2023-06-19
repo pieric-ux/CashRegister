@@ -11,6 +11,11 @@ export default function UpdateAppForm({ application, className = '' }) {
     const [openingModal, setOpeningModal] = useState(false);
     const { data, setData, patch, processing, errors, reset } = useForm({
         name: application.name,
+        description: '',
+        start_date: '',
+        end_date: '',
+        location: '',
+        website: '',
     });
 
     const openModal = () => {
@@ -20,14 +25,25 @@ export default function UpdateAppForm({ application, className = '' }) {
     const closeModal = () => {
         setOpeningModal(false);
         setData({
-            ...data,
             name: application.name,
+            description: application.description,
+            start_date: application.start_date,
+            end_date: application.end_date,
+            location: application.location,
+            website: application.website,
         });
     };
 
     useEffect(() => {
-        setData('name', application.name);
-    }, [application.name]);
+        setData({
+            name: application.name,
+            description: application.description,
+            start_date: application.start_date,
+            end_date: application.end_date,
+            location: application.location,
+            website: application.website,
+        });
+    }, [application]);
 
     const submit = (e) => {
         e.preventDefault();
@@ -50,11 +66,14 @@ export default function UpdateAppForm({ application, className = '' }) {
             <Modal show={openingModal} onClose={closeModal}>
 
                 <form onSubmit={submit} className='p-6'>
-                    <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Edit App</h2>
+                    <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+                        Edit App
+                    </h2>
 
                     <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
                         Ready to update the application? Fill out the form below with the required details and click the 'Save' button to apply the changes.
                     </p>
+
                     <div className='mt-6'>
                         <InputLabel htmlFor="name" value="Application Name :" />
 
@@ -64,11 +83,87 @@ export default function UpdateAppForm({ application, className = '' }) {
                             className="mt-1 block w-3/4"
                             value={data.name}
                             isFocused={true}
-                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                            onChange={(e) => setData('name', e.target.value)}
                         />
 
                         <InputError className="mt-2" message={errors.name} />
                     </div>
+
+                    <div className="mt-6">
+                        <InputLabel htmlFor="description" value="Description :" />
+
+                        <textarea
+                            id="description"
+                            name="description"
+                            className="mt-1 block w-3/4 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-sky-500 dark:focus:border-sky-600 focus:ring-sky-500 dark:focus:ring-sky-600 rounded-md shadow-sm transition ease-linear duration-300"
+                            rows={5}
+                            value={data.description}
+                            onChange={(e) => setData('description', e.target.value)}
+                        />
+
+                        <InputError className="mt-2" message={errors.description} />
+                    </div>
+
+                    <div className="mt-6">
+                        <InputLabel htmlFor="start_date" value="Start Date :" />
+
+                        <TextInput
+                            id="start_date"
+                            name="start_date"
+                            type="date"
+                            className="mt-1 w-3/4"
+                            value={data.start_date}
+                            onChange={(e) => setData('start_date', e.target.value)}
+                        />
+
+                        <InputError className="mt-2" message={errors.start_date} />
+                    </div>
+
+                    <div className="mt-6">
+                        <InputLabel htmlFor="end_date" value="End Date :" />
+
+                        <TextInput
+                            id="end_date"
+                            name="end_date"
+                            type="date"
+                            className="mt-1 w-3/4"
+                            value={data.end_date}
+                            onChange={(e) => setData('end_date', e.target.value)}
+                        />
+
+                        <InputError className="mt-2" message={errors.end_date} />
+                    </div>
+
+                    <div className="mt-6">
+                        <InputLabel htmlFor="location" value="Location :" />
+
+                        <TextInput
+                            id="location"
+                            name="location"
+                            className="mt-1 block w-3/4"
+                            value={data.location}
+                            onChange={(e) => setData('location', e.target.value)}
+                        />
+
+                        <InputError className="mt-2" message={errors.location} />
+                    </div>
+
+                    <div className="mt-6">
+                        <InputLabel htmlFor="website" value="Website :" />
+
+                        <TextInput
+                            id="website"
+                            name="website"
+                            placeholder="https://"
+                            pattern="https://.*"
+                            className="mt-1 block w-3/4"
+                            value={data.website}
+                            onChange={(e) => setData('website', e.target.value)}
+                        />
+
+                        <InputError className="mt-2" message={errors.website} />
+                    </div>
+
                     <div className="mt-6 flex justify-end">
                         <SecondaryButton onClick={closeModal}>
                             Cancel

@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('cr_apps', function (Blueprint $table) {
             $table->id();
+            $table->string('poster')->nullable();
             $table->string('name')->unique();
             $table->string('slug');
-            $table->string('desciption')->nullable();
+            $table->string('description')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->string('location')->nullable();

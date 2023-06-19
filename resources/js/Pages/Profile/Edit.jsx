@@ -16,8 +16,8 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
         >
             <Head title="Profile" />
 
-            <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
+            <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 space-y-6">
+                <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow-md rounded-lg transition ease-linear duration-300">
                     <UpdateUserAvatar className="max-w-xl mx-auto" avatarPath={auth.user.avatar} />
 
                     <UpdateProfileInformationForm
@@ -26,11 +26,11 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
                         className="max-w-xl mt-6 mx-auto"
                     />
                 </div>
-                <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
+                <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow-md rounded-lg transition ease-linear duration-300">
                     <UpdatePasswordForm className="max-w-xl mx-auto" />
                 </div>
 
-                <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
+                <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow-md rounded-lg transition ease-linear duration-300">
                     <DeleteUserForm className="max-w-xl mx-auto" />
                 </div>
             </div>

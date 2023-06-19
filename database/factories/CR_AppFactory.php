@@ -22,7 +22,7 @@ class CR_AppFactory extends Factory
         return [
             'name' => $name,
             'slug' => Str::slug($name),
-            'desciption' => fake()->text(100),
+            'description' => fake()->text(100),
             'start_date' => fake()->date(),
             'end_date' => fake()->dateTimeInInterval('+1 week', '+3 week'),
             'location' => fake()->city(),

@@ -26,10 +26,16 @@ class CR_Media extends Model
         'collection',
         'size',
         'fk_customer_id',
+        'fk_app_id'
     ];
 
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'fk_customer_id', 'id');
+    }
+
+    public function cr_app()
+    {
+        return $this->belongsTo(CR_App::class, 'fk_app_id', 'id');
     }
 }

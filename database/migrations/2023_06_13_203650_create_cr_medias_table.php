@@ -21,8 +21,10 @@ return new class extends Migration
             $table->string('file_hash', 64)->unique();
             $table->string('collection')->nullable();
             $table->unsignedBigInteger('size');
-            $table->unsignedBigInteger('fk_customer_id');
+            $table->unsignedBigInteger('fk_customer_id')->nullable();
             $table->foreign('fk_customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->unsignedBigInteger('fk_app_id')->nullable();
+            $table->foreign('fk_app_id')->references('id')->on('cr_apps')->onDelete('cascade');
             $table->timestamps();
         });
     }
