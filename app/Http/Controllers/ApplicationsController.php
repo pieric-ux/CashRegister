@@ -7,6 +7,7 @@ use App\Http\Requests\Applications\ShowApplicationsRequest;
 use App\Http\Requests\Applications\UpdateApplicationRequest;
 use App\Http\Requests\Applications\DeleteApplicationRequest;
 use App\Models\CR_App;
+use App\Models\CR_Media;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -87,6 +88,12 @@ class ApplicationsController extends Controller
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
+
+        $appMedia = CR_Media::where('fk_app_id', $app->id)->get();
+
+        foreach ($appMedia as $media) {
+            Storage::disk('public')->delete($media->path);
+        }
 
         $app->delete();
 
