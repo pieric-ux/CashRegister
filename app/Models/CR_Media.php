@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CR_App extends Model
+class CR_Media extends Model
 {
     use HasFactory;
 
-    protected $table = 'cr_apps';
+    protected $table = 'cr_medias';
 
     /**
      * The attributes that are mass assignable.
@@ -17,15 +17,16 @@ class CR_App extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'poster',
         'name',
-        'slug',
-        'description',
-        'start_date',
-        'end_date',
-        'location',
-        'website',
+        'file_name',
+        'mime_type',
+        'path',
+        'disk',
+        'file_hash',
+        'collection',
+        'size',
         'fk_customer_id',
+        'fk_app_id'
     ];
 
     public function customer()
@@ -33,8 +34,8 @@ class CR_App extends Model
         return $this->belongsTo(Customer::class, 'fk_customer_id', 'id');
     }
 
-    public function getRouteKeyName()
+    public function cr_app()
     {
-        return 'slug';
+        return $this->belongsTo(CR_App::class, 'fk_app_id', 'id');
     }
 }

@@ -2,10 +2,10 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Link, useForm, usePage } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 
-export default function UpdateProfileInformation({ mustVerifyEmail, status, className = '' }) {
+export default function UpdateProfileInformation({ className = '' }) {
     const user = usePage().props.auth.user;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
@@ -41,10 +41,10 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                     <TextInput
                         id="company_name"
+                        name="company_name"
                         value={data.company_name}
                         className="mt-1 block w-full"
                         autoComplete="organization"
-                        isFocused
                         onChange={(e) => setData('company_name', e.target.value)}
                     />
 
@@ -56,6 +56,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                     <TextInput
                         id="first_name"
+                        name="first_name"
                         value={data.first_name}
                         className="mt-1 block w-full"
                         autoComplete="given-name"
@@ -71,6 +72,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                     <TextInput
                         id="last_name"
+                        name="last_name"
                         value={data.last_name}
                         className="mt-1 block w-full"
                         autoComplete="family-name"
@@ -86,6 +88,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                     <TextInput
                         id="address"
+                        name="address"
                         value={data.address}
                         className="mt-1 block w-full"
                         autoComplete="street-address"
@@ -102,6 +105,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                         <TextInput
                             id="city"
+                            name="city"
                             value={data.city}
                             className="mt-1 block w-full"
                             autoComplete="address-level2"
@@ -116,6 +120,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                         <TextInput
                             id="npa"
+                            name="npa"
                             value={data.npa}
                             className="mt-1 block w-full"
                             autoComplete="postal-code"
@@ -132,6 +137,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                     <TextInput
                         id="phone"
+                        name="phone"
                         type="tel"
                         value={data.phone}
                         className="mt-1 block w-full"
@@ -147,6 +153,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                     <TextInput
                         id="email"
+                        name="email"
                         type="email"
                         value={data.email}
                         className="mt-1 block w-full"
@@ -157,28 +164,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                     <InputError className="mt-2" message={errors.email} />
                 </div>
-
-                {mustVerifyEmail && user.email_verified_at === null && (
-                    <div>
-                        <p className="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                            Your email address is unverified.
-                            <Link
-                                href={route('verification.send')}
-                                method="post"
-                                as="button"
-                                className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                            >
-                                Click here to re-send the verification email.
-                            </Link>
-                        </p>
-
-                        {status === 'verification-link-sent' && (
-                            <div className="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                                A new verification link has been sent to your email address.
-                            </div>
-                        )}
-                    </div>
-                )}
 
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing}>Save</PrimaryButton>
