@@ -29,13 +29,13 @@ class CR_Media extends Model
         'fk_app_id'
     ];
 
-    public function customer()
+    public function customers()
     {
-        return $this->belongsTo(Customer::class, 'fk_customer_id', 'id');
+        return $this->belongsTo(Customer::class, 'fk_customer_id');
     }
 
-    public function cr_app()
+    public function cr_apps()
     {
-        return $this->belongsTo(CR_App::class, 'fk_app_id', 'id');
+        return $this->belongsTo(CR_App::class, 'fk_app_id');
     }
 }

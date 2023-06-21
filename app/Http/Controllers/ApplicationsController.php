@@ -7,7 +7,6 @@ use App\Http\Requests\Applications\ShowApplicationsRequest;
 use App\Http\Requests\Applications\UpdateApplicationRequest;
 use App\Http\Requests\Applications\DeleteApplicationRequest;
 use App\Models\CR_App;
-use App\Models\CR_Media;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -23,8 +22,8 @@ class ApplicationsController extends Controller
      */
     public function index(): Response
     {
-        $customerId = Auth::id();
-        $applications = CR_App::where('fk_customer_id', $customerId)->get();
+        $customer = Auth::user();
+        $applications = $customer->cr_apps;
 
         return Inertia::render('Applications/Index', [
             'applications' => $applications,
@@ -36,9 +35,9 @@ class ApplicationsController extends Controller
      */
     public function store(StoreApplicationRequest $request): RedirectResponse
     {
-        $customerId = Auth::id();
+        $customer = Auth::user();
 
-        CR_App::create([
+        $customer->cr_apps()->create([
             'name' => $request->input('name'),
             'slug' => Str::slug($request->input('name')),
             'description' => $request->input('description'),
@@ -46,7 +45,6 @@ class ApplicationsController extends Controller
             'end_date' => $request->input('end_date'),
             'location' => $request->input('location'),
             'website' => $request->input('website'),
-            'fk_customer_id' => $customerId,
         ]);
 
         return Redirect::route('applications.index');
@@ -67,7 +65,6 @@ class ApplicationsController extends Controller
      */
     public function update(UpdateApplicationRequest $request, CR_App $app): RedirectResponse
     {
-
         $app->name = $request->input('name');
         $app->slug = Str::slug($request->input('name'));
         $app->description = $request->input('description');
@@ -89,7 +86,7 @@ class ApplicationsController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
-        $appMedia = CR_Media::where('fk_app_id', $app->id)->get();
+        $appMedia = $app->cr_medias;
 
         foreach ($appMedia as $media) {
             Storage::disk('public')->delete($media->path);

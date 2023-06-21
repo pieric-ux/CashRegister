@@ -50,4 +50,14 @@ class Customer extends Authenticatable //implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function cr_apps()
+    {
+        return $this->hasMany(CR_App::class, 'fk_customer_id');
+    }
+
+    public function cr_medias()
+    {
+        return $this->hasMany(CR_Media::class, 'fk_customer_id');
+    }
 }

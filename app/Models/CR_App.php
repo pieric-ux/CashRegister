@@ -28,9 +28,14 @@ class CR_App extends Model
         'fk_customer_id',
     ];
 
-    public function customer()
+    public function customers()
     {
-        return $this->belongsTo(Customer::class, 'fk_customer_id', 'id');
+        return $this->belongsTo(Customer::class, 'fk_customer_id');
+    }
+
+    public function cr_medias()
+    {
+        return $this->hasMany(CR_Media::class, 'fk_app_id');
     }
 
     public function getRouteKeyName()
