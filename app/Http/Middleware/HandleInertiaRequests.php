@@ -33,7 +33,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => [
-                    'avatarUrl' => $request->user()->getAvatarUrl(),
+                    'avatarPath' => $request->user()->getAvatarUrl(),
                 ],
             ],
             'ziggy' => function () use ($request) {
