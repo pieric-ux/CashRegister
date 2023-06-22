@@ -82,6 +82,6 @@ class Customer extends Authenticatable implements HasMedia //implements MustVeri
     {
         $this->addMedia($avatar)
             ->usingFileName($avatar->hashName())
-            ->toMediaCollection('avatar');
+            ->toMediaCollection('avatars');
     }
 }

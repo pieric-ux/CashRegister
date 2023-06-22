@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Dropdown from '@/Components/Dropdown';
 import DarkModeSwitcher from './DarkModeSwitcher';
 
-export default function Header({ user, RespNavLink, DropdownLink }) {
+export default function Header({ user, avatarPath, RespNavLink, DropdownLink }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
 
@@ -19,7 +19,7 @@ export default function Header({ user, RespNavLink, DropdownLink }) {
                                     className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-900 dark:text-white bg-white dark:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none transition ease-linear duration-300"
                                 >
                                     {user.first_name}
-                                    <img src={user.avatar ? user.avatar : '/storage/media/avatar/default-avatar.png'} alt="avatar" className="h-12 w-12 rounded-full ml-2 backdrop-blur-md" />
+                                    <img src={avatarPath} alt="avatar" className="h-12 w-12 rounded-full ml-2 backdrop-blur-md" />
 
 
                                     <svg

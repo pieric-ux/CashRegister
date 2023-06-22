@@ -9,7 +9,7 @@ export default function Index({ applications, auth }) {
 
     return (
         <CustomerLayout
-            customer={auth.customer}
+            auth={auth}
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Applications</h2>}
         >
             <Head title="Applications" />

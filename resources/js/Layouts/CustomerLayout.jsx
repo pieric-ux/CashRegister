@@ -4,7 +4,7 @@ import SideBarLink from "@/Components/SideBarLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import Dropdown from "@/Components/Dropdown";
 
-export default function CustomerLayout({ customer, children }) {
+export default function CustomerLayout({ auth, children }) {
     const RespNavLink = (
         <>
             <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
@@ -63,7 +63,7 @@ export default function CustomerLayout({ customer, children }) {
                 {/* Content Area Start*/}
                 <div className="flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
                     {/* Header Start*/}
-                    <Header user={customer} RespNavLink={RespNavLink} DropdownLink={DropdownLink} />
+                    <Header user={auth.customer} avatarPath={auth.avatarPath} RespNavLink={RespNavLink} DropdownLink={DropdownLink} />
 
 
                     {/* Header End*/}
