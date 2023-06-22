@@ -20,20 +20,12 @@ class DatabaseSeeder extends Seeder
             \App\Models\CR_App::factory()->create([
                 'fk_customer_id' => $existingCustomer->id,
             ]);
-
-            \App\Models\CR_Media::factory()->create([
-                'fk_customer_id' => $existingCustomer->id,
-            ]);
         }
 
         $customers = \App\Models\Customer::factory(9)->create();
 
         foreach ($customers as $customer) {
             \App\Models\CR_App::factory()->create([
-                'fk_customer_id' => $customer->id,
-            ]);
-
-            \App\Models\CR_Media::factory()->create([
                 'fk_customer_id' => $customer->id,
             ]);
         }
