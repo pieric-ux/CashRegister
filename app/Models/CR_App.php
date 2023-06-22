@@ -17,7 +17,6 @@ class CR_App extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'poster',
         'name',
         'slug',
         'description',
@@ -31,11 +30,6 @@ class CR_App extends Model
     public function customers()
     {
         return $this->belongsTo(Customer::class, 'fk_customer_id');
-    }
-
-    public function cr_medias()
-    {
-        return $this->hasMany(CR_Media::class, 'fk_app_id');
     }
 
     public function getRouteKeyName()
