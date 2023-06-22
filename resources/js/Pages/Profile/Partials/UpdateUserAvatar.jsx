@@ -37,7 +37,7 @@ export default function UpdateUserAvatar({ avatarPath, className }) {
             <form className="flex flex-col items-center justify-center mt-6 space-y-4" encType="multipart/form-data">
                 <div className='relative z-30 mx-auto bg-gray-100 dark:bg-gray-900 h-52 w-52 rounded-full backdrop-blur-md transition ease-linear duration-300'>
                     <div className='relative drop-shadow-md w-full h-full'>
-                        <img src={avatarPath} alt="avatar" className="h-48 w-48 rounded-full absolute ml-2 mt-2" />
+                        <img src={avatarPath ? avatarPath : 'storage/media/avatar/default-avatar.png'} alt="avatar" className="h-48 w-48 rounded-full absolute ml-2 mt-2" />
                         <label htmlFor="avatar" className='absolute bottom-8 right-2 h-8 w-8 flex cursor-pointer items-center justify-center rounded-full bg-sky-500 text-white hover:bg-opacity-90'>
                             <svg
                                 className="fill-current"

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use App\Models\CR_Media;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -52,18 +51,6 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
-
-        $userMedia = CR_Media::where('fk_customer_id', $user->id)->get();
-        foreach ($userMedia as $media) {
-            Storage::disk('public')->delete($media->path);
-        }
-
-        $userAppsMedia = CR_Media::whereIn('fk_app_id', function ($query) use ($user) {
-            $query->select('id')->from('cr_apps')->where('fk_customer_id', $user->id);
-        })->get();
-        foreach ($userAppsMedia as $media) {
-            Storage::disk('public')->delete($media->path);
-        }
 
         Auth::logout();
 
