@@ -72,10 +72,10 @@ class Customer extends Authenticatable implements HasMedia //implements MustVeri
         $avatar = $this->getFirstMediaUrl('avatars');
 
         if ($avatar) {
-            return url($avatar);
+            return $avatar;
         }
 
-        return url('storage/media/avatar/default-avatar.png');
+        return '/storage/media/avatar/default-avatar.png';
     }
 
     public function uploadAvatar($avatar)
