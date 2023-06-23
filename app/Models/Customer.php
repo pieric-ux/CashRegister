@@ -75,7 +75,7 @@ class Customer extends Authenticatable implements HasMedia //implements MustVeri
             return $avatar;
         }
 
-        return '/storage/media/avatar/default-avatar.png';
+        return '/storage/media/avatars/default-avatar.png';
     }
 
     public function uploadAvatar($avatar)
