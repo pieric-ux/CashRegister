@@ -39,9 +39,9 @@ class CustomPathGenerator implements PathGenerator
         $prefix = config('media-library.prefix', '');
 
         if ($prefix !== '') {
-            return $prefix . '/' . $media->collection_name . '/' . $media->getKey();
+            return $prefix . '/' . $media->collection_name . '/' . $media->model_id;
         }
 
-        return $media->collection_name . '/' . $media->getKey();
+        return $media->collection_name . '/' . $media->model_id;
     }
 }
