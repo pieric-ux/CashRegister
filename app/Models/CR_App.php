@@ -57,7 +57,7 @@ class CR_App extends Model implements HasMedia
             return $poster;
         }
 
-        return '/storage/medias/avatars/default-avatar.png';
+        return '/storage/medias/posters/default-poster.png';
     }
 
     public function uploadPoster($poster)

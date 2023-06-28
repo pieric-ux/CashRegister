@@ -24,7 +24,7 @@ export default function UpdateAppPoster({ application, className }) {
         formData.append('appId', data.id);
         formData.append('poster', data.poster);
 
-        post(route('upload.poster'), formData);
+        post(route('poster.upload'), formData);
     };
 
     return (

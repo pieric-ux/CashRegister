@@ -86,12 +86,6 @@ class ApplicationsController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
-        $appMedia = $app->cr_medias;
-
-        foreach ($appMedia as $media) {
-            Storage::disk('public')->delete($media->path);
-        }
-
         $app->delete();
 
         return Redirect::route('applications.index');
