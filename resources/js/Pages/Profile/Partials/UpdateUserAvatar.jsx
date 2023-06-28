@@ -22,7 +22,7 @@ export default function UpdateUserAvatar({ avatarPath, className }) {
         const formData = new FormData();
         formData.append('avatar', data.avatar);
 
-        post(route('image.upload'), formData);
+        post(route('avatar.upload'), formData);
     };
 
     return (

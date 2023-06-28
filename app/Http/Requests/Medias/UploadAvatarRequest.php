@@ -4,7 +4,7 @@ namespace App\Http\Requests\Medias;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UploadImageRequest extends FormRequest
+class UploadAvatarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

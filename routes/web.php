@@ -46,7 +46,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::post('/image-upload', [MediaController::class, 'uploadImage'])->name('image.upload');
+    Route::post('/avatar-upload', [MediaController::class, 'uploadAvatar'])->name('avatar.upload');
+    Route::post('/poster-upload', [MediaController::class, 'uploadPoster'])->name('poster.upload');
 });
 
 require __DIR__ . '/auth.php';
