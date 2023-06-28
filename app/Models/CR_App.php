@@ -62,6 +62,8 @@ class CR_App extends Model implements HasMedia
 
     public function uploadPoster($poster)
     {
+        $this->clearMediaCollection('posters');
+
         $this->addMedia($poster)
             ->usingFileName($poster->hashName())
             ->toMediaCollection('posters');

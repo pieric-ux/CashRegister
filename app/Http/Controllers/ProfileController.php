@@ -51,6 +51,10 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
+        $user->cr_apps->each(function ($app) {
+            $app->clearMediaCollection('posters');
+        });
+
         Auth::logout();
 
         $user->delete();

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Medias;
 
+use App\Models\CR_App;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UploadPosterRequest extends FormRequest
 {
@@ -11,7 +13,10 @@ class UploadPosterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $appId = $this->input('appId');
+
+        $app = CR_App::where('id', $appId)->where('fk_customer_id', Auth::user()->id)->exists();
+        return $app;
     }
 
     /**
