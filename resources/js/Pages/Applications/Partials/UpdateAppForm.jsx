@@ -9,7 +9,8 @@ import Modal from "@/Components/Modal";
 
 export default function UpdateAppForm({ application, className = '' }) {
     const [openingModal, setOpeningModal] = useState(false);
-    const { data, setData, patch, processing, errors, reset } = useForm({
+    const [showErrors, setShowErrors] = useState(false);
+    const { data, setData, patch, processing, errors } = useForm({
         name: application.name,
         description: '',
         start_date: '',
@@ -32,6 +33,7 @@ export default function UpdateAppForm({ application, className = '' }) {
             location: application.location,
             website: application.website,
         });
+        setShowErrors(false);
     };
 
     useEffect(() => {
@@ -50,8 +52,8 @@ export default function UpdateAppForm({ application, className = '' }) {
 
         patch(route('applications.update', application.slug), {
             preserveScroll: true,
+            onError: () => { setShowErrors(true); },
             onSuccess: () => closeModal(),
-            onFinish: () => reset(),
         });
     }
 
@@ -86,7 +88,7 @@ export default function UpdateAppForm({ application, className = '' }) {
                             onChange={(e) => setData('name', e.target.value)}
                         />
 
-                        <InputError className="mt-2" message={errors.name} />
+                        <InputError className="mt-2" message={showErrors ? errors.name : null} />
                     </div>
 
                     <div className="mt-6">
@@ -101,7 +103,7 @@ export default function UpdateAppForm({ application, className = '' }) {
                             onChange={(e) => setData('description', e.target.value)}
                         />
 
-                        <InputError className="mt-2" message={errors.description} />
+                        <InputError className="mt-2" message={showErrors ? errors.description : null} />
                     </div>
 
                     <div className="mt-6">
@@ -116,7 +118,7 @@ export default function UpdateAppForm({ application, className = '' }) {
                             onChange={(e) => setData('start_date', e.target.value)}
                         />
 
-                        <InputError className="mt-2" message={errors.start_date} />
+                        <InputError className="mt-2" message={showErrors ? errors.start_date : null} />
                     </div>
 
                     <div className="mt-6">
@@ -131,7 +133,7 @@ export default function UpdateAppForm({ application, className = '' }) {
                             onChange={(e) => setData('end_date', e.target.value)}
                         />
 
-                        <InputError className="mt-2" message={errors.end_date} />
+                        <InputError className="mt-2" message={showErrors ? errors.end_date : null} />
                     </div>
 
                     <div className="mt-6">
@@ -145,7 +147,7 @@ export default function UpdateAppForm({ application, className = '' }) {
                             onChange={(e) => setData('location', e.target.value)}
                         />
 
-                        <InputError className="mt-2" message={errors.location} />
+                        <InputError className="mt-2" message={showErrors ? errors.location : null} />
                     </div>
 
                     <div className="mt-6">
@@ -161,7 +163,7 @@ export default function UpdateAppForm({ application, className = '' }) {
                             onChange={(e) => setData('website', e.target.value)}
                         />
 
-                        <InputError className="mt-2" message={errors.website} />
+                        <InputError className="mt-2" message={showErrors ? errors.website : null} />
                     </div>
 
                     <div className="mt-6 flex justify-end">
