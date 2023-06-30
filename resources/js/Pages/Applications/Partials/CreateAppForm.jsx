@@ -41,7 +41,7 @@ export default function CreateAppForm({ className = '' }) {
     return (
         <section className={`space-y-6 ${className}`}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Create an Application</h2>
+                <h1 className="text-lg font-medium text-gray-900 dark:text-gray-100">Create an Application</h1>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
                     Don't have any applications yet? Looking to add another one? Click the 'Create' button to begin.
