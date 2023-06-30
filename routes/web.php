@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationsController;
-use App\Http\Controllers\MediasController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -46,8 +46,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::post('/upload-avatar', [MediasController::class, 'uploadAvatar'])->name('upload.avatar');
-    Route::post('/upload-poster', [MediasController::class, 'uploadPoster'])->name('upload.poster');
+    Route::post('/avatar-upload', [MediaController::class, 'uploadAvatar'])->name('avatar.upload');
+    Route::post('/poster-upload', [MediaController::class, 'uploadPoster'])->name('poster.upload');
 });
 
 require __DIR__ . '/auth.php';

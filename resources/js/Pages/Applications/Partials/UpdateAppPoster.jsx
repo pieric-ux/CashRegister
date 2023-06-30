@@ -24,14 +24,14 @@ export default function UpdateAppPoster({ application, className }) {
         formData.append('appId', data.id);
         formData.append('poster', data.poster);
 
-        post(route('upload.poster'), formData);
+        post(route('poster.upload'), formData);
     };
 
     return (
         <form className={` h-52 flex items-center justify-center ${className}`} encType="multipart/form-data">
             <div className='relative z-30 mx-auto h-36 w-36 backdrop-blur-md transition ease-linear duration-300'>
                 <div className='relative drop-shadow-md w-full h-full'>
-                    <img src={application.poster ? application.poster : '/storage/media/poster/default-poster.png'} alt="poster" className="w-full h-full" />
+                    <img src={application.posterPath} alt="poster" className="w-full h-full" />
                     <label htmlFor={`poster-${application.id}`} className='absolute -bottom-4 -right-4 h-8 w-8 flex cursor-pointer items-center justify-center rounded-full bg-sky-500 text-white hover:bg-opacity-90'>
                         <svg
                             className="fill-current"

@@ -1,5 +1,5 @@
 import { useForm } from '@inertiajs/react';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
@@ -9,6 +9,7 @@ import Modal from "@/Components/Modal";
 
 export default function CreateAppForm({ className = '' }) {
     const [openingModal, setOpeningModal] = useState(false);
+    const [showErrors, setShowErrors] = useState(false);
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         description: '',
@@ -24,29 +25,23 @@ export default function CreateAppForm({ className = '' }) {
 
     const closeModal = () => {
         setOpeningModal(false);
-
         reset();
+        setShowErrors(false);
     };
-
-    useEffect(() => {
-        return () => {
-            reset('name', 'description', 'start_date', 'end_date', 'location', 'website');
-        };
-    }, []);
 
     const submit = (e) => {
         e.preventDefault();
 
         post(route('applications.store'), {
             preserveScroll: true,
+            onError: () => { setShowErrors(true); },
             onSuccess: () => closeModal(),
-            onFinish: () => reset(),
         });
     }
     return (
         <section className={`space-y-6 ${className}`}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Create an Application</h2>
+                <h1 className="text-lg font-medium text-gray-900 dark:text-gray-100">Create an Application</h1>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
                     Don't have any applications yet? Looking to add another one? Click the 'Create' button to begin.
@@ -77,7 +72,7 @@ export default function CreateAppForm({ className = '' }) {
                             onChange={(e) => setData('name', e.target.value)}
                         />
 
-                        <InputError className="mt-2" message={errors.name} />
+                        <InputError className="mt-2" message={showErrors ? errors.name : null} />
                     </div>
 
                     <div className="mt-6">
@@ -92,7 +87,7 @@ export default function CreateAppForm({ className = '' }) {
                             onChange={(e) => setData('description', e.target.value)}
                         />
 
-                        <InputError className="mt-2" message={errors.description} />
+                        <InputError className="mt-2" message={showErrors ? errors.description : null} />
                     </div>
 
                     <div className="mt-6">
@@ -107,7 +102,7 @@ export default function CreateAppForm({ className = '' }) {
                             onChange={(e) => setData('start_date', e.target.value)}
                         />
 
-                        <InputError className="mt-2" message={errors.start_date} />
+                        <InputError className="mt-2" message={showErrors ? errors.start_date : null} />
                     </div>
 
                     <div className="mt-6">
@@ -122,7 +117,7 @@ export default function CreateAppForm({ className = '' }) {
                             onChange={(e) => setData('end_date', e.target.value)}
                         />
 
-                        <InputError className="mt-2" message={errors.end_date} />
+                        <InputError className="mt-2" message={showErrors ? errors.end_date : null} />
                     </div>
 
                     <div className="mt-6">
@@ -136,7 +131,7 @@ export default function CreateAppForm({ className = '' }) {
                             onChange={(e) => setData('location', e.target.value)}
                         />
 
-                        <InputError className="mt-2" message={errors.location} />
+                        <InputError className="mt-2" message={showErrors ? errors.location : null} />
                     </div>
 
                     <div className="mt-6">
@@ -152,7 +147,7 @@ export default function CreateAppForm({ className = '' }) {
                             onChange={(e) => setData('website', e.target.value)}
                         />
 
-                        <InputError className="mt-2" message={errors.website} />
+                        <InputError className="mt-2" message={showErrors ? errors.website : null} />
                     </div>
 
                     <div className="mt-6 flex justify-end">

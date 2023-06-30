@@ -2,21 +2,20 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { useForm, usePage } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 
-export default function UpdateProfileInformation({ className = '' }) {
-    const user = usePage().props.auth.user;
+export default function UpdateProfileInformation({ customer, className = '' }) {
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
-        company_name: user.company_name || '',
-        first_name: user.first_name,
-        last_name: user.last_name,
-        address: user.address,
-        npa: user.npa,
-        city: user.city,
-        phone: user.phone || '',
-        email: user.email,
+        company_name: customer.company_name || '',
+        first_name: customer.first_name,
+        last_name: customer.last_name,
+        address: customer.address,
+        npa: customer.npa,
+        city: customer.city,
+        phone: customer.phone || '',
+        email: customer.email,
     });
 
     const submit = (e) => {

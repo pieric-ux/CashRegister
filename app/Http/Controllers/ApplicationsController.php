@@ -10,7 +10,6 @@ use App\Models\CR_App;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -23,7 +22,10 @@ class ApplicationsController extends Controller
     public function index(): Response
     {
         $customer = Auth::user();
-        $applications = $customer->cr_apps;
+        $applications = $customer->cr_apps->map(function ($app) {
+            $app->posterPath = $app->getPosterUrl();
+            return $app;
+        });
 
         return Inertia::render('Applications/Index', [
             'applications' => $applications,
@@ -85,12 +87,6 @@ class ApplicationsController extends Controller
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
-
-        $appMedia = $app->cr_medias;
-
-        foreach ($appMedia as $media) {
-            Storage::disk('public')->delete($media->path);
-        }
 
         $app->delete();
 

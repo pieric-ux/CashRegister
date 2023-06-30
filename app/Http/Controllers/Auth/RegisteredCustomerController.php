@@ -14,7 +14,7 @@ use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class RegisteredUserController extends Controller
+class RegisteredCustomerController extends Controller
 {
     /**
      * Display the registration view.
@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = Customer::create([
+        $customer = Customer::create([
             'company_name' => $request->company_name,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -53,9 +53,9 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+        event(new Registered($customer));
 
-        Auth::login($user);
+        Auth::login($customer);
 
         return redirect(RouteServiceProvider::HOME);
     }
