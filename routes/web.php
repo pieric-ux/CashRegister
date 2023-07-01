@@ -46,6 +46,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/apps/{app}/workstations', [WorkstationsController::class, 'index'])->name('workstations.index');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/avatar-upload', [MediaController::class, 'uploadAvatar'])->name('avatar.upload');
     Route::post('/poster-upload', [MediaController::class, 'uploadPoster'])->name('poster.upload');
 });
