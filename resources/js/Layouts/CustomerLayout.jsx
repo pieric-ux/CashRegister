@@ -3,8 +3,10 @@ import Sidebar from "@/Components/SideBar";
 import SideBarLink from "@/Components/SideBarLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import Dropdown from "@/Components/Dropdown";
+import useLocalStorage from "@/Hooks/useLocalStorage";
 
 export default function CustomerLayout({ auth, children }) {
+    const [sideBarOpen, setSideBarOpen] = useLocalStorage("sideBarOpen", false);
     const RespNavLink = (
         <>
             <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
@@ -33,7 +35,7 @@ export default function CustomerLayout({ auth, children }) {
 
             <div className="flex h-screen overflow-hidden">
                 {/* SideBar Start*/}
-                <Sidebar>
+                <Sidebar sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen}>
                     <SideBarLink href={route('dashboard')} active={route().current('dashboard')}
                         svg={
                             <svg className="w-5 h-5 text-gray-600 dark:text-gray-300" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -63,7 +65,7 @@ export default function CustomerLayout({ auth, children }) {
                 {/* Content Area Start*/}
                 <div className="flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
                     {/* Header Start*/}
-                    <Header user={auth.customer} avatarPath={auth.avatarPath} RespNavLink={RespNavLink} DropdownLink={DropdownLink} />
+                    <Header user={auth.customer} avatarPath={auth.avatarPath} RespNavLink={RespNavLink} DropdownLink={DropdownLink} sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen} />
 
 
                     {/* Header End*/}

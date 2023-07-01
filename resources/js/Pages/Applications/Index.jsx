@@ -23,26 +23,24 @@ export default function Index({ applications, auth }) {
                     <ul>
                         {applications.map((application) => (
                             <li className='my-4' key={application.id}>
-                                <div className="flex gap-8 p-4 sm:p-8 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-md rounded-lg transition ease-linear duration-300">
+                                <div className="relative flex md:flex-row lg:gap-12 md:gap-10 flex-col sm:p-8 p-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-md rounded-lg transition ease-linear duration-300">
                                     {/*<Link className='flex gap-4 flex-1' href={route('applications.show', application.slug)}></Link>*/}
-                                    <div className='flex items-center'>
+                                    <div className='absolute top-4 right-4 flex gap-2'>
+                                        <UpdateAppForm application={application} />
+                                        <DeleteAppForm application={application} />
+                                    </div>
+                                    <div className='flex items-center justify-center md:mt-0 mt-8'>
                                         <UpdateAppPoster application={application} />
                                     </div>
-                                    <div className='flex flex-col flex-1'>
-                                        <div className='flex gap-2 justify-end'>
-                                            <UpdateAppForm application={application} />
-                                            <DeleteAppForm application={application} />
+                                    <div className='flex flex-col flex-1 gap-2'>
+                                        <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>{application.name}</h2>
+                                        <p className='text-gray-900 dark:text-gray-100 text-clip overflow-hidden'>{application.description}</p>
+                                        <div className='flex justify-around flex-wrap gap-4'>
+                                            <p className='text-gray-900 dark:text-gray-100'>{application.start_date}</p>
+                                            <p className='text-gray-900 dark:text-gray-100'>{application.end_date}</p>
                                         </div>
-                                        <div className='flex flex-col flex-1 gap-2 mt-1'>
-                                            <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>{application.name}</h2>
-                                            <p className='text-gray-900 dark:text-gray-100'>{application.description}</p>
-                                            <div className='flex flex-wrap gap-4'>
-                                                <p className='text-gray-900 dark:text-gray-100'>{application.start_date}</p>
-                                                <p className='text-gray-900 dark:text-gray-100'>{application.end_date}</p>
-                                            </div>
-                                            <p className='text-gray-900 dark:text-gray-100'>{application.location}</p>
-                                            <p className='text-gray-900 dark:text-gray-100'>{application.website}</p>
-                                        </div>
+                                        <p className='text-gray-900 text-center dark:text-gray-100'>{application.location}</p>
+                                        <p className='text-gray-900 text-center dark:text-gray-100'>{application.website}</p>
                                     </div>
                                 </div>
                             </li>
