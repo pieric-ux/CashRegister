@@ -1,7 +1,7 @@
 import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
 import { Head } from '@inertiajs/react';
 
-export default function Show({ application, auth }) {
+export default function Dashboard({ application, auth }) {
     return (
         <CR_AppAdminLayout
             auth={auth}

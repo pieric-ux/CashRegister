@@ -27,7 +27,7 @@ class ApplicationsController extends Controller
             return $app;
         });
 
-        return Inertia::render('Applications/Index', [
+        return Inertia::render('Customers/Applications/Index', [
             'applications' => $applications,
         ]);
     }
@@ -57,7 +57,7 @@ class ApplicationsController extends Controller
      */
     public function show(ShowApplicationsRequest $request, CR_App $app): Response
     {
-        return Inertia::render('Applications/Show', [
+        return Inertia::render('Application/Dashboard', [
             'application' => $app,
         ]);
     }
