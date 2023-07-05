@@ -9,6 +9,9 @@ export default function CR_AppAdminLayout({ auth, application, children }) {
     const [sideBarOpen, setSideBarOpen] = useLocalStorage("sideBarOpen", false);
     const RespNavLink = (
         <>
+            <ResponsiveNavLink href={route('dashboard')}>
+                Home
+            </ResponsiveNavLink>
             <ResponsiveNavLink href={route('applications.show', application.slug)} active={route().current('applications.show', application.slug)}>
                 App Dashboard
             </ResponsiveNavLink>
@@ -22,6 +25,7 @@ export default function CR_AppAdminLayout({ auth, application, children }) {
     );
     const DropdownLink = (
         <>
+            <Dropdown.Link href={route('dashboard')}>Home</Dropdown.Link>
             <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
             <Dropdown.Link href={route('logout')} method="post" as="button">Log Out</Dropdown.Link>
         </>
@@ -54,7 +58,7 @@ export default function CR_AppAdminLayout({ auth, application, children }) {
                 {/* Content Area Start*/}
                 <div className="flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
                     {/* Header Start*/}
-                    <Header user={auth.customer} avatarPath={auth.avatarPath} RespNavLink={RespNavLink} DropdownLink={DropdownLink} sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen} />
+                    <Header user={auth.customer} title={application.name} avatarPath={auth.avatarPath} RespNavLink={RespNavLink} DropdownLink={DropdownLink} sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen} />
 
 
                     {/* Header End*/}

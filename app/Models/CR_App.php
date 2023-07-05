@@ -36,6 +36,11 @@ class CR_App extends Model implements HasMedia
         return $this->belongsTo(Customer::class, 'fk_customer_id');
     }
 
+    public function cr_workstations()
+    {
+        return $this->hasMany(CR_Workstations::class, 'fk_apps_id');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

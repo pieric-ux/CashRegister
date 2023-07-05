@@ -2,14 +2,14 @@ import { useState } from 'react';
 import Dropdown from '@/Components/Dropdown';
 import DarkModeSwitcher from './DarkModeSwitcher';
 
-export default function Header({ user, avatarPath, RespNavLink, DropdownLink, sideBarOpen, setSideBarOpen }) {
+export default function Header({ user, title, avatarPath, RespNavLink, DropdownLink, sideBarOpen, setSideBarOpen }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
 
     return (
         <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 drop-shadow-sm dark:drop-shadow-none transition ease-linear duration-300">
             <div className="flex items-center justify-between h-20 mx-auto px-4 sm:gap-2 gap-4 sm:px-6 lg:px-8">
-                <div className={`${sideBarOpen ? 'sm:invisible' : 'visibile'} lg:invisible sm:visible invisible items-center`}>
+                <div className={`${sideBarOpen ? 'sm:invisible' : 'visibile'} lg:invisible sm:visible invisible`}>
                     <button
                         aria-controls="sidebar"
                         onClick={(e) => {
@@ -27,6 +27,9 @@ export default function Header({ user, avatarPath, RespNavLink, DropdownLink, si
                             />
                         </svg>
                     </button>
+                </div>
+                <div className={`${title ? 'flex' : 'hidden'}`}>
+                    <h1 className='font-semibold text-2xl text-gray-900 dark:text-gray-100'>{title}</h1>
                 </div>
                 <div className='flex items-center gap-2'>
                     <DarkModeSwitcher />
@@ -64,7 +67,7 @@ export default function Header({ user, avatarPath, RespNavLink, DropdownLink, si
                         </Dropdown>
                     </div>
 
-                    <div className="-mr-2 flex items-center sm:hidden">
+                    <div className="-mr-2 flex sm:hidden">
                         <button
                             onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
                             className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"

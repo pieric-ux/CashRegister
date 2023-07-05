@@ -3,10 +3,7 @@ import { Head } from '@inertiajs/react';
 
 export default function Dashboard({ auth }) {
     return (
-        <CustomerLayout
-            auth={auth}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>}
-        >
+        <CustomerLayout auth={auth}>
             <Head title="Dashboard" />
 
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 space-y-6">

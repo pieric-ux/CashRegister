@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\CR_App;
 use App\Models\Customer;
 use Illuminate\Database\Seeder;
 
@@ -27,6 +28,14 @@ class DatabaseSeeder extends Seeder
         foreach ($customers as $customer) {
             \App\Models\CR_App::factory()->create([
                 'fk_customer_id' => $customer->id,
+            ]);
+        }
+
+        $apps = CR_App::all();
+
+        foreach ($apps as $app) {
+            \App\Models\CR_Workstations::factory()->create([
+                'fk_apps_id' => $app->id,
             ]);
         }
     }

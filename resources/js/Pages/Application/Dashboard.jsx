@@ -6,7 +6,6 @@ export default function Dashboard({ application, auth }) {
         <CR_AppAdminLayout
             auth={auth}
             application={application}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">{application.name}</h2>}
         >
             <Head title={application.name} />
 
