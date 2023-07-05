@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Applications\StoreApplicationRequest;
-use App\Http\Requests\Applications\ShowApplicationsRequest;
+use App\Http\Requests\Applications\ShowApplicationRequest;
 use App\Http\Requests\Applications\UpdateApplicationRequest;
 use App\Http\Requests\Applications\DeleteApplicationRequest;
 use App\Models\CR_App;
@@ -55,7 +55,7 @@ class ApplicationsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ShowApplicationsRequest $request, CR_App $app): Response
+    public function show(ShowApplicationRequest $request, CR_App $app): Response
     {
         return Inertia::render('Application/Dashboard', [
             'application' => $app,

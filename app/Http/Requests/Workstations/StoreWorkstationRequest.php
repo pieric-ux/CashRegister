@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Applications;
+namespace App\Http\Requests\Workstations;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
-class DeleteApplicationRequest extends FormRequest
+class StoreWorkstationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +25,17 @@ class DeleteApplicationRequest extends FormRequest
      */
     public function rules(): array
     {
+        $app = $this->route('app');
+
         return [
-            //
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('cr_workstations')->where(function ($query) use ($app) {
+                    return $query->where('fk_apps_id', $app->id);
+                }),
+            ],
         ];
     }
 }

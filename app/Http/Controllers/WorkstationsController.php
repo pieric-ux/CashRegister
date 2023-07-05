@@ -2,52 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Workstations\DeleteWorkstationRequest;
 use App\Http\Requests\Workstations\IndexWorkstationsRequest;
+use App\Http\Requests\Workstations\StoreWorkstationRequest;
+use App\Http\Requests\Workstations\UpdateWorkstationRequest;
 use App\Models\CR_App;
 use App\Models\CR_Workstations;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class WorkstationsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexWorkstationsRequest $request, CR_App $app)
+    public function index(IndexWorkstationsRequest $request, CR_App $app): Response
     {
+        $workstations = $app->cr_workstations->map(function ($workstation) {
+            return $workstation;
+        });
+
         return Inertia::render('Application/Workstations/Index', [
             'application' => $app,
+            'workstations' => $workstations,
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreWorkstationRequest $request, CR_App $app): RedirectResponse
     {
-        //
+        $app->cr_workstations()->create([
+            'name' => $request->input('name'),
+        ]);
+
+        return Redirect::route('workstations.index', $app);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(CR_Workstations $cR_Workstations)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(CR_Workstations $cR_Workstations)
+    public function show()
     {
         //
     }
@@ -55,16 +53,25 @@ class WorkstationsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CR_Workstations $cR_Workstations)
+    public function update(UpdateWorkstationRequest $request, CR_Workstations $workstation): RedirectResponse
     {
-        //
+        $workstation->name = $request->input('name');
+        $workstation->save();
+
+        return Redirect::route('workstations.index', $workstation->cr_apps->slug);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CR_Workstations $cR_Workstations)
+    public function destroy(DeleteWorkstationRequest $request, CR_Workstations $workstation): RedirectResponse
     {
-        //
+        $request->validate([
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $workstation->delete();
+
+        return Redirect::route('workstations.index', $workstation->cr_apps->slug);
     }
 }

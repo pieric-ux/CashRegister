@@ -15,7 +15,7 @@ class UpdateApplicationRequest extends FormRequest
     {
         $app = $this->route('app');
 
-        return $app->fk_customer_id === Auth::id();
+        return $app->isOwnedBy(Auth::user());
     }
 
     /**

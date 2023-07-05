@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Http\Requests\Applications;
+namespace App\Http\Requests\Workstations;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class ShowApplicationsRequest extends FormRequest
+class DeleteWorkstationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        $app = $this->route('app');
+        $workstation = $this->route('workstation');
+        $app = $workstation->cr_apps;
 
-        return $app->fk_customer_id === Auth::id();
+        return $app->isOwnedBy(Auth::user());
     }
 
     /**

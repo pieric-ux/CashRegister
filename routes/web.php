@@ -48,6 +48,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/apps/{app}/workstations', [WorkstationsController::class, 'index'])->name('workstations.index');
+    Route::post('/apps/{app}/workstations', [WorkstationsController::class, 'store'])->name('workstations.store');
+    Route::patch('/workstations/{workstation}', [WorkstationsController::class, 'update'])->name('workstations.update');
+    Route::delete('/workstations/{workstation}', [WorkstationsController::class, 'destroy'])->name('workstations.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

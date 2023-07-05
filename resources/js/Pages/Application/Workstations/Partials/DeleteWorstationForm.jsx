@@ -7,8 +7,8 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 
-export default function DeleteAppForm({ application }) {
-    const [confirmingAppDeletion, setConfirmingAppDeletion] = useState(false);
+export default function DeleteWorkstationForm({ workstation }) {
+    const [confirmingWorkstationDeletion, setConfirmingWorkstationDeletion] = useState(false);
     const passwordInput = useRef();
 
     const {
@@ -22,14 +22,14 @@ export default function DeleteAppForm({ application }) {
         password: '',
     });
 
-    const confirmAppDeletion = () => {
-        setConfirmingAppDeletion(true);
+    const confirmWorkstationDeletion = () => {
+        setConfirmingWorkstationDeletion(true);
     };
 
-    const deleteApp = (e) => {
+    const deleteWorkstation = (e) => {
         e.preventDefault();
 
-        destroy(route('applications.destroy', application.slug), {
+        destroy(route('workstations.destroy', workstation), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
             onError: () => passwordInput.current.focus(),
@@ -38,14 +38,14 @@ export default function DeleteAppForm({ application }) {
     };
 
     const closeModal = () => {
-        setConfirmingAppDeletion(false);
+        setConfirmingWorkstationDeletion(false);
 
         reset();
     };
 
     return (
         <section>
-            <DangerButton onClick={confirmAppDeletion} className='!px-2'>
+            <DangerButton onClick={confirmWorkstationDeletion} className='!px-2'>
                 <svg className='w-5 h-5 text-white' fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430.901 583.409">
                     <g>
                         <path d="M3.339,199.409h384v320c0,35.3-28.7,64-64,64h-256c-35.3,0-64-28.7-64-64V199.409z M99.339,263.409c-8.8,0-16,7.2-16,16
@@ -59,14 +59,14 @@ export default function DeleteAppForm({ application }) {
                 </svg>
             </DangerButton>
 
-            <Modal show={confirmingAppDeletion} onClose={closeModal}>
-                <form onSubmit={deleteApp} className="p-6">
+            <Modal show={confirmingWorkstationDeletion} onClose={closeModal}>
+                <form onSubmit={deleteWorkstation} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                        Are you sure you want to delete your app?
+                        Are you sure you want to delete your workstation?
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                        Once your app is deleted, all of its resources and data will be permanently deleted. Please
+                        Once your workstation is deleted, all of its resources and data will be permanently deleted. Please
                         enter your password to confirm you would like to permanently delete your app.
                     </p>
 
@@ -92,7 +92,7 @@ export default function DeleteAppForm({ application }) {
                         <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
 
                         <DangerButton className="ml-3" disabled={processing}>
-                            Delete App
+                            Delete Workstation
                         </DangerButton>
                     </div>
                 </form>

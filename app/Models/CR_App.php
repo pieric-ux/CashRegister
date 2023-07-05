@@ -46,6 +46,11 @@ class CR_App extends Model implements HasMedia
         return 'slug';
     }
 
+    public function isOwnedBy(Customer $customer): bool
+    {
+        return $this->fk_customer_id === $customer->id;
+    }
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this
