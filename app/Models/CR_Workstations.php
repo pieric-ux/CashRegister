@@ -25,4 +25,9 @@ class CR_Workstations extends Model
     {
         return $this->belongsTo(CR_App::class, 'fk_apps_id');
     }
+
+    public function cr_employees()
+    {
+        return $this->hasMany(CR_Employees::class, 'fk_workstations_id');
+    }
 }

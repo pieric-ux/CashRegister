@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationsController;
+use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WorkstationsController;
@@ -51,6 +52,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/apps/{app}/workstations', [WorkstationsController::class, 'store'])->name('workstations.store');
     Route::patch('/workstations/{workstation}', [WorkstationsController::class, 'update'])->name('workstations.update');
     Route::delete('/workstations/{workstation}', [WorkstationsController::class, 'destroy'])->name('workstations.destroy');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/apps/{app}/employees', [EmployeesController::class, 'index'])->name('employees.index');
+    Route::post('/apps/{app}/employees', [EmployeesController::class, 'store'])->name('employees.store');
+    Route::patch('/employees/{employee}', [EmployeesController::class, 'update'])->name('employees.update');
+    Route::delete('/employees/{employee}', [EmployeesController::class, 'destroy'])->name('employees.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

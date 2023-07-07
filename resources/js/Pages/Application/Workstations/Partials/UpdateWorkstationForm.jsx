@@ -62,7 +62,7 @@ export default function UpdateWorkstationForm({ workstation, className = '' }) {
                     </p>
 
                     <div className='mt-6'>
-                        <InputLabel htmlFor="name" value="Workstation Name :" />
+                        <InputLabel htmlFor="name" value="Name" />
 
                         <TextInput
                             id="name"

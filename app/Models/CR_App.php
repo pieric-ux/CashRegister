@@ -41,6 +41,18 @@ class CR_App extends Model implements HasMedia
         return $this->hasMany(CR_Workstations::class, 'fk_apps_id');
     }
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function (CR_App $app) {
+            $workstation = new CR_Workstations();
+            $workstation->name = 'Pending assignements';
+            $workstation->fk_apps_id = $app->id;
+            $workstation->save();
+        });
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

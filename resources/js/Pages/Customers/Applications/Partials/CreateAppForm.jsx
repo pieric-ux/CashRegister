@@ -61,7 +61,7 @@ export default function CreateAppForm({ className = '' }) {
                     </p>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="name" value="Application Name :" />
+                        <InputLabel htmlFor="name" value="Name" />
 
                         <TextInput
                             id="name"
@@ -76,7 +76,7 @@ export default function CreateAppForm({ className = '' }) {
                     </div>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="description" value="Description :" />
+                        <InputLabel htmlFor="description" value="Description" />
 
                         <textarea
                             id="description"
@@ -91,7 +91,7 @@ export default function CreateAppForm({ className = '' }) {
                     </div>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="start_date" value="Start Date :" />
+                        <InputLabel htmlFor="start_date" value="Start Date" />
 
                         <TextInput
                             id="start_date"
@@ -106,7 +106,7 @@ export default function CreateAppForm({ className = '' }) {
                     </div>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="end_date" value="End Date :" />
+                        <InputLabel htmlFor="end_date" value="End Date" />
 
                         <TextInput
                             id="end_date"
@@ -121,7 +121,7 @@ export default function CreateAppForm({ className = '' }) {
                     </div>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="location" value="Location :" />
+                        <InputLabel htmlFor="location" value="Location" />
 
                         <TextInput
                             id="location"
@@ -135,7 +135,7 @@ export default function CreateAppForm({ className = '' }) {
                     </div>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="website" value="Website :" />
+                        <InputLabel htmlFor="website" value="Website" />
 
                         <TextInput
                             id="website"
