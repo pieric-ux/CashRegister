@@ -1,9 +1,9 @@
 import CustomerLayout from '@/Layouts/CustomerLayout';
 import { Head } from '@inertiajs/react';
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ customerAuth }) {
     return (
-        <CustomerLayout auth={auth}>
+        <CustomerLayout auth={customerAuth}>
             <Head title="Dashboard" />
 
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 space-y-6">

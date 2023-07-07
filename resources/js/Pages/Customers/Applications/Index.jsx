@@ -6,10 +6,10 @@ import DeleteAppForm from './Partials/DeleteAppForm';
 import UpdateAppPoster from './Partials/UpdateAppPoster';
 import PrimaryButton from '@/Components/PrimaryButton';
 
-export default function Index({ applications, auth }) {
+export default function Index({ customerAuth, applications }) {
 
     return (
-        <CustomerLayout auth={auth}>
+        <CustomerLayout auth={customerAuth}>
             <Head title="Applications" />
 
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 space-y-6">

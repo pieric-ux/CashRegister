@@ -4,10 +4,10 @@ import CreateEmployeeForm from "./Partials/CreateEmployeeForm";
 import UpdateEmployeeForm from "./Partials/UpdateEmployeeForm";
 import DeleteEmployeeForm from "./Partials/DeleteEmployeeForm";
 
-export default function Index({ application, auth, employees }) {
+export default function Index({ customerAuth, application, employees }) {
     return (
         <CR_AppAdminLayout
-            auth={auth}
+            auth={customerAuth}
             application={application}
         >
             <Head title={application.name} />

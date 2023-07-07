@@ -4,7 +4,7 @@ import CreateWorkstationForm from "./Partials/CreateWorkstationForm";
 import DeleteWorkstationForm from "./Partials/DeleteWorstationForm";
 import UpdateWorkstationForm from "./Partials/UpdateWorkstationForm";
 
-export default function Index({ application, auth, workstations }) {
+export default function Index({ customerAuth, application, workstations }) {
 
     const defaultWorkstation = workstations.find(workstation => workstation.name === 'Pending assignements');
 
@@ -12,7 +12,7 @@ export default function Index({ application, auth, workstations }) {
 
     return (
         <CR_AppAdminLayout
-            auth={auth}
+            auth={customerAuth}
             application={application}
         >
             <Head title={application.name} />
