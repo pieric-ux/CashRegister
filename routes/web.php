@@ -29,41 +29,34 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Customers/Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/dashboard', function () {
+        return Inertia::render('Customers/Dashboard');
+    })->name('dashboard');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/apps', [ApplicationsController::class, 'index'])->name('applications.index');
     Route::post('/apps', [ApplicationsController::class, 'store'])->name('applications.store');
     Route::get('/apps/{app}', [ApplicationsController::class, 'show'])->name('applications.show');
     Route::patch('/apps/{app}', [ApplicationsController::class, 'update'])->name('applications.update');
     Route::delete('/apps/{app}', [ApplicationsController::class, 'destroy'])->name('applications.destroy');
-});
 
-Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/apps/{app}/workstations', [WorkstationsController::class, 'index'])->name('workstations.index');
     Route::post('/apps/{app}/workstations', [WorkstationsController::class, 'store'])->name('workstations.store');
     Route::patch('/workstations/{workstation}', [WorkstationsController::class, 'update'])->name('workstations.update');
     Route::delete('/workstations/{workstation}', [WorkstationsController::class, 'destroy'])->name('workstations.destroy');
-});
 
-Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/apps/{app}/employees', [EmployeesController::class, 'index'])->name('employees.index');
-    Route::post('/apps/{app}/employees', [EmployeesController::class, 'store'])->name('employees.store');
     Route::patch('/employees/{employee}', [EmployeesController::class, 'update'])->name('employees.update');
     Route::delete('/employees/{employee}', [EmployeesController::class, 'destroy'])->name('employees.destroy');
-});
 
-Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/avatar-upload', [MediaController::class, 'uploadAvatar'])->name('avatar.upload');
     Route::post('/poster-upload', [MediaController::class, 'uploadPoster'])->name('poster.upload');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__ . '/customerAuth.php';
+require __DIR__ . '/employeeAuth.php';

@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Employees\DeleteEmployeeRequest;
 use App\Http\Requests\Employees\IndexEmployeesRequest;
-use App\Http\Requests\Employees\StoreEmployeeRequest;
 use App\Http\Requests\Employees\UpdateEmployeeRequest;
 use App\Models\CR_App;
 use App\Models\CR_Employees;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -29,32 +27,6 @@ class EmployeesController extends Controller
             'application' => $app,
             'employees' => $employees,
         ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreEmployeeRequest $request, CR_App $app): RedirectResponse
-    {
-        $workstation = $app->cr_workstations->first();
-
-        $workstation->cr_employees()->create([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'phone' => $request->input('phone'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->password),
-        ]);
-
-        return Redirect::route('employees.index', $app);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show()
-    {
-        //
     }
 
     /**

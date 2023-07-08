@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\CustomerAuth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterCustomerRequest;
 use App\Models\Customer;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class RegisteredCustomerController extends Controller
+class CustomerRegisterController extends Controller
 {
     /**
      * Display the registration view.
@@ -29,19 +28,8 @@ class RegisteredCustomerController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(RegisterCustomerRequest $request): RedirectResponse
     {
-        $request->validate([
-            'company_name' => 'nullable|string|max:255',
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'npa' => 'required|integer',
-            'city' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:' . Customer::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
         $customer = Customer::create([
             'company_name' => $request->company_name,
             'first_name' => $request->first_name,

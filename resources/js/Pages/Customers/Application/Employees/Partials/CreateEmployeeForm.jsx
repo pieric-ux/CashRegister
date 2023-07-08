@@ -38,7 +38,7 @@ export default function CreateEmployeeForm({ application, className = '' }) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('employees.store', application.slug), {
+        post(route('employees.register', application.slug), {
             preserveScroll: true,
             onError: () => { setShowErrors(true); },
             onSuccess: () => closeModal(),
