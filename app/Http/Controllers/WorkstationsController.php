@@ -24,7 +24,7 @@ class WorkstationsController extends Controller
             return $workstation;
         });
 
-        return Inertia::render('Application/Workstations/Index', [
+        return Inertia::render('Customers/Application/Workstations/Index', [
             'application' => $app,
             'workstations' => $workstations,
         ]);

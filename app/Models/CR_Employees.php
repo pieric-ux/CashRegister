@@ -21,7 +21,8 @@ class CR_Employees extends Model
         'last_name',
         'phone',
         'email',
-        'fk_workstations_id'
+        'password',
+        'fk_workstations_id',
     ];
 
     /**
@@ -30,6 +31,7 @@ class CR_Employees extends Model
      * @var array<int, string>
      */
     protected $hidden = [
+        'password',
         'remember_token',
     ];
 

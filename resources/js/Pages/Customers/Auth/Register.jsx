@@ -62,7 +62,6 @@ export default function Register() {
                         className="mt-1 block w-full"
                         autoComplete="given-name"
                         onChange={(e) => setData('first_name', e.target.value)}
-                        required
                     />
 
                     <InputError message={errors.first_name} className="mt-2" />
@@ -78,7 +77,6 @@ export default function Register() {
                         className="mt-1 block w-full"
                         autoComplete="family-name"
                         onChange={(e) => setData('last_name', e.target.value)}
-                        required
                     />
 
                     <InputError message={errors.last_name} className="mt-2" />
@@ -94,7 +92,6 @@ export default function Register() {
                         className="mt-1 block w-full"
                         autoComplete="street-address"
                         onChange={(e) => setData('address', e.target.value)}
-                        required
                     />
 
                     <InputError message={errors.address} className="mt-2" />
@@ -111,7 +108,6 @@ export default function Register() {
                             className="mt-1 block w-full"
                             autoComplete="address-level2"
                             onChange={(e) => setData('city', e.target.value)}
-                            required
                         />
 
                         <InputError message={errors.city} className="mt-2" />
@@ -126,7 +122,6 @@ export default function Register() {
                             className="mt-1 block w-full"
                             autoComplete="postal-code"
                             onChange={(e) => setData('npa', e.target.value)}
-                            required
                         />
 
                         <InputError message={errors.npa} className="mt-2" />
@@ -144,7 +139,6 @@ export default function Register() {
                         className="mt-1 block w-full"
                         autoComplete="username"
                         onChange={(e) => setData('email', e.target.value)}
-                        required
                     />
 
                     <InputError message={errors.email} className="mt-2" />
@@ -161,7 +155,6 @@ export default function Register() {
                         className="mt-1 block w-full"
                         autoComplete="new-password"
                         onChange={(e) => setData('password', e.target.value)}
-                        required
                     />
 
                     <InputError message={errors.password} className="mt-2" />
@@ -177,7 +170,6 @@ export default function Register() {
                         value={data.password_confirmation}
                         className="mt-1 block w-full"
                         onChange={(e) => setData('password_confirmation', e.target.value)}
-                        required
                     />
 
                     <InputError message={errors.password_confirmation} className="mt-2" />

@@ -57,7 +57,7 @@ class ApplicationsController extends Controller
      */
     public function show(ShowApplicationRequest $request, CR_App $app): Response
     {
-        return Inertia::render('Application/Dashboard', [
+        return Inertia::render('Customers/Application/Dashboard', [
             'application' => $app,
         ]);
     }

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Employees;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules;
 
 class StoreEmployeeRequest extends FormRequest
 {
@@ -29,6 +30,7 @@ class StoreEmployeeRequest extends FormRequest
             'last_name' => ['required', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:cr_employees'],
+            'password' => ['required', 'confirmed', Rules\Password::default()],
         ];
     }
 }

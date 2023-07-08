@@ -9,6 +9,7 @@ use App\Http\Requests\Employees\UpdateEmployeeRequest;
 use App\Models\CR_App;
 use App\Models\CR_Employees;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -24,7 +25,7 @@ class EmployeesController extends Controller
             return $workstation->cr_employees;
         });
 
-        return Inertia::render('Application/Employees/Index', [
+        return Inertia::render('Customers/Application/Employees/Index', [
             'application' => $app,
             'employees' => $employees,
         ]);
@@ -42,6 +43,7 @@ class EmployeesController extends Controller
             'last_name' => $request->input('last_name'),
             'phone' => $request->input('phone'),
             'email' => $request->input('email'),
+            'password' => Hash::make($request->password),
         ]);
 
         return Redirect::route('employees.index', $app);
