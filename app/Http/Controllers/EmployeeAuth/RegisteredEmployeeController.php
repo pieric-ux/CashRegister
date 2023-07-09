@@ -7,7 +7,6 @@ use App\Http\Requests\Auth\RegisterEmployeeRequest;
 use App\Models\CR_App;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
@@ -31,9 +30,7 @@ class RegisteredEmployeeController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        /*event(new Registered($employee));
-
-        Auth::login($employee);*/
+        event(new Registered($employee));
 
         return Redirect::route('employees.index', $app);
     }

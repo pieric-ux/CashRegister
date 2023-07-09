@@ -45,6 +45,6 @@ class CustomerRegisterController extends Controller
 
         Auth::login($customer);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::CUSTOMER_HOME);
     }
 }
