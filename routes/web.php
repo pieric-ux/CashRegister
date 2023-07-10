@@ -27,9 +27,9 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('welcome');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth:customer', 'verified'])->group(function () {
 
     Route::get('/dashboard', function () {
         return Inertia::render('Customers/Dashboard');

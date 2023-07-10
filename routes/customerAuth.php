@@ -12,48 +12,35 @@ use App\Http\Controllers\CustomerAuth\CustomerVerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [CustomerRegisterController::class, 'create'])
-        ->name('register');
+    Route::get('register', [CustomerRegisterController::class, 'create'])->name('customers.register');
 
     Route::post('register', [CustomerRegisterController::class, 'store']);
 
-    Route::get('login', [CustomerLoginController::class, 'create'])
-        ->name('login');
+    Route::get('login', [CustomerLoginController::class, 'create'])->name('customers.login');
 
     Route::post('login', [CustomerLoginController::class, 'store']);
 
-    Route::get('forgot-password', [CustomerPasswordResetLinkController::class, 'create'])
-        ->name('password.request');
+    Route::get('forgot-password', [CustomerPasswordResetLinkController::class, 'create'])->name('password.request');
 
-    Route::post('forgot-password', [CustomerPasswordResetLinkController::class, 'store'])
-        ->name('password.email');
+    Route::post('forgot-password', [CustomerPasswordResetLinkController::class, 'store'])->name('password.email');
 
-    Route::get('reset-password/{token}', [CustomerNewPasswordController::class, 'create'])
-        ->name('password.reset');
+    Route::get('reset-password/{token}', [CustomerNewPasswordController::class, 'create'])->name('password.reset');
 
-    Route::post('reset-password', [CustomerNewPasswordController::class, 'store'])
-        ->name('password.store');
+    Route::post('reset-password', [CustomerNewPasswordController::class, 'store'])->name('password.store');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('verify-email', CustomerEmailVerificationPromptController::class)
-        ->name('verification.notice');
+Route::middleware('auth:customer')->group(function () {
+    Route::get('verify-email', CustomerEmailVerificationPromptController::class)->name('verification.notice');
 
-    Route::get('verify-email/{id}/{hash}', CustomerVerifyEmailController::class)
-        ->middleware(['signed', 'throttle:6,1'])
-        ->name('verification.verify');
+    Route::get('verify-email/{id}/{hash}', CustomerVerifyEmailController::class)->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
 
-    Route::post('email/verification-notification', [CustomerEmailVerificationNotificationController::class, 'store'])
-        ->middleware('throttle:6,1')
-        ->name('verification.send');
+    Route::post('email/verification-notification', [CustomerEmailVerificationNotificationController::class, 'store'])->middleware('throttle:6,1')->name('verification.send');
 
-    Route::get('confirm-password', [CustomerConfirmablePasswordController::class, 'show'])
-        ->name('password.confirm');
+    Route::get('confirm-password', [CustomerConfirmablePasswordController::class, 'show'])->name('password.confirm');
 
     Route::post('confirm-password', [CustomerConfirmablePasswordController::class, 'store']);
 
     Route::put('password', [CustomerPasswordController::class, 'update'])->name('password.update');
 
-    Route::post('logout', [CustomerLoginController::class, 'destroy'])
-        ->name('logout');
+    Route::post('logout', [CustomerLoginController::class, 'destroy'])->name('logout');
 });

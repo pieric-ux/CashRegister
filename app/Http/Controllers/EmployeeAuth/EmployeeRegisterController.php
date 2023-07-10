@@ -10,7 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
-class RegisteredEmployeeController extends Controller
+class EmployeeRegisterController extends Controller
 {
 
     /**
