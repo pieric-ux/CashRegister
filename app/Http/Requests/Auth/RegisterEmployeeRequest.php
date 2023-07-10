@@ -30,7 +30,6 @@ class RegisterEmployeeRequest extends FormRequest
             'last_name' => ['required', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:cr_employees'],
-            'password' => ['required', 'confirmed', Rules\Password::default()],
         ];
     }
 }

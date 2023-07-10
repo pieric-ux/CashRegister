@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('phone')->nullable();
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->uuid('passwordless')->unique();
             $table->rememberToken();
             $table->unsignedBigInteger('fk_workstations_id');
             $table->foreign('fk_workstations_id')->references('id')->on('cr_workstations')->onDelete('cascade');

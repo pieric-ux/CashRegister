@@ -7,8 +7,8 @@ use App\Http\Requests\Auth\RegisterEmployeeRequest;
 use App\Models\CR_App;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 
 class EmployeeRegisterController extends Controller
 {
@@ -21,13 +21,14 @@ class EmployeeRegisterController extends Controller
     public function store(RegisterEmployeeRequest $request, CR_App $app): RedirectResponse
     {
         $workstation = $app->cr_workstations->first();
+        $passwordless = Str::uuid();
 
         $employee = $workstation->cr_employees()->create([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'phone' => $request->input('phone'),
             'email' => $request->input('email'),
-            'password' => Hash::make($request->password),
+            'passwordless' => $passwordless,
         ]);
 
         event(new Registered($employee));

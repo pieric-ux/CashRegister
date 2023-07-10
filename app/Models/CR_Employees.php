@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-//use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class CR_Employees extends Authenticatable // implements MustVerifyEmail
+class CR_Employees extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -25,7 +24,7 @@ class CR_Employees extends Authenticatable // implements MustVerifyEmail
         'last_name',
         'phone',
         'email',
-        'password',
+        'passwordless',
         'fk_workstations_id',
     ];
 
@@ -35,21 +34,23 @@ class CR_Employees extends Authenticatable // implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+        'passwordless',
         'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 
     public function cr_workstations()
     {
         return $this->belongsTo(CR_Workstations::class, 'fk_workstations_id');
+    }
+
+    public static function attemptByPasswordless($passwordless)
+    {
+        $user = static::where('passwordless', $passwordless)->first();
+
+        if ($user) {
+            return $user;
+        }
+
+        return null;
     }
 }
