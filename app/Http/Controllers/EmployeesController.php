@@ -56,6 +56,8 @@ class EmployeesController extends Controller
 
         $employee->delete();
 
+        //logout employee
+
         $app = $employee->cr_workstations->cr_apps;
 
         return Redirect::route('employees.index', $app);

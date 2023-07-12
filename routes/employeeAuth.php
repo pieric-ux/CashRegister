@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeAuth\EmployeeLoginController;
+use App\Http\Controllers\EmployeeAuth\EmployeeRegenerateActivationController;
 use App\Http\Controllers\EmployeeAuth\EmployeeRegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +16,5 @@ Route::middleware('auth:employee')->group(function () {
 
 Route::middleware(['auth:customer', 'verified'])->group(function () {
     Route::post('/apps/{app}/employees', [EmployeeRegisterController::class, 'store'])->name('employees.register');
+    Route::patch('regenerate-passwordless/{employee}', [EmployeeRegenerateActivationController::class, 'update'])->name('employees.regenerate');
 });

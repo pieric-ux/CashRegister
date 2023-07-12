@@ -3,6 +3,7 @@ import { Head } from "@inertiajs/react";
 import CreateEmployeeForm from "./Partials/CreateEmployeeForm";
 import UpdateEmployeeForm from "./Partials/UpdateEmployeeForm";
 import DeleteEmployeeForm from "./Partials/DeleteEmployeeForm";
+import RegenerateEmployeeForm from "./Partials/RegenerateEmployeeForm";
 
 export default function Index({ customerAuth, application, employees }) {
     return (
@@ -21,10 +22,17 @@ export default function Index({ customerAuth, application, employees }) {
                             <li className="my-4" key={employee.id}>
                                 <div className="relative flex md:flex-row lg:gap-12 md:gap-10 flex-col sm:p-8 p-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-md rounded-lg transition ease-linear duration-300">
                                     <div className='absolute top-4 right-4 flex gap-2'>
+                                        <RegenerateEmployeeForm employee={employee} />
                                         <UpdateEmployeeForm employee={employee} />
                                         <DeleteEmployeeForm employee={employee} />
                                     </div>
-                                    {employee.first_name}
+                                    <div className="flex flex-col flex-1 gap-2">
+                                        <p className='text-gray-900 dark:text-gray-100 text-clip overflow-hidden'>{employee.first_name}</p>
+                                        <p className='text-gray-900 dark:text-gray-100 text-clip overflow-hidden'>{employee.last_name}</p>
+                                        <p className='text-gray-900 dark:text-gray-100 text-clip overflow-hidden'>{employee.phone}</p>
+                                        <p className='text-gray-900 dark:text-gray-100 text-clip overflow-hidden'>{employee.email}</p>
+                                    </div>
+
                                 </div>
                             </li>
                         ))}
