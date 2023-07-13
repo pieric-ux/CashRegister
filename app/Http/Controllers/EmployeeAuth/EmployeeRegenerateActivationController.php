@@ -17,7 +17,6 @@ class EmployeeRegenerateActivationController extends Controller
      */
     public function update(Request $request, CR_Employees $employee)
     {
-        dd($request);
         $passwordless = Str::uuid();
         $loginRoute = 'employees.login';
         $applicationSlug = $employee->cr_workstations->cr_apps->slug;
@@ -25,9 +24,8 @@ class EmployeeRegenerateActivationController extends Controller
 
         $employee->update([
             'passwordless' => $passwordless,
+            'logout' => true,
         ]);
-
-        // logout employee
 
         Notification::send($employee, new EmployeePasswordlessNotification($passwordless, $loginRoute, $applicationSlug));
 

@@ -43,17 +43,22 @@ class LoginEmployeeRequest extends FormRequest
 
         $passwordless = $this->input('passwordless');
 
-        $user = CR_Employees::attemptByPasswordless($passwordless);
+        $employee = CR_Employees::attemptByPasswordless($passwordless);
 
-        if (!$user) {
-            RateLimiter::hit($this->throttleKey());
+        if (!$employee) {
+            RateLimiter::hit($this->throttleKey(), 600);
 
             throw ValidationException::withMessages([
                 'passwordless' => trans('auth.failed'),
             ]);
         }
 
-        Auth::guard('employee')->login($user, $this->boolean('remember'));
+        if ($employee->logout) {
+            $employee->logout = false;
+            $employee->save();
+        }
+
+        Auth::guard('employee')->login($employee, $this->boolean('remember'));
 
         RateLimiter::clear($this->throttleKey());
     }
@@ -65,7 +70,7 @@ class LoginEmployeeRequest extends FormRequest
      */
     public function ensureIsNotRateLimited(): void
     {
-        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 3)) {
             return;
         }
 

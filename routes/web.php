@@ -58,5 +58,11 @@ Route::middleware(['auth:customer', 'verified'])->group(function () {
     Route::post('/poster-upload', [MediaController::class, 'uploadPoster'])->name('poster.upload');
 });
 
+Route::middleware(['auth:employee', 'logout'])->group(function () {
+    Route::get('/test', function () {
+        return Inertia::render('Employees/Test');
+    });
+});
+
 require __DIR__ . '/customerAuth.php';
 require __DIR__ . '/employeeAuth.php';

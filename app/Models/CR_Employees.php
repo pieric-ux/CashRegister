@@ -25,6 +25,7 @@ class CR_Employees extends Authenticatable
         'phone',
         'email',
         'passwordless',
+        'logout',
         'fk_workstations_id',
     ];
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->uuid('passwordless')->unique();
             $table->rememberToken();
+            $table->boolean('logout')->default(false);
             $table->unsignedBigInteger('fk_workstations_id');
             $table->foreign('fk_workstations_id')->references('id')->on('cr_workstations')->onDelete('cascade');
             $table->timestamps();
