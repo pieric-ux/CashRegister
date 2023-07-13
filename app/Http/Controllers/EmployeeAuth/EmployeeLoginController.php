@@ -17,11 +17,12 @@ class EmployeeLoginController extends Controller
     /**
      * Display the login view.
      */
-    public function create(Request $request, CR_App $app): Response
+    public function create(Request $request, CR_App $app, $code = null): Response
     {
         $app = $request->route('app');
         return Inertia::render('Employees/Auth/Login', [
             'application' => $app,
+            'code' => $code,
         ]);
     }
 

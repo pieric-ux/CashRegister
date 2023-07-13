@@ -41,11 +41,15 @@ class EmployeePasswordlessNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $loginUrl = route($this->loginRoute, ['app' => $this->applicationSlug]);
+        $loginUrl = route($this->loginRoute, [
+            'app' => $this->applicationSlug,
+            'code' => $this->passwordless,
+        ]);
 
         return (new MailMessage)
             ->subject(Lang::get('Activation code'))
-            ->line(Lang::get('Please use the following activation code: :code', ['code' => $this->passwordless]))
+            ->line(Lang::get('Please use the following activation code :'))
+            ->line($this->passwordless)
             ->action(Lang::get('Login'), $loginUrl);
     }
 

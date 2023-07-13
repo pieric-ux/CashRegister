@@ -6,7 +6,7 @@ use App\Http\Controllers\EmployeeAuth\EmployeeRegisterController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('/apps/{app}/login', [EmployeeLoginController::class, 'create'])->name('employees.login');
+    Route::get('/apps/{app}/login/{code?}', [EmployeeLoginController::class, 'create'])->name('employees.login');
     Route::post('/apps/{app}/login', [EmployeeLoginController::class, 'store']);
 });
 

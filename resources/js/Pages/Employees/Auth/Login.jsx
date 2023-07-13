@@ -6,9 +6,9 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
 
-export default function Login({ status, application }) {
+export default function Login({ status, application, code }) {
     const { data, setData, post, processing, errors } = useForm({
-        passwordless: '',
+        passwordless: code ?? '',
         remember: false,
     });
 
