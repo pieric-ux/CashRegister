@@ -77,7 +77,7 @@ export default function Index({ customerAuth, application, workstations }) {
                                 <DragDropContext onDragEnd={onDragEnd}>
                                     <div className="flex h-full mt-4 gap-2">
                                         <div className="flex flex-col w-1/2 h-full">
-                                            <h4 className="text-center">Employee</h4>
+                                            <h4 className="text-center underline">Employee</h4>
                                             <Droppable droppableId={`workstation-${workstation.id}`}>
                                                 {(provided, snapshot) => (
                                                     <ul
@@ -114,7 +114,7 @@ export default function Index({ customerAuth, application, workstations }) {
                                         </div>
                                         <div className="border-r border-gray-300 dark:border-gray-700"></div>
                                         <div className="flex flex-col w-1/2 h-full">
-                                            <h4 className="text-center">Employee Free</h4>
+                                            <h4 className="text-center underline">Employee Free</h4>
                                             <Droppable droppableId={`workstation-1`}>
                                                 {(provided, snapshot) => (
                                                     <ul
