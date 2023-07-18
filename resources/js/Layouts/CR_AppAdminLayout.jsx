@@ -15,11 +15,11 @@ export default function CR_AppAdminLayout({ auth, application, children }) {
             <ResponsiveNavLink href={route('applications.show', application.slug)} active={route().current('applications.show', application.slug)}>
                 App Dashboard
             </ResponsiveNavLink>
-            <ResponsiveNavLink href={route('workstations.index', application.slug)} active={route().current('workstations.index', application.slug)}>
-                Workstations
-            </ResponsiveNavLink>
             <ResponsiveNavLink href={route('employees.index', application.slug)} active={route().current('employees.index', application.slug)}>
                 Employees
+            </ResponsiveNavLink>
+            <ResponsiveNavLink href={route('workstations.index', application.slug)} active={route().current('workstations.index', application.slug)}>
+                Workstations
             </ResponsiveNavLink>
             <ResponsiveNavLink method="post" href={route('logout')} as="button">
                 Log Out
@@ -48,20 +48,20 @@ export default function CR_AppAdminLayout({ auth, application, children }) {
                         App Dashboard
                     </SideBarLink>
 
-                    <SideBarLink href={route('workstations.index', application.slug)} active={route().current('workstations.index', application.slug)}
-                        svg={
-                            <svg className="w-5 h-5 text-gray-600 dark:text-gray-300" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-                                <path d="M218.3 8.5c12.3-11.3 31.2-11.3 43.4 0l208 192c6.7 6.2 10.3 14.8 10.3 23.5H336c-19.1 0-36.3 8.4-48 21.7V208c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16h64V416H112c-26.5 0-48-21.5-48-48V256H32c-13.2 0-25-8.1-29.8-20.3s-1.6-26.2 8.1-35.2l208-192zM352 304V448H544V304H352zm-48-16c0-17.7 14.3-32 32-32H560c17.7 0 32 14.3 32 32V448h32c8.8 0 16 7.2 16 16c0 26.5-21.5 48-48 48H544 352 304c-26.5 0-48-21.5-48-48c0-8.8 7.2-16 16-16h32V288z" />
-                            </svg>}>
-                        Workstations
-                    </SideBarLink>
-
                     <SideBarLink href={route('employees.index', application.slug)} active={route().current('employees.index', application.slug)}
                         svg={
                             <svg className="w-5 h-5 text-gray-600 dark:text-gray-300" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                                 <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z" />
                             </svg>}>
                         Employees
+                    </SideBarLink>
+
+                    <SideBarLink href={route('workstations.index', application.slug)} active={route().current('workstations.index', application.slug)}
+                        svg={
+                            <svg className="w-5 h-5 text-gray-600 dark:text-gray-300" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                                <path d="M218.3 8.5c12.3-11.3 31.2-11.3 43.4 0l208 192c6.7 6.2 10.3 14.8 10.3 23.5H336c-19.1 0-36.3 8.4-48 21.7V208c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16h64V416H112c-26.5 0-48-21.5-48-48V256H32c-13.2 0-25-8.1-29.8-20.3s-1.6-26.2 8.1-35.2l208-192zM352 304V448H544V304H352zm-48-16c0-17.7 14.3-32 32-32H560c17.7 0 32 14.3 32 32V448h32c8.8 0 16 7.2 16 16c0 26.5-21.5 48-48 48H544 352 304c-26.5 0-48-21.5-48-48c0-8.8 7.2-16 16-16h32V288z" />
+                            </svg>}>
+                        Workstations
                     </SideBarLink>
                 </Sidebar>
                 {/* SideBar Start*/}
