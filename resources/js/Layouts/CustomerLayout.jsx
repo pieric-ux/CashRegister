@@ -63,7 +63,7 @@ export default function CustomerLayout({ auth, children }) {
                 {/* SideBar Start*/}
 
                 {/* Content Area Start*/}
-                <div className="flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+                <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
                     {/* Header Start*/}
                     <Header user={auth.customer} avatarPath={auth.avatarPath} RespNavLink={RespNavLink} DropdownLink={DropdownLink} sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen} />
 

@@ -31,7 +31,7 @@ export default function SideBar({ children, sideBarOpen, setSideBarOpen }) {
     }, [sideBarOpen, setSideBarOpen]);
 
     return (
-        <aside className={`${sideBarOpen ? 'sm:flex' : 'hidden'} lg:flex hidden flex-col z-50 w-72 min-h-screen overflow-y-hidden bg-gray-50 dark:bg-gray-800 transition ease-linear duration-300`} ref={sideBarRef}>
+        <aside className={`${sideBarOpen ? 'absolute sm:flex' : 'hidden'} lg:flex hidden flex-col z-50 w-72 min-h-screen overflow-y-hidden bg-gray-50 dark:bg-gray-800 transition ease-linear duration-300`} ref={sideBarRef}>
             {/* SideBar Header*/}
             <header className="flex items-center p-4">
                 <Link href="/">

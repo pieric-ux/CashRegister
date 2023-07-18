@@ -67,7 +67,7 @@ export default function CR_AppAdminLayout({ auth, application, children }) {
                 {/* SideBar Start*/}
 
                 {/* Content Area Start*/}
-                <div className="flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+                <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
                     {/* Header Start*/}
                     <Header user={auth.customer} title={application.name} avatarPath={auth.avatarPath} RespNavLink={RespNavLink} DropdownLink={DropdownLink} sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen} />
 
