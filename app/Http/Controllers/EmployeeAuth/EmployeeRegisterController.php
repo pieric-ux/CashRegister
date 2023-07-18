@@ -24,8 +24,8 @@ class EmployeeRegisterController extends Controller
         $passwordless = Str::uuid();
 
         $employee = $workstation->cr_employees()->create([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
+            'first_name' => ucfirst($request->input('first_name')),
+            'last_name' => ucfirst($request->input('last_name')),
             'phone' => $request->input('phone'),
             'email' => $request->input('email'),
             'passwordless' => $passwordless,

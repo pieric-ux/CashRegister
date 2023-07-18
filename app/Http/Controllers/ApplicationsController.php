@@ -40,12 +40,12 @@ class ApplicationsController extends Controller
         $customer = Auth::user();
 
         $customer->cr_apps()->create([
-            'name' => $request->input('name'),
+            'name' => ucfirst($request->input('name')),
             'slug' => Str::slug($request->input('name')),
             'description' => $request->input('description'),
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
-            'location' => $request->input('location'),
+            'location' => ucfirst($request->input('location')),
             'website' => $request->input('website'),
         ]);
 
@@ -67,12 +67,12 @@ class ApplicationsController extends Controller
      */
     public function update(UpdateApplicationRequest $request, CR_App $app): RedirectResponse
     {
-        $app->name = $request->input('name');
+        $app->name = ucfirst($request->input('name'));
         $app->slug = Str::slug($request->input('name'));
         $app->description = $request->input('description');
         $app->start_date = $request->input('start_date');
         $app->end_date = $request->input('end_date');
-        $app->location = $request->input('location');
+        $app->location = ucfirst($request->input('location'));
         $app->website = $request->input('website');
         $app->save();
 

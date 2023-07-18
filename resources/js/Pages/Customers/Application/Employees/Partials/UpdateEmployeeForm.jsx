@@ -11,10 +11,10 @@ export default function UpdateEmployeeForm({ employee, className = '' }) {
     const [openingModal, setOpeningModal] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
     const { data, setData, patch, processing, errors } = useForm({
-        first_name: employee.first_name,
-        last_name: employee.last_name,
-        phone: employee.phone,
-        email: employee.email,
+        first_name: employee.first_name ?? '',
+        last_name: employee.last_name ?? '',
+        phone: employee.phone ?? '',
+        email: employee.email ?? '',
     });
 
     const openModal = () => {
@@ -24,20 +24,20 @@ export default function UpdateEmployeeForm({ employee, className = '' }) {
     const closeModal = () => {
         setOpeningModal(false);
         setData({
-            first_name: employee.first_name,
-            last_name: employee.last_name,
-            phone: employee.phone,
-            email: employee.email,
+            first_name: employee.first_name ?? '',
+            last_name: employee.last_name ?? '',
+            phone: employee.phone ?? '',
+            email: employee.email ?? '',
         });
         setShowErrors(false);
     };
 
     useEffect(() => {
         setData({
-            first_name: employee.first_name,
-            last_name: employee.last_name,
-            phone: employee.phone,
-            email: employee.email,
+            first_name: employee.first_name ?? '',
+            last_name: employee.last_name ?? '',
+            phone: employee.phone ?? '',
+            email: employee.email ?? '',
         });
     }, [employee]);
 

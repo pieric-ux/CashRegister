@@ -31,12 +31,12 @@ class CustomerRegisterController extends Controller
     public function store(RegisterCustomerRequest $request): RedirectResponse
     {
         $customer = Customer::create([
-            'company_name' => $request->company_name,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'address' => $request->address,
+            'company_name' => ucfirst($request->company_name),
+            'first_name' => ucfirst($request->first_name),
+            'last_name' => ucfirst($request->last_name),
+            'address' => ucfirst($request->address),
             'npa' => $request->npa,
-            'city' => $request->city,
+            'city' => ucfirst($request->city),
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);

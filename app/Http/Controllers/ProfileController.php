@@ -35,7 +35,14 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $customer = $request->user();
+        $customer->company_name = ucfirst($customer->company_name);
+        $customer->first_name = ucfirst($customer->first_name);
+        $customer->last_name = ucfirst($customer->last_name);
+        $customer->address = ucfirst($customer->address);
+        $customer->city = ucfirst($customer->city);
+
+        $customer->save();
 
         return Redirect::route('profile.edit');
     }

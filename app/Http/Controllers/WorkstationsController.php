@@ -21,6 +21,9 @@ class WorkstationsController extends Controller
     public function index(IndexWorkstationsRequest $request, CR_App $app): Response
     {
         $workstations = $app->cr_workstations->map(function ($workstation) {
+
+            $workstation->cr_employees;
+
             return $workstation;
         });
 
@@ -36,7 +39,7 @@ class WorkstationsController extends Controller
     public function store(StoreWorkstationRequest $request, CR_App $app): RedirectResponse
     {
         $app->cr_workstations()->create([
-            'name' => $request->input('name'),
+            'name' => ucfirst($request->input('name')),
         ]);
 
         return Redirect::route('workstations.index', $app);
@@ -55,7 +58,7 @@ class WorkstationsController extends Controller
      */
     public function update(UpdateWorkstationRequest $request, CR_Workstations $workstation): RedirectResponse
     {
-        $workstation->name = $request->input('name');
+        $workstation->name = ucfirst($request->input('name'));
         $workstation->save();
 
         return Redirect::route('workstations.index', $workstation->cr_apps->slug);

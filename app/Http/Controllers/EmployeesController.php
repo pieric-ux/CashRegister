@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Employees\DeleteEmployeeRequest;
 use App\Http\Requests\Employees\IndexEmployeesRequest;
+use App\Http\Requests\Employees\UpdateDragAndDropEmployeesRequest;
 use App\Http\Requests\Employees\UpdateEmployeeRequest;
 use App\Models\CR_App;
 use App\Models\CR_Employees;
+use App\Models\CR_Workstations;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -34,8 +36,8 @@ class EmployeesController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, CR_Employees $employee): RedirectResponse
     {
-        $employee->first_name = $request->input('first_name');
-        $employee->last_name = $request->input('last_name');
+        $employee->first_name = ucfirst($request->input('first_name'));
+        $employee->last_name = ucfirst($request->input('last_name'));
         $employee->phone = $request->input('phone');
         $employee->email = $request->input('email');
         $employee->save();
@@ -43,6 +45,28 @@ class EmployeesController extends Controller
         $app = $employee->cr_workstations->cr_apps;
 
         return Redirect::route('employees.index', $app);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function updateDragAndDrop(UpdateDragAndDropEmployeesRequest $request)
+    {
+        $workstations = $request->input('workstations');
+
+        foreach ($workstations as $workstationData) {
+            $workstation = CR_Workstations::find($workstationData['id']);
+            $employees = $workstationData['cr_employees'];
+
+            foreach ($employees as $employeeData) {
+                $employee = CR_Employees::find($employeeData['id']);
+                $employee->fk_workstations_id = $workstation->id;
+                $employee->save();
+            }
+        }
+        return response()->json([
+            'workstations' => $workstations,
+        ]);
     }
 
     /**

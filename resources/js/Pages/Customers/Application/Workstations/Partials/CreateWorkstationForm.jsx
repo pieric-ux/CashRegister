@@ -36,7 +36,7 @@ export default function CreateWorkstationForm({ application, className = '' }) {
     return (
         <section className={`space-y-6 ${className}`}>
             <header>
-                <h1 className="text-lg font-medium text-gray-900 dark:text-gray-100">Create a Workstation</h1>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Create a Workstation</h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
                     Don't have any workstations yet? Looking to add another one? Click the 'Create' button to begin.
