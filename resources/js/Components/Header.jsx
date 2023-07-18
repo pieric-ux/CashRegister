@@ -11,12 +11,13 @@ export default function Header({ user, title, avatarPath, RespNavLink, DropdownL
             <div className="flex items-center justify-between h-20 mx-auto px-4 sm:gap-2 gap-4 sm:px-6 lg:px-8">
                 <div className={`${sideBarOpen ? 'sm:invisible' : 'visibile'} lg:invisible sm:visible invisible`}>
                     <button
+                        aria-label='Open Sidebar'
                         aria-controls="sidebar"
                         onClick={(e) => {
                             e.stopPropagation();
                             setSideBarOpen(true);
                         }}
-                        className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
+                        className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition duration-150 ease-in-out"
                     >
                         <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                             <path
@@ -32,14 +33,15 @@ export default function Header({ user, title, avatarPath, RespNavLink, DropdownL
                     <h1 className='font-semibold text-2xl text-gray-900 dark:text-gray-100'>{title}</h1>
                 </div>
                 <div className='flex items-center gap-2'>
-                    <DarkModeSwitcher />
-                    <div className="hidden sm:flex ">
+                    <DarkModeSwitcher aria-label='Dark Mode Switch' tabIndex='0' />
+                    <div className="hidden sm:flex">
                         <Dropdown>
                             <Dropdown.Trigger>
                                 <span className="inline-flex rounded-md">
                                     <button
                                         type="button"
-                                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-900 dark:text-white bg-white dark:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none transition ease-linear duration-300"
+                                        aria-label='User Dropdown Menu'
+                                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-900 dark:text-white bg-white dark:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-linear duration-300"
                                     >
                                         {user.first_name}
                                         <img src={avatarPath} alt="avatar" className="h-12 w-12 rounded-full ml-2 backdrop-blur-md" />
@@ -70,7 +72,7 @@ export default function Header({ user, title, avatarPath, RespNavLink, DropdownL
                     <div className="-mr-2 flex sm:hidden">
                         <button
                             onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
-                            className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
+                            className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition duration-150 ease-in-out"
                         >
                             <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                 <path

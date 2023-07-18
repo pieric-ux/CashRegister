@@ -98,7 +98,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <PrimaryButton disabled={processing} aria-label='Save your updated password'>Save</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}

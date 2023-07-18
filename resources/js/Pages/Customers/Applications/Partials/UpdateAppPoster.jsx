@@ -58,6 +58,7 @@ export default function UpdateAppPoster({ application, className }) {
                         name={`poster-${application.id}`}
                         type="file"
                         className="sr-only"
+                        aria-label="Upload your app's image"
                         onChange={handlePosterChange}
                     />
                     <InputError className='mt-2' message={errors.poster} />

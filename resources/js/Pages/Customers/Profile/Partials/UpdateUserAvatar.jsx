@@ -62,6 +62,7 @@ export default function UpdateUserAvatar({ avatarPath, className }) {
                                 name="avatar"
                                 type="file"
                                 className="sr-only"
+                                aria-label='Upload your avatar'
                                 onChange={handleAvatarChange}
                             />
                         </label>

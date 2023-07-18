@@ -165,7 +165,7 @@ export default function UpdateProfileInformation({ customer, className = '' }) {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <PrimaryButton disabled={processing} aria-label='Save your profile information'>Save</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}

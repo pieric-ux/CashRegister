@@ -45,7 +45,7 @@ export default function DeleteAppForm({ application }) {
 
     return (
         <section>
-            <DangerButton onClick={confirmAppDeletion} className='!px-2'>
+            <DangerButton onClick={confirmAppDeletion} className='!px-2' aria-label='Delete your app'>
                 <svg className='w-5 h-5 text-white' fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430.901 583.409">
                     <g>
                         <path d="M3.339,199.409h384v320c0,35.3-28.7,64-64,64h-256c-35.3,0-64-28.7-64-64V199.409z M99.339,263.409c-8.8,0-16,7.2-16,16
@@ -91,7 +91,7 @@ export default function DeleteAppForm({ application }) {
                     <div className="mt-6 flex justify-end">
                         <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
 
-                        <DangerButton className="ml-3" disabled={processing}>
+                        <DangerButton className="ml-3" disabled={processing} aria-label='Delete your app'>
                             Delete App
                         </DangerButton>
                     </div>

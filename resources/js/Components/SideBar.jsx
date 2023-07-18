@@ -34,13 +34,14 @@ export default function SideBar({ children, sideBarOpen, setSideBarOpen }) {
         <aside className={`${sideBarOpen ? 'absolute sm:flex' : 'hidden'} lg:flex hidden flex-col z-50 w-72 min-h-screen overflow-y-hidden bg-gray-50 dark:bg-gray-800 transition ease-linear duration-300`} ref={sideBarRef}>
             {/* SideBar Header*/}
             <header className="flex items-center p-4">
-                <Link href="/">
+                <Link href="/" className='focus:rounded-md focus:bg-gray-100 dark:focus:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800' aria-label='Welcome Page'>
                     <ApplicationLogo className="block m-auto dark:hidden" />
                     <ApplicationLogoDark className="hidden dark:block m-auto" />
                 </Link>
                 <button
-                    className="inline-flex lg:hidden items-center justify-center p-2 ml-10 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
+                    className="inline-flex lg:hidden items-center justify-center p-2 ml-10 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition duration-150 ease-in-out"
                     onClick={() => setSideBarOpen(!sideBarOpen)}
+                    aria-label='Close Sidebar'
                     aria-controls="sidebar"
                     aria-expanded={sideBarOpen}
                 >

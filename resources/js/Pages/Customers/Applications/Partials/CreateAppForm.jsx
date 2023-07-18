@@ -47,7 +47,7 @@ export default function CreateAppForm({ className = '' }) {
                     Don't have any applications yet? Looking to add another one? Click the 'Create' button to begin.
                 </p>
             </header>
-            <PrimaryButton onClick={openModal}>Create</PrimaryButton>
+            <PrimaryButton onClick={openModal} aria-label='Create your app'>Create</PrimaryButton>
 
             <Modal show={openingModal} onClose={closeModal}>
 
@@ -154,7 +154,7 @@ export default function CreateAppForm({ className = '' }) {
                         <SecondaryButton onClick={closeModal}>
                             Cancel
                         </SecondaryButton>
-                        <PrimaryButton className="ml-3" disabled={processing}>
+                        <PrimaryButton className="ml-3" disabled={processing} aria-label='Create your app'>
                             Create
                         </PrimaryButton>
                     </div>

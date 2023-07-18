@@ -42,7 +42,7 @@ export default function CreateWorkstationForm({ application, className = '' }) {
                     Don't have any workstations yet? Looking to add another one? Click the 'Create' button to begin.
                 </p>
             </header>
-            <PrimaryButton onClick={openModal}>Create</PrimaryButton>
+            <PrimaryButton onClick={openModal} aria-label='Create a workstation'>Create</PrimaryButton>
 
             <Modal show={openingModal} onClose={closeModal}>
 
@@ -74,7 +74,7 @@ export default function CreateWorkstationForm({ application, className = '' }) {
                         <SecondaryButton onClick={closeModal}>
                             Cancel
                         </SecondaryButton>
-                        <PrimaryButton className="ml-3" disabled={processing}>
+                        <PrimaryButton className="ml-3" disabled={processing} aria-label='Create a workstation'>
                             Create
                         </PrimaryButton>
                     </div>
