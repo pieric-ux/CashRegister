@@ -1,5 +1,5 @@
 import { useForm } from '@inertiajs/react';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
