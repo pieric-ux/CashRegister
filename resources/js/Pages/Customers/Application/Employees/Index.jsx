@@ -6,6 +6,8 @@ import UpdateEmployeeForm from "./Partials/UpdateEmployeeForm";
 import DeleteEmployeeForm from "./Partials/DeleteEmployeeForm";
 import RegenerateEmployeeForm from "./Partials/RegenerateEmployeeForm";
 import TextInput from "@/Components/TextInput";
+import Table from "@/Components/Table";
+import { sortData, filterData } from "@/Utils/useTableUtils";
 
 export default function Index({ customerAuth, application, employees }) {
     const [searchTerm, setSearchTerm] = useState("");
@@ -25,28 +27,23 @@ export default function Index({ customerAuth, application, employees }) {
         }
     };
 
-    const sortedEmployees = employees.sort((a, b) => {
-        if (sortColumn) {
-            const valueA = a[sortColumn] ? a[sortColumn].toLowerCase() : "";
-            const valueB = b[sortColumn] ? b[sortColumn].toLowerCase() : "";
-            if (valueA < valueB) {
-                return sortDirection === "asc" ? -1 : 1;
-            }
-            if (valueA > valueB) {
-                return sortDirection === "asc" ? 1 : -1;
-            }
-        }
-        return 0;
-    });
+    const employeeColumns = [
+        { key: "first_name", label: "First Name" },
+        { key: "last_name", label: "Last Name", className: "hidden md:table-cell" },
+        { key: "phone", label: "Phone", className: "hidden xl:table-cell" },
+        { key: "email", label: "Email", className: "hidden lg:table-cell" },
+    ];
 
-    const filteredEmployees = sortedEmployees.filter((employee) => {
-        const firstNameMatch = employee.first_name && employee.first_name.toLowerCase().includes(searchTerm.toLowerCase());
-        const lastNameMatch = employee.last_name && employee.last_name.toLowerCase().includes(searchTerm.toLowerCase());
-        const phoneMatch = employee.phone && employee.phone.toLowerCase().includes(searchTerm.toLowerCase());
-        const emailMatch = employee.email && employee.email.toLowerCase().includes(searchTerm.toLowerCase());
+    const renderEmployeeActions = (employee) => (
+        <div className="flex items-center justify-center gap-2">
+            <RegenerateEmployeeForm employee={employee} />
+            <UpdateEmployeeForm employee={employee} />
+            <DeleteEmployeeForm employee={employee} />
+        </div>
+    );
 
-        return firstNameMatch || lastNameMatch || phoneMatch || emailMatch;
-    });
+    const sortedEmployees = sortData(employees, sortColumn, sortDirection);
+    const filteredEmployees = filterData(sortedEmployees, searchTerm, employeeColumns);
 
     return (
         <CR_AppAdminLayout auth={customerAuth} application={application}>
@@ -65,62 +62,14 @@ export default function Index({ customerAuth, application, employees }) {
                 </div>
                 {filteredEmployees.length > 0 ? (
 
-                    <table className="min-w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-md rounded-lg transition ease-linear duration-300">
-                        <thead>
-                            <tr>
-                                <th
-                                    className="py-2 px-4 text-left cursor-pointer"
-                                    onClick={() => handleSort("first_name")}
-                                >
-                                    First Name
-                                </th>
-                                <th
-                                    className="hidden md:table-cell py-2 px-4 text-left cursor-pointer"
-                                    onClick={() => handleSort("last_name")}
-                                >
-                                    Last Name
-                                </th>
-                                <th
-                                    className="hidden xl:table-cell py-2 px-4 text-left cursor-pointer"
-                                    onClick={() => handleSort("phone")}
-                                >
-                                    Phone
-                                </th>
-                                <th
-                                    className="hidden lg:table-cell py-2 px-4 text-left cursor-pointer"
-                                    onClick={() => handleSort("email")}
-                                >
-                                    Email
-                                </th>
-                                <th className="py-2 px-4 text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredEmployees.map((employee) => (
-                                <tr key={employee.id}>
-                                    <td className="py-2 px-4 border-t border-gray-300 dark:border-gray-700">
-                                        {employee.first_name}
-                                    </td>
-                                    <td className="hidden md:table-cell py-2 px-4 border-t border-gray-300 dark:border-gray-700">
-                                        {employee.last_name}
-                                    </td>
-                                    <td className="hidden xl:table-cell py-2 px-4 border-t border-gray-300 dark:border-gray-700">
-                                        {employee.phone}
-                                    </td>
-                                    <td className="hidden lg:table-cell py-2 px-4 border-t border-gray-300 dark:border-gray-700">
-                                        {employee.email}
-                                    </td>
-                                    <td className="py-2 px-4 border-t border-gray-300 dark:border-gray-700">
-                                        <div className="flex items-center justify-center gap-2">
-                                            <RegenerateEmployeeForm employee={employee} />
-                                            <UpdateEmployeeForm employee={employee} />
-                                            <DeleteEmployeeForm employee={employee} />
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <Table
+                        data={filteredEmployees}
+                        columns={employeeColumns}
+                        sortColumn={sortColumn}
+                        sortDirection={sortDirection}
+                        handleSort={handleSort}
+                        actionsRenderer={renderEmployeeActions}
+                    />
 
                 ) : (
                     <div className="p-4 sm:p-8 text-center bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">

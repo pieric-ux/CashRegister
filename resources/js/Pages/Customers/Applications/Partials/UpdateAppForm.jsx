@@ -38,12 +38,12 @@ export default function UpdateAppForm({ application, className = '' }) {
 
     useEffect(() => {
         setData({
-            name: application.name,
-            description: application.description,
-            start_date: application.start_date,
-            end_date: application.end_date,
-            location: application.location,
-            website: application.website,
+            name: application.name ?? '',
+            description: application.description ?? '',
+            start_date: application.start_date ?? '',
+            end_date: application.end_date ?? '',
+            location: application.location ?? '',
+            website: application.website ?? '',
         });
     }, [application]);
 
@@ -83,7 +83,7 @@ export default function UpdateAppForm({ application, className = '' }) {
                             id="name"
                             name="name"
                             className="mt-1 block w-3/4"
-                            value={data.name}
+                            value={data.name ?? ''}
                             isFocused={true}
                             onChange={(e) => setData('name', e.target.value)}
                         />
@@ -99,7 +99,7 @@ export default function UpdateAppForm({ application, className = '' }) {
                             name="description"
                             className="mt-1 block w-3/4 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-sky-500 dark:focus:border-sky-600 focus:ring-sky-500 dark:focus:ring-sky-600 rounded-md shadow-sm transition ease-linear duration-300"
                             rows={5}
-                            value={data.description}
+                            value={data.description ?? ''}
                             onChange={(e) => setData('description', e.target.value)}
                         />
 
@@ -114,7 +114,7 @@ export default function UpdateAppForm({ application, className = '' }) {
                             name="start_date"
                             type="date"
                             className="mt-1 w-3/4"
-                            value={data.start_date}
+                            value={data.start_date ?? ''}
                             onChange={(e) => setData('start_date', e.target.value)}
                         />
 
@@ -129,7 +129,7 @@ export default function UpdateAppForm({ application, className = '' }) {
                             name="end_date"
                             type="date"
                             className="mt-1 w-3/4"
-                            value={data.end_date}
+                            value={data.end_date ?? ''}
                             onChange={(e) => setData('end_date', e.target.value)}
                         />
 
@@ -143,7 +143,7 @@ export default function UpdateAppForm({ application, className = '' }) {
                             id="location"
                             name="location"
                             className="mt-1 block w-3/4"
-                            value={data.location}
+                            value={data.location ?? ''}
                             onChange={(e) => setData('location', e.target.value)}
                         />
 
@@ -159,7 +159,7 @@ export default function UpdateAppForm({ application, className = '' }) {
                             placeholder="https://"
                             pattern="https://.*"
                             className="mt-1 block w-3/4"
-                            value={data.website}
+                            value={data.website ?? ''}
                             onChange={(e) => setData('website', e.target.value)}
                         />
 

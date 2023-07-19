@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import useLocalStorage from './useLocalStorage';
 
-const useColorMode = () => {
+export default function useColorMode() {
     {/* Initialise l'état du mode couleur en utilisant le hook useLocalStorage, qui récupère la valeur stockée depuis le localStorage. */ }
     const [colorMode, setColorMode] = useLocalStorage('theme', null);
 
@@ -50,5 +50,3 @@ const useColorMode = () => {
     {/* Retourne l'état du mode couleur et la fonction de mise à jour du mode couleur */ }
     return [colorMode, setColorMode];
 };
-
-export default useColorMode;
