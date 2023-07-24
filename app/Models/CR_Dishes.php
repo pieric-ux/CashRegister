@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CR_Workstations extends Model
+class CR_Dishes extends Model
 {
     use HasFactory;
 
-    protected $table = 'cr_workstations';
+    protected $table = 'cr_dishes';
 
     /**
      * The attributes that are mass assignable.
@@ -18,6 +18,10 @@ class CR_Workstations extends Model
      */
     protected $fillable = [
         'name',
+        'unit',
+        'client_price',
+        'cost_price',
+        'is_consigned',
         'fk_apps_id',
     ];
 
@@ -26,13 +30,8 @@ class CR_Workstations extends Model
         return $this->belongsTo(CR_App::class, 'fk_apps_id');
     }
 
-    public function cr_employees()
-    {
-        return $this->hasMany(CR_Employees::class, 'fk_workstations_id');
-    }
-
     public function cr_products()
     {
-        return $this->belongsToMany(CR_Products::class, 'cr_workstations_products', 'fk_workstations_id', 'fk_products_id');
+        return $this->hasMany(CR_Products::class, 'fk_dishes_id');
     }
 }

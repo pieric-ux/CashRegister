@@ -41,6 +41,16 @@ class CR_App extends Model implements HasMedia
         return $this->hasMany(CR_Workstations::class, 'fk_apps_id');
     }
 
+    public function cr_categories_products()
+    {
+        return $this->hasMany(CR_Categories_Products::class, 'fk_apps_id')->orderBy('order');
+    }
+
+    public function cr_dishes()
+    {
+        return $this->hasMany(CR_Categories_Products::class, 'fk_apps_id');
+    }
+
     public static function boot()
     {
         parent::boot();
@@ -50,6 +60,19 @@ class CR_App extends Model implements HasMedia
             $workstation->name = 'Pending assignements';
             $workstation->fk_apps_id = $app->id;
             $workstation->save();
+
+            $categorie = new CR_Categories_Products();
+            $categorie->name = 'No categories';
+            $categorie->order = 0;
+            $categorie->fk_apps_id = $app->id;
+            $categorie->save();
+
+            $categorie = new CR_Dishes();
+            $categorie->name = 'No dishes';
+            $categorie->unit = 'pce';
+            $categorie->is_consigned = false;
+            $categorie->fk_apps_id = $app->id;
+            $categorie->save();
         });
     }
 

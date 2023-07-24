@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationsController;
+use App\Http\Controllers\CategoriesProductsController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProfileController;
@@ -54,6 +55,12 @@ Route::middleware(['auth:customer', 'verified'])->group(function () {
     Route::patch('/employees/update/{employee}', [EmployeesController::class, 'update'])->name('employees.update');
     Route::patch('/employees/update', [EmployeesController::class, 'updateDragAndDrop'])->name('employees.updateDragAndDrop');
     Route::delete('/employees/{employee}', [EmployeesController::class, 'destroy'])->name('employees.destroy');
+
+    Route::get('/apps/{app}/categories-products', [CategoriesProductsController::class, 'index'])->name('categories.index');
+    Route::post('/apps/{app}/categories-products', [CategoriesProductsController::class, 'store'])->name('categories.store');
+    Route::patch('/categories-products/update/{category}', [CategoriesProductsController::class, 'update'])->name('categories.update');
+    Route::patch('/categories-products/update', [CategoriesProductsController::class, 'updateDragAndDrop'])->name('categories.updateDragAndDrop');
+    Route::delete('/categories-products/{category}', [CategoriesProductsController::class, 'destroy'])->name('categories.destroy');
 
     Route::post('/avatar-upload', [MediaController::class, 'uploadAvatar'])->name('avatar.upload');
     Route::post('/poster-upload', [MediaController::class, 'uploadPoster'])->name('poster.upload');

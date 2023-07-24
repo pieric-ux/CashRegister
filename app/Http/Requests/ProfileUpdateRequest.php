@@ -17,13 +17,13 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'company_name' => ['nullable', 'string', 'max:255'],
-            'first_name' => ['string', 'max:255'],
-            'last_name' => ['string', 'max:255'],
-            'address' => ['string', 'max:255'],
-            'npa' => ['integer'],
-            'city' => ['string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'npa' => ['required', 'integer'],
             'phone' => ['nullable', 'string', 'max:255'],
-            'email' => ['email', 'max:255', Rule::unique(Customer::class)->ignore($this->user()->id)],
+            'email' => ['required', 'email', 'max:255', Rule::unique(Customer::class)->ignore($this->user()->id)],
         ];
     }
 }

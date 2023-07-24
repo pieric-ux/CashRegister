@@ -3,11 +3,13 @@ import { Head } from "@inertiajs/react";
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import CR_AppAdminLayout from "@/Layouts/CR_AppAdminLayout";
 import CreateWorkstationForm from "./Partials/CreateWorkstationForm";
-import DeleteWorkstationForm from "./Partials/DeleteWorstationForm";
 import UpdateWorkstationForm from "./Partials/UpdateWorkstationForm";
+import DeleteWorkstationForm from "./Partials/DeleteWorstationForm";
 import axios from "axios";
 
 export default function Index({ customerAuth, application, workstations }) {
+
+    const defaultWorkstationId = application.cr_workstations.find((workstation) => workstation.name === 'Pending assignements')?.id || null;
 
     const [updatedWorkstations, setUpdatedWorkstations] = useState(workstations);
 
@@ -115,7 +117,7 @@ export default function Index({ customerAuth, application, workstations }) {
                                         <div className="border-r border-gray-300 dark:border-gray-700"></div>
                                         <div className="flex flex-col w-1/2 h-full">
                                             <h4 className="text-center underline">Employee Free</h4>
-                                            <Droppable droppableId={`workstation-1`}>
+                                            <Droppable droppableId={`workstation-${defaultWorkstationId}`}>
                                                 {(provided, snapshot) => (
                                                     <ul
                                                         className={`p-2 flex flex-col gap-1.5 flex-grow mt-2 ${(snapshot.isDraggingOver)

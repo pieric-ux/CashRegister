@@ -16,5 +16,5 @@ Route::middleware('auth:employee')->group(function () {
 
 Route::middleware(['auth:customer', 'verified'])->group(function () {
     Route::post('/apps/{app}/employees', [EmployeeRegisterController::class, 'store'])->name('employees.register');
-    Route::patch('regenerate-passwordless/{employee}', [EmployeeRegenerateActivationController::class, 'update'])->name('employees.regenerate');
+    Route::patch('/regenerate-passwordless/{employee}', [EmployeeRegenerateActivationController::class, 'update'])->name('employees.regenerate');
 });

@@ -52,7 +52,7 @@ export default function Index({ customerAuth, application, employees }) {
                 <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow-md rounded-lg transition ease-linear duration-300">
                     <CreateEmployeeForm className="max-w-xl mx-auto" application={application} />
                 </div>
-                <div className="flex justify-end pr-4 mt-4">
+                <div className="flex items-center justify-end pr-4 mt-4">
                     <TextInput
                         placeholder="Search employees"
                         className="w-64 dark:!bg-gray-800 placeholder:text-gray-600 dark:placeholder:text-gray-400"
