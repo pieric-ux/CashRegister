@@ -3,7 +3,7 @@ import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import { useForm } from '@inertiajs/react';
 
-export default function UpdateAppPoster({ application, className }) {
+export default function UpdateAppPoster({ application, className, translations }) {
     const { data, setData, post, errors } = useForm({
         appId: application.id,
         poster: '',
@@ -58,7 +58,7 @@ export default function UpdateAppPoster({ application, className }) {
                         name={`poster-${application.id}`}
                         type="file"
                         className="sr-only"
-                        aria-label="Upload your app's image"
+                        aria-label={translations.ariaAppPosterUpdate}
                         onChange={handlePosterChange}
                     />
                     <InputError className='mt-2' message={errors.poster} />

@@ -1,11 +1,12 @@
 import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
 import { Head } from '@inertiajs/react';
 
-export default function Dashboard({ customerAuth, application }) {
+export default function Dashboard({ customerAuth, application, GlobalTranslations }) {
     return (
         <CR_AppAdminLayout
             auth={customerAuth}
             application={application}
+            GlobalTranslations={GlobalTranslations}
         >
             <Head title={application.name} />
 

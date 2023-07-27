@@ -21,6 +21,37 @@ class ProfileController extends Controller
         return Inertia::render('Customers/Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
+            'translations' => [
+                'updateAvatarTitle' => __('Update Avatar'),
+                'updateAvatarLabel' => __('Update your avatar\'s profile.'),
+                'ariaAvatarUpdateButton' => __('Upload your avatar'),
+                'profileInformationTitle' => __('Profile Information'),
+                'profileInformationLabel' => __('Update your account\'s profile information and email address.'),
+                'inputCompanyNameLabel' => __('Company Name'),
+                'inputFirstNameLabel' => __('First Name'),
+                'inputLastNameLabel' => __('Last Name'),
+                'inputAddressLabel' => __('Address'),
+                'inputCityLabel' => __('City'),
+                'inputNPALabel' => __('NPA'),
+                'inputPhoneLabel' => __('Phone'),
+                'inputEmailLabel' => __('Email'),
+                'ariaSaveProfileInformationButton' => __('Save your profile information'),
+                'buttonSave' => __('Save'),
+                'transitionSaved' => __('Saved.'),
+                'updatePasswordTitle' => __('Update Password'),
+                'updatePasswordLabel' => __('Ensure your account is using a long, random password to stay secure.'),
+                'inputCurrentPasswordLabel' => __('Current Password'),
+                'inputNewPasswordLabel' => __('New Password'),
+                'inputConfirmPasswordLabel' => __('Confirm Password'),
+                'ariaSaveUpdatedPasswordButton' => __('Save your updated password'),
+                'deleteAccountTitle' => __('Delete Account'),
+                'deleteAccountLabel' => __('Once your account is deleted, all of its resources and data will be permanently deleted.'),
+                'ariaDeleteAccountButton' => __('Delete your account'),
+                'modalConfirmingDeletionTitle' => __('Are you sure you want to delete your account?'),
+                'modalConfirmingDeletionLabel' => __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.'),
+                'inputPasswordLabel' => __('Password'),
+                'buttonCancel' => __('Cancel')
+            ],
         ]);
     }
 

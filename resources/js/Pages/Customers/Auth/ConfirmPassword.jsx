@@ -6,7 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
 
-export default function ConfirmPassword() {
+export default function ConfirmPassword({ translations }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         password: '',
     });
@@ -25,15 +25,15 @@ export default function ConfirmPassword() {
 
     return (
         <GuestLayout>
-            <Head title="Confirm Password" />
+            <Head title={translations.confirmPassword} />
 
             <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-                This is a secure area of the application. Please confirm your password before continuing.
+                {translations.confirmPasswordLabel}
             </div>
 
             <form onSubmit={submit}>
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <InputLabel htmlFor="password" value={translations.inputPasswordLabel} />
 
                     <TextInput
                         id="password"
@@ -50,7 +50,7 @@ export default function ConfirmPassword() {
 
                 <div className="flex items-center justify-end mt-4">
                     <PrimaryButton className="ml-4" disabled={processing}>
-                        Confirm
+                        {translations.confirm}
                     </PrimaryButton>
                 </div>
             </form>

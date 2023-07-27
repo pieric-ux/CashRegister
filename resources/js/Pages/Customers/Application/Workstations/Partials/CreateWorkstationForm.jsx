@@ -7,7 +7,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
 import Modal from "@/Components/Modal";
 
-export default function CreateWorkstationForm({ application, className = '' }) {
+export default function CreateWorkstationForm({ application, className = '', translations }) {
     const [openingModal, setOpeningModal] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -36,27 +36,27 @@ export default function CreateWorkstationForm({ application, className = '' }) {
     return (
         <section className={`space-y-6 ${className}`}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Create a Workstation</h2>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{translations.createWorkstationTitle}</h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Don't have any workstations yet? Looking to add another one? Click the 'Create' button to begin.
+                    {translations.createWorkstationLabel}
                 </p>
             </header>
-            <PrimaryButton onClick={openModal} aria-label='Create a workstation'>Create</PrimaryButton>
+            <PrimaryButton onClick={openModal} aria-label={translations.ariaCreateWorkstationButton}>{translations.buttonCreate}</PrimaryButton>
 
             <Modal show={openingModal} onClose={closeModal}>
 
                 <form onSubmit={submit} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                        Create Workstation
+                        {translations.modalCreateWorkstationTitle}
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                        Ready to create a new workstation? Fill out the form below with the required details and hit the "Create" button to get started.
+                        {translations.modalCreateWorkstationLabel}
                     </p>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="name" value="Name" />
+                        <InputLabel htmlFor="name" value={translations.inputNameLabel} />
 
                         <TextInput
                             id="name"
@@ -72,10 +72,10 @@ export default function CreateWorkstationForm({ application, className = '' }) {
 
                     <div className="mt-6 flex justify-end">
                         <SecondaryButton onClick={closeModal}>
-                            Cancel
+                            {translations.buttonCancel}
                         </SecondaryButton>
-                        <PrimaryButton className="ml-3" disabled={processing} aria-label='Create a workstation'>
-                            Create
+                        <PrimaryButton className="ml-3" disabled={processing} aria-label={translations.ariaCreateWorkstationButton}>
+                            {translations.buttonCreate}
                         </PrimaryButton>
                     </div>
                 </form>

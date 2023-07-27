@@ -1,6 +1,6 @@
 import { Link, Head } from '@inertiajs/react';
 
-export default function Welcome({ customerAuth, laravelVersion, phpVersion }) {
+export default function Welcome({ customerAuth, translations, laravelVersion, phpVersion }) {
     return (
         <>
             <Head title="Welcome" />
@@ -11,7 +11,7 @@ export default function Welcome({ customerAuth, laravelVersion, phpVersion }) {
                             href={route('dashboard')}
                             className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                         >
-                            Dashboard
+                            {translations.dashboard}
                         </Link>
                     ) : (
                         <>
@@ -19,14 +19,14 @@ export default function Welcome({ customerAuth, laravelVersion, phpVersion }) {
                                 href={route('customers.login')}
                                 className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                             >
-                                Log in
+                                {translations.login}
                             </Link>
 
                             <Link
                                 href={route('customers.register')}
                                 className="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                             >
-                                Register
+                                {translations.register}
                             </Link>
                         </>
                     )}

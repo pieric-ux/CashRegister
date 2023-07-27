@@ -30,6 +30,31 @@ class WorkstationsController extends Controller
         return Inertia::render('Customers/Application/Workstations/Index', [
             'application' => $app,
             'workstations' => $workstations,
+            'translations' => [
+                'noWorkstationFound' => __('No workstation found.'),
+                'listEmployeeTitle' => __('Employee'),
+                'listEmployeeFreeTitle' => __('Employee Free'),
+                'createWorkstationTitle' => __('Create a Workstation'),
+                'createWorkstationLabel' => __('Don\'t have any workstations yet? Looking to add another one? Click the \'Create\' button to begin.'),
+                'ariaCreateWorkstationButton' => __('Create a workstation'),
+                'buttonCreate' => __('Create'),
+                'modalCreateWorkstationTitle' => __('Create Workstation'),
+                'modalCreateWorkstationLabel' => __('Ready to create a new workstation? Fill out the form below with the required details and hit the \'Create\' button to get started.'),
+                'inputNameLabel' => __('Name'),
+                'buttonCancel' => __('Cancel'),
+                'buttonCreate' => __('Create'),
+                'ariaEditWorkstationButton' => __('Edit the workstation'),
+                'modalEditWorkstationTitle' => __('Edit Workstation'),
+                'modalEditWorkstationLabel' => __('Ready to update the workstation? Fill out the form below with the required details and click the \'Save\' button to apply the changes.'),
+                'buttonSave' => __('Save'),
+                'deleteWorkstationTitle' => __('Delete Workstation'),
+                'ariaDeleteWorkstationButton' => __('Delete the workstation'),
+                'modalConfirmingDeletionTitle' => __('Are you sure you want to delete your workstation?'),
+                'modalConfirmingDeletionLabel' => __('Once your workstation is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your workstation.'),
+                'inputPasswordLabel' => __('Password'),
+
+
+            ],
         ]);
     }
 

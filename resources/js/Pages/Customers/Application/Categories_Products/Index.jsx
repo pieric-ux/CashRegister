@@ -7,7 +7,7 @@ import UpdateCategorieProductForm from "./Partials/UpdateCategorieProductFrom";
 import DeleteCategorieProductForm from "./Partials/DeleteCategorieProductForm";
 import axios from "axios";
 
-export default function Index({ customerAuth, application, categories }) {
+export default function Index({ customerAuth, application, categories, GlobalTranslations, translations }) {
 
     const [updatedCategories, setUpdatedCategories] = useState(categories);
 
@@ -48,11 +48,11 @@ export default function Index({ customerAuth, application, categories }) {
     }
 
     return (
-        <CR_AppAdminLayout auth={customerAuth} application={application}>
+        <CR_AppAdminLayout auth={customerAuth} application={application} GlobalTranslations={GlobalTranslations}>
             <Head title={application.name} />
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 space-y-6">
                 <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow-md rounded-lg transition ease-linear duration-300">
-                    <CreateCategorieProductForm className="max-w-xl mx-auto" application={application} />
+                    <CreateCategorieProductForm className="max-w-xl mx-auto" application={application} translations={translations} />
                 </div>
                 {updatedCategories.length > 1 ? (
                     <DragDropContext onDragEnd={onDragEnd}>
@@ -79,8 +79,8 @@ export default function Index({ customerAuth, application, categories }) {
                                                     <div className="flex items-center justify-between drop-shadow-sm dark:drop-shadow-none">
                                                         <h3>{category.name}</h3>
                                                         <div className="flex gap-2">
-                                                            <UpdateCategorieProductForm category={category} />
-                                                            <DeleteCategorieProductForm category={category} />
+                                                            <UpdateCategorieProductForm category={category} translations={translations} />
+                                                            <DeleteCategorieProductForm category={category} translations={translations} />
                                                         </div>
                                                     </div>
                                                 </li>
@@ -94,7 +94,7 @@ export default function Index({ customerAuth, application, categories }) {
                     </DragDropContext>
                 ) : (
                     <div className="p-4 sm:p-8 text-center bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
-                        <p className='text-gray-900 dark:text-gray-100'>No categories of products found.</p>
+                        <p className='text-gray-900 dark:text-gray-100'>{translations.noCategoryFound}</p>
                     </div>
                 )}
             </div>

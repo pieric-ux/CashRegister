@@ -7,7 +7,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
 import Modal from "@/Components/Modal";
 
-export default function CreateEmployeeForm({ application, className = '' }) {
+export default function CreateEmployeeForm({ application, className = '', translations }) {
     const [openingModal, setOpeningModal] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -39,27 +39,27 @@ export default function CreateEmployeeForm({ application, className = '' }) {
     return (
         <section className={`space-y-6 ${className}`}>
             <header>
-                <h1 className="text-lg font-medium text-gray-900 dark:text-gray-100">Create an Employee</h1>
+                <h1 className="text-lg font-medium text-gray-900 dark:text-gray-100">{translations.createEmployeeTitle}</h1>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Don't have any employee yet? Looking to add another one? Click the 'Create' button to begin.
+                    {translations.createEmployeeLabel}
                 </p>
             </header>
-            <PrimaryButton onClick={openModal} aria-label='Create your employee'>Create</PrimaryButton>
+            <PrimaryButton onClick={openModal} aria-label={translations.ariaCreateEmployeeButton}>{translations.buttonCreate}</PrimaryButton>
 
             <Modal show={openingModal} onClose={closeModal}>
 
                 <form onSubmit={submit} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                        Create Employee
+                        {translations.modalCreateEmployeeTitle}
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                        Ready to create a new employee? Fill out the form below with the required details and hit the "Create" button to get started.
+                        {translations.modalCreateEmployeeLabel}
                     </p>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="first_name" value="First Name" />
+                        <InputLabel htmlFor="first_name" value={translations.inputFirstNameLabel} />
 
                         <TextInput
                             id="first_name"
@@ -74,7 +74,7 @@ export default function CreateEmployeeForm({ application, className = '' }) {
                     </div>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="last_name" value="Last Name" />
+                        <InputLabel htmlFor="last_name" value={translations.inputLastNameLabel} />
 
                         <TextInput
                             id="last_name"
@@ -88,7 +88,7 @@ export default function CreateEmployeeForm({ application, className = '' }) {
                     </div>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="phone" value="Phone" />
+                        <InputLabel htmlFor="phone" value={translations.inputPhoneLabel} />
 
                         <TextInput
                             id="phone"
@@ -102,7 +102,7 @@ export default function CreateEmployeeForm({ application, className = '' }) {
                     </div>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="email" value="Email" />
+                        <InputLabel htmlFor="email" value={translations.inputEmailLabel} />
 
                         <TextInput
                             id="email"
@@ -117,10 +117,10 @@ export default function CreateEmployeeForm({ application, className = '' }) {
 
                     <div className="mt-6 flex justify-end">
                         <SecondaryButton onClick={closeModal}>
-                            Cancel
+                            {translations.buttonCancel}
                         </SecondaryButton>
-                        <PrimaryButton className="ml-3" disabled={processing} aria-label='Create your employee'>
-                            Create
+                        <PrimaryButton className="ml-3" disabled={processing} aria-label={translations.ariaCreateEmployeeButton}>
+                            {translations.buttonCreate}
                         </PrimaryButton>
                     </div>
                 </form>

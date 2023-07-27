@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import Dropdown from '@/Components/Dropdown';
 import DarkModeSwitcher from './DarkModeSwitcher';
+import LanguageSwitcher from './LanguageSwitcher';
 
-export default function Header({ user, title, avatarPath, RespNavLink, DropdownLink, sideBarOpen, setSideBarOpen }) {
+export default function Header({ user, title, avatarPath, RespNavLink, DropdownLink, sideBarOpen, setSideBarOpen, GlobalTranslations }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
 
@@ -33,6 +34,7 @@ export default function Header({ user, title, avatarPath, RespNavLink, DropdownL
                     <h1 className='font-semibold text-2xl text-gray-900 dark:text-gray-100'>{title}</h1>
                 </div>
                 <div className='flex items-center gap-2'>
+                    <LanguageSwitcher GlobalTranslations={GlobalTranslations} />
                     <DarkModeSwitcher aria-label='Dark Mode Switch' tabIndex='0' />
                     <div className="hidden sm:flex">
                         <Dropdown>

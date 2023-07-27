@@ -22,7 +22,13 @@ class EmployeeLoginController extends Controller
         $app = $request->route('app');
         return Inertia::render('Employees/Auth/Login', [
             'application' => $app,
+            'status' => session('status'),
             'code' => $code,
+            'translations' => [
+                'login' => __('Log in'),
+                'activationCode' => __('Activation Code'),
+                'rememberMe' => __('Remember me'),
+            ],
         ]);
     }
 

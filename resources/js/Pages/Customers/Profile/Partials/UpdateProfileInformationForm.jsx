@@ -5,7 +5,7 @@ import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 
-export default function UpdateProfileInformation({ customer, className = '' }) {
+export default function UpdateProfileInformation({ customer, className = '', translations }) {
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
         company_name: customer.company_name || '',
@@ -27,16 +27,16 @@ export default function UpdateProfileInformation({ customer, className = '' }) {
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Profile Information</h2>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{translations.profileInformationTitle}</h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Update your account's profile information and email address.
+                    {translations.profileInformationLabel}
                 </p>
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-4">
                 <div>
-                    <InputLabel htmlFor="company_name" value="Company Name" />
+                    <InputLabel htmlFor="company_name" value={translations.inputCompanyNameLabel} />
 
                     <TextInput
                         id="company_name"
@@ -51,7 +51,7 @@ export default function UpdateProfileInformation({ customer, className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="first_name" value="First Name" />
+                    <InputLabel htmlFor="first_name" value={translations.inputFirstNameLabel} />
 
                     <TextInput
                         id="first_name"
@@ -66,7 +66,7 @@ export default function UpdateProfileInformation({ customer, className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="last_name" value="Last Name" />
+                    <InputLabel htmlFor="last_name" value={translations.inputLastNameLabel} />
 
                     <TextInput
                         id="last_name"
@@ -81,7 +81,7 @@ export default function UpdateProfileInformation({ customer, className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="address" value="Address" />
+                    <InputLabel htmlFor="address" value={translations.inputAddressLabel} />
 
                     <TextInput
                         id="address"
@@ -97,7 +97,7 @@ export default function UpdateProfileInformation({ customer, className = '' }) {
 
                 <div className="flex gap-4">
                     <div className='basis-3/5'>
-                        <InputLabel htmlFor="city" value="City" />
+                        <InputLabel htmlFor="city" value={translations.inputCityLabel} />
 
                         <TextInput
                             id="city"
@@ -111,7 +111,7 @@ export default function UpdateProfileInformation({ customer, className = '' }) {
                         <InputError message={errors.city} className="mt-2" />
                     </div>
                     <div className='basis-2/5'>
-                        <InputLabel htmlFor="npa" value="NPA" />
+                        <InputLabel htmlFor="npa" value={translations.inputNPALabel} />
 
                         <TextInput
                             id="npa"
@@ -127,7 +127,7 @@ export default function UpdateProfileInformation({ customer, className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="phone" value="Phone" />
+                    <InputLabel htmlFor="phone" value={translations.inputPhoneLabel} />
 
                     <TextInput
                         id="phone"
@@ -143,7 +143,7 @@ export default function UpdateProfileInformation({ customer, className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="email" value={translations.inputEmailLabel} />
 
                     <TextInput
                         id="email"
@@ -159,7 +159,7 @@ export default function UpdateProfileInformation({ customer, className = '' }) {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing} aria-label='Save your profile information'>Save</PrimaryButton>
+                    <PrimaryButton disabled={processing} aria-label={translations.ariaSaveProfileInformationButton}>{translations.buttonSave}</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
@@ -167,7 +167,7 @@ export default function UpdateProfileInformation({ customer, className = '' }) {
                         leaveTo="opacity-0"
                         className="transition ease-in-out"
                     >
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">{translations.transitionSaved}</p>
                     </Transition>
                 </div>
             </form>

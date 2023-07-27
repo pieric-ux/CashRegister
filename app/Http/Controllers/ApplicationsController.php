@@ -29,6 +29,33 @@ class ApplicationsController extends Controller
 
         return Inertia::render('Customers/Applications/Index', [
             'applications' => $applications,
+            'translations' => [
+                'noApplicationFound' => __('No application found.'),
+                'createApplicationTitle' => __('Create an Application'),
+                'createApplicationLabel' => __('Don\'t have any applications yet? Looking to add another one? Click the \'Create\' button to begin.'),
+                'ariaCreateApplicationButton' => __('Create your app'),
+                'buttonCreate' => __('Create'),
+                'modalCreateAppTitle' => __('Create App'),
+                'modalCreateAppLabel' => __('Ready to create a new application? Fill out the form below with the required details and hit the \'Create\' button to get started.'),
+                'inputNameLabel' => __('Name'),
+                'inputDescriptionLabel' => __('Description'),
+                'inputStartDateLabel' => __('Start Date'),
+                'inputEndDateLabel' => __('End Date'),
+                'inputLocationLabel' => __('Location'),
+                'inputWebsiteLabel' => __('Website'),
+                'buttonCancel' => __('Cancel'),
+                'ariaConfigureApplicationButton' => __('Configure your app'),
+                'ariaEditApplicationButton' => __('Edit your app'),
+                'editApplicationTitle' => __('Edit App'),
+                'editApplicationLabel' => __('Ready to update the application? Fill out the form below with the required details and click the \'Save\' button to apply the changes.'),
+                'buttonSave' => __('Save'),
+                'deleteAppTitle' => __('Delete App'),
+                'ariaDeleteAppButton' => __('Delete your app'),
+                'modalConfirmingDeletionTitle' => __('Are you sure you want to delete your app?'),
+                'modalConfirmingDeletionLabel' => __('Once your app is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your app.'),
+                'inputPasswordLabel' => __('Password'),
+                'ariaAppPosterUpdate' => __('Upload your app\'s image')
+            ],
         ]);
     }
 

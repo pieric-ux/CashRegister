@@ -3,7 +3,7 @@ import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import { useForm } from '@inertiajs/react';
 
-export default function UpdateUserAvatar({ avatarPath, className }) {
+export default function UpdateUserAvatar({ avatarPath, className, translations }) {
     const { data, setData, post, errors } = useForm({
         avatar: '',
     });
@@ -28,10 +28,10 @@ export default function UpdateUserAvatar({ avatarPath, className }) {
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Update Avatar</h2>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{translations.updateAvatarTitle}</h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Update your avatar's profile.
+                    {translations.updateAvatarLabel}
                 </p>
             </header>
             <form className="flex flex-col items-center justify-center mt-6 space-y-4" encType="multipart/form-data">
@@ -62,7 +62,7 @@ export default function UpdateUserAvatar({ avatarPath, className }) {
                                 name="avatar"
                                 type="file"
                                 className="sr-only"
-                                aria-label='Upload your avatar'
+                                aria-label={translations.ariaAvatarUpdateButton}
                                 onChange={handleAvatarChange}
                             />
                         </label>

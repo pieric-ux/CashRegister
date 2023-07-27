@@ -6,7 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 
-export default function Register() {
+export default function Register({ translations }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         company_name: '',
         first_name: '',
@@ -33,11 +33,11 @@ export default function Register() {
 
     return (
         <GuestLayout>
-            <Head title="Register" />
+            <Head title={translations.register} />
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="company_name">Company Name <small>(facultative)</small></InputLabel>
+                    <InputLabel htmlFor="company_name">{translations.inputCompanyNameLabel} <small>({translations.facultative})</small></InputLabel>
 
                     <TextInput
                         id="company_name"
@@ -53,7 +53,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="first_name" value="First Name" />
+                    <InputLabel htmlFor="first_name" value={translations.inputFirstNameLabel} />
 
                     <TextInput
                         id="first_name"
@@ -68,7 +68,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="last_name" value="Last Name" />
+                    <InputLabel htmlFor="last_name" value={translations.inputLastNameLabel} />
 
                     <TextInput
                         id="last_name"
@@ -83,7 +83,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="address" value="Address" />
+                    <InputLabel htmlFor="address" value={translations.inputAddressLabel} />
 
                     <TextInput
                         id="address"
@@ -99,7 +99,7 @@ export default function Register() {
 
                 <div className="flex gap-4 mt-4">
                     <div className='basis-3/5'>
-                        <InputLabel htmlFor="city" value="City" />
+                        <InputLabel htmlFor="city" value={translations.inputCityLabel} />
 
                         <TextInput
                             id="city"
@@ -113,7 +113,7 @@ export default function Register() {
                         <InputError message={errors.city} className="mt-2" />
                     </div>
                     <div className='basis-2/5'>
-                        <InputLabel htmlFor="npa" value="NPA" />
+                        <InputLabel htmlFor="npa" value={translations.inputNPALabel} />
 
                         <TextInput
                             id="npa"
@@ -129,7 +129,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="email" value={translations.inputEmailLabel} />
 
                     <TextInput
                         id="email"
@@ -145,7 +145,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <InputLabel htmlFor="password" value={translations.inputPasswordLabel} />
 
                     <TextInput
                         id="password"
@@ -161,7 +161,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
+                    <InputLabel htmlFor="password_confirmation" value={translations.inputConfirmPasswordLabel} />
 
                     <TextInput
                         id="password_confirmation"
@@ -180,11 +180,11 @@ export default function Register() {
                         href={route('customers.login')}
                         className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                     >
-                        Already registered?
+                        {translations.alreadyRegister}
                     </Link>
 
                     <PrimaryButton className="ml-4" disabled={processing}>
-                        Register
+                        {translations.register}
                     </PrimaryButton>
                 </div>
             </form>

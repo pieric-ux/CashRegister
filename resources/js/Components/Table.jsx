@@ -17,7 +17,7 @@ export default function Table({ data, columns, sortColumn, sortDirection, handle
                             {column.label}
                         </TableColumnHeader>
                     ))}
-                    {actionsRenderer && <th className="py-2 px-4 text-center">Actions</th>}
+                    {actionsRenderer && <th className="py-2 px-4 text-center">{actionsRenderer.header()}</th>}
                 </tr>
             </thead>
             <tbody>
@@ -30,7 +30,7 @@ export default function Table({ data, columns, sortColumn, sortDirection, handle
                         ))}
                         {actionsRenderer && (
                             <td className="py-2 px-4 border-t border-gray-300 dark:border-gray-700">
-                                {actionsRenderer(item)}
+                                {actionsRenderer.render(item)}
                             </td>
                         )}
                     </tr>

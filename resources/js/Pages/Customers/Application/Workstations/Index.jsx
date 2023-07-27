@@ -7,7 +7,7 @@ import UpdateWorkstationForm from "./Partials/UpdateWorkstationForm";
 import DeleteWorkstationForm from "./Partials/DeleteWorstationForm";
 import axios from "axios";
 
-export default function Index({ customerAuth, application, workstations }) {
+export default function Index({ customerAuth, application, workstations, GlobalTranslations, translations }) {
 
     const defaultWorkstationId = application.cr_workstations.find((workstation) => workstation.name === 'Pending assignements')?.id || null;
 
@@ -59,11 +59,12 @@ export default function Index({ customerAuth, application, workstations }) {
         <CR_AppAdminLayout
             auth={customerAuth}
             application={application}
+            GlobalTranslations={GlobalTranslations}
         >
             <Head title={application.name} />
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 space-y-6">
                 <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow-md rounded-lg transition ease-linear duration-300">
-                    <CreateWorkstationForm className="max-w-xl mx-auto" application={application} />
+                    <CreateWorkstationForm className="max-w-xl mx-auto" application={application} translations={translations} />
                 </div>
                 {updatedWorkstations.length > 1 ? (
                     <ul className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-4">
@@ -72,14 +73,14 @@ export default function Index({ customerAuth, application, workstations }) {
                                 <div className="flex items-center justify-between pb-4 border-b border-gray-300 dark:border-gray-700 drop-shadow-sm dark:drop-shadow-none">
                                     <h3>{workstation.name}</h3>
                                     <div className="flex gap-2">
-                                        <UpdateWorkstationForm workstation={workstation} />
-                                        <DeleteWorkstationForm workstation={workstation} />
+                                        <UpdateWorkstationForm workstation={workstation} translations={translations} />
+                                        <DeleteWorkstationForm workstation={workstation} translations={translations} />
                                     </div>
                                 </div>
                                 <DragDropContext onDragEnd={onDragEnd}>
                                     <div className="flex h-full mt-4 gap-2">
                                         <div className="flex flex-col w-1/2 h-full">
-                                            <h4 className="text-center underline">Employee</h4>
+                                            <h4 className="text-center underline">{translations.listEmployeeTitle}</h4>
                                             <Droppable droppableId={`workstation-${workstation.id}`}>
                                                 {(provided, snapshot) => (
                                                     <ul
@@ -116,7 +117,7 @@ export default function Index({ customerAuth, application, workstations }) {
                                         </div>
                                         <div className="border-r border-gray-300 dark:border-gray-700"></div>
                                         <div className="flex flex-col w-1/2 h-full">
-                                            <h4 className="text-center underline">Employee Free</h4>
+                                            <h4 className="text-center underline">{translations.listEmployeeFreeTitle}</h4>
                                             <Droppable droppableId={`workstation-${defaultWorkstationId}`}>
                                                 {(provided, snapshot) => (
                                                     <ul
@@ -159,7 +160,7 @@ export default function Index({ customerAuth, application, workstations }) {
                     </ul>
                 ) : (
                     <div className="p-4 sm:p-8 text-center bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
-                        <p className='text-gray-900 dark:text-gray-100'>No workstation found.</p>
+                        <p className='text-gray-900 dark:text-gray-100'>{translations.noWorkstationFound}</p>
                     </div>
                 )}
             </div>

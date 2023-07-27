@@ -6,7 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
 
-export default function Login({ status, application, code }) {
+export default function Login({ status, application, code, translations }) {
     const { data, setData, post, processing, errors } = useForm({
         passwordless: code ?? '',
         remember: false,
@@ -20,13 +20,13 @@ export default function Login({ status, application, code }) {
 
     return (
         <GuestLayout>
-            <Head title="Log in" />
+            <Head title={translations.login} />
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="passwordless" value="Activation Code" />
+                    <InputLabel htmlFor="passwordless" value={translations.activationCode} />
 
                     <TextInput
                         id="passwordless"
@@ -47,13 +47,13 @@ export default function Login({ status, application, code }) {
                             checked={data.remember}
                             onChange={(e) => setData('remember', e.target.checked)}
                         />
-                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
+                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">{translations.rememberMe}</span>
                     </label>
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
                     <PrimaryButton className="ml-4" disabled={processing}>
-                        Log in
+                        {translations.login}
                     </PrimaryButton>
                 </div>
             </form>

@@ -7,7 +7,7 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 
-export default function DeleteCategorieProductForm({ category }) {
+export default function DeleteCategorieProductForm({ category, translations }) {
     const [confirmingCategoryDeletion, setConfirmingCategoryDeletion] = useState(false);
     const passwordInput = useRef();
 
@@ -45,7 +45,7 @@ export default function DeleteCategorieProductForm({ category }) {
 
     return (
         <section>
-            <DangerButton onClick={confirmCategoryDeletion} className='!px-2' aria-label='Delete the category of product'>
+            <DangerButton onClick={confirmCategoryDeletion} className='!px-2' aria-label={translations.ariaDeleteCategoryButton}>
                 <svg className='w-5 h-5 text-white' fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430.901 583.409">
                     <g>
                         <path d="M3.339,199.409h384v320c0,35.3-28.7,64-64,64h-256c-35.3,0-64-28.7-64-64V199.409z M99.339,263.409c-8.8,0-16,7.2-16,16
@@ -62,16 +62,15 @@ export default function DeleteCategorieProductForm({ category }) {
             <Modal show={confirmingCategoryDeletion} onClose={closeModal}>
                 <form onSubmit={deleteCategory} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                        Are you sure you want to delete your category of product?
+                        {translations.modalConfirmingDeletionTitle}
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                        Once your category of product is deleted, all of its resources and data will be permanently deleted. Please
-                        enter your password to confirm you would like to permanently delete your category of product.
+                        {translations.modalConfirmingDeletionLabel}
                     </p>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="password" value="Password" className="sr-only" />
+                        <InputLabel htmlFor="password" value={translations.inputPasswordLabel} className="sr-only" />
 
                         <TextInput
                             id="password"
@@ -82,17 +81,17 @@ export default function DeleteCategorieProductForm({ category }) {
                             onChange={(e) => setData('password', e.target.value)}
                             className="mt-1 block w-3/4"
                             isFocused
-                            placeholder="Password"
+                            placeholder={translations.inputPasswordLabel}
                         />
 
                         <InputError message={errors.password} className="mt-2" />
                     </div>
 
                     <div className="mt-6 flex justify-end">
-                        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+                        <SecondaryButton onClick={closeModal}>{translations.buttonCancel}</SecondaryButton>
 
-                        <DangerButton className="ml-3" disabled={processing} aria-label='Delete the category of product'>
-                            Delete Category
+                        <DangerButton className="ml-3" disabled={processing} aria-label={translations.ariaDeleteCategoryButton}>
+                            {translations.deleteCategorieTitle}
                         </DangerButton>
                     </div>
                 </form>

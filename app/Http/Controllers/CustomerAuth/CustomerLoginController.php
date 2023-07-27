@@ -22,6 +22,13 @@ class CustomerLoginController extends Controller
         return Inertia::render('Customers/Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
+            'translations' => [
+                'login' => __('Log in'),
+                'inputEmailLabel' => __('Email'),
+                'inputPasswordLabel' => __('Password'),
+                'rememberMe' => __('Remember me'),
+                'forgotPassword' => __('Forgot your password?'),
+            ],
         ]);
     }
 

@@ -7,7 +7,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
 import Modal from "@/Components/Modal";
 
-export default function CreateAppForm({ className = '' }) {
+export default function CreateAppForm({ className = '', translations }) {
     const [openingModal, setOpeningModal] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -41,27 +41,27 @@ export default function CreateAppForm({ className = '' }) {
     return (
         <section className={`space-y-6 ${className}`}>
             <header>
-                <h1 className="text-lg font-medium text-gray-900 dark:text-gray-100">Create an Application</h1>
+                <h1 className="text-lg font-medium text-gray-900 dark:text-gray-100">{translations.createApplicationTitle}</h1>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Don't have any applications yet? Looking to add another one? Click the 'Create' button to begin.
+                    {translations.createApplicationLabel}
                 </p>
             </header>
-            <PrimaryButton onClick={openModal} aria-label='Create your app'>Create</PrimaryButton>
+            <PrimaryButton onClick={openModal} aria-label={translations.ariaCreateApplicationButton}>{translations.buttonCreate}</PrimaryButton>
 
             <Modal show={openingModal} onClose={closeModal}>
 
                 <form onSubmit={submit} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                        Create App
+                        {translations.modalCreateAppTitle}
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                        Ready to create a new application? Fill out the form below with the required details and hit the "Create" button to get started.
+                        {translations.modalCreateAppLabel}
                     </p>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="name" value="Name" />
+                        <InputLabel htmlFor="name" value={translations.inputNameLabel} />
 
                         <TextInput
                             id="name"
@@ -76,7 +76,7 @@ export default function CreateAppForm({ className = '' }) {
                     </div>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="description" value="Description" />
+                        <InputLabel htmlFor="description" value={translations.inputDescriptionLabel} />
 
                         <textarea
                             id="description"
@@ -91,7 +91,7 @@ export default function CreateAppForm({ className = '' }) {
                     </div>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="start_date" value="Start Date" />
+                        <InputLabel htmlFor="start_date" value={translations.inputStartDateLabel} />
 
                         <TextInput
                             id="start_date"
@@ -106,7 +106,7 @@ export default function CreateAppForm({ className = '' }) {
                     </div>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="end_date" value="End Date" />
+                        <InputLabel htmlFor="end_date" value={translations.inputEndDateLabel} />
 
                         <TextInput
                             id="end_date"
@@ -121,7 +121,7 @@ export default function CreateAppForm({ className = '' }) {
                     </div>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="location" value="Location" />
+                        <InputLabel htmlFor="location" value={translations.inputLocationLabel} />
 
                         <TextInput
                             id="location"
@@ -135,7 +135,7 @@ export default function CreateAppForm({ className = '' }) {
                     </div>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="website" value="Website" />
+                        <InputLabel htmlFor="website" value={translations.inputWebsiteLabel} />
 
                         <TextInput
                             id="website"
@@ -152,10 +152,10 @@ export default function CreateAppForm({ className = '' }) {
 
                     <div className="mt-6 flex justify-end">
                         <SecondaryButton onClick={closeModal}>
-                            Cancel
+                            {translations.buttonCancel}
                         </SecondaryButton>
-                        <PrimaryButton className="ml-3" disabled={processing} aria-label='Create your app'>
-                            Create
+                        <PrimaryButton className="ml-3" disabled={processing} aria-label={translations.ariaCreateApplicationButton}>
+                            {translations.buttonCreate}
                         </PrimaryButton>
                     </div>
                 </form>
