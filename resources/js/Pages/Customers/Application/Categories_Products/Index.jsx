@@ -6,9 +6,10 @@ import CreateCategorieProductForm from "./Partials/CreateCategorieProductForm";
 import UpdateCategorieProductForm from "./Partials/UpdateCategorieProductFrom";
 import DeleteCategorieProductForm from "./Partials/DeleteCategorieProductForm";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
-export default function Index({ customerAuth, application, categories, GlobalTranslations, translations }) {
-
+export default function Index({ customerAuth, application, categories, localization }) {
+    const { t } = useTranslation();
     const [updatedCategories, setUpdatedCategories] = useState(categories);
 
     useEffect(() => {
@@ -48,11 +49,11 @@ export default function Index({ customerAuth, application, categories, GlobalTra
     }
 
     return (
-        <CR_AppAdminLayout auth={customerAuth} application={application} GlobalTranslations={GlobalTranslations}>
+        <CR_AppAdminLayout auth={customerAuth} application={application} localization={localization}>
             <Head title={application.name} />
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 space-y-6">
                 <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow-md rounded-lg transition ease-linear duration-300">
-                    <CreateCategorieProductForm className="max-w-xl mx-auto" application={application} translations={translations} />
+                    <CreateCategorieProductForm className="max-w-xl mx-auto" application={application} />
                 </div>
                 {updatedCategories.length > 1 ? (
                     <DragDropContext onDragEnd={onDragEnd}>
@@ -79,8 +80,8 @@ export default function Index({ customerAuth, application, categories, GlobalTra
                                                     <div className="flex items-center justify-between drop-shadow-sm dark:drop-shadow-none">
                                                         <h3>{category.name}</h3>
                                                         <div className="flex gap-2">
-                                                            <UpdateCategorieProductForm category={category} translations={translations} />
-                                                            <DeleteCategorieProductForm category={category} translations={translations} />
+                                                            <UpdateCategorieProductForm category={category} />
+                                                            <DeleteCategorieProductForm category={category} />
                                                         </div>
                                                     </div>
                                                 </li>
@@ -94,7 +95,7 @@ export default function Index({ customerAuth, application, categories, GlobalTra
                     </DragDropContext>
                 ) : (
                     <div className="p-4 sm:p-8 text-center bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
-                        <p className='text-gray-900 dark:text-gray-100'>{translations.noCategoryFound}</p>
+                        <p className='text-gray-900 dark:text-gray-100'>{t('No categories of products found.')}</p>
                     </div>
                 )}
             </div>

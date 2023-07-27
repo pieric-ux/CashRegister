@@ -2,8 +2,10 @@ import { useEffect } from 'react';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import { useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
-export default function UpdateUserAvatar({ avatarPath, className, translations }) {
+export default function UpdateUserAvatar({ avatarPath, className }) {
+    const { t } = useTranslation();
     const { data, setData, post, errors } = useForm({
         avatar: '',
     });
@@ -28,10 +30,10 @@ export default function UpdateUserAvatar({ avatarPath, className, translations }
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{translations.updateAvatarTitle}</h2>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('Update Avatar')}</h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    {translations.updateAvatarLabel}
+                    {t('Update your avatar\'s profile.')}
                 </p>
             </header>
             <form className="flex flex-col items-center justify-center mt-6 space-y-4" encType="multipart/form-data">
@@ -62,7 +64,7 @@ export default function UpdateUserAvatar({ avatarPath, className, translations }
                                 name="avatar"
                                 type="file"
                                 className="sr-only"
-                                aria-label={translations.ariaAvatarUpdateButton}
+                                aria-label={t('Upload your avatar')}
                                 onChange={handleAvatarChange}
                             />
                         </label>

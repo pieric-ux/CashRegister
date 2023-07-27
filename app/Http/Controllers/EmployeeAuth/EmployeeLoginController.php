@@ -24,11 +24,6 @@ class EmployeeLoginController extends Controller
             'application' => $app,
             'status' => session('status'),
             'code' => $code,
-            'translations' => [
-                'login' => __('Log in'),
-                'activationCode' => __('Activation Code'),
-                'rememberMe' => __('Remember me'),
-            ],
         ]);
     }
 

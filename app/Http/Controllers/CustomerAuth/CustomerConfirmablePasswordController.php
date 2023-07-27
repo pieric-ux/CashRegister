@@ -18,14 +18,7 @@ class CustomerConfirmablePasswordController extends Controller
      */
     public function show(): Response
     {
-        return Inertia::render('Customers/Auth/ConfirmPassword', [
-            'translations' => [
-                'confirmPassword' => __('Confirm Password'),
-                'confirmPasswordLabel' => __('This is a secure area of the application. Please confirm your password before continuing.'),
-                'inputPasswordLabel' => __('Password'),
-                'confirm' => __('Confirm'),
-            ],
-        ]);
+        return Inertia::render('Customers/Auth/ConfirmPassword');
     }
 
     /**

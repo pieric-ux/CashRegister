@@ -6,8 +6,10 @@ import Modal from '@/Components/Modal';
 import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
-export default function DeleteUserForm({ className = '', translations }) {
+export default function DeleteUserForm({ className = '' }) {
+    const { t } = useTranslation();
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const passwordInput = useRef();
 
@@ -46,27 +48,27 @@ export default function DeleteUserForm({ className = '', translations }) {
     return (
         <section className={`space-y-6 ${className}`}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{translations.deleteAccountTitle}</h2>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('Delete Account')}</h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    {translations.deleteAccountLabel}
+                    {t('Once your account is deleted, all of its resources and data will be permanently deleted.')}
                 </p>
             </header>
 
-            <DangerButton onClick={confirmUserDeletion} aria-label={translations.ariaDeleteAccountButton}>{translations.deleteAccountTitle}</DangerButton>
+            <DangerButton onClick={confirmUserDeletion} aria-label={t('Delete your account')}>{t('Delete Account')}</DangerButton>
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
                 <form onSubmit={deleteUser} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                        {translations.modalConfirmingDeletionTitle}
+                        {t('Are you sure you want to delete your account?')}
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                        {translations.modalConfirmingDeletionLabel}
+                        {t('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.')}
                     </p>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="password" value={translations.inputPasswordLabel} className="sr-only" />
+                        <InputLabel htmlFor="password" value={t('Password')} className="sr-only" />
 
                         <TextInput
                             id="password"
@@ -77,17 +79,17 @@ export default function DeleteUserForm({ className = '', translations }) {
                             onChange={(e) => setData('password', e.target.value)}
                             className="mt-1 block w-3/4"
                             isFocused
-                            placeholder={translations.inputPasswordLabel}
+                            placeholder={t('Password')}
                         />
 
                         <InputError message={errors.password} className="mt-2" />
                     </div>
 
                     <div className="mt-6 flex justify-end">
-                        <SecondaryButton onClick={closeModal}>{translations.buttonCancel}</SecondaryButton>
+                        <SecondaryButton onClick={closeModal}>{t('Cancel')}</SecondaryButton>
 
-                        <DangerButton className="ml-3" disabled={processing} aria-label={translations.ariaDeleteAccountButton}>
-                            {translations.deleteAccountTitle}
+                        <DangerButton className="ml-3" disabled={processing} aria-label={t('Delete your account')}>
+                            {t('Delete Account')}
                         </DangerButton>
                     </div>
                 </form>

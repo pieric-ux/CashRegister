@@ -6,8 +6,10 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
-export default function Login({ status, canResetPassword, translations }) {
+export default function Login({ status, canResetPassword }) {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -28,13 +30,13 @@ export default function Login({ status, canResetPassword, translations }) {
 
     return (
         <GuestLayout>
-            <Head title={translations.login} />
+            <Head title={t('Log in')} />
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="email" value={translations.inputEmailLabel} />
+                    <InputLabel htmlFor="email" value={t('Email')} />
 
                     <TextInput
                         id="email"
@@ -51,7 +53,7 @@ export default function Login({ status, canResetPassword, translations }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value={translations.inputPasswordLabel} />
+                    <InputLabel htmlFor="password" value={t('Password')} />
 
                     <TextInput
                         id="password"
@@ -73,7 +75,7 @@ export default function Login({ status, canResetPassword, translations }) {
                             checked={data.remember}
                             onChange={(e) => setData('remember', e.target.checked)}
                         />
-                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">{translations.rememberMe}</span>
+                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">{t('Remember me')}</span>
                     </label>
                 </div>
 
@@ -83,12 +85,12 @@ export default function Login({ status, canResetPassword, translations }) {
                             href={route('password.request')}
                             className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                         >
-                            {translations.forgotPassword}
+                            {t('Forgot your password?')}
                         </Link>
                     )}
 
                     <PrimaryButton className="ml-4" disabled={processing}>
-                        {translations.login}
+                        {t('Log in')}
                     </PrimaryButton>
                 </div>
             </form>

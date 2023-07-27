@@ -10,7 +10,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
 /*
@@ -26,8 +25,9 @@ use Inertia\Inertia;
 
 Route::get('/language-switch/{locale}', function ($locale) {
     if (in_array($locale, config('app.locales'))) {
-        Session::put('locale', $locale);
         App::setLocale($locale);
+
+        return response('locale')->cookie('i18next', $locale, 60 * 24 * 3);
     }
 
     return Redirect::back();
@@ -37,11 +37,6 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'translations' => [
-            'login' => __('Log in'),
-            'register' => __('Register'),
-            'dashboard' => __('Dashboard'),
-        ],
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
@@ -50,11 +45,7 @@ Route::get('/', function () {
 Route::middleware(['auth:customer', 'verified'])->group(function () {
 
     Route::get('/dashboard', function () {
-        return Inertia::render('Customers/Dashboard', [
-            'translations' => [
-                'welcome' => __('Welcome'),
-            ],
-        ]);
+        return Inertia::render('Customers/Dashboard');
     })->name('dashboard');
 
 

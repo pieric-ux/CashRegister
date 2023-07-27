@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
             \App\Http\Middleware\LogoutEmployee::class,
-            \App\Http\Middleware\Locale::class,
+            \App\Http\Middleware\SetLocale::class,
         ],
 
         'api' => [

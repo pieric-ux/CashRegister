@@ -3,9 +3,8 @@ import Dropdown from '@/Components/Dropdown';
 import DarkModeSwitcher from './DarkModeSwitcher';
 import LanguageSwitcher from './LanguageSwitcher';
 
-export default function Header({ user, title, avatarPath, RespNavLink, DropdownLink, sideBarOpen, setSideBarOpen, GlobalTranslations }) {
+export default function Header({ user, title, avatarPath, RespNavLink, DropdownLink, sideBarOpen, setSideBarOpen, localization }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
-
 
     return (
         <header className="sticky top-0 z-40 w-full bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 drop-shadow-sm dark:drop-shadow-none transition ease-linear duration-300">
@@ -34,7 +33,7 @@ export default function Header({ user, title, avatarPath, RespNavLink, DropdownL
                     <h1 className='font-semibold text-2xl text-gray-900 dark:text-gray-100'>{title}</h1>
                 </div>
                 <div className='flex items-center gap-2'>
-                    <LanguageSwitcher GlobalTranslations={GlobalTranslations} />
+                    <LanguageSwitcher localization={localization} />
                     <DarkModeSwitcher aria-label='Dark Mode Switch' tabIndex='0' />
                     <div className="hidden sm:flex">
                         <Dropdown>

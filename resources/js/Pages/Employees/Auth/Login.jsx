@@ -5,8 +5,10 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
-export default function Login({ status, application, code, translations }) {
+export default function Login({ status, application, code }) {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors } = useForm({
         passwordless: code ?? '',
         remember: false,
@@ -20,13 +22,13 @@ export default function Login({ status, application, code, translations }) {
 
     return (
         <GuestLayout>
-            <Head title={translations.login} />
+            <Head title={t('Log in')} />
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="passwordless" value={translations.activationCode} />
+                    <InputLabel htmlFor="passwordless" value={t('Activation Code')} />
 
                     <TextInput
                         id="passwordless"
@@ -47,13 +49,13 @@ export default function Login({ status, application, code, translations }) {
                             checked={data.remember}
                             onChange={(e) => setData('remember', e.target.checked)}
                         />
-                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">{translations.rememberMe}</span>
+                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">{t('Remember me')}</span>
                     </label>
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
                     <PrimaryButton className="ml-4" disabled={processing}>
-                        {translations.login}
+                        {t('Log in')}
                     </PrimaryButton>
                 </div>
             </form>

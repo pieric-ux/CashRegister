@@ -5,8 +5,10 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
-export default function ResetPassword({ token, email, translations }) {
+export default function ResetPassword({ token, email }) {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors, reset } = useForm({
         token: token,
         email: email,
@@ -28,11 +30,11 @@ export default function ResetPassword({ token, email, translations }) {
 
     return (
         <GuestLayout>
-            <Head title={translations.resetPassword} />
+            <Head title={t('Reset Password')} />
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="email" value={translations.inputEmailLabel} />
+                    <InputLabel htmlFor="email" value={t('Email')} />
 
                     <TextInput
                         id="email"
@@ -48,7 +50,7 @@ export default function ResetPassword({ token, email, translations }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value={translations.inputPasswordLabel} />
+                    <InputLabel htmlFor="password" value={t('Password')} />
 
                     <TextInput
                         id="password"
@@ -65,7 +67,7 @@ export default function ResetPassword({ token, email, translations }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password_confirmation" value={translations.inputConfirmPasswordLabel} />
+                    <InputLabel htmlFor="password_confirmation" value={t('Confirm Password')} />
 
                     <TextInput
                         type="password"
@@ -81,7 +83,7 @@ export default function ResetPassword({ token, email, translations }) {
 
                 <div className="flex items-center justify-end mt-4">
                     <PrimaryButton className="ml-4" disabled={processing}>
-                        {translations.resetPassword}
+                        {t('Reset Password')}
                     </PrimaryButton>
                 </div>
             </form>

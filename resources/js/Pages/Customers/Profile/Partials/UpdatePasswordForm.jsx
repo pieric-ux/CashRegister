@@ -5,8 +5,10 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
+import { useTranslation } from 'react-i18next';
 
-export default function UpdatePasswordForm({ className = '', translations }) {
+export default function UpdatePasswordForm({ className = '' }) {
+    const { t } = useTranslation();
     const passwordInput = useRef();
     const currentPasswordInput = useRef();
 
@@ -39,16 +41,16 @@ export default function UpdatePasswordForm({ className = '', translations }) {
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{translations.updatePasswordTitle}</h2>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('Update Password')}</h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    {translations.updatePasswordLabel}
+                    {t('Ensure your account is using a long, random password to stay secure.')}
                 </p>
             </header>
 
             <form onSubmit={updatePassword} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="current_password" value={translations.inputCurrentPasswordLabel} />
+                    <InputLabel htmlFor="current_password" value={t('Current Password')} />
 
                     <TextInput
                         id="current_password"
@@ -65,7 +67,7 @@ export default function UpdatePasswordForm({ className = '', translations }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="password" value={translations.inputNewPasswordLabel} />
+                    <InputLabel htmlFor="password" value={t('New Password')} />
 
                     <TextInput
                         id="password"
@@ -82,7 +84,7 @@ export default function UpdatePasswordForm({ className = '', translations }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="password_confirmation" value={translations.inputConfirmPasswordLabel} />
+                    <InputLabel htmlFor="password_confirmation" value={t('Confirm Password')} />
 
                     <TextInput
                         id="password_confirmation"
@@ -98,7 +100,7 @@ export default function UpdatePasswordForm({ className = '', translations }) {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing} aria-label={translations.ariaSaveUpdatedPasswordButton}>{translations.buttonSave}</PrimaryButton>
+                    <PrimaryButton disabled={processing} aria-label={t('Save your updated password')}>{t('Save')}</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
@@ -106,7 +108,7 @@ export default function UpdatePasswordForm({ className = '', translations }) {
                         leaveTo="opacity-0"
                         className="transition ease-in-out"
                     >
-                        <p className="text-sm text-gray-600 dark:text-gray-400">{translations.transitionSaved}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">{t('Saved.')}</p>
                     </Transition>
                 </div>
             </form>

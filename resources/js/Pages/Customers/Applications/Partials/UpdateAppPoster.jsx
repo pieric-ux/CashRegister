@@ -2,8 +2,10 @@ import { useEffect } from 'react';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import { useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
-export default function UpdateAppPoster({ application, className, translations }) {
+export default function UpdateAppPoster({ application, className }) {
+    const { t } = useTranslation();
     const { data, setData, post, errors } = useForm({
         appId: application.id,
         poster: '',
@@ -58,7 +60,7 @@ export default function UpdateAppPoster({ application, className, translations }
                         name={`poster-${application.id}`}
                         type="file"
                         className="sr-only"
-                        aria-label={translations.ariaAppPosterUpdate}
+                        aria-label={t('Upload your app\'s image')}
                         onChange={handlePosterChange}
                     />
                     <InputError className='mt-2' message={errors.poster} />

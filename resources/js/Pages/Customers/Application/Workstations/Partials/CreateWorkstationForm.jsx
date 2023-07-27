@@ -6,8 +6,10 @@ import TextInput from "@/Components/TextInput";
 import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
 import Modal from "@/Components/Modal";
+import { useTranslation } from 'react-i18next';
 
-export default function CreateWorkstationForm({ application, className = '', translations }) {
+export default function CreateWorkstationForm({ application, className = '' }) {
+    const { t } = useTranslation();
     const [openingModal, setOpeningModal] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -36,27 +38,27 @@ export default function CreateWorkstationForm({ application, className = '', tra
     return (
         <section className={`space-y-6 ${className}`}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{translations.createWorkstationTitle}</h2>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('Create a Workstation')}</h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    {translations.createWorkstationLabel}
+                    {t('Don\'t have any workstations yet? Looking to add another one? Click the \'Create\' button to begin.')}
                 </p>
             </header>
-            <PrimaryButton onClick={openModal} aria-label={translations.ariaCreateWorkstationButton}>{translations.buttonCreate}</PrimaryButton>
+            <PrimaryButton onClick={openModal} aria-label={t('Create a workstation')}>{t('Create')}</PrimaryButton>
 
             <Modal show={openingModal} onClose={closeModal}>
 
                 <form onSubmit={submit} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                        {translations.modalCreateWorkstationTitle}
+                        {t('Create Workstation')}
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                        {translations.modalCreateWorkstationLabel}
+                        {t('Ready to create a new workstation? Fill out the form below with the required details and hit the \'Create\' button to get started.')}
                     </p>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="name" value={translations.inputNameLabel} />
+                        <InputLabel htmlFor="name" value={t('Name')} />
 
                         <TextInput
                             id="name"
@@ -72,10 +74,10 @@ export default function CreateWorkstationForm({ application, className = '', tra
 
                     <div className="mt-6 flex justify-end">
                         <SecondaryButton onClick={closeModal}>
-                            {translations.buttonCancel}
+                            {t('Cancel')}
                         </SecondaryButton>
-                        <PrimaryButton className="ml-3" disabled={processing} aria-label={translations.ariaCreateWorkstationButton}>
-                            {translations.buttonCreate}
+                        <PrimaryButton className="ml-3" disabled={processing} aria-label={t('Create a workstation')}>
+                            {t('Create')}
                         </PrimaryButton>
                     </div>
                 </form>

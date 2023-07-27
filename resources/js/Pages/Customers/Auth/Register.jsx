@@ -5,8 +5,10 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
-export default function Register({ translations }) {
+export default function Register() {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors, reset } = useForm({
         company_name: '',
         first_name: '',
@@ -33,11 +35,11 @@ export default function Register({ translations }) {
 
     return (
         <GuestLayout>
-            <Head title={translations.register} />
+            <Head title={t('Register')} />
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="company_name">{translations.inputCompanyNameLabel} <small>({translations.facultative})</small></InputLabel>
+                    <InputLabel htmlFor="company_name">{t('Company Name')} <small>({t('facultative')})</small></InputLabel>
 
                     <TextInput
                         id="company_name"
@@ -53,7 +55,7 @@ export default function Register({ translations }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="first_name" value={translations.inputFirstNameLabel} />
+                    <InputLabel htmlFor="first_name" value={t('First Name')} />
 
                     <TextInput
                         id="first_name"
@@ -68,7 +70,7 @@ export default function Register({ translations }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="last_name" value={translations.inputLastNameLabel} />
+                    <InputLabel htmlFor="last_name" value={t('Last Name')} />
 
                     <TextInput
                         id="last_name"
@@ -83,7 +85,7 @@ export default function Register({ translations }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="address" value={translations.inputAddressLabel} />
+                    <InputLabel htmlFor="address" value={t('Address')} />
 
                     <TextInput
                         id="address"
@@ -99,7 +101,7 @@ export default function Register({ translations }) {
 
                 <div className="flex gap-4 mt-4">
                     <div className='basis-3/5'>
-                        <InputLabel htmlFor="city" value={translations.inputCityLabel} />
+                        <InputLabel htmlFor="city" value={t('City')} />
 
                         <TextInput
                             id="city"
@@ -113,7 +115,7 @@ export default function Register({ translations }) {
                         <InputError message={errors.city} className="mt-2" />
                     </div>
                     <div className='basis-2/5'>
-                        <InputLabel htmlFor="npa" value={translations.inputNPALabel} />
+                        <InputLabel htmlFor="npa" value={t('NPA')} />
 
                         <TextInput
                             id="npa"
@@ -129,7 +131,7 @@ export default function Register({ translations }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value={translations.inputEmailLabel} />
+                    <InputLabel htmlFor="email" value={t('Email')} />
 
                     <TextInput
                         id="email"
@@ -145,7 +147,7 @@ export default function Register({ translations }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value={translations.inputPasswordLabel} />
+                    <InputLabel htmlFor="password" value={t('Password')} />
 
                     <TextInput
                         id="password"
@@ -161,7 +163,7 @@ export default function Register({ translations }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password_confirmation" value={translations.inputConfirmPasswordLabel} />
+                    <InputLabel htmlFor="password_confirmation" value={t('Confirm Password')} />
 
                     <TextInput
                         id="password_confirmation"
@@ -180,11 +182,11 @@ export default function Register({ translations }) {
                         href={route('customers.login')}
                         className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                     >
-                        {translations.alreadyRegister}
+                        {t('Already registered?')}
                     </Link>
 
                     <PrimaryButton className="ml-4" disabled={processing}>
-                        {translations.register}
+                        {t('Register')}
                     </PrimaryButton>
                 </div>
             </form>

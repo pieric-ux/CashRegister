@@ -24,12 +24,6 @@ class CustomerNewPasswordController extends Controller
         return Inertia::render('Customers/Auth/ResetPassword', [
             'email' => $request->email,
             'token' => $request->route('token'),
-            'translations' => [
-                'resetPassword' => __('Reset Password'),
-                'inputEmailLabel' => __('Email'),
-                'inputPasswordLabel' => __('Password'),
-                'inputConfirmPasswordLabel' => __('Confirm Password'),
-            ],
         ]);
     }
 

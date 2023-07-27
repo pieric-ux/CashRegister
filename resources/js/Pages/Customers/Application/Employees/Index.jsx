@@ -10,8 +10,10 @@ import Table from "@/Components/Table";
 import { sortData, filterData } from "@/Utils/useTableUtils";
 import Pagination from "@/Components/Pagination";
 import PaginationItemsPerPage from "@/Components/PaginationItemsPerPage";
+import { useTranslation } from "react-i18next";
 
-export default function Index({ customerAuth, application, employees, GlobalTranslations, translations }) {
+export default function Index({ customerAuth, application, employees, localization }) {
+    const { t } = useTranslation();
     const [searchTerm, setSearchTerm] = useState("");
     const [sortColumn, setSortColumn] = useState("");
     const [sortDirection, setSortDirection] = useState("");
@@ -41,19 +43,19 @@ export default function Index({ customerAuth, application, employees, GlobalTran
     };
 
     const employeeColumns = [
-        { key: "first_name", label: translations.inputFirstNameLabel },
-        { key: "last_name", label: translations.inputLastNameLabel, className: "hidden md:table-cell" },
-        { key: "phone", label: translations.inputPhoneLabel, className: "hidden xl:table-cell" },
-        { key: "email", label: translations.inputEmailLabel, className: "hidden lg:table-cell" },
+        { key: "first_name", label: t('First Name') },
+        { key: "last_name", label: t('Last Name'), className: "hidden md:table-cell" },
+        { key: "phone", label: t('Phone'), className: "hidden xl:table-cell" },
+        { key: "email", label: t('Email'), className: "hidden lg:table-cell" },
     ];
 
     const renderEmployeeActions = {
-        header: () => translations.headerActionsTable,
+        header: () => t('Actions'),
         render: (employee) => (
             <div className="flex items-center justify-center gap-2">
-                <RegenerateEmployeeForm employee={employee} translations={translations} />
-                <UpdateEmployeeForm employee={employee} translations={translations} />
-                <DeleteEmployeeForm employee={employee} translations={translations} />
+                <RegenerateEmployeeForm employee={employee} />
+                <UpdateEmployeeForm employee={employee} />
+                <DeleteEmployeeForm employee={employee} />
             </div>
         )
     };
@@ -67,20 +69,20 @@ export default function Index({ customerAuth, application, employees, GlobalTran
 
 
     return (
-        <CR_AppAdminLayout auth={customerAuth} application={application} GlobalTranslations={GlobalTranslations}>
+        <CR_AppAdminLayout auth={customerAuth} application={application} localization={localization}>
             <Head title={application.name} />
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 space-y-6">
                 <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow-md rounded-lg transition ease-linear duration-300">
-                    <CreateEmployeeForm className="max-w-xl mx-auto" application={application} translations={translations} />
+                    <CreateEmployeeForm className="max-w-xl mx-auto" application={application} />
                 </div>
                 <div className="flex flex-col sm:flex-row items-center justify-end pr-4 mt-4 gap-2">
                     <PaginationItemsPerPage
                         itemsPerPage={employeesPerPage}
                         onChange={handleEmployeesPerPageChange}
-                        itemName={translations.paginationItemsName}
+                        itemName={t('employees')}
                     />
                     <TextInput
-                        placeholder={translations.inputSearchPlaceholder}
+                        placeholder={t('Search employees')}
                         className="w-64 dark:!bg-gray-800 placeholder:text-gray-600 dark:placeholder:text-gray-400"
                         value={searchTerm}
                         onChange={handleSearchChange}
@@ -100,12 +102,11 @@ export default function Index({ customerAuth, application, employees, GlobalTran
                             currentPage={currentPage}
                             totalPages={Math.ceil(filteredEmployees.length / employeesPerPage)}
                             onPageChange={handlePageChange}
-                            translations={translations}
                         />
                     </>
                 ) : (
                     <div className="p-4 sm:p-8 text-center bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
-                        <p className="text-gray-900 dark:text-gray-100">{translations.noEmployeeFound}</p>
+                        <p className="text-gray-900 dark:text-gray-100">{t('No employees found.')}</p>
                     </div>
                 )}
             </div>

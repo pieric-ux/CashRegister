@@ -20,22 +20,7 @@ class CustomerRegisterController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Customers/Auth/Register', [
-            'translations' => [
-                'register' => __('Register'),
-                'inputCompanyNameLabel' => __('Company Name'),
-                'facultative' => __('facultative'),
-                'inputFirstNameLabel' => __('First Name'),
-                'inputLastNameLabel' => __('Last Name'),
-                'inputAddressLabel' => __('Address'),
-                'inputCityLabel' => __('City'),
-                'inputNPALabel' => __('NPA'),
-                'inputEmailLabel' => __('Email'),
-                'inputPasswordLabel' => __('Password'),
-                'inputConfirmPasswordLabel' => __('Confirm Password'),
-                'alreadyRegister' => __('Already registered?'),
-            ],
-        ]);
+        return Inertia::render('Customers/Auth/Register');
     }
 
     /**
