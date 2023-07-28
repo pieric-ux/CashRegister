@@ -44,8 +44,12 @@ i18n
             caches: ['localStorage', 'cookie'],
             excludeCacheFor: ['cimode'], // Languages to not persist (cookie, localStorage).
 
-            // optional expire and domain for set cookie
+            // optional expire cookie
             cookieMinutes: 60 * 2,
+            // optional set cookie options, reference:[MDN Set-Cookie docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie)
+            cookieOptions: {
+                path: '/', secure: false, sameSite: 'strict',
+            },
 
             // optional conversion function to use to modify the detected language code
             convertDetectedLanguage: (lng) => lng.split('-')[0],
