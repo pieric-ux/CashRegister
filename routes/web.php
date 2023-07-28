@@ -26,8 +26,6 @@ use Inertia\Inertia;
 Route::get('/language-switch/{locale}', function ($locale) {
     if (in_array($locale, config('app.locales'))) {
         App::setLocale($locale);
-
-        return response('locale')->cookie('i18next', $locale, 60 * 24 * 3);
     }
 
     return Redirect::back();

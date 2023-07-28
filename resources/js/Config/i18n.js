@@ -39,11 +39,17 @@ i18n
             lookupQuerystring: 'lng',
             lookupCookie: 'i18next',
             lookupLocalStorage: 'i18nextLng',
+
             // Cache user language on.
             caches: ['localStorage', 'cookie'],
             excludeCacheFor: ['cimode'], // Languages to not persist (cookie, localStorage).
+
+            // optional expire and domain for set cookie
+            cookieMinutes: 60 * 2,
+
+            // optional conversion function to use to modify the detected language code
+            convertDetectedLanguage: (lng) => lng.split('-')[0],
         },
     });
-
 
 export default i18n;
