@@ -73,6 +73,16 @@ class WorkstationsController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
+        $defaultWorkstation = CR_Workstations::where('fk_apps_id', $workstation->fk_apps_id)->where('name', 'Pending assignements')->first();
+        $employees = $workstation->cr_employees;
+
+        if ($employees) {
+            foreach ($employees as $employee) {
+                $employee->fk_workstations_id = $defaultWorkstation->id;
+                $employee->save();
+            }
+        }
+
         $workstation->delete();
 
         return Redirect::route('workstations.index', $workstation->cr_apps->slug);
