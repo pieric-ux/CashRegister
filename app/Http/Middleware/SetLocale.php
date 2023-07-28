@@ -16,7 +16,7 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = $request->cookie('locale', config('app.fallback_locale'));
+        $locale = $request->cookie('i18next', config('app.fallback_locale'));
 
         if (in_array($locale, config('app.locales'))) {
             App::setLocale($locale);
