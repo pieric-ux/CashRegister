@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApplicationsController;
 use App\Http\Controllers\CategoriesProductsController;
+use App\Http\Controllers\DishesController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProfileController;
@@ -45,7 +46,6 @@ Route::middleware(['auth:customer', 'verified'])->group(function () {
         return Inertia::render('Customers/Dashboard');
     })->name('dashboard');
 
-
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -71,6 +71,11 @@ Route::middleware(['auth:customer', 'verified'])->group(function () {
     Route::patch('/categories-products/update/{category}', [CategoriesProductsController::class, 'update'])->name('categories.update');
     Route::patch('/categories-products/update', [CategoriesProductsController::class, 'updateDragAndDrop'])->name('categories.updateDragAndDrop');
     Route::delete('/categories-products/{category}', [CategoriesProductsController::class, 'destroy'])->name('categories.destroy');
+
+    Route::get('/apps/{app}/dishes', [DishesController::class, 'index'])->name('dishes.index');
+    Route::post('/apps/{app}/dishes', [DishesController::class, 'store'])->name('dishes.store');
+    Route::patch('/apps/dishes/update/{dish}', [DishesController::class, 'update'])->name('dishes.update');
+    Route::delete('/dishes/{dish}', [DishesController::class, 'destroy'])->name('dishes.destroy');
 
     Route::post('/avatar-upload', [MediaController::class, 'uploadAvatar'])->name('avatar.upload');
     Route::post('/poster-upload', [MediaController::class, 'uploadPoster'])->name('poster.upload');

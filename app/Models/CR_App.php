@@ -48,7 +48,7 @@ class CR_App extends Model implements HasMedia
 
     public function cr_dishes()
     {
-        return $this->hasMany(CR_Categories_Products::class, 'fk_apps_id');
+        return $this->hasMany(CR_Dishes::class, 'fk_apps_id');
     }
 
     public static function boot()

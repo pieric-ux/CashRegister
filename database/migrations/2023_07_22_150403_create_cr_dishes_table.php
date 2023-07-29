@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('unit');
             $table->decimal('client_price', 6, 2)->default(0.00);
             $table->decimal('cost_price', 6, 2)->default(0.00);
-            $table->boolean('is_consigned')->default(true);
+            $table->boolean('is_consigned')->nullable()->default(true);
             $table->unsignedBigInteger('fk_apps_id');
             $table->foreign('fk_apps_id')->references('id')->on('cr_apps')->onDelete('cascade');
             $table->timestamps();
