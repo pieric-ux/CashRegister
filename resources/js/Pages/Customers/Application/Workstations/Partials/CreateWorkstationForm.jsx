@@ -76,7 +76,7 @@ export default function CreateWorkstationForm({ application, className = '' }) {
                         <SecondaryButton onClick={closeModal}>
                             {t('Cancel')}
                         </SecondaryButton>
-                        <PrimaryButton className="ml-3" disabled={processing} aria-label={t('Create a workstation')}>
+                        <PrimaryButton className="ml-3" disabled={processing} aria-label={t('Create a Workstation')}>
                             {t('Create')}
                         </PrimaryButton>
                     </div>

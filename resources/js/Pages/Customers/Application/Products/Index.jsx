@@ -2,25 +2,23 @@ import { useState } from "react";
 import { Head } from "@inertiajs/react";
 import { sortData, filterData } from "@/Utils/useTableUtils";
 import CR_AppAdminLayout from "@/Layouts/CR_AppAdminLayout";
-import CreateDishForm from "./Partials/CreateDishForm";
+import CreateProductForm from "./Partials/CreateProductForm";
+import UpdateProductForm from "./Partials/UpdateProductForm";
+import UpdateProdutPicture from "./Partials/UpdateProductPicture";
+import DeleteProductForm from "./Partials/DeleteProductForm";
 import TextInput from "@/Components/TextInput";
 import Table from "@/Components/Table";
 import Pagination from "@/Components/Pagination";
 import PaginationItemsPerPage from "@/Components/PaginationItemsPerPage";
 import { useTranslation } from "react-i18next";
-import Checkbox from "@/Components/Checkbox";
-import UpdateDishForm from "./Partials/UpdateDishForm";
-import DeleteDishForm from "./Partials/DeleteDishForm";
 
-export default function Index({ customerAuth, application, dishes, localization }) {
+export default function Index({ customerAuth, application, products, localization }) {
     const { t } = useTranslation();
     const [searchTerm, setSearchTerm] = useState("");
     const [sortColumn, setSortColumn] = useState("");
     const [sortDirection, setSortDirection] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const [dishesPerPage, setDishesPerPage] = useState(10);
-
-    const dishesToRender = dishes.slice(1);
+    const [productPerPage, setProductPerPage] = useState(10);
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -39,39 +37,36 @@ export default function Index({ customerAuth, application, dishes, localization 
         setCurrentPage(page);
     };
 
-    const handleDishesPerPageChange = (e) => {
-        setDishesPerPage(parseInt(e.target.value, 10));
+    const handleProductPerPage = (e) => {
+        setProductPerPage(parseInt(e.target.value, 10));
         setCurrentPage(1);
     };
 
-    const dishesColumns = [
+    const productsColumns = [
+        { key: "picture", label: t('Picture'), className: "hidden lg:table-cell", render: (product) => <UpdateProdutPicture product={product} /> },
         { key: "name", label: t('Name') },
+        { key: "description", label: t('Description'), className: "hidden xl:table-cell" },
         { key: "unit", label: t('Unit'), className: "hidden md:table-cell" },
-        { key: "client_price", label: t('Client Price'), className: "hidden lg:table-cell", render: (dish) => `${dish.client_price} ${t('currency_symbol')}` },
-        { key: "cost_price", label: t('Cost Price'), className: "hidden xl:table-cell", render: (dish) => `${dish.cost_price} ${t('currency_symbol')}` },
-        {
-            key: "is_consigned", label: t('Consigned'), className: "hidden md:table-cell", render: (dish) => (
-                <Checkbox className="disabled:opacity-50 disabled:cursor-not-allowed" checked={dish.is_consigned} disabled />
-            )
-        },
+        { key: "client_price", label: t('Client Price'), className: "hidden lg:table-cell", render: (product) => `${product.client_price} ${t('currency_symbol')}` },
+        { key: "cost_price", label: t('Cost Price'), className: "hidden xl:table-cell", render: (product) => `${product.cost_price} ${t('currency_symbol')}` },
     ];
 
-    const renderDishesActions = {
+    const renderProductsActions = {
         header: () => t('Actions'),
-        render: (dish) => (
+        render: (product) => (
             <div className="flex items-center justify-center gap-2">
-                <UpdateDishForm dish={dish} />
-                <DeleteDishForm dish={dish} />
+                <UpdateProductForm product={product} />
+                <DeleteProductForm product={product} />
             </div>
         )
     };
 
-    const sortedDishes = sortData(dishesToRender, sortColumn, sortDirection);
-    const filteredDishes = filterData(sortedDishes, searchTerm, dishesColumns, t);
+    const sortedProducts = sortData(products, sortColumn, sortDirection);
+    const filteredProducts = filterData(sortedProducts, searchTerm, productsColumns, t);
 
-    const indexOfLastDishes = currentPage * dishesPerPage;
-    const indexOfFirstDishes = indexOfLastDishes - dishesPerPage;
-    const currentDishes = filteredDishes.slice(indexOfFirstDishes, indexOfLastDishes);
+    const indexOfLastProducts = currentPage * productPerPage;
+    const indexOfFirstProducts = indexOfLastProducts - productPerPage;
+    const currentProducts = filteredProducts.slice(indexOfFirstProducts, indexOfLastProducts);
 
 
     return (
@@ -79,40 +74,40 @@ export default function Index({ customerAuth, application, dishes, localization 
             <Head title={application.name} />
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 space-y-6">
                 <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow-md rounded-lg transition ease-linear duration-300">
-                    <CreateDishForm className="max-w-xl mx-auto" application={application} />
+                    <CreateProductForm className="max-w-xl mx-auto" application={application} />
                 </div>
                 <div className="flex flex-col sm:flex-row items-center justify-end pr-4 mt-4 gap-2">
                     <PaginationItemsPerPage
-                        itemsPerPage={dishesPerPage}
-                        onChange={handleDishesPerPageChange}
-                        itemName={t('dishes')}
+                        itemsPerPage={productPerPage}
+                        onChange={handleProductPerPage}
+                        itemName={t('products')}
                     />
                     <TextInput
-                        placeholder={t('Search dishes')}
+                        placeholder={t('Search products')}
                         className="w-64 dark:!bg-gray-800 placeholder:text-gray-600 dark:placeholder:text-gray-400"
                         value={searchTerm}
                         onChange={handleSearchChange}
                     />
                 </div>
-                {filteredDishes.length > 0 ? (
+                {filteredProducts.length > 0 ? (
                     <>
                         <Table
-                            data={currentDishes}
-                            columns={dishesColumns}
+                            data={currentProducts}
+                            columns={productsColumns}
                             sortColumn={sortColumn}
                             sortDirection={sortDirection}
                             handleSort={handleSort}
-                            actionsRenderer={renderDishesActions}
+                            actionsRenderer={renderProductsActions}
                         />
                         <Pagination
                             currentPage={currentPage}
-                            totalPages={Math.ceil(filteredDishes.length / dishesPerPage)}
+                            totalPages={Math.ceil(filteredProducts.length / productPerPage)}
                             onPageChange={handlePageChange}
                         />
                     </>
                 ) : (
                     <div className="p-4 sm:p-8 text-center bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
-                        <p className="text-gray-900 dark:text-gray-100">{t('No dishes found.')}</p>
+                        <p className="text-gray-900 dark:text-gray-100">{t('No products found.')}</p>
                     </div>
                 )}
             </div>

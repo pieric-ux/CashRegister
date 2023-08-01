@@ -25,7 +25,7 @@ export default function Table({ data, columns, sortColumn, sortDirection, handle
                     <tr key={item.id}>
                         {columns.map((column) => (
                             <td key={`${item.id}-${column.key}`} className={`py-2 px-4 border-t border-gray-300 dark:border-gray-700 ${column.className || ''}`}>
-                                {column.render ? <p className="ml-5">{column.render(item)}</p> : <p className="ml-5">{item[column.key]}</p>}
+                                {column.render ? <div className="ml-5">{column.render(item)}</div> : <p className="ml-5">{item[column.key]}</p>}
                             </td>
                         ))}
                         {actionsRenderer && (

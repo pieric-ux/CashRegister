@@ -61,7 +61,7 @@ class WorkstationsController extends Controller
         $workstation->name = ucfirst($request->input('name'));
         $workstation->save();
 
-        return Redirect::route('workstations.index', $workstation->cr_apps->slug);
+        return Redirect::route('workstations.index', $workstation->cr_apps);
     }
 
     /**
@@ -85,6 +85,6 @@ class WorkstationsController extends Controller
 
         $workstation->delete();
 
-        return Redirect::route('workstations.index', $workstation->cr_apps->slug);
+        return Redirect::route('workstations.index', $workstation->cr_apps);
     }
 }

@@ -50,7 +50,7 @@ class CategoriesProductsController extends Controller
         $category->name = ucfirst($request->input('name'));
         $category->save();
 
-        return Redirect::route('categories.index', $category->cr_apps->slug);
+        return Redirect::route('categories.index', $category->cr_apps);
     }
 
     /**
@@ -82,6 +82,6 @@ class CategoriesProductsController extends Controller
 
         $category->delete();
 
-        return Redirect::route('categories.index', $category->cr_apps->slug);
+        return Redirect::route('categories.index', $category->cr_apps);
     }
 }

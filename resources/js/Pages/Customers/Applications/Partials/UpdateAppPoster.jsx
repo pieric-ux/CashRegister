@@ -30,7 +30,7 @@ export default function UpdateAppPoster({ application, className }) {
     };
 
     return (
-        <form className={` h-52 flex items-center justify-center ${className}`} encType="multipart/form-data">
+        <form className={`h-52 flex items-center justify-center ${className}`} encType="multipart/form-data">
             <div className='relative z-30 mx-auto h-36 w-36 backdrop-blur-md transition ease-linear duration-300'>
                 <div className='relative drop-shadow-md w-full h-full'>
                     <img src={application.posterPath} alt="poster" className="w-full h-full" />

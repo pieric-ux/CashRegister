@@ -42,9 +42,7 @@ class EmployeesController extends Controller
         $employee->email = $request->input('email');
         $employee->save();
 
-        $app = $employee->cr_workstations->cr_apps;
-
-        return Redirect::route('employees.index', $app);
+        return Redirect::route('employees.index', $employee->cr_workstations->cr_apps);
     }
 
     /**
@@ -80,10 +78,6 @@ class EmployeesController extends Controller
 
         $employee->delete();
 
-        //logout employee
-
-        $app = $employee->cr_workstations->cr_apps;
-
-        return Redirect::route('employees.index', $app);
+        return Redirect::route('employees.index', $employee->cr_workstations->cr_apps);
     }
 }

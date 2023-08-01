@@ -56,7 +56,7 @@ class DishesController extends Controller
         $dish->is_consigned = $request->input('is_consigned');
         $dish->save();
 
-        return Redirect::route('dishes.index', $dish->cr_apps->slug);
+        return Redirect::route('dishes.index', $dish->cr_apps);
     }
 
     /**
@@ -70,6 +70,6 @@ class DishesController extends Controller
 
         $dish->delete();
 
-        return Redirect::route('dishes.index', $dish->cr_apps->slug);
+        return Redirect::route('dishes.index', $dish->cr_apps);
     }
 }

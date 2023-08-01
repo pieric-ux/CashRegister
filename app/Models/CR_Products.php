@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class CR_Products extends Model
+class CR_Products extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $table = 'cr_products';
 
@@ -39,5 +43,29 @@ class CR_Products extends Model
     public function cr_workstations()
     {
         return $this->belongsToMany(CR_Workstations::class, 'cr_workstations_products', 'fk_products_id', 'fk_workstations_id');
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('preview')
+            ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->nonQueued();
+    }
+
+    public function getPictureUrl()
+    {
+        $picture = $this->getFirstMediaUrl('products-pictures');
+
+        return $picture;
+    }
+
+    public function uploadProductPicture($picture)
+    {
+        $this->clearMediaCollection('products-pictures');
+
+        $this->addMedia($picture)
+            ->usingFileName($picture->hashName())
+            ->toMediaCollection('products-pictures');
     }
 }

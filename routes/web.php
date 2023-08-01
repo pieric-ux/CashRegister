@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoriesProductsController;
 use App\Http\Controllers\DishesController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WorkstationsController;
 use Illuminate\Foundation\Application;
@@ -24,13 +25,6 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/language-switch/{locale}', function ($locale) {
-    if (in_array($locale, config('app.locales'))) {
-        App::setLocale($locale);
-    }
-    return Redirect::back();
-});
-
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -39,6 +33,13 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 })->name('welcome');
+
+Route::get('/language-switch/{locale}', function ($locale) {
+    if (in_array($locale, config('app.locales'))) {
+        App::setLocale($locale);
+    }
+    return Redirect::back();
+});
 
 Route::middleware(['auth:customer', 'verified'])->group(function () {
 
@@ -77,8 +78,15 @@ Route::middleware(['auth:customer', 'verified'])->group(function () {
     Route::patch('/apps/dishes/update/{dish}', [DishesController::class, 'update'])->name('dishes.update');
     Route::delete('/dishes/{dish}', [DishesController::class, 'destroy'])->name('dishes.destroy');
 
+    Route::get('/apps/{app}/products', [ProductsController::class, 'index'])->name('products.index');
+    Route::post('/apps/{app}/products', [ProductsController::class, 'store'])->name('products.store');
+    Route::patch('/apps/products/update/{product}', [ProductsController::class, 'update'])->name('products.update');
+    Route::delete('/products/{product}', [ProductsController::class, 'destroy'])->name('products.destroy');
+
+
     Route::post('/avatar-upload', [MediaController::class, 'uploadAvatar'])->name('avatar.upload');
     Route::post('/poster-upload', [MediaController::class, 'uploadPoster'])->name('poster.upload');
+    Route::post('/picture-product-upload', [MediaController::class, 'uploadProductPicture'])->name('picture-product.upload');
 });
 
 Route::middleware(['auth:employee', 'logout'])->group(function () {
