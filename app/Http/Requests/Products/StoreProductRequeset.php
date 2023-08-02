@@ -36,7 +36,6 @@ class StoreProductRequeset extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:255'],
             'unit' => ['required', 'string', 'max:255'],
             'client_price' => ['required', 'numeric', 'between:0,9999.99'],
             'cost_price' => ['required', 'numeric', 'between:0,9999.99'],

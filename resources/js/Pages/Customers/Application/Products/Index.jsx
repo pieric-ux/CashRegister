@@ -12,7 +12,7 @@ import Pagination from "@/Components/Pagination";
 import PaginationItemsPerPage from "@/Components/PaginationItemsPerPage";
 import { useTranslation } from "react-i18next";
 
-export default function Index({ customerAuth, application, products, localization }) {
+export default function Index({ customerAuth, application, products, categories, dishes, localization }) {
     const { t } = useTranslation();
     const [searchTerm, setSearchTerm] = useState("");
     const [sortColumn, setSortColumn] = useState("");
@@ -45,17 +45,18 @@ export default function Index({ customerAuth, application, products, localizatio
     const productsColumns = [
         { key: "picture", label: t('Picture'), className: "hidden lg:table-cell", render: (product) => <UpdateProdutPicture product={product} /> },
         { key: "name", label: t('Name') },
-        { key: "description", label: t('Description'), className: "hidden xl:table-cell" },
         { key: "unit", label: t('Unit'), className: "hidden md:table-cell" },
         { key: "client_price", label: t('Client Price'), className: "hidden lg:table-cell", render: (product) => `${product.client_price} ${t('currency_symbol')}` },
         { key: "cost_price", label: t('Cost Price'), className: "hidden xl:table-cell", render: (product) => `${product.cost_price} ${t('currency_symbol')}` },
+        { key: "category", label: t('Category'), className: "hidden xl:table-cell", render: (product) => product.cr_categories_products?.name === 'No category' ? '' : product.cr_categories_products?.name },
+        { key: "dish", label: t('Dish'), className: "hidden xl:table-cell", render: (product) => product.cr_dishes?.name === 'No dish' ? '' : product.cr_dishes?.name },
     ];
 
     const renderProductsActions = {
         header: () => t('Actions'),
         render: (product) => (
-            <div className="flex items-center justify-center gap-2">
-                <UpdateProductForm product={product} />
+            <div className="flex flex-col items-center justify-center gap-2">
+                <UpdateProductForm product={product} categories={categories} dishes={dishes} />
                 <DeleteProductForm product={product} />
             </div>
         )

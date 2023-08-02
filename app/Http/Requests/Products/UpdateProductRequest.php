@@ -4,6 +4,7 @@ namespace App\Http\Requests\Products;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UpdateProductRequest extends FormRequest
 {
@@ -27,10 +28,23 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:255'],
             'unit' => ['required', 'string', 'max:255'],
             'client_price' => ['required', 'numeric', 'between:0,9999.99'],
             'cost_price' => ['required', 'numeric', 'between:0,9999.99'],
+            'category' => [
+                'required',
+                'integer',
+                Rule::exists('cr_categories_products', 'id')->where(function ($query) {
+                    $query->where('fk_apps_id', $this->product->cr_categories_products->fk_apps_id);
+                })
+            ],
+            'dish' => [
+                'required',
+                'integer',
+                Rule::exists('cr_dishes', 'id')->where(function ($query) {
+                    $query->where('fk_apps_id', $this->product->cr_dishes->fk_apps_id);
+                })
+            ],
         ];
     }
 }

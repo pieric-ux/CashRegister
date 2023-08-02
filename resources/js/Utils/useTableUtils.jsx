@@ -36,6 +36,12 @@ export function filterData(data, searchTerm, columns, t) {
                 } else {
                     return value.toString() === searchTermLowerCase;
                 }
+            } else if (column.key === 'category') {
+                const categoryName = item.cr_categories_products?.name?.toLowerCase();
+                return categoryName?.includes(searchTermLowerCase);
+            } else if (column.key === 'dish') {
+                const dishName = item.cr_dishes?.name?.toLowerCase();
+                return dishName?.includes(searchTermLowerCase);
             }
 
             return false;

@@ -8,16 +8,17 @@ import SecondaryButton from "@/Components/SecondaryButton";
 import Modal from "@/Components/Modal";
 import { useTranslation } from 'react-i18next';
 
-export default function UpdateProductForm({ product, className = '' }) {
+export default function UpdateProductForm({ product, categories, dishes, className = '' }) {
     const { t } = useTranslation();
     const [openingModal, setOpeningModal] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
     const { data, setData, patch, processing, errors } = useForm({
         name: product.name,
-        description: product.description,
         unit: product.unit,
         client_price: product.client_price,
         cost_price: product.cost_price,
+        category: product.fk_categories_products_id,
+        dish: product.fk_dishes_id,
     });
 
     const openModal = () => {
@@ -28,10 +29,11 @@ export default function UpdateProductForm({ product, className = '' }) {
         setOpeningModal(false);
         setData({
             name: product.name,
-            description: product.description,
             unit: product.unit,
             client_price: product.client_price,
             cost_price: product.cost_price,
+            category: product.fk_categories_products_id,
+            dish: product.fk_dishes_id,
         });
         setShowErrors(false);
     };
@@ -39,10 +41,11 @@ export default function UpdateProductForm({ product, className = '' }) {
     useEffect(() => {
         setData({
             name: product.name,
-            description: product.description,
             unit: product.unit,
             client_price: product.client_price,
             cost_price: product.cost_price,
+            category: product.fk_categories_products_id,
+            dish: product.fk_dishes_id,
         });
     }, [product]);
 
@@ -91,20 +94,6 @@ export default function UpdateProductForm({ product, className = '' }) {
                     </div>
 
                     <div className="mt-6">
-                        <InputLabel htmlFor="description" value={t('Description')} />
-
-                        <TextInput
-                            id="description"
-                            name="description"
-                            className="mt-1 block w-3/4"
-                            value={data.description}
-                            onChange={(e) => setData('description', e.target.value)}
-                        />
-
-                        <InputError className="mt-2" message={showErrors ? errors.description : null} />
-                    </div>
-
-                    <div className="mt-6">
                         <InputLabel htmlFor="unit" value={t('Unit')} />
 
                         <TextInput
@@ -144,6 +133,46 @@ export default function UpdateProductForm({ product, className = '' }) {
                         />
 
                         <InputError className="mt-2" message={showErrors ? errors.cost_price : null} />
+                    </div>
+
+                    <div className="mt-6">
+                        <InputLabel htmlFor="category" value={t('Category')} />
+
+                        <select
+                            id="category"
+                            name="category"
+                            className="mt-1 block w-3/4 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-sky-500 dark:focus:border-sky-600 focus:ring-sky-500 dark:focus:ring-sky-600 rounded-md shadow-sm transition ease-linear duration-300 "
+                            value={data.category}
+                            onChange={(e) => setData('category', e.target.value)}
+                        >
+                            {categories.map((category) => (
+                                <option key={category.id} value={category.id}>
+                                    {category.name === 'No category' ? t('No category') : category.name}
+                                </option>
+                            ))}
+                        </select>
+
+                        <InputError className="mt-2" message={showErrors ? errors.category : null} />
+                    </div>
+
+                    <div className="mt-6">
+                        <InputLabel htmlFor="dish" value={t('Dish')} />
+
+                        <select
+                            id="dish"
+                            name="dish"
+                            className="mt-1 block w-3/4 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-sky-500 dark:focus:border-sky-600 focus:ring-sky-500 dark:focus:ring-sky-600 rounded-md shadow-sm transition ease-linear duration-300 "
+                            value={data.dish}
+                            onChange={(e) => setData('dish', e.target.value)}
+                        >
+                            {dishes.map((dish) => (
+                                <option key={dish.id} value={dish.id}>
+                                    {dish.name === 'No dish' ? t('No dish') : dish.name}
+                                </option>
+                            ))}
+                        </select>
+
+                        <InputError className="mt-2" message={showErrors ? errors.dish : null} />
                     </div>
 
                     <div className="mt-6 flex justify-end">

@@ -57,18 +57,18 @@ class CR_App extends Model implements HasMedia
 
         static::created(function (CR_App $app) {
             $workstation = new CR_Workstations();
-            $workstation->name = 'Pending assignements';
+            $workstation->name = 'Pending assignement';
             $workstation->fk_apps_id = $app->id;
             $workstation->save();
 
             $categorie = new CR_Categories_Products();
-            $categorie->name = 'No categories';
+            $categorie->name = 'No category';
             $categorie->order = 0;
             $categorie->fk_apps_id = $app->id;
             $categorie->save();
 
             $categorie = new CR_Dishes();
-            $categorie->name = 'No dishes';
+            $categorie->name = 'No dish';
             $categorie->unit = 'pce';
             $categorie->is_consigned = false;
             $categorie->fk_apps_id = $app->id;

@@ -23,13 +23,20 @@ class ProductsController extends Controller
         $products = $app->cr_categories_products->flatMap(function ($category) {
             return $category->cr_products->map(function ($product) {
                 $product->picturePath = $product->getPictureUrl();
+                $product->cr_categories_products;
+                $product->cr_dishes;
                 return $product;
             });
         });
 
+        $categories = $app->cr_categories_products;
+        $dishes = $app->cr_dishes;
+
         return Inertia::render('Customers/Application/Products/Index', [
             'application' => $app,
             'products' => $products,
+            'categories' => $categories,
+            'dishes' => $dishes,
         ]);
     }
 
@@ -43,7 +50,6 @@ class ProductsController extends Controller
 
         $category->cr_products()->create([
             'name' => ucfirst($request->input('name')),
-            'description' => $request->input('description'),
             'unit' => $request->input('unit'),
             'client_price' => $request->input('client_price'),
             'cost_price' => $request->input('cost_price'),
@@ -59,10 +65,11 @@ class ProductsController extends Controller
     public function update(UpdateProductRequest $request, CR_Products $product): RedirectResponse
     {
         $product->name = ucfirst($request->input('name'));
-        $product->description = $request->input('description');
         $product->unit = $request->input('unit');
         $product->client_price = $request->input('client_price');
         $product->cost_price = $request->input('cost_price');
+        $product->fk_categories_products_id = $request->input('category');
+        $product->fk_dishes_id = $request->input('dish');
         $product->save();
 
         return Redirect::route('products.index', $product->cr_categories_products->cr_apps);

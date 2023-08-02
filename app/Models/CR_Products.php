@@ -22,7 +22,6 @@ class CR_Products extends Model implements HasMedia
      */
     protected $fillable = [
         'name',
-        'description',
         'unit',
         'client_price',
         'cost_price',

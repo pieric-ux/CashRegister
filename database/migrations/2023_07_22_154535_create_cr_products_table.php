@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('cr_products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
             $table->string('unit');
             $table->decimal('client_price', 6, 2)->default(0.00);
             $table->decimal('cost_price', 6, 2)->default(0.00);

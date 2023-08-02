@@ -47,10 +47,10 @@ class EmployeePasswordlessNotification extends Notification
         ]);
 
         return (new MailMessage)
-            ->subject(Lang::get('Activation code'))
-            ->line(Lang::get('Please use the following activation code :'))
+            ->subject(Lang::get('email-notification.activation_subject'))
+            ->line(Lang::get('email-notification.activation_line'))
             ->line($this->passwordless)
-            ->action(Lang::get('Login'), $loginUrl);
+            ->action(Lang::get('email-notification.activation_action'), $loginUrl);
     }
 
     /**

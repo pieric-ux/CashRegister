@@ -14,7 +14,6 @@ export default function CreateProductForm({ application, className = '' }) {
     const [showErrors, setShowErrors] = useState(false);
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
-        description: '',
         unit: '',
         client_price: '',
         cost_price: '',
@@ -74,20 +73,6 @@ export default function CreateProductForm({ application, className = '' }) {
                         />
 
                         <InputError className="mt-2" message={showErrors ? errors.name : null} />
-                    </div>
-
-                    <div className="mt-6">
-                        <InputLabel htmlFor="description" value={t('Description')} />
-
-                        <TextInput
-                            id="description"
-                            name="description"
-                            className="mt-1 block w-3/4"
-                            value={data.description}
-                            onChange={(e) => setData('description', e.target.value)}
-                        />
-
-                        <InputError className="mt-2" message={showErrors ? errors.description : null} />
                     </div>
 
                     <div className="mt-6">
