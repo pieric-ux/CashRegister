@@ -10,8 +10,7 @@ import { useTranslation } from "react-i18next";
 
 export default function Index({ customerAuth, application, workstations, localization }) {
     const { t } = useTranslation();
-    const defaultWorkstationId = application.cr_workstations.find((workstation) => workstation.name === 'Pending assignements')?.id || null;
-
+    const defaultWorkstationId = application.cr_workstations.find((workstation) => workstation.name === 'Pending assignement').id;
     const [updatedWorkstations, setUpdatedWorkstations] = useState(workstations);
 
     useEffect(() => {
@@ -26,33 +25,59 @@ export default function Index({ customerAuth, application, workstations, localiz
         }
 
         if (
-            destination.droppableId === source.droppableId &&
-            destination.index === source.index
+            destination.droppableId === source.droppableId
         ) {
             return;
         }
 
-        const sourceWorkstationId = parseInt(source.droppableId.split('-')[1]);
-        const destinationWorkstationId = parseInt(destination.droppableId.split('-')[1]);
+        const sourceType = source.droppableId.includes("employee") ? "employees" : "products";
+        const sourceId = parseInt(source.droppableId.split("-")[1]);
+        const destinationId = parseInt(destination.droppableId.split("-")[1]);
 
-        const sourceWorkstation = updatedWorkstations.find((workstation) => workstation.id === sourceWorkstationId);
-        const destinationWorkstation = updatedWorkstations.find((workstation) => workstation.id === destinationWorkstationId);
+        const sourceWorkstation = updatedWorkstations.find((workstation) => workstation.id === sourceId);
+        const destinationWorkstation = updatedWorkstations.find((workstation) => workstation.id === destinationId);
 
-        const movedEmployee = sourceWorkstation.cr_employees[source.index];
+        if (sourceType === 'employees') {
 
-        if (sourceWorkstation === destinationWorkstation) {
-            return;
-        } else {
-            sourceWorkstation.cr_employees.splice(source.index, 1);
-            destinationWorkstation.cr_employees.splice(destination.index, 0, movedEmployee);
+            const movedEmployee = sourceWorkstation.cr_employees[source.index];
+
+            if (sourceWorkstation === destinationWorkstation) {
+                return;
+            } else {
+                sourceWorkstation.cr_employees.splice(source.index, 1);
+                destinationWorkstation.cr_employees.splice(destination.index, 0, movedEmployee);
+            }
+            await axios.patch(route('employees.updateDragAndDrop'), {
+                workstations: updatedWorkstations,
+            })
+                .then(function (response) {
+                    setUpdatedWorkstations(response.data.workstations);
+                });
         }
 
-        await axios.patch(route('employees.updateDragAndDrop'), {
-            workstations: updatedWorkstations,
-        })
-            .then(function (response) {
-                setUpdatedWorkstations(response.data.workstations);
+        else if (sourceType === 'products') {
+
+            const sourceProducts = sourceId === 0
+                ? destinationWorkstation.generalProducts
+                : sourceWorkstation.cr_products;
+
+            const movedProduct = sourceProducts[source.index];
+
+            if (sourceId === 0) {
+                destinationWorkstation.cr_products.splice(destination.index, 0, movedProduct);
+                destinationWorkstation.generalProducts.splice(source.index, 1);
+            }
+            else {
+                sourceWorkstation.generalProducts.splice(destination.index, 0, movedProduct);
+                sourceWorkstation.cr_products.splice(source.index, 1);
+            }
+            await axios.patch(route('products.updateDragAndDrop'), {
+                workstations: updatedWorkstations,
             })
+                .then(function (response) {
+                    setUpdatedWorkstations(response.data.workstations);
+                });
+        }
     };
 
     return (
@@ -81,7 +106,7 @@ export default function Index({ customerAuth, application, workstations, localiz
                                     <div className="flex h-full mt-4 gap-2">
                                         <div className="flex flex-col w-1/2 h-full">
                                             <h4 className="text-center underline">{t('Employee')}</h4>
-                                            <Droppable droppableId={`workstation-${workstation.id}`}>
+                                            <Droppable droppableId={`workstation-${workstation.id}-employees`}>
                                                 {(provided, snapshot) => (
                                                     <ul
                                                         className={`p-2 flex flex-col gap-1 flex-grow mt-2 ${(snapshot.isDraggingOver)
@@ -118,7 +143,7 @@ export default function Index({ customerAuth, application, workstations, localiz
                                         <div className="border-r border-gray-300 dark:border-gray-700"></div>
                                         <div className="flex flex-col w-1/2 h-full">
                                             <h4 className="text-center underline">{t('Employee Free')}</h4>
-                                            <Droppable droppableId={`workstation-${defaultWorkstationId}`}>
+                                            <Droppable droppableId={`workstation-${defaultWorkstationId}-employees`}>
                                                 {(provided, snapshot) => (
                                                     <ul
                                                         className={`p-2 flex flex-col gap-1.5 flex-grow mt-2 ${(snapshot.isDraggingOver)
@@ -148,6 +173,80 @@ export default function Index({ customerAuth, application, workstations, localiz
                                                                 </Draggable>
                                                             ))
                                                         ) : (null)}
+                                                        {provided.placeholder}
+                                                    </ul>
+                                                )}
+                                            </Droppable>
+                                        </div>
+                                    </div>
+                                </DragDropContext>
+                                <DragDropContext onDragEnd={onDragEnd}>
+                                    <div className="flex h-full mt-4 gap-2">
+                                        <div className="flex flex-col w-1/2 h-full">
+                                            <h4 className="text-center underline">{t('Products')}</h4>
+                                            <Droppable droppableId={`workstation-${workstation.id}-products`}>
+                                                {(provided, snapshot) => (
+                                                    <ul
+                                                        className={`p-2 flex flex-col gap-1 flex-grow mt-2 ${(snapshot.isDraggingOver)
+                                                            ? "bg-gray-100 dark:bg-gray-900 rounded-md transition ease-linear duration-300"
+                                                            : ""
+                                                            }`}
+                                                        ref={provided.innerRef}
+                                                        {...provided.droppableProps}
+                                                    >
+                                                        {workstation.cr_products.map((cr_product, index) => (
+                                                            <Draggable key={cr_product.id} draggableId={`product-${cr_product.id}`} index={index}>
+                                                                {(provided, snapshot) => (
+                                                                    <li
+                                                                        ref={provided.innerRef}
+                                                                        {...provided.draggableProps}
+                                                                        {...provided.dragHandleProps}
+                                                                        key={cr_product.id}
+                                                                        className={`p-1 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-2 border-sky-400 dark:border-sky-600 hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm rounded-md transition ease-linear hover:duration-150 duration-300 ${snapshot.isDragging ? "bg-sky-500" : ""}`}                                                                        >
+                                                                        <div className="flex items-center justify-center gap-2 overflow-auto">
+                                                                            <p>{cr_product.name}</p>
+                                                                            <p>{cr_product.unit}.</p>
+                                                                        </div>
+                                                                    </li>
+                                                                )}
+                                                            </Draggable>
+                                                        ))}
+                                                        {provided.placeholder}
+                                                    </ul>
+                                                )}
+                                            </Droppable>
+                                        </div>
+                                        <div className="border-r border-gray-300 dark:border-gray-700"></div>
+                                        <div className="flex flex-col w-1/2 h-full">
+                                            <h4 className="text-center underline">{t('Products')}</h4>
+                                            <Droppable droppableId={`products-0`}>
+                                                {(provided, snapshot) => (
+                                                    <ul
+                                                        className={`p-2 flex flex-col gap-1.5 flex-grow mt-2 ${(snapshot.isDraggingOver)
+                                                            ? "bg-gray-100 dark:bg-gray-900 rounded-md transition ease-linear duration-300"
+                                                            : ""
+                                                            }`}
+                                                        ref={provided.innerRef}
+                                                        {...provided.droppableProps}
+                                                    >
+                                                        {workstation.generalProducts.map((product, index) => (
+                                                            <Draggable key={product.id} draggableId={`product-${product.id}`} index={index}>
+                                                                {(provided, snapshot) => (
+                                                                    <li
+                                                                        ref={provided.innerRef}
+                                                                        {...provided.draggableProps}
+                                                                        {...provided.dragHandleProps}
+                                                                        key={product.id}
+                                                                        className={`p-1 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-2 border-sky-400 dark:border-sky-600 hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm rounded-md transition ease-linear hover:duration-150 duration-300 ${snapshot.isDragging ? "bg-sky-500" : ""}`}
+                                                                    >
+                                                                        <div className="flex items-center justify-center gap-2 overflow-auto">
+                                                                            <p>{product.name}</p>
+                                                                            <p>{product.unit}.</p>
+                                                                        </div>
+                                                                    </li>
+                                                                )}
+                                                            </Draggable>
+                                                        ))}
                                                         {provided.placeholder}
                                                     </ul>
                                                 )}

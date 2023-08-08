@@ -81,6 +81,7 @@ Route::middleware(['auth:customer', 'verified'])->group(function () {
     Route::get('/apps/{app}/products', [ProductsController::class, 'index'])->name('products.index');
     Route::post('/apps/{app}/products', [ProductsController::class, 'store'])->name('products.store');
     Route::patch('/apps/products/update/{product}', [ProductsController::class, 'update'])->name('products.update');
+    Route::patch('/apps/products/update', [ProductsController::class, 'updateDragAndDrop'])->name('products.updateDragAndDrop');
     Route::delete('/products/{product}', [ProductsController::class, 'destroy'])->name('products.destroy');
 
 

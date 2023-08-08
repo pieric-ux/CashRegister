@@ -20,12 +20,20 @@ class WorkstationsController extends Controller
      */
     public function index(IndexWorkstationsRequest $request, CR_App $app): Response
     {
-        $workstations = $app->cr_workstations->map(function ($workstation) {
+        $workstations = $app->cr_workstations->load('cr_employees', 'cr_products');
 
-            $workstation->cr_employees;
+        $categories = $app->cr_categories_products()->with('cr_products')->get();
 
-            return $workstation;
+        $generalProducts = $categories->flatMap(function ($category) {
+            return $category->cr_products;
         });
+
+        foreach ($workstations as $workstation) {
+            $assignedProductIds = $workstation->cr_products->pluck('id')->toArray();
+            $workstation->generalProducts = $generalProducts->filter(function ($product) use ($assignedProductIds) {
+                return !in_array($product->id, $assignedProductIds);
+            })->values()->toArray();
+        }
 
         return Inertia::render('Customers/Application/Workstations/Index', [
             'application' => $app,

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Products\DeleteProductRequest;
 use App\Http\Requests\Products\IndexProductsRequest;
 use App\Http\Requests\Products\StoreProductRequeset;
+use App\Http\Requests\Products\UpdateDragAndDropProductsRequest;
 use App\Http\Requests\Products\UpdateProductRequest;
 use App\Models\CR_App;
 use App\Models\CR_Products;
+use App\Models\CR_Workstations;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -20,16 +22,15 @@ class ProductsController extends Controller
      */
     public function index(IndexProductsRequest $request, CR_App $app): Response
     {
-        $products = $app->cr_categories_products->flatMap(function ($category) {
+        $categories = $app->cr_categories_products()->with('cr_products.cr_categories_products', 'cr_products.cr_dishes')->get();
+
+        $products = $categories->flatMap(function ($category) {
             return $category->cr_products->map(function ($product) {
                 $product->picturePath = $product->getPictureUrl();
-                $product->cr_categories_products;
-                $product->cr_dishes;
                 return $product;
             });
         });
 
-        $categories = $app->cr_categories_products;
         $dishes = $app->cr_dishes;
 
         return Inertia::render('Customers/Application/Products/Index', [
@@ -73,6 +74,25 @@ class ProductsController extends Controller
         $product->save();
 
         return Redirect::route('products.index', $product->cr_categories_products->cr_apps);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function updateDragAndDrop(UpdateDragAndDropProductsRequest $request)
+    {
+        $workstations = $request->input('workstations');
+
+        foreach ($workstations as $workstationData) {
+            $workstation = CR_Workstations::find($workstationData['id']);
+            $productIds = collect($workstationData['cr_products'])->pluck('id')->all();
+
+            $workstation->cr_products()->sync($productIds);
+        }
+
+        return response()->json([
+            'workstations' => $workstations,
+        ]);
     }
 
     /**

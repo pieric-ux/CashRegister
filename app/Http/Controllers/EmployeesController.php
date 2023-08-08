@@ -8,7 +8,6 @@ use App\Http\Requests\Employees\UpdateDragAndDropEmployeesRequest;
 use App\Http\Requests\Employees\UpdateEmployeeRequest;
 use App\Models\CR_App;
 use App\Models\CR_Employees;
-use App\Models\CR_Workstations;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -21,7 +20,9 @@ class EmployeesController extends Controller
      */
     public function index(IndexEmployeesRequest $request, CR_App $app): Response
     {
-        $employees = $app->cr_workstations->flatMap(function ($workstation) {
+        $workstations = $app->cr_workstations()->with('cr_employees')->get();
+
+        $employees = $workstations->flatMap(function ($workstation) {
             return $workstation->cr_employees;
         });
 
@@ -52,15 +53,18 @@ class EmployeesController extends Controller
     {
         $workstations = $request->input('workstations');
 
+        $updates = [];
         foreach ($workstations as $workstationData) {
-            $workstation = CR_Workstations::find($workstationData['id']);
-            $employees = $workstationData['cr_employees'];
-
-            foreach ($employees as $employeeData) {
-                $employee = CR_Employees::find($employeeData['id']);
-                $employee->fk_workstations_id = $workstation->id;
-                $employee->save();
+            $workstationId = $workstationData['id'];
+            foreach ($workstationData['cr_employees'] as $employeeData) {
+                $updates[$employeeData['id']] = ['fk_workstations_id' => $workstationId];
             }
+        }
+        if (!empty($updates)) {
+            CR_Employees::whereIn('id', array_keys($updates))
+                ->each(function ($employee) use ($updates) {
+                    $employee->update($updates[$employee->id]);
+                });
         }
         return response()->json([
             'workstations' => $workstations,
