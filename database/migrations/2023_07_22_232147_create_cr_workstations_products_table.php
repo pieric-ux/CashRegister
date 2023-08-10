@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreign('fk_workstations_id')->references('id')->on('cr_workstations')->onDelete('cascade');
             $table->unsignedBigInteger('fk_products_id');
             $table->foreign('fk_products_id')->references('id')->on('cr_products')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 
