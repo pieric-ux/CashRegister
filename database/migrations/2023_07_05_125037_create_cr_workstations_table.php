@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cr_workstations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 45);
             $table->unsignedBigInteger('fk_apps_id');
             $table->foreign('fk_apps_id')->references('id')->on('cr_apps')->onDelete('cascade');
             $table->timestamps();

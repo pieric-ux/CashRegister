@@ -4,7 +4,6 @@ namespace App\Http\Requests\Dishes;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
 class UpdateDishRequest extends FormRequest
 {
@@ -40,8 +39,8 @@ class UpdateDishRequest extends FormRequest
         $app = $dish->cr_apps;
 
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'unit' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:45'],
+            'unit' => ['required', 'string', 'max:45'],
             'client_price' => ['required', 'numeric', 'between:0,9999.99'],
             'cost_price' => ['required', 'numeric', 'between:0,9999.99'],
             'is_consigned' => ['boolean'],

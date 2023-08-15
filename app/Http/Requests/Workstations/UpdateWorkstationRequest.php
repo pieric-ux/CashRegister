@@ -43,7 +43,7 @@ class UpdateWorkstationRequest extends FormRequest
             'name' => [
                 'required',
                 'string',
-                'max:255',
+                'max:45',
                 Rule::unique('cr_workstations')
                     ->where(function ($query) use ($app) {
                         return $query->where('fk_apps_id', $app->id);

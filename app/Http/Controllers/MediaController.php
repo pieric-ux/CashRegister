@@ -39,7 +39,7 @@ class MediaController extends Controller
         return redirect()->back();
     }
 
-    public function uploadProductPicture(UploadProductPictureRequest $request, CR_Products $product)
+    public function uploadProductPicture(UploadProductPictureRequest $request, CR_Products $product): RedirectResponse
     {
         $product = $product::find($request->productId);
 
@@ -50,7 +50,7 @@ class MediaController extends Controller
         return redirect()->back();
     }
 
-    public function uploadDishPicture(UploadDishPictureRequest $request, CR_Dishes $dish)
+    public function uploadDishPicture(UploadDishPictureRequest $request, CR_Dishes $dish): RedirectResponse
     {
         $dish = $dish::find($request->dishId);
 

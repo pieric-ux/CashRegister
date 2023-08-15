@@ -35,8 +35,8 @@ class StoreProductRequeset extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'unit' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:45'],
+            'unit' => ['required', 'string', 'max:45'],
             'client_price' => ['required', 'numeric', 'between:0,9999.99'],
             'cost_price' => ['required', 'numeric', 'between:0,9999.99'],
         ];

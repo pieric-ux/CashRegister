@@ -41,7 +41,7 @@ class StoreCategorieProductRequest extends FormRequest
             'name' => [
                 'required',
                 'string',
-                'max:255',
+                'max:45',
                 Rule::unique('cr_categories_products')->where(function ($query) use ($app) {
                     return $query->where('fk_apps_id', $app->id);
                 }),

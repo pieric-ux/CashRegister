@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('cr_employees', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('phone')->nullable();
+            $table->string('first_name', 45);
+            $table->string('last_name', 45);
+            $table->string('phone', 45)->nullable();
             $table->string('email')->unique();
             $table->uuid('passwordless')->unique();
-            $table->rememberToken();
             $table->boolean('logout')->default(false);
             $table->unsignedBigInteger('fk_workstations_id');
             $table->foreign('fk_workstations_id')->references('id')->on('cr_workstations')->onDelete('cascade');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('cr_dishes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('unit');
+            $table->string('name', 45);
+            $table->string('unit', 45);
             $table->decimal('client_price', 6, 2)->default(0.00);
             $table->decimal('cost_price', 6, 2)->default(0.00);
             $table->boolean('is_consigned')->nullable()->default(true);
