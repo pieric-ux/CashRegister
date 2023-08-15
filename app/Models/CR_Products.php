@@ -47,14 +47,15 @@ class CR_Products extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this
-            ->addMediaConversion('preview')
-            ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->addMediaConversion('thumb')
+            ->fit(Manipulations::FIT_CROP, 150, 150)
+            ->format(Manipulations::FORMAT_PNG)
             ->nonQueued();
     }
 
-    public function getPictureUrl()
+    public function getPictureUrl($conversion = '')
     {
-        $picture = $this->getFirstMediaUrl('products-pictures');
+        $picture = $this->getFirstMediaUrl('products-pictures', $conversion);
 
         return $picture;
     }

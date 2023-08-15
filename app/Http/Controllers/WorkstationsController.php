@@ -81,7 +81,7 @@ class WorkstationsController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
-        $defaultWorkstation = CR_Workstations::where('fk_apps_id', $workstation->fk_apps_id)->where('name', 'Pending assignements')->first();
+        $defaultWorkstation = $workstation->where('fk_apps_id', $workstation->fk_apps_id)->where('name', 'Pending assignement')->first();
         $employees = $workstation->cr_employees;
 
         if ($employees) {

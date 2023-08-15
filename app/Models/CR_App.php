@@ -71,6 +71,7 @@ class CR_App extends Model implements HasMedia
             $categorie->name = 'No dish';
             $categorie->unit = 'pce';
             $categorie->is_consigned = false;
+            $categorie->is_SoldSeparately = false;
             $categorie->fk_apps_id = $app->id;
             $categorie->save();
         });

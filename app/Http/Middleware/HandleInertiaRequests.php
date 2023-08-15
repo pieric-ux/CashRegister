@@ -36,8 +36,15 @@ class HandleInertiaRequests extends Middleware
             'avatarPath' => optional($customer)->getAvatarUrl(),
         ];
 
+        $employee = $request->user('employee');
+        $employeeAuth = [
+            'employee' => $employee,
+            'avatarPath' => optional($employee)->getAvatarUrl(),
+        ];
+
         return array_merge(parent::share($request), [
             'customerAuth' => $customerAuth,
+            'employeeAuth' => $employeeAuth,
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),

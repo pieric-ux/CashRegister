@@ -40,16 +40,7 @@ class UpdateDishRequest extends FormRequest
         $app = $dish->cr_apps;
 
         return [
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('cr_dishes')
-                    ->where(function ($query) use ($app) {
-                        return $query->where('fk_apps_id', $app->id);
-                    })
-                    ->ignoreModel($this->route('dish')),
-            ],
+            'name' => ['required', 'string', 'max:255'],
             'unit' => ['required', 'string', 'max:255'],
             'client_price' => ['required', 'numeric', 'between:0,9999.99'],
             'cost_price' => ['required', 'numeric', 'between:0,9999.99'],

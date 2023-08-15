@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ApplicationsController;
+use App\Http\Controllers\CashregisterController;
 use App\Http\Controllers\CategoriesProductsController;
 use App\Http\Controllers\DishesController;
+use App\Http\Controllers\EmployeeProfilController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProductsController;
@@ -84,16 +86,18 @@ Route::middleware(['auth:customer', 'verified'])->group(function () {
     Route::patch('/apps/products/update', [ProductsController::class, 'updateDragAndDrop'])->name('products.updateDragAndDrop');
     Route::delete('/products/{product}', [ProductsController::class, 'destroy'])->name('products.destroy');
 
-
     Route::post('/avatar-upload', [MediaController::class, 'uploadAvatar'])->name('avatar.upload');
     Route::post('/poster-upload', [MediaController::class, 'uploadPoster'])->name('poster.upload');
     Route::post('/picture-product-upload', [MediaController::class, 'uploadProductPicture'])->name('picture-product.upload');
+    Route::post('/picture-dish.upload', [MediaController::class, 'uploadDishPicture'])->name('picture-dish.upload');
 });
 
 Route::middleware(['auth:employee', 'logout'])->group(function () {
-    Route::get('/test', function () {
-        return Inertia::render('Employees/Test');
-    });
+    Route::get('/cashregister', [CashregisterController::class, 'show'])->name('cashregister.show');
+
+    Route::get('employee/profile', [EmployeeProfilController::class, 'index'])->name('employee-profil.index');
+
+    Route::post('/avatar-employee-upload', [MediaController::class, 'uploadEmployeeAvatar'])->name('avatar-employee.upload');
 });
 
 require __DIR__ . '/customerAuth.php';

@@ -80,6 +80,16 @@ class CategoriesProductsController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
+        $defaultCategory = $category->where('fk_apps_id', $category->fk_apps_id)->where('name', 'No category')->first();
+        $products = $category->cr_products;
+
+        if ($products) {
+            foreach ($products as $product) {
+                $product->fk_categories_products_id = $defaultCategory->id;
+                $product->save();
+            }
+        }
+
         $category->delete();
 
         return Redirect::route('categories.index', $category->cr_apps);

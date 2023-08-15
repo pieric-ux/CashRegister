@@ -8,8 +8,11 @@ export default function Header({ user, title, avatarPath, RespNavLink, DropdownL
 
     return (
         <header className="sticky top-0 z-40 w-full bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 drop-shadow-sm dark:drop-shadow-none transition ease-linear duration-300">
-            <div className="flex items-center justify-between h-20 mx-auto px-4 sm:gap-2 gap-4 sm:px-6 lg:px-8">
-                <div className={`${sideBarOpen ? 'sm:invisible' : 'visibile'} lg:invisible sm:visible invisible`}>
+            <div className="flex items-center justify-between h-20 mx-auto px-4 sm:gap-4 gap-2 sm:px-6 lg:px-8">
+                <div className={`${sideBarOpen === undefined
+                    ? 'hidden sm:flex invisible'
+                    : `${sideBarOpen ? 'sm:invisible' : 'visibile'} lg:invisible sm:flex hidden`}
+                    `}>
                     <button
                         aria-label='Open Sidebar'
                         aria-controls="sidebar"
@@ -30,7 +33,7 @@ export default function Header({ user, title, avatarPath, RespNavLink, DropdownL
                     </button>
                 </div>
                 <div className={`${title ? 'flex' : 'hidden'}`}>
-                    <h1 className='font-semibold text-2xl text-gray-900 dark:text-gray-100'>{title}</h1>
+                    <h1 className='font-semibold sm:text-2xl text-xl text-gray-900 dark:text-gray-100'>{title}</h1>
                 </div>
                 <div className='flex items-center gap-2'>
                     <LanguageSwitcher localization={localization} />

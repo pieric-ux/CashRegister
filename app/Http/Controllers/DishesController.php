@@ -20,7 +20,10 @@ class DishesController extends Controller
      */
     public function index(IndexDishesRequest $request, CR_App $app): Response
     {
-        $dishes = $app->cr_dishes;
+        $dishes = $app->cr_dishes->map(function ($dish) {
+            $dish->picturePath = $dish->getPictureUrl('thumb');
+            return $dish;
+        });
 
         return Inertia::render('Customers/Application/Dishes/Index', [
             'application' => $app,
@@ -39,6 +42,7 @@ class DishesController extends Controller
             'client_price' => $request->input('client_price'),
             'cost_price' => $request->input('cost_price'),
             'is_consigned' => $request->input('is_consigned'),
+            'is_SoldSeparately' => $request->input('is_SoldSeparately'),
         ]);
 
         return Redirect::route('dishes.index', $app);
@@ -54,6 +58,7 @@ class DishesController extends Controller
         $dish->client_price = $request->input('client_price');
         $dish->cost_price = $request->input('cost_price');
         $dish->is_consigned = $request->input('is_consigned');
+        $dish->is_SoldSeparately = $request->input('is_SoldSeparately');
         $dish->save();
 
         return Redirect::route('dishes.index', $dish->cr_apps);
@@ -67,6 +72,16 @@ class DishesController extends Controller
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
+
+        $defaultDish = $dish->where('fk_apps_id', $dish->fk_apps_id)->where('name', 'No dish')->first();
+        $products = $dish->cr_products;
+
+        if ($products) {
+            foreach ($products as $product) {
+                $product->fk_dishes_id = $defaultDish->id;
+                $product->save();
+            }
+        }
 
         $dish->delete();
 

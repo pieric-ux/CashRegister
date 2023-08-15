@@ -4,10 +4,10 @@ import InputError from '@/Components/InputError';
 import { useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
-export default function UpdateProdutPicture({ product, className }) {
+export default function UpdateDishPicture({ dish, className }) {
     const { t } = useTranslation();
     const { data, setData, post, errors } = useForm({
-        productId: product.id,
+        dishId: dish.id,
         picture: '',
     });
 
@@ -23,20 +23,20 @@ export default function UpdateProdutPicture({ product, className }) {
 
     const submit = () => {
         const formData = new FormData();
-        formData.append('productId', data.id);
+        formData.append('dishId', data.id);
         formData.append('picture', data.picture);
 
-        post(route('picture-product.upload'), formData);
+        post(route('picture-dish.upload'), formData);
     };
 
     return (
         <form className={`h-24 flex items-center justify-center ${className}`} encType="multipart/form-data">
             <div className="w-3/4 flex items-center justify-center">
-                {product.picturePath ? (
+                {dish.picturePath ? (
                     <div className='relative z-30 mx-auto h-16 w-16 backdrop-blur-md transition ease-linear duration-300'>
                         <div className='relative drop-shadow-md w-full h-full'>
-                            <img src={product.picturePath} alt="picture of product" className="w-full h-full" />
-                            <label htmlFor={`picture-${product.id}`} className='absolute -bottom-4 -right-4 h-8 w-8 flex cursor-pointer items-center justify-center rounded-full bg-sky-500 text-white hover:bg-opacity-90'>
+                            <img src={dish.picturePath} alt="picture of dish" className="w-full h-full" />
+                            <label htmlFor={`picture-${dish.id}`} className='absolute -bottom-4 -right-4 h-8 w-8 flex cursor-pointer items-center justify-center rounded-full bg-sky-500 text-white hover:bg-opacity-90'>
                                 <svg
                                     className="fill-current"
                                     width="14"
@@ -58,11 +58,11 @@ export default function UpdateProdutPicture({ product, className }) {
 
                             </label>
                             <TextInput
-                                id={`picture-${product.id}`}
-                                name={`picture-${product.id}`}
+                                id={`picture-${dish.id}`}
+                                name={`picture-${dish.id}`}
                                 type="file"
                                 className="sr-only"
-                                aria-label={t('Upload your product\'s image')}
+                                aria-label={t('Upload your dish\'s image')}
                                 onChange={handlePictureChange}
                             />
                             <InputError className='mt-2' message={errors.picture} />
@@ -70,7 +70,7 @@ export default function UpdateProdutPicture({ product, className }) {
                     </div>
                 ) : (
                     <>
-                        <label htmlFor={`picture-${product.id}`} className='h-8 w-8 flex cursor-pointer items-center justify-center rounded-full bg-sky-500 text-white hover:bg-opacity-90'>
+                        <label htmlFor={`picture-${dish.id}`} className='h-8 w-8 flex cursor-pointer items-center justify-center rounded-full bg-sky-500 text-white hover:bg-opacity-90'>
                             <svg
                                 className="fill-current"
                                 width="14"
@@ -92,11 +92,11 @@ export default function UpdateProdutPicture({ product, className }) {
 
                         </label>
                         <TextInput
-                            id={`picture-${product.id}`}
-                            name={`picture-${product.id}`}
+                            id={`picture-${dish.id}`}
+                            name={`picture-${dish.id}`}
                             type="file"
                             className="sr-only"
-                            aria-label={t('Upload your product\'s image')}
+                            aria-label={t('Upload your dish\'s image')}
                             onChange={handlePictureChange}
                         />
                         <InputError className='mt-2' message={errors.picture} />

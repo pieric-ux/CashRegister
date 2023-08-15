@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import Checkbox from "@/Components/Checkbox";
 import UpdateDishForm from "./Partials/UpdateDishForm";
 import DeleteDishForm from "./Partials/DeleteDishForm";
+import UpdateDishPicture from "./Partials/UpdateDishPicture";
 
 export default function Index({ customerAuth, application, dishes, localization }) {
     const { t } = useTranslation();
@@ -45,13 +46,19 @@ export default function Index({ customerAuth, application, dishes, localization 
     };
 
     const dishesColumns = [
+        { key: "picture", label: t('Picture'), className: "hidden lg:table-cell", render: (dish) => <UpdateDishPicture dish={dish} /> },
         { key: "name", label: t('Name') },
         { key: "unit", label: t('Unit'), className: "hidden md:table-cell" },
-        { key: "client_price", label: t('Client Price'), className: "hidden lg:table-cell", render: (dish) => `${dish.client_price} ${t('currency_symbol')}` },
+        { key: "client_price", label: t('Client Price'), className: "hidden xl:table-cell", render: (dish) => `${dish.client_price} ${t('currency_symbol')}` },
         { key: "cost_price", label: t('Cost Price'), className: "hidden xl:table-cell", render: (dish) => `${dish.cost_price} ${t('currency_symbol')}` },
         {
             key: "is_consigned", label: t('Consigned'), className: "hidden md:table-cell", render: (dish) => (
                 <Checkbox className="disabled:opacity-50 disabled:cursor-not-allowed" checked={dish.is_consigned} disabled />
+            )
+        },
+        {
+            key: "is_SoldSeparately", label: t('Sold Separately'), className: "hidden lg:table-cell", render: (dish) => (
+                <Checkbox className="disabled:opacity-50 disabled:cursor-not-allowed" checked={dish.is_SoldSeparately} disabled />
             )
         },
     ];

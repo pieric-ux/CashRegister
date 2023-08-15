@@ -49,7 +49,7 @@ export default function Index({ customerAuth, application, products, categories,
         { key: "client_price", label: t('Client Price'), className: "hidden lg:table-cell", render: (product) => `${product.client_price} ${t('currency_symbol')}` },
         { key: "cost_price", label: t('Cost Price'), className: "hidden xl:table-cell", render: (product) => `${product.cost_price} ${t('currency_symbol')}` },
         { key: "category", label: t('Category'), className: "hidden xl:table-cell", render: (product) => product.cr_categories_products?.name === 'No category' ? '' : product.cr_categories_products?.name },
-        { key: "dish", label: t('Dish'), className: "hidden xl:table-cell", render: (product) => product.cr_dishes?.name === 'No dish' ? '' : product.cr_dishes?.name },
+        { key: "dish", label: t('Dish'), className: "hidden xl:table-cell", render: (product) => product.cr_dishes?.name === 'No dish' ? '' : `${product.cr_dishes?.name} ${product.cr_dishes?.unit}` },
     ];
 
     const renderProductsActions = {

@@ -19,6 +19,7 @@ export default function UpdateDishForm({ dish, className = '' }) {
         client_price: dish.client_price,
         cost_price: dish.cost_price,
         is_consigned: dish.is_consigned,
+        is_SoldSeparately: dish.is_SoldSeparately,
     });
 
     const openModal = () => {
@@ -33,6 +34,7 @@ export default function UpdateDishForm({ dish, className = '' }) {
             client_price: dish.client_price,
             cost_price: dish.cost_price,
             is_consigned: dish.is_consigned,
+            is_SoldSeparately: dish.is_SoldSeparately,
         });
         setShowErrors(false);
     };
@@ -44,6 +46,7 @@ export default function UpdateDishForm({ dish, className = '' }) {
             client_price: dish.client_price,
             cost_price: dish.cost_price,
             is_consigned: dish.is_consigned,
+            is_SoldSeparately: dish.is_SoldSeparately,
         });
     }, [dish]);
 
@@ -143,6 +146,18 @@ export default function UpdateDishForm({ dish, className = '' }) {
                             <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">{t('Consigned')}</span>
                         </label>
                         <InputError className="mt-2" message={showErrors ? errors.is_consigned : null} />
+                    </div>
+
+                    <div className="mt-6">
+                        <label className="flex items-center">
+                            <Checkbox
+                                name="is_SoldSeparately"
+                                checked={data.is_SoldSeparately}
+                                onChange={(e) => setData('is_SoldSeparately', e.target.checked)}
+                            />
+                            <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">{t('Sold Separately')}</span>
+                        </label>
+                        <InputError className="mt-2" message={showErrors ? errors.is_SoldSeparately : null} />
                     </div>
 
                     <div className="mt-6 flex justify-end">

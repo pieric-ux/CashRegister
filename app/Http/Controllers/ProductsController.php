@@ -26,7 +26,7 @@ class ProductsController extends Controller
 
         $products = $categories->flatMap(function ($category) {
             return $category->cr_products->map(function ($product) {
-                $product->picturePath = $product->getPictureUrl();
+                $product->picturePath = $product->getPictureUrl('thumb');
                 return $product;
             });
         });

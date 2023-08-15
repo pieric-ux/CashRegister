@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
-class CR_Employees extends Authenticatable
+class CR_Employees extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, InteractsWithMedia;
 
     protected $table = 'cr_employees';
 
@@ -53,5 +57,32 @@ class CR_Employees extends Authenticatable
         }
 
         return null;
+    }
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('preview')
+            ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->nonQueued();
+    }
+
+    public function getAvatarUrl()
+    {
+        $avatar = $this->getFirstMediaUrl('avatars-employees');
+
+        if ($avatar) {
+            return $avatar;
+        }
+
+        return '/storage/medias/avatars/default-avatar.png';
+    }
+
+    public function uploadAvatar($avatar)
+    {
+        $this->clearMediaCollection('avatars-employees');
+
+        $this->addMedia($avatar)
+            ->usingFileName($avatar->hashName())
+            ->toMediaCollection('avatars-employees');
     }
 }

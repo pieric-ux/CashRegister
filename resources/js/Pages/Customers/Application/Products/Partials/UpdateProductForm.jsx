@@ -167,7 +167,7 @@ export default function UpdateProductForm({ product, categories, dishes, classNa
                         >
                             {dishes.map((dish) => (
                                 <option key={dish.id} value={dish.id}>
-                                    {dish.name === 'No dish' ? t('No dish') : dish.name}
+                                    {dish.name === 'No dish' ? t('No dish') : `${dish.name} ${dish.unit}`}
                                 </option>
                             ))}
                         </select>
