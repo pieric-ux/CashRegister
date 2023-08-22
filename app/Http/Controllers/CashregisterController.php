@@ -147,7 +147,7 @@ class CashregisterController extends Controller
 
         $transaction = CR_Transactions::create([
             'or_number' => $or_number,
-            'employee' => $employee->first_name,
+            'employee' => $employee->first_name . ' ' . $employee->last_name,
             'workstation' => $workstation->name,
             'total' => $total,
             'fk_paymentMethods_id' => $paymentMethod,

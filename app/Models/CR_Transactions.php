@@ -24,9 +24,9 @@ class CR_Transactions extends Model
         'fk_paymentMethods_id',
     ];
 
-    public function cr_payement_methods()
+    public function cr_payment_methods()
     {
-        return $this->belongsTo(CR_PayementMethods::class, 'fk_paymentMethods_id');
+        return $this->belongsTo(CR_PaymentMethods::class, 'fk_paymentMethods_id');
     }
 
     public function cr_details_transactions()

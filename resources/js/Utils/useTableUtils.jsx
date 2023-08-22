@@ -1,15 +1,28 @@
 export function sortData(data, sortColumn, sortDirection) {
     return data.slice().sort((a, b) => {
         if (sortColumn) {
-            let valueA = a[sortColumn];
-            let valueB = b[sortColumn];
+            let valueA, valueB;
 
-            if (sortColumn === "client_price" || sortColumn === "cost_price") {
+            if (sortColumn === "paymentMethod") {
+                valueA = a.cr_payment_methods?.name?.toLowerCase();
+                valueB = b.cr_payment_methods?.name?.toLowerCase();
+            } else if (sortColumn === 'category') {
+                valueA = a.cr_categories_products?.name?.toLowerCase();
+                valueB = b.cr_categories_products?.name?.toLowerCase();
+            } else if (sortColumn === 'dish') {
+                valueA = a.cr_dishes?.unit?.toLowerCase();
+                valueB = b.cr_dishes?.unit?.toLowerCase();
+            } else {
+                valueA = a[sortColumn];
+                valueB = b[sortColumn];
+            }
+
+            if (sortColumn === "client_price" || sortColumn === "cost_price" || sortColumn === 'total') {
                 valueA = parseFloat(valueA);
                 valueB = parseFloat(valueB);
-            } else if (sortColumn === "is_consigned") {
+            } else if (sortColumn === "is_consigned" || sortColumn === "is_SoldSeparately") {
 
-            } else {
+            } else if (sortColumn !== "paymentMethod") {
                 valueA = valueA ? valueA.toLowerCase() : "";
                 valueB = valueB ? valueB.toLowerCase() : "";
             }
@@ -19,6 +32,7 @@ export function sortData(data, sortColumn, sortDirection) {
         return 0;
     });
 }
+
 
 export function filterData(data, searchTerm, columns, t) {
     if (!searchTerm) return data;
@@ -42,8 +56,10 @@ export function filterData(data, searchTerm, columns, t) {
             } else if (column.key === 'dish') {
                 const dishName = item.cr_dishes?.name?.toLowerCase();
                 return dishName?.includes(searchTermLowerCase);
+            } else if (column.key === 'paymentMethod') {
+                const paymentMethodName = item.cr_payment_methods?.name?.toLowerCase();
+                return paymentMethodName?.includes(searchTermLowerCase);
             }
-
             return false;
         })
     );

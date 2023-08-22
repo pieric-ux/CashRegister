@@ -9,6 +9,7 @@ use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\WorkstationsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\App;
@@ -85,6 +86,9 @@ Route::middleware(['auth:customer', 'verified'])->group(function () {
     Route::patch('/apps/products/update/{product}', [ProductsController::class, 'update'])->name('products.update');
     Route::patch('/apps/products/update', [ProductsController::class, 'updateDragAndDrop'])->name('products.updateDragAndDrop');
     Route::delete('/products/{product}', [ProductsController::class, 'destroy'])->name('products.destroy');
+
+    Route::get('/apps/{app}/transactions', [TransactionsController::class, 'index'])->name('transactions.index');
+    Route::delete('/transactions/{transaction}', [TransactionsController::class, 'destroy'])->name('transactions.destroy');
 
     Route::post('/avatar-upload', [MediaController::class, 'uploadAvatar'])->name('avatar.upload');
     Route::post('/poster-upload', [MediaController::class, 'uploadPoster'])->name('poster.upload');
