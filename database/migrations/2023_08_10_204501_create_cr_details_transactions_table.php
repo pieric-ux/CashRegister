@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('item_name', 45);
             $table->string('unit', 45);
             $table->decimal('client_price', 6, 2);
-            $table->unsignedInteger('fk_transactions_id');
+            $table->unsignedBigInteger('fk_transactions_id');
             $table->foreign('fk_transactions_id')->references('id')->on('cr_transactions')->onDelete('cascade');
             $table->timestamps();
         });
