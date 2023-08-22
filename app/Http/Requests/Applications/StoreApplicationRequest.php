@@ -15,6 +15,16 @@ class StoreApplicationRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'name' => ucfirst($this->input('name'))
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
@@ -22,11 +32,11 @@ class StoreApplicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255', 'unique:cr_apps'],
-            'description' => ['nullable', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:45', 'unique:cr_apps'],
+            'description' => ['nullable', 'string', 'max:45'],
             'start_date' => ['nullable', 'date', 'after:yesterday'],
             'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
-            'location' => ['nullable', 'string', 'max:255'],
+            'location' => ['nullable', 'string', 'max:45'],
             'website' => ['nullable', 'url', 'max:255'],
         ];
     }

@@ -30,10 +30,21 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $customer = $request->user('customer');
+        $customerAuth = [
+            'customer' => $customer,
+            'avatarPath' => optional($customer)->getAvatarUrl(),
+        ];
+
+        $employee = $request->user('employee');
+        $employeeAuth = [
+            'employee' => $employee,
+            'avatarPath' => optional($employee)->getAvatarUrl(),
+        ];
+
         return array_merge(parent::share($request), [
-            'auth' => [
-                'user' => $request->user(),
-            ],
+            'customerAuth' => $customerAuth,
+            'employeeAuth' => $employeeAuth,
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),

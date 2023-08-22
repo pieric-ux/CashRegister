@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Applications\StoreApplicationRequest;
-use App\Http\Requests\Applications\ShowApplicationsRequest;
+use App\Http\Requests\Applications\ShowApplicationRequest;
 use App\Http\Requests\Applications\UpdateApplicationRequest;
 use App\Http\Requests\Applications\DeleteApplicationRequest;
 use App\Models\CR_App;
-use App\Models\CR_Media;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -23,10 +21,13 @@ class ApplicationsController extends Controller
      */
     public function index(): Response
     {
-        $customerId = Auth::id();
-        $applications = CR_App::where('fk_customer_id', $customerId)->get();
+        $customer = Auth::user();
+        $applications = $customer->cr_apps->map(function ($app) {
+            $app->posterPath = $app->getPosterUrl();
+            return $app;
+        });
 
-        return Inertia::render('Applications/Index', [
+        return Inertia::render('Customers/Applications/Index', [
             'applications' => $applications,
         ]);
     }
@@ -36,17 +37,16 @@ class ApplicationsController extends Controller
      */
     public function store(StoreApplicationRequest $request): RedirectResponse
     {
-        $customerId = Auth::id();
+        $customer = Auth::user();
 
-        CR_App::create([
-            'name' => $request->input('name'),
+        $customer->cr_apps()->create([
+            'name' => ucfirst($request->input('name')),
             'slug' => Str::slug($request->input('name')),
             'description' => $request->input('description'),
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
-            'location' => $request->input('location'),
+            'location' => ucfirst($request->input('location')),
             'website' => $request->input('website'),
-            'fk_customer_id' => $customerId,
         ]);
 
         return Redirect::route('applications.index');
@@ -55,9 +55,9 @@ class ApplicationsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ShowApplicationsRequest $request, CR_App $app): Response
+    public function show(ShowApplicationRequest $request, CR_App $app): Response
     {
-        return Inertia::render('Applications/Show', [
+        return Inertia::render('Customers/Application/Dashboard', [
             'application' => $app,
         ]);
     }
@@ -67,13 +67,12 @@ class ApplicationsController extends Controller
      */
     public function update(UpdateApplicationRequest $request, CR_App $app): RedirectResponse
     {
-
-        $app->name = $request->input('name');
+        $app->name = ucfirst($request->input('name'));
         $app->slug = Str::slug($request->input('name'));
         $app->description = $request->input('description');
         $app->start_date = $request->input('start_date');
         $app->end_date = $request->input('end_date');
-        $app->location = $request->input('location');
+        $app->location = ucfirst($request->input('location'));
         $app->website = $request->input('website');
         $app->save();
 
@@ -88,12 +87,6 @@ class ApplicationsController extends Controller
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
-
-        $appMedia = CR_Media::where('fk_app_id', $app->id)->get();
-
-        foreach ($appMedia as $media) {
-            Storage::disk('public')->delete($media->path);
-        }
 
         $app->delete();
 

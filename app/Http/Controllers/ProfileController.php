@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use App\Models\CR_Media;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -20,7 +18,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
-        return Inertia::render('Profile/Edit', [
+        return Inertia::render('Customers/Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
         ]);
@@ -37,7 +35,14 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $customer = $request->user();
+        $customer->company_name = ucfirst($customer->company_name);
+        $customer->first_name = ucfirst($customer->first_name);
+        $customer->last_name = ucfirst($customer->last_name);
+        $customer->address = ucfirst($customer->address);
+        $customer->city = ucfirst($customer->city);
+
+        $customer->save();
 
         return Redirect::route('profile.edit');
     }
@@ -53,17 +58,9 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
-        $userMedia = CR_Media::where('fk_customer_id', $user->id)->get();
-        foreach ($userMedia as $media) {
-            Storage::disk('public')->delete($media->path);
-        }
-
-        $userAppsMedia = CR_Media::whereIn('fk_app_id', function ($query) use ($user) {
-            $query->select('id')->from('cr_apps')->where('fk_customer_id', $user->id);
-        })->get();
-        foreach ($userAppsMedia as $media) {
-            Storage::disk('public')->delete($media->path);
-        }
+        $user->cr_apps->each(function ($app) {
+            $app->clearMediaCollection('posters');
+        });
 
         Auth::logout();
 

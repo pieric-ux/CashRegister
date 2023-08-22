@@ -10,7 +10,6 @@ export default function useLocalStorage(key, initialValue) {
           on la parse en JSON pour la retourner comme valeur initiale. */}
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
-      console.error(`Error retrieving value from localStorage: ${error.message}`);
       {/* En cas d'erreur lors de la récupération de la valeur, on utilise la valeur initiale fournie. */ }
       return initialValue;
     }
@@ -25,9 +24,7 @@ export default function useLocalStorage(key, initialValue) {
       setStoredValue(valueToStore);
       {/* Stockage de la nouvelle valeur dans le localStorage, en la convertissant en JSON. */ }
       window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      console.error(`Error storing value in localStorage: ${error.message}`);
-    }
+    } catch (error) { }
   };
 
   {/* Le hook `useLocalStorage` retourne un tableau contenant la valeur actuelle stockée dans le localStorage (`storedValue`)

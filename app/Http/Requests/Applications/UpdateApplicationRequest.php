@@ -15,7 +15,17 @@ class UpdateApplicationRequest extends FormRequest
     {
         $app = $this->route('app');
 
-        return $app->fk_customer_id === Auth::id();
+        return $app->isOwnedBy(Auth::user());
+    }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'name' => ucfirst($this->input('name'))
+        ]);
     }
 
     /**
@@ -26,7 +36,7 @@ class UpdateApplicationRequest extends FormRequest
     public function rules(): array
     {
         $app = $this->route('app');
-        $nameRules = ['required', 'string', 'max:255'];
+        $nameRules = ['required', 'string', 'max:45'];
 
         if ($app) {
             $nameRules[] = Rule::unique('cr_apps')->ignore($app->id);
@@ -36,10 +46,10 @@ class UpdateApplicationRequest extends FormRequest
 
         return [
             'name' => $nameRules,
-            'description' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string', 'max:45'],
             'start_date' => ['nullable', 'date', 'after:yesterday'],
             'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
-            'location' => ['nullable', 'string', 'max:255'],
+            'location' => ['nullable', 'string', 'max:45'],
             'website' => ['nullable', 'url', 'max:255'],
         ];
     }

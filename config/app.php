@@ -86,6 +86,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Supported Locales Configuration
+    |--------------------------------------------------------------------------
+    |
+    | The 'locales' array specifies all the locales supported by your application.
+    | The translation service provider will reference this array to validate the 
+    | language change requests. You can freely modify this array to include or 
+    | exclude the locales as per your application's requirements.
+    |
+    */
+
+    'locales' => ['en', 'fr'],
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Fallback Locale
     |--------------------------------------------------------------------------
     |

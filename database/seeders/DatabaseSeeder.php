@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\CR_App;
 use App\Models\Customer;
 use Illuminate\Database\Seeder;
 
@@ -20,10 +21,6 @@ class DatabaseSeeder extends Seeder
             \App\Models\CR_App::factory()->create([
                 'fk_customer_id' => $existingCustomer->id,
             ]);
-
-            \App\Models\CR_Media::factory()->create([
-                'fk_customer_id' => $existingCustomer->id,
-            ]);
         }
 
         $customers = \App\Models\Customer::factory(9)->create();
@@ -32,9 +29,13 @@ class DatabaseSeeder extends Seeder
             \App\Models\CR_App::factory()->create([
                 'fk_customer_id' => $customer->id,
             ]);
+        }
 
-            \App\Models\CR_Media::factory()->create([
-                'fk_customer_id' => $customer->id,
+        $apps = CR_App::all();
+
+        foreach ($apps as $app) {
+            \App\Models\CR_Workstations::factory()->create([
+                'fk_apps_id' => $app->id,
             ]);
         }
     }

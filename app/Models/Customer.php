@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+//use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Customer extends Authenticatable //implements MustVerifyEmail
+class Customer extends Authenticatable implements HasMedia //, MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, InteractsWithMedia;
 
     protected $table = 'customers';
 
@@ -20,7 +24,6 @@ class Customer extends Authenticatable //implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-        'avatar',
         'company_name',
         'first_name',
         'last_name',
@@ -50,4 +53,37 @@ class Customer extends Authenticatable //implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function cr_apps()
+    {
+        return $this->hasMany(CR_App::class, 'fk_customer_id');
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('preview')
+            ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->nonQueued();
+    }
+
+    public function getAvatarUrl()
+    {
+        $avatar = $this->getFirstMediaUrl('avatars');
+
+        if ($avatar) {
+            return $avatar;
+        }
+
+        return '/storage/medias/avatars/default-avatar.png';
+    }
+
+    public function uploadAvatar($avatar)
+    {
+        $this->clearMediaCollection('avatars');
+
+        $this->addMedia($avatar)
+            ->usingFileName($avatar->hashName())
+            ->toMediaCollection('avatars');
+    }
 }
