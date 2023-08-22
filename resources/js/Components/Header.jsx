@@ -10,8 +10,8 @@ export default function Header({ user, title, avatarPath, RespNavLink, DropdownL
         <header className="sticky top-0 z-40 w-full bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 drop-shadow-sm dark:drop-shadow-none transition ease-linear duration-300">
             <div className="flex items-center justify-between h-20 mx-auto px-4 sm:gap-4 gap-2 sm:px-6 lg:px-8">
                 <div className={`${sideBarOpen === undefined
-                    ? 'hidden sm:flex invisible'
-                    : `${sideBarOpen ? 'sm:invisible' : 'visibile'} lg:invisible sm:flex hidden`}
+                    ? 'sm:flex invisible'
+                    : `${sideBarOpen ? 'sm:invisible' : 'visibile'} lg:invisible sm:visible invisible`}
                     `}>
                     <button
                         aria-label='Open Sidebar'

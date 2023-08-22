@@ -4,7 +4,6 @@ namespace App\Http\Requests\Dishes;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
 class StoreDishRequest extends FormRequest
 {
@@ -35,12 +34,10 @@ class StoreDishRequest extends FormRequest
      */
     public function rules(): array
     {
-        $app = $this->route('app');
-
         return [
             'name' => ['required', 'string', 'max:45'],
             'unit' => ['required', 'string', 'max:45'],
-            'client_price' => ['required', 'numeric', 'between:0,9999.99'],
+            'client_price' => $this->input('is_consigned') ? ['required', 'numeric', 'between:0,9999.99'] : ['nullable', 'numeric', 'between:0,9999.99'],
             'cost_price' => ['required', 'numeric', 'between:0,9999.99'],
             'is_consigned' => ['boolean'],
         ];

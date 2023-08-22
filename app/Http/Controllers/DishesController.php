@@ -39,7 +39,7 @@ class DishesController extends Controller
         $app->cr_dishes()->create([
             'name' => ucfirst($request->input('name')),
             'unit' => $request->input('unit'),
-            'client_price' => $request->input('client_price'),
+            'client_price' => $request->input('is_consigned') ? $request->input('client_price') : 0,
             'cost_price' => $request->input('cost_price'),
             'is_consigned' => $request->input('is_consigned'),
             'is_SoldSeparately' => $request->input('is_SoldSeparately'),
@@ -55,7 +55,7 @@ class DishesController extends Controller
     {
         $dish->name = ucfirst($request->input('name'));
         $dish->unit = $request->input('unit');
-        $dish->client_price = $request->input('client_price');
+        $dish->client_price = $request->input('is_consigned') ? $request->input('client_price') : 0;
         $dish->cost_price = $request->input('cost_price');
         $dish->is_consigned = $request->input('is_consigned');
         $dish->is_SoldSeparately = $request->input('is_SoldSeparately');

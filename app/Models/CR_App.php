@@ -51,6 +51,11 @@ class CR_App extends Model implements HasMedia
         return $this->hasMany(CR_Dishes::class, 'fk_apps_id');
     }
 
+    public function cr_payment_methods()
+    {
+        return $this->hasMany(CR_PaymentMethods::class, 'fk_apps_id');
+    }
+
     public static function boot()
     {
         parent::boot();
@@ -61,19 +66,36 @@ class CR_App extends Model implements HasMedia
             $workstation->fk_apps_id = $app->id;
             $workstation->save();
 
-            $categorie = new CR_Categories_Products();
-            $categorie->name = 'No category';
-            $categorie->order = 0;
-            $categorie->fk_apps_id = $app->id;
-            $categorie->save();
+            $category = new CR_Categories_Products();
+            $category->name = 'No category';
+            $category->order = 0;
+            $category->fk_apps_id = $app->id;
+            $category->save();
 
-            $categorie = new CR_Dishes();
-            $categorie->name = 'No dish';
-            $categorie->unit = 'pce';
-            $categorie->is_consigned = false;
-            $categorie->is_SoldSeparately = false;
-            $categorie->fk_apps_id = $app->id;
-            $categorie->save();
+            $dish = new CR_Dishes();
+            $dish->name = 'No dish';
+            $dish->unit = 'pce';
+            $dish->is_consigned = false;
+            $dish->is_SoldSeparately = false;
+            $dish->fk_apps_id = $app->id;
+            $dish->save();
+
+            $paymentMethodsData = [
+                'Cash' => storage_path('/app/public/medias/paymentMethod-pictures/cash.png'),
+                'Cards' => storage_path('/app/public/medias/paymentMethod-pictures/creditcards.png'),
+                'Twint' => storage_path('/app/public/medias/paymentMethod-pictures/twint.png')
+            ];
+            foreach ($paymentMethodsData as $paymentMethodName => $imagePath) {
+                $paymentMethod = new CR_PaymentMethods();
+                $paymentMethod->name = $paymentMethodName;
+                $paymentMethod->fk_apps_id = $app->id;
+                $paymentMethod->save();
+
+                $paymentMethod->addMedia($imagePath)
+                    ->usingFileName(basename($imagePath))
+                    ->preservingOriginal()
+                    ->toMediaCollection('paymentMethod-pictures');
+            }
         });
     }
 

@@ -54,14 +54,6 @@ class WorkstationsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show()
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateWorkstationRequest $request, CR_Workstations $workstation): RedirectResponse

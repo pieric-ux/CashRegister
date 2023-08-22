@@ -93,7 +93,8 @@ Route::middleware(['auth:customer', 'verified'])->group(function () {
 });
 
 Route::middleware(['auth:employee', 'logout'])->group(function () {
-    Route::get('/cashregister', [CashregisterController::class, 'show'])->name('cashregister.show');
+    Route::get('/cashregister', [CashregisterController::class, 'index'])->name('cashregister.index');
+    Route::post('/cashregister/payment', [CashregisterController::class, 'store'])->name('cashregister.store');
 
     Route::get('employee/profile', [EmployeeProfilController::class, 'index'])->name('employee-profil.index');
 

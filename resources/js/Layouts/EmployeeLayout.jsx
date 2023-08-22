@@ -7,7 +7,7 @@ export default function EmployeeLayout({ auth, children, localization }) {
     const { t } = useTranslation();
     const RespNavLink = (
         <>
-            <ResponsiveNavLink href={route('cashregister.show')} active={route().current('cashregister.show')}>
+            <ResponsiveNavLink href={route('cashregister.index')} active={route().current('cashregister.index')}>
                 {t('Cash Register')}
             </ResponsiveNavLink>
             <ResponsiveNavLink href={route('employee-profil.index')} active={route().current('employee-profil.index')}>
@@ -20,7 +20,7 @@ export default function EmployeeLayout({ auth, children, localization }) {
     );
     const DropdownLink = (
         <>
-            <Dropdown.Link href={route('cashregister.show')}>{t('Cash Register')}</Dropdown.Link>
+            <Dropdown.Link href={route('cashregister.index')}>{t('Cash Register')}</Dropdown.Link>
             <Dropdown.Link href={route('employee-profil.index')}>{t('Profile')}</Dropdown.Link>
             <Dropdown.Link href={route('logout')} method="post" as="button">{t('Logout')}</Dropdown.Link>
         </>

@@ -35,13 +35,10 @@ class UpdateDishRequest extends FormRequest
      */
     public function rules(): array
     {
-        $dish = $this->route('dish');
-        $app = $dish->cr_apps;
-
         return [
             'name' => ['required', 'string', 'max:45'],
             'unit' => ['required', 'string', 'max:45'],
-            'client_price' => ['required', 'numeric', 'between:0,9999.99'],
+            'client_price' => $this->input('is_consigned') ? ['required', 'numeric', 'between:0,9999.99'] : ['nullable', 'numeric', 'between:0,9999.99'],
             'cost_price' => ['required', 'numeric', 'between:0,9999.99'],
             'is_consigned' => ['boolean'],
         ];

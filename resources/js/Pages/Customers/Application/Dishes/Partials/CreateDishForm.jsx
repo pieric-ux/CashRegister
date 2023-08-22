@@ -1,5 +1,5 @@
 import { useForm } from '@inertiajs/react';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
@@ -21,6 +21,12 @@ export default function CreateDishForm({ application, className = '' }) {
         is_consigned: true,
         is_SoldSeparately: false,
     });
+
+    useEffect(() => {
+        if (!data.is_consigned) {
+            setData('client_price', '');
+        }
+    }, [data.is_consigned]);
 
     const openModal = () => {
         setOpeningModal(true);
@@ -97,9 +103,10 @@ export default function CreateDishForm({ application, className = '' }) {
                         <TextInput
                             id="client_price"
                             name="client_price"
-                            className="mt-1 block w-3/4"
+                            className="mt-1 block w-3/4 disabled:cursor-not-allowed"
                             value={data.client_price}
                             onChange={(e) => setData('client_price', e.target.value)}
+                            disabled={!data.is_consigned}
                         />
 
                         <InputError className="mt-2" message={showErrors ? errors.client_price : null} />
