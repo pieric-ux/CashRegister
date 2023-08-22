@@ -1,17 +1,3 @@
-<IfModule mod_headers.c>
-    # Politique de sécurité du contenu (CSP)
-    Header set Content-Security-Policy "default-src 'self';"
-
-    # Protéger contre le clickjacking
-    Header always append X-Frame-Options SAMEORIGIN
-
-    # Activer la protection XSS dans les navigateurs
-    Header set X-XSS-Protection "1; mode=block"
-
-    # Configurer le HSTS (Strict Transport Security Header)
-    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
-</IfModule>
-
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
@@ -19,9 +5,8 @@
 
     RewriteEngine On
 
-    # Forcer l'utilisation de HTTPS
-    RewriteCond %{HTTPS} off
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    # CSP
+    Header set Content-Security-Policy "default-src 'self';"
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
@@ -36,10 +21,8 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-</IfModule>
 
-<IfModule mod_autoindex.c>
-    # Désactiver l'affichage de la version du serveur
-    ServerTokens Prod
-    ServerSignature Off
+    # Redirect HTTPS
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
