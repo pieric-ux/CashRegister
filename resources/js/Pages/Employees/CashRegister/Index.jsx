@@ -43,7 +43,7 @@ export default function CashRegister({ employeeAuth, localization, categories, d
 
     const calculateTotal = () => {
         return cart.reduce((subtotal, item) => {
-            return parseFloat(subtotal) + (item.quantity * parseFloat(item.client_price));
+            return subtotal + (item.quantity * item.client_price);
         }, 0);
     }
 
