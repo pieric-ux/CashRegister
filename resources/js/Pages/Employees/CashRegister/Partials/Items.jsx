@@ -71,7 +71,9 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
 
     const addToCart = (item, itemType) => {
         let newCart = [...cart];
+        console.log(typeof (item.client_price));
         let price = itemType === 'return' ? -1 * item.client_price : item.client_price;
+        console.log(typeof (price));
 
         if (item.cr_dishes && item.cr_dishes.is_consigned) {
             price += item.cr_dishes.client_price;
