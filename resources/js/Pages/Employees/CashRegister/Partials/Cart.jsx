@@ -21,8 +21,8 @@ export default function Cart({ isCartVisible, cart, removeFromCart }) {
                         <tr key={index} className="divide-x divide-gray-300 dark:divide-gray-700 even:bg-gray-200/25 even:dark:bg-gray-800/25 odd:bg-gray-400/25 odd:dark:bg-gray-600">
                             <td className="p-1 text-center text-sm">{item.quantity}</td>
                             <td className="p-1 pl-2 text-left text-sm">{item.name} {item.unit}</td>
-                            <td className="p-1 pr-2 text-right text-sm">{`${item.client_price} ${t('currency_symbol')}`}</td>
-                            <td className="hidden sm:table-cell p-1 pr-2 text-right text-sm">{`${item.quantity * item.client_price} ${t('currency_symbol')}`}</td>
+                            <td className="p-1 pr-2 text-right text-sm">{`${parseFloat(item.client_price)} ${t('currency_symbol')}`}</td>
+                            <td className="hidden sm:table-cell p-1 pr-2 text-right text-sm">{`${item.quantity * parseFloat(item.client_price)} ${t('currency_symbol')}`}</td>
                             <td className="p-1 text-center">
                                 <DangerButton className='!px-2' onClick={() => removeFromCart(index)}>
                                     <svg className='w-3 h-3 text-white' fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430.901 583.409">
