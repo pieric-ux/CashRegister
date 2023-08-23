@@ -74,7 +74,7 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
         let price = itemType === 'return' ? -1 * item.client_price : item.client_price;
 
         if (item.cr_dishes && item.cr_dishes.is_consigned) {
-            price += item.cr_dishes.client_price;
+            price = price + item.cr_dishes.client_price;
         }
 
         let foundItem = newCart.find(cartItem => cartItem.id === item.id && cartItem.type === itemType);
