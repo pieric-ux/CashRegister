@@ -74,7 +74,7 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
         let price = parseFloat(item.client_price);
 
         if (itemType === 'return') {
-            price *= -1.00;
+            price *= -1;
         }
 
         if (item.cr_dishes && item.cr_dishes.is_consigned) {
@@ -106,14 +106,14 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
                         <div>
                             <Swiper {...settings}>
                                 {[...returnDishesMap.values()].map(dish => (
-                                    <SwiperSlide key={dish.id} className='pt-4'>
+                                    <SwiperSlide key={dish.id} className="pt-4">
                                         <button
                                             onClick={() => {
                                                 if (!isDragging) {
                                                     addToCart(dish, 'return')
                                                 }
                                             }}
-                                            className="w-[82px] h-[82px] flex flex-col items-center justify-center mx-auto p-4 rounded-lg bg-white dark:bg-gray-800 transition ease-linear duration-300 disabled:opacity-25 disabled:cursor-not-allowed"
+                                            className="w-[82px] h-[82px] flex flex-col items-center justify-center mx-auto m-2 p-4 rounded-lg bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 focus:bg-gray-200 dark:focus:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-linear duration-300 disabled:opacity-25 disabled:cursor-not-allowed"
                                             disabled={isDragging}
                                         >
                                             {dish.picture_url ? (
@@ -147,14 +147,14 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
                             <div>
                                 <Swiper {...settings}>
                                     {filteredProducts.map(product => (
-                                        <SwiperSlide key={product.id} className='pt-4'>
+                                        <SwiperSlide key={product.id} className="pt-4">
                                             <button
                                                 onClick={() => {
                                                     if (!isDragging) {
                                                         addToCart(product, 'product')
                                                     }
                                                 }}
-                                                className="w-[82px] h-[82px] flex flex-col items-center justify-center mx-auto p-4 rounded-lg bg-white dark:bg-gray-800 transition ease-linear duration-300 disabled:opacity-25 disabled:cursor-not-allowed"
+                                                className="w-[82px] h-[82px] flex flex-col items-center justify-center mx-auto m-2 p-4 rounded-lg bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 focus:bg-gray-200 dark:focus:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-linear duration-300 disabled:opacity-25 disabled:cursor-not-allowed"
                                                 disabled={isDragging}
                                             >
                                                 {product.picture_url ? (
@@ -185,14 +185,14 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
                         <div>
                             <Swiper {...settings}>
                                 {[...soldSeparatelydDishesMap.values()].map(dish => (
-                                    <SwiperSlide key={dish.id} className='pt-4'>
+                                    <SwiperSlide key={dish.id} className="pt-4">
                                         <button
                                             onClick={() => {
                                                 if (!isDragging) {
                                                     addToCart(dish, 'dishes')
                                                 }
                                             }}
-                                            className="w-[82px] h-[82px] flex flex-col items-center justify-center mx-auto p-4 rounded-lg bg-white dark:bg-gray-800 transition ease-linear duration-300 disabled:opacity-25 disabled:cursor-not-allowed"
+                                            className="w-[82px] h-[82px] flex flex-col items-center justify-center mx-auto m-2 p-4 rounded-lg bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 focus:bg-gray-200 dark:focus:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-linear duration-300 disabled:opacity-25 disabled:cursor-not-allowed"
                                             disabled={isDragging}
                                         >
                                             {dish.picture_url ? (
@@ -210,7 +210,8 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
                         </div>
                     )}
                 </div>
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 }
