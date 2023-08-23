@@ -72,12 +72,16 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
     const addToCart = (item, itemType) => {
         let newCart = [...cart];
         console.log(typeof (item.client_price));
-        let price = itemType === 'return' ? -1 * item.client_price : item.client_price;
+        let price = parseFloat(item.client_price);
+        if (itemType === 'return') {
+            price *= -1;
+        }
         console.log(typeof (price));
 
         if (item.cr_dishes && item.cr_dishes.is_consigned) {
-            price += item.cr_dishes.client_price;
+            price += parseFloat(item.cr_dishes.client_price);
         }
+        console.log(typeof (price));
 
         let foundItem = newCart.find(cartItem => cartItem.id === item.id && cartItem.type === itemType);
 
