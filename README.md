@@ -121,6 +121,4 @@ Vous pouvez swiper les produits si ils ne sont pas tous affichés. La barre de p
 
 Si vous découvrez une vulnérabilité de sécurité au sein de CashRegister, merci de bien vouloir envoyer un e-mail à Demont Pieric via [demont.pieric@gmail.com](mailto:demont.pieric@gmail.com). Toutes les vulnérabilités de sécurité seront **traitées rapidement**.
 
-## Licence
-
-Le framework Laravel est un logiciel open-source sous licence [MIT](https://opensource.org/licenses/MIT).
+© 2023 Demont Pieric. Tous droits réservés.
