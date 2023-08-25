@@ -19,7 +19,7 @@ class AddContentSecurityPolicyHeaders
         Vite::useCspNonce();
 
         return $next($request)->withHeaders([
-            'Content-Security-Policy' => "default-src 'self'; script-src 'self' 'nonce-" . Vite::cspNonce() . "'; style-src 'self' 'nonce-" . Vite::cspNonce() . "'; font-src 'self' https://fonts.bunny.net; img-src 'self' data:;connect-src 'self'; frame-src 'self';",
+            'Content-Security-Policy' => "default-src 'self'; script-src 'self' 'nonce-" . Vite::cspNonce() . "'; style-src 'self' 'nonce-" . Vite::cspNonce() . "'; font-src 'self' https://fonts.bunny.net; img-src 'self' data:;connect-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self';",
             'X-Frame-Options' => "SAMEORIGIN",
             'X-Content-Type-Options' => "nosniff",
         ]);
