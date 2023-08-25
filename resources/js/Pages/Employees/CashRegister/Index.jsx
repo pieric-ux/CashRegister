@@ -89,7 +89,7 @@ export default function CashRegister({ employeeAuth, localization, categories, d
                     <Items isCartVisible={isCartVisible} cart={cart} setCart={setCart} categories={categories} dishes={dishes} products={products} />
                 </div>
             </div>
-            <div >
+            <div style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
 
             </div>
         </EmployeeLayout >
