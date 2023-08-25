@@ -9,14 +9,14 @@
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net" nonce="{{ Vite::cspNonce() }}">
+        <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" nonce="{{ Vite::cspNonce() }}" />
 
         <!-- Scripts -->
         @routes(nonce: Vite::cspNonce())
         @viteReactRefresh
         @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])
-        @inertiaHead(nonce: Vite::cspNonce())
+        @inertiaHead
     </head>
     <body class="font-sans antialiased">
         @inertia
