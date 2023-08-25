@@ -320,7 +320,6 @@ export default function Welcome({ customerAuth }) {
                     </div>
                 </div>
             </div>
-
         </>
     );
 }

@@ -16,10 +16,14 @@ class AddContentSecurityPolicyHeaders
      */
     public function handle(Request $request, Closure $next): Response
     {
-        Vite::useCspNonce();
+        $response = $next($request);
 
-        return $next($request)->withHeaders([
-            'Content-Security-Policy' => "script-src 'nonce-" . Vite::cspNonce() . "'; style-src 'nonce-" . Vite::cspNonce() . "'",
-        ]);
+        $cspNonce = Vite::useCspNonce();
+
+        $response->headers->set('Content-Security-Policy', "default-src 'self'; script-src 'self' 'nonce-$cspNonce'; style-src 'self' 'nonce-$cspNonce'; font-src 'self' https://fonts.bunny.net; img-src 'self' data:; connect-src 'self'; frame-src 'self'; frame-ancestors 'none'; media-src 'self'; object-src 'self'; manifest-src 'self'; prefetch-src 'self'; form-action 'self';");
+        $response->headers->set('X-Frame-Options', 'SAMEORIGIN');
+        $response->headers->set('X-Content-Type-Options', 'nosniff');
+
+        return $response;
     }
 }
