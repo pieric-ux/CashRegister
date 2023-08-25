@@ -40,6 +40,7 @@ class Kernel extends HttpKernel
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
             \App\Http\Middleware\LogoutEmployee::class,
             \App\Http\Middleware\SetLocale::class,
+            \App\Http\Middleware\AddContentSecurityPolicyHeaders::class,
         ],
 
         'api' => [
