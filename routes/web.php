@@ -27,6 +27,8 @@ use Inertia\Inertia;
 |
 */
 
+Route::post('/csp-report-endpoint', 'CspReportController@receiveReport');
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),

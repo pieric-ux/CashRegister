@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta http-equiv="Content-Security-Policy-Report-Only" content="default-src 'self' https://fonts.bunny.net;">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' report-uri /csp-report-endpoint">
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
