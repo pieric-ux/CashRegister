@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-{{ Vite::cspNonce() }}'; style-src 'self' 'nonce-{{ Vite::cspNonce() }}'; font-src 'self' https://fonts.bunny.net; img-src 'self' data:;connect-src 'self'; frame-src 'self'; frame-ancestors 'none'; media-src 'self'; object-src 'self'; manifest-src 'self'; prefetch-src 'self'; form-action 'self';">
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
