@@ -8,11 +8,11 @@ import DeleteWorkstationForm from "./Partials/DeleteWorstationForm";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 
-export default function Index({ customerAuth, application, nonce, workstations, localization }) {
+export default function Index({ customerAuth, application, workstations, localization }) {
     const { t } = useTranslation();
     const defaultWorkstationId = application.cr_workstations.find((workstation) => workstation.name === 'Pending assignement').id;
     const [updatedWorkstations, setUpdatedWorkstations] = useState(workstations);
-    console.log(nonce);
+
     useEffect(() => {
         setUpdatedWorkstations(workstations);
     }, [workstations]);
@@ -102,7 +102,7 @@ export default function Index({ customerAuth, application, nonce, workstations, 
                                         <DeleteWorkstationForm workstation={workstation} />
                                     </div>
                                 </div>
-                                <DragDropContext nonce={nonce} onDragEnd={onDragEnd}>
+                                <DragDropContext onDragEnd={onDragEnd}>
                                     <div className="flex h-full mt-4 gap-2">
                                         <div className="flex flex-col w-1/2 h-full">
                                             <h4 className="text-center underline">{t('Employee')}</h4>
@@ -180,7 +180,7 @@ export default function Index({ customerAuth, application, nonce, workstations, 
                                         </div>
                                     </div>
                                 </DragDropContext>
-                                <DragDropContext nonce={nonce} onDragEnd={onDragEnd}>
+                                <DragDropContext onDragEnd={onDragEnd}>
                                     <div className="flex h-full mt-4 gap-2">
                                         <div className="flex flex-col w-1/2 h-full">
                                             <h4 className="text-center underline">{t('Products')}</h4>

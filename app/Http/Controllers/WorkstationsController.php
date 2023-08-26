@@ -10,7 +10,6 @@ use App\Models\CR_App;
 use App\Models\CR_Workstations;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Vite;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -36,12 +35,9 @@ class WorkstationsController extends Controller
             })->values()->toArray();
         }
 
-        $nonce = Vite::cspNonce();
-
         return Inertia::render('Customers/Application/Workstations/Index', [
             'application' => $app,
             'workstations' => $workstations,
-            'nonce' => $nonce,
         ]);
     }
 

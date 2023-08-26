@@ -11,7 +11,6 @@ use App\Models\CR_App;
 use App\Models\CR_Categories_Products;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Vite;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -24,12 +23,9 @@ class CategoriesProductsController extends Controller
     {
         $categories = $app->cr_categories_products;
 
-        $nonce = Vite::cspNonce();
-
         return Inertia::render('Customers/Application/Categories_Products/Index', [
             'application' => $app,
             'categories' => $categories,
-            'nonce' => $nonce,
         ]);
     }
 

@@ -8,7 +8,7 @@ import DeleteCategorieProductForm from "./Partials/DeleteCategorieProductForm";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 
-export default function Index({ customerAuth, application, categories, localization, nonce }) {
+export default function Index({ customerAuth, application, categories, localization }) {
     const { t } = useTranslation();
     const [updatedCategories, setUpdatedCategories] = useState(categories);
 
@@ -56,7 +56,7 @@ export default function Index({ customerAuth, application, categories, localizat
                     <CreateCategorieProductForm className="max-w-xl mx-auto" application={application} />
                 </div>
                 {updatedCategories.length > 1 ? (
-                    <DragDropContext nonce={nonce} onDragEnd={onDragEnd}>
+                    <DragDropContext onDragEnd={onDragEnd}>
                         <Droppable droppableId="categories">
                             {(provided, snapshot) => (
                                 <ul
