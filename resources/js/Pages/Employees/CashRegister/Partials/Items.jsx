@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import { useTranslation } from "react-i18next";
-import 'swiper/css/bundle';
+import 'swiper/css/pagination';
 
 export default function Items({ isCartVisible, cart, setCart, categories, dishes, products }) {
     const { t } = useTranslation();
