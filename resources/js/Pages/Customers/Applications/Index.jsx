@@ -40,13 +40,28 @@ export default function Index({ customerAuth, applications, localization }) {
                                     </div>
                                     <div className='flex flex-col flex-1 gap-2'>
                                         <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>{application.name}</h2>
-                                        <p className='text-gray-900 dark:text-gray-100 text-clip overflow-hidden'>{application.description}</p>
-                                        <div className='flex justify-around flex-wrap gap-4'>
-                                            <p className='text-gray-900 dark:text-gray-100'>{application.start_date}</p>
-                                            <p className='text-gray-900 dark:text-gray-100'>{application.end_date}</p>
+                                        <div>
+                                            <span className='text-sm text-gray-600 dark:text-gray-400'>{`${t('Description')} :`}</span>
+                                            <p className='text-gray-900 dark:text-gray-100 text-clip overflow-hidden'>{application.description}</p>
                                         </div>
-                                        <p className='text-gray-900 text-center dark:text-gray-100'>{application.location}</p>
-                                        <p className='text-gray-900 text-center dark:text-gray-100'>{application.website}</p>
+                                        <div className='sm:self-start flex justify-around flex-wrap gap-12'>
+                                            <div>
+                                                <span className='text-sm text-gray-600 dark:text-gray-400'>{`${t('Start Date')} :`}</span>
+                                                <p className='text-gray-900 dark:text-gray-100'>{application.start_date}</p>
+                                            </div>
+                                            <div>
+                                                <span className='text-sm text-gray-600 dark:text-gray-400'>{`${t('End Date')} :`}</span>
+                                                <p className='text-gray-900 dark:text-gray-100'>{application.end_date}</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span className='text-sm text-gray-600 dark:text-gray-400'>{`${t('Location')} :`}</span>
+                                            <p className='text-gray-900 dark:text-gray-100'>{application.location}</p>
+                                        </div>
+                                        <div>
+                                            <span className='text-sm text-gray-600 dark:text-gray-400'>{`${t('Website')} :`}</span>
+                                            <p className='text-gray-900 dark:text-gray-100'>{application.website}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </li>

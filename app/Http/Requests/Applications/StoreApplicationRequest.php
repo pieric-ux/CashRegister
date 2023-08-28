@@ -33,7 +33,7 @@ class StoreApplicationRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:45', 'unique:cr_apps'],
-            'description' => ['nullable', 'string', 'max:45'],
+            'description' => ['nullable', 'string', 'max:255'],
             'start_date' => ['nullable', 'date', 'after:yesterday'],
             'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
             'location' => ['nullable', 'string', 'max:45'],
