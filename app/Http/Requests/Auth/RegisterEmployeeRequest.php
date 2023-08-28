@@ -28,7 +28,7 @@ class RegisterEmployeeRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:45'],
             'last_name' => ['required', 'string', 'max:45'],
             'phone' => ['nullable', 'string', 'max:45'],
-            'email' => ['required', 'email', 'max:255', 'unique:cr_employees'],
+            'email' => ['required', 'email:rfc,dns', 'max:255', 'unique:cr_employees'],
         ];
     }
 }

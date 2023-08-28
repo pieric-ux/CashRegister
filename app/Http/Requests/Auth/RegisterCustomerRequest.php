@@ -29,7 +29,7 @@ class RegisterCustomerRequest extends FormRequest
             'address' => ['required', 'string', 'max:255'],
             'npa' => ['required', 'integer'],
             'city' => ['required', 'string', 'max:45'],
-            'email' => ['required', 'email', 'max:255', 'unique:customers'],
+            'email' => ['required', 'email:rfc,dns', 'max:255', 'unique:customers'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
     }
