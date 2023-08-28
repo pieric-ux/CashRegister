@@ -26,16 +26,19 @@ class CR_PaymentMethods extends Model implements HasMedia
         'fk_apps_id',
     ];
 
+    // Relationship with CR_App model
     public function cr_apps()
     {
         return $this->belongsTo(CR_App::class, 'fk_apps_id');
     }
 
+    // Relationship with CR_Transactions model
     public function cr_transactions()
     {
         return $this->hasMany(CR_Transactions::class, 'fk_paymentMethods_id');
     }
 
+    // Register media conversions for media items
     public function registerMediaConversions(Media $media = null): void
     {
         $this
@@ -45,6 +48,7 @@ class CR_PaymentMethods extends Model implements HasMedia
             ->nonQueued();
     }
 
+    // Get URL of the picture image for the paymentMethod
     public function getPictureUrl($conversion = '')
     {
         $picture = $this->getFirstMediaUrl('paymentMethod-pictures', $conversion);
@@ -52,6 +56,7 @@ class CR_PaymentMethods extends Model implements HasMedia
         return $picture;
     }
 
+    // Upload a new picture image for the paymentMethod
     public function uploadPaymentMethodPicture($picture)
     {
         $this->clearMediaCollection('paymentMethod-pictures');

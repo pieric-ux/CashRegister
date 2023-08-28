@@ -24,11 +24,13 @@ class CR_Transactions extends Model
         'fk_paymentMethods_id',
     ];
 
+    // Relationship with CR_PaymentMethods model
     public function cr_payment_methods()
     {
         return $this->belongsTo(CR_PaymentMethods::class, 'fk_paymentMethods_id');
     }
 
+    // Relationship with CR_Details_Transactions model
     public function cr_details_transactions()
     {
         return $this->hasMany(CR_Details_Transactions::class, 'fk_transactions_id');

@@ -21,16 +21,19 @@ class CR_Workstations extends Model
         'fk_apps_id',
     ];
 
+    // Relationship with CR_App model
     public function cr_apps()
     {
         return $this->belongsTo(CR_App::class, 'fk_apps_id');
     }
 
+    // Relationship with CR_Employees model
     public function cr_employees()
     {
         return $this->hasMany(CR_Employees::class, 'fk_workstations_id');
     }
 
+    // Relationship with CR_Products model
     public function cr_products()
     {
         return $this->belongsToMany(CR_Products::class, 'cr_workstations_products', 'fk_workstations_id', 'fk_products_id');

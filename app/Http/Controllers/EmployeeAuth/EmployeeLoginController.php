@@ -15,11 +15,14 @@ use Inertia\Response;
 class EmployeeLoginController extends Controller
 {
     /**
-     * Display the login view.
+     * Display the login view for employees.
      */
     public function create(Request $request, CR_App $app, $code = null): Response
     {
+        // Get the application from the route
         $app = $request->route('app');
+
+        // Render the login view with application, status, and code
         return Inertia::render('Employees/Auth/Login', [
             'application' => $app,
             'status' => session('status'),
@@ -28,28 +31,33 @@ class EmployeeLoginController extends Controller
     }
 
     /**
-     * Handle an incoming authentication request.
+     * Handle the authentication request for employees.
      */
     public function store(LoginEmployeeRequest $request): RedirectResponse
     {
+        // Authenticate the employee using the provided credentials
         $request->authenticate();
 
+        // Regenerate the session ID to prevent session fixation attacks
         $request->session()->regenerate();
 
+        // Redirect to the intended URL after successful login
         return redirect()->intended(RouteServiceProvider::EMPLOYEE_HOME);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Log out the authenticated employee.
      */
     public function destroy(Request $request): RedirectResponse
     {
+        // Log out the authenticated employee using the employee guard
         Auth::guard('employee')->logout();
 
+        // Invalidate the session and regenerate a new session token
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
+        // Redirect to the home page
         return redirect('/');
     }
 }

@@ -10,6 +10,8 @@ import { useTranslation } from "react-i18next";
 
 export default function CashRegister({ employeeAuth, localization, categories, dishes, products, paymentMethods }) {
     const { t } = useTranslation();
+
+    {/* Initialize cart and related states */ }
     const emptyCartItem = { id: null, name: "", quantity: 0, client_price: 0 };
     const [cart, setCart] = useState(Array(5).fill(emptyCartItem));
     const isCartEmpty = cart.every(item => item.id === null || item.quantity === 0);
@@ -18,17 +20,20 @@ export default function CashRegister({ employeeAuth, localization, categories, d
     const [isCartVisible, setIsCartVisible] = useState(true);
     const [serverErrors, setServerErrors] = useState({});
 
+    {/* Handle payment method selection */ }
     useEffect(() => {
         if (selectedPaymentMethod) {
             handlePayment();
         }
     }, [selectedPaymentMethod])
 
+    {/* Update total when cart changes */ }
     useEffect(() => {
         const newTotal = calculateTotal();
         setTotal(newTotal);
     }, [cart]);
 
+    {/* Remove item from cart */ }
     const removeFromCart = (index) => {
         const newCart = [...cart];
         newCart.splice(index, 1);
@@ -41,12 +46,14 @@ export default function CashRegister({ employeeAuth, localization, categories, d
         setCart(newCart);
     }
 
+    {/* Calculate total of items in cart */ }
     const calculateTotal = () => {
         return cart.reduce((subtotal, item) => {
             return subtotal + (item.quantity * item.client_price);
         }, 0);
     }
 
+    {/* Handle payment processing */ }
     const handlePayment = async () => {
         const filteredCart = cart.filter(item => item.id !== null);
 

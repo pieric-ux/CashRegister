@@ -14,17 +14,23 @@ export default function Index({ customerAuth, applications, localization }) {
         <CustomerLayout auth={customerAuth} localization={localization}>
             <Head title={t('Applications')} />
 
+            {/* Main container */}
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 space-y-6">
+
+                {/* Create Application Form */}
                 <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow-md rounded-lg transition ease-linear duration-300">
                     <CreateAppForm className="max-w-xl mx-auto" />
                 </div>
 
+                {/* Display applications or no application message */}
                 {applications.length > 0 ? (
                     <ul>
                         {applications.map((application) => (
                             <li className='my-4' key={application.id}>
+                                {/* Application Card */}
                                 <div className="relative flex md:flex-row lg:gap-12 md:gap-10 flex-col sm:p-8 p-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-md rounded-lg transition ease-linear duration-300">
                                     <div className='absolute top-4 right-4 flex gap-2'>
+                                        {/* Configure Button */}
                                         <Link href={route('applications.show', application.slug)} tabIndex='-1'>
                                             <PrimaryButton className='!px-2' aria-label={t('Configure your app')}>
                                                 <svg className="w-5 h-5 text-white dark:text-gray-800" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -32,12 +38,15 @@ export default function Index({ customerAuth, applications, localization }) {
                                                 </svg>
                                             </PrimaryButton>
                                         </Link>
+                                        {/* Update and Delete Buttons */}
                                         <UpdateAppForm application={application} />
                                         <DeleteAppForm application={application} />
                                     </div>
+                                    {/* App Poster */}
                                     <div className='flex items-center justify-center md:mt-0 mt-8'>
                                         <UpdateAppPoster application={application} />
                                     </div>
+                                    {/* App Information */}
                                     <div className='flex flex-col flex-1 gap-2'>
                                         <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>{application.name}</h2>
                                         <div>

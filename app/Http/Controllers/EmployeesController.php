@@ -20,8 +20,10 @@ class EmployeesController extends Controller
      */
     public function index(IndexEmployeesRequest $request, CR_App $app): Response
     {
+        // Retrieve workstations along with their employees
         $workstations = $app->cr_workstations()->with('cr_employees')->get();
 
+        // Combine all employee from different workstations into a single collection
         $employees = $workstations->flatMap(function ($workstation) {
             return $workstation->cr_employees;
         });
@@ -37,6 +39,7 @@ class EmployeesController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, CR_Employees $employee): RedirectResponse
     {
+        // Update employee details based on validated data
         $employee->first_name = ucfirst($request->input('first_name'));
         $employee->last_name = ucfirst($request->input('last_name'));
         $employee->phone = $request->input('phone');
@@ -51,15 +54,21 @@ class EmployeesController extends Controller
      */
     public function updateDragAndDrop(UpdateDragAndDropEmployeesRequest $request)
     {
+        // Retrieve workstation data and associated employee IDs from the request
         $workstations = $request->input('workstations');
 
+        // Prepare an array to store updates for employee workstations
         $updates = [];
+
+        // Iterate through workstation data and employee data to prepare updates
         foreach ($workstations as $workstationData) {
             $workstationId = $workstationData['id'];
             foreach ($workstationData['cr_employees'] as $employeeData) {
                 $updates[$employeeData['id']] = ['fk_workstations_id' => $workstationId];
             }
         }
+
+        // Update employee workstations using the prepared updates array
         if (!empty($updates)) {
             CR_Employees::whereIn('id', array_keys($updates))
                 ->each(function ($employee) use ($updates) {
@@ -76,10 +85,12 @@ class EmployeesController extends Controller
      */
     public function destroy(DeleteEmployeeRequest $request, CR_Employees $employee): RedirectResponse
     {
+        // Validate the user's password before proceeding
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
 
+        // Delete the product
         $employee->delete();
 
         return Redirect::route('employees.index', $employee->cr_workstations->cr_apps);

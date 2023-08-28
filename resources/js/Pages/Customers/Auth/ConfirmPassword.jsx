@@ -9,10 +9,13 @@ import { useTranslation } from 'react-i18next';
 
 export default function ConfirmPassword() {
     const { t } = useTranslation();
+
+    {/* Initialize form data and handle form submission */ }
     const { data, setData, post, processing, errors, reset } = useForm({
         password: '',
     });
 
+    {/* Reset password field when component unmounts */ }
     useEffect(() => {
         return () => {
             reset('password');

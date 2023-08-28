@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
 import { useTranslation } from "react-i18next";
+import { swiperSetting } from "@/Config/swiperConfig";
 import 'swiper/css/bundle';
 
 export default function Items({ isCartVisible, cart, setCart, categories, dishes, products }) {
@@ -9,6 +9,7 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
     const [activeSection, setActiveSection] = useState(null);
     const [isDragging, setIsDragging] = useState(false);
 
+    {/* Create maps for dishes and products */ }
     const soldSeparatelydDishesMap = new Map(dishes.filter(dish => dish.is_SoldSeparately).map(dish => [dish.id, dish]));
     const productsDishesMap = products.reduce((dishes, product) => {
         if (product.cr_dishes && product.cr_dishes.name !== 'No dish') {
@@ -18,6 +19,7 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
     }, new Map());
     const returnDishesMap = new Map([...soldSeparatelydDishesMap, ...productsDishesMap]);
 
+    {/* Set initial active section based on data */ }
     useEffect(() => {
         if (productsDishesMap.size > 0) {
             setActiveSection('return');
@@ -26,49 +28,21 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
         }
     }, [categories]);
 
+    {/* Toggle section visibility */ }
     const toggleSection = (section) => {
         activeSection === section ? setActiveSection(null) : setActiveSection(section);
     }
 
+    {/* Swiper settings */ }
     const settings = {
-        modules: [Pagination],
+        ...swiperSetting,
         onTransitionStart: () => setIsDragging(true),
         onTransitionEnd: () => setIsDragging(false),
         preventClicks: isDragging,
         preventClicksPropagation: isDragging,
-        pagination: {
-            el: '.swiper-pagination',
-            type: 'progressbar',
-            renderProgressbar: function (progressbarFillClass) {
-                return '<span class="' + progressbarFillClass + ' !bg-sky-500"></span>';
-            }
-        },
-
-        breakpoints: {
-            320: {
-                slidesPerView: 2,
-            },
-            375: {
-                slidesPerView: 3,
-            },
-            640: {
-                slidesPerView: 4,
-
-            },
-            768: {
-                slidesPerView: 5,
-
-            },
-            1024: {
-                slidesPerView: 6,
-
-            },
-            1280: {
-                slidesPerView: 8,
-            }
-        }
     };
 
+    {/* Add item to cart */ }
     const addToCart = (item, itemType) => {
         let newCart = [...cart];
         let price = parseFloat(item.client_price);

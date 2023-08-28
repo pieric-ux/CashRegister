@@ -24,6 +24,7 @@ class CR_Details_Transactions extends Model
         'fk_transactions_id',
     ];
 
+    // Relationship with CR_Transactions model
     public function cr_transactions()
     {
         return $this->belongsTo(CR_Transactions::class, 'fk_transactions_id');

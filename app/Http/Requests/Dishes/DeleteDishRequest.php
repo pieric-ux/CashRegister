@@ -12,9 +12,13 @@ class DeleteDishRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // Get the dish instance from the route parameter
         $dish = $this->route('dish');
+
+        // Get the associated app of the dish
         $app = $dish->cr_apps;
 
+        // Check if the app is owned by the authenticated user
         return $app->isOwnedBy(Auth::user());
     }
 

@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 
 export default function EmployeeLayout({ auth, children, localization }) {
     const { t } = useTranslation();
+
+    {/* Responsive NavLink components */ }
     const RespNavLink = (
         <>
             <ResponsiveNavLink href={route('cashregister.index')} active={route().current('cashregister.index')}>
@@ -18,6 +20,8 @@ export default function EmployeeLayout({ auth, children, localization }) {
             </ResponsiveNavLink>
         </>
     );
+
+    {/* Dropdown Link components */ }
     const DropdownLink = (
         <>
             <Dropdown.Link href={route('cashregister.index')}>{t('Cash Register')}</Dropdown.Link>

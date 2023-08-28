@@ -9,6 +9,8 @@ import { useTranslation } from 'react-i18next';
 
 export default function Register() {
     const { t } = useTranslation();
+
+    {/* Initialize form data and handle form submission */ }
     const { data, setData, post, processing, errors, reset } = useForm({
         company_name: '',
         first_name: '',
@@ -21,6 +23,7 @@ export default function Register() {
         password_confirmation: '',
     });
 
+    {/* Reset password and password confirmation fields when component unmounts */ }
     useEffect(() => {
         return () => {
             reset('password', 'password_confirmation');

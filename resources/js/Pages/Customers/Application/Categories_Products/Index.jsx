@@ -10,28 +10,39 @@ import { useTranslation } from "react-i18next";
 
 export default function Index({ customerAuth, application, categories, localization }) {
     const { t } = useTranslation();
+
+    {/* State to hold the updated categories */ }
     const [updatedCategories, setUpdatedCategories] = useState(categories);
 
+    {/* Update the state when the 'categories' prop changes */ }
     useEffect(() => {
         setUpdatedCategories(categories);
     }, [categories]);
 
+    {/* Callback for handling the end of a drag-and-drop operation */ }
     const onDragEnd = async (result) => {
+        {/* Destructure the result to get the destination and source */ }
         const { destination, source } = result;
 
+        {/* If there's no destination, return */ }
         if (!destination) {
             return;
         }
 
+        {/* If the destination is the same as the source, return */ }
         if (
             destination.index === source.index
         ) {
             return;
         }
 
+        {/* Get the category being moved */ }
         const movedCategory = updatedCategories.splice(source.index, 1)[0];
+
+        {/* Insert the moved category at the destination index */ }
         updatedCategories.splice(destination.index, 0, movedCategory);
 
+        {/* Update the order of categories based on their new positions */ }
         const updatedCategoriesWithOrder = updatedCategories.map((category, index) => {
             return {
                 ...category,
@@ -39,13 +50,14 @@ export default function Index({ customerAuth, application, categories, localizat
             };
         });
 
+        {/* Update the server using Axios */ }
         await axios.patch(route('categories.updateDragAndDrop'), {
             categories: updatedCategoriesWithOrder,
         })
             .then(function (response) {
+                {/* Update the state with the response data */ }
                 setUpdatedCategories(response.data.categories);
             })
-            .catch(function (error) { });
     }
 
     return (

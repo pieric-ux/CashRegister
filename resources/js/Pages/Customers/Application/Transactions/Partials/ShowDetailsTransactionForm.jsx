@@ -6,12 +6,16 @@ import SecondaryButton from "@/Components/SecondaryButton";
 
 export default function ShowDetailsTransactionForm({ transaction, className = '' }) {
     const { t } = useTranslation();
+
+    {/* State for controlling modal visibility */ }
     const [openingModal, setOpeningModal] = useState(false);
 
+    {/* Open the modal */ }
     const openModal = () => {
         setOpeningModal(true);
     };
 
+    {/* Close the modal */ }
     const closeModal = () => {
         setOpeningModal(false);
     };

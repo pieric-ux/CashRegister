@@ -14,16 +14,20 @@ import { useTranslation } from "react-i18next";
 
 export default function Index({ customerAuth, application, products, categories, dishes, localization }) {
     const { t } = useTranslation();
+
+    {/* State variables for handling search, sorting, and pagination */ }
     const [searchTerm, setSearchTerm] = useState("");
     const [sortColumn, setSortColumn] = useState("");
     const [sortDirection, setSortDirection] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [productPerPage, setProductPerPage] = useState(10);
 
+    {/* Handler for search input change */ }
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
 
+    {/* Handler for column sorting */ }
     const handleSort = (column) => {
         if (column === sortColumn) {
             setSortDirection(sortDirection === "asc" ? "desc" : "asc");
@@ -33,15 +37,18 @@ export default function Index({ customerAuth, application, products, categories,
         }
     };
 
+    {/* Handler for page change */ }
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
 
+    {/* Handler for items per page change */ }
     const handleProductPerPage = (e) => {
         setProductPerPage(parseInt(e.target.value, 10));
         setCurrentPage(1);
     };
 
+    {/* Columns configuration for the table */ }
     const productsColumns = [
         { key: "picture", label: t('Picture'), className: "hidden lg:table-cell", render: (product) => <UpdateProdutPicture product={product} /> },
         { key: "name", label: t('Name') },
@@ -52,6 +59,7 @@ export default function Index({ customerAuth, application, products, categories,
         { key: "dish", label: t('Dish'), className: "hidden xl:table-cell", render: (product) => product.cr_dishes?.name === 'No dish' ? '' : `${product.cr_dishes?.name} ${product.cr_dishes?.unit}` },
     ];
 
+    {/* Configuration for rendering actions in each row */ }
     const renderProductsActions = {
         header: () => t('Actions'),
         render: (product) => (
@@ -62,15 +70,18 @@ export default function Index({ customerAuth, application, products, categories,
         )
     };
 
+    {/* Sorting products by creation date by ASC */ }
     const sortedByCreationDateProducts = products.slice().sort((a, b) => {
         const dateA = new Date(a.created_at);
         const dateB = new Date(b.created_at);
         return dateA - dateB;
     });
 
+    {/* Applying sorting and filtering */ }
     const sortedProducts = sortData(sortedByCreationDateProducts, sortColumn, sortDirection);
     const filteredProducts = filterData(sortedProducts, searchTerm, productsColumns, t);
 
+    {/* Pagination calculation */ }
     const indexOfLastProducts = currentPage * productPerPage;
     const indexOfFirstProducts = indexOfLastProducts - productPerPage;
     const currentProducts = filteredProducts.slice(indexOfFirstProducts, indexOfLastProducts);

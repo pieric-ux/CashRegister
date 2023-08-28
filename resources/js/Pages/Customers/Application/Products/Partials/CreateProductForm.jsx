@@ -10,8 +10,12 @@ import { useTranslation } from 'react-i18next';
 
 export default function CreateProductForm({ application, className = '' }) {
     const { t } = useTranslation();
+
+    {/* State for controlling modal visibility and form errors display */ }
     const [openingModal, setOpeningModal] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
+
+    {/* Initialize form data and handle form submission */ }
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         unit: '',
@@ -19,10 +23,12 @@ export default function CreateProductForm({ application, className = '' }) {
         cost_price: '',
     });
 
+    {/* Open the modal */ }
     const openModal = () => {
         setOpeningModal(true);
     };
 
+    {/* Close the modal and reset form data */ }
     const closeModal = () => {
         setOpeningModal(false);
         reset();

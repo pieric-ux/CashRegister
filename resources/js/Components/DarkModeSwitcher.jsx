@@ -1,10 +1,10 @@
 import useColorMode from "@/Hooks/useColorMode";
 
 export default function DarkModeSwitcher() {
-    {/* Importe et utilise le hook useColorMode personnalisé */ }
+    {/* Import and use the custom useColorMode hook */ }
     const [colorMode, setColorMode] = useColorMode();
 
-    {/* Gère le changement de thème en alternant entre 'light' et 'dark' */ }
+    {/* Handles theme change by toggling between 'light' and 'dark' */ }
     const handleThemeChange = () => {
         const newTheme = colorMode === 'light' ? 'dark' : 'light';
         setColorMode(newTheme);

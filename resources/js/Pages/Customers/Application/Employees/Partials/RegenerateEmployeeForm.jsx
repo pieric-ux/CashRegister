@@ -4,8 +4,11 @@ import { useTranslation } from "react-i18next";
 
 export default function RegenerateEmployeeForm({ employee }) {
     const { t } = useTranslation();
+
+    {/* Initialize form data and handle form submission */ }
     const { patch } = useForm({});
 
+    {/* Regenerate the activation code for the employee. */ }
     function regenerateEmployeeActivation(e) {
         e.preventDefault();
 

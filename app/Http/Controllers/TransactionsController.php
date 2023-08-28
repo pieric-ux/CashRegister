@@ -18,12 +18,17 @@ class TransactionsController extends Controller
      */
     public function index(IndexTransactionsRequest $request, CR_App $app): Response
     {
-        $paymentMethods = $app->cr_payment_methods()->with('cr_transactions', 'cr_transactions.cr_payment_methods', 'cr_transactions.cr_details_transactions')->get();
+        // Load payment methods with their associated transactions and details
+        $paymentMethods = $app->cr_payment_methods()
+            ->with('cr_transactions', 'cr_transactions.cr_payment_methods', 'cr_transactions.cr_details_transactions')
+            ->get();
 
+        // Combine all transactions from different payment methods into a single collection
         $transactions = $paymentMethods->flatMap(function ($paymentMethod) {
             return $paymentMethod->cr_transactions;
         });
 
+        // Render the Inertia view with application and transaction data
         return Inertia::render('Customers/Application/Transactions/Index', [
             'application' => $app,
             'transactions' => $transactions,
@@ -35,12 +40,15 @@ class TransactionsController extends Controller
      */
     public function destroy(DeleteTransactionRequest $request, CR_Transactions $transaction): RedirectResponse
     {
+        // Validate the current user's password before proceeding
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
 
+        // Delete the specified transaction
         $transaction->delete();
 
+        // Redirect back to the transactions index page
         return Redirect::route('transactions.index', $transaction->cr_payment_methods->cr_apps);
     }
 }

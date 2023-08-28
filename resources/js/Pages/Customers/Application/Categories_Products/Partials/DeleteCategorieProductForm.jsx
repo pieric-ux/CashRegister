@@ -10,9 +10,14 @@ import { useTranslation } from 'react-i18next';
 
 export default function DeleteCategorieProductForm({ category }) {
     const { t } = useTranslation();
+
+    {/* State to manage the modal visibility and user confirmation */ }
     const [confirmingCategoryDeletion, setConfirmingCategoryDeletion] = useState(false);
+
+    {/* Ref for the password input field */ }
     const passwordInput = useRef();
 
+    {/* Initialize form data and handle form submission */ }
     const {
         data,
         setData,
@@ -24,10 +29,12 @@ export default function DeleteCategorieProductForm({ category }) {
         password: '',
     });
 
+    {/* Open the confirmation modal */ }
     const confirmCategoryDeletion = () => {
         setConfirmingCategoryDeletion(true);
     };
 
+    {/* Delete the category */ }
     const deleteCategory = (e) => {
         e.preventDefault();
 
@@ -39,6 +46,7 @@ export default function DeleteCategorieProductForm({ category }) {
         });
     };
 
+    {/* Close the modal and reset the form */ }
     const closeModal = () => {
         setConfirmingCategoryDeletion(false);
 

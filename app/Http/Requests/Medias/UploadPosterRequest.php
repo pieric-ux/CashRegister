@@ -13,10 +13,13 @@ class UploadPosterRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // Get the app ID from the request input
         $appId = $this->input('appId');
 
+        // Find the app instance
         $app = CR_App::find($appId);
 
+        // Check if the app is owned by the authenticated user
         return $app->isOwnedBy(Auth::user());
     }
 

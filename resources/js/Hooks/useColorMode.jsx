@@ -2,51 +2,51 @@ import { useEffect } from 'react';
 import useLocalStorage from './useLocalStorage';
 
 export default function useColorMode() {
-    {/* Initialise l'état du mode couleur en utilisant le hook useLocalStorage, qui récupère la valeur stockée depuis le localStorage. */ }
+    {/* Initialize the color mode state using the useLocalStorage hook, which retrieves the stored value from localStorage. */ }
     const [colorMode, setColorMode] = useLocalStorage('theme', null);
 
     useEffect(() => {
-        {/* Nom de la classe CSS pour le mode sombre */ }
+        {/* CSS class name for dark mode */ }
         const className = 'dark';
-        {/* Référence à la liste de classes du document.body */ }
+        {/* Reference to the list of classes of the document.body */ }
         const bodyClass = window.document.body.classList;
 
-        {/* Fonction de gestion du changement de mode de couleur */ }
+        {/* Function to handle color mode change */ }
         const handleColorSchemeChange = event => {
-            {/* Vérifie si le mode sombre est préféré */ }
+            {/* Check if dark mode is preferred */ }
             const prefersDarkMode = event.matches;
-            {/* Détermine le nouveau thème en fonction de la préférence */ }
+            {/* Determine the new theme based on preference */ }
             const newTheme = prefersDarkMode ? 'dark' : 'light';
-            {/* Met à jour l'état du mode couleur avec le nouveau thème */ }
+            {/* Update the color mode state with the new theme */ }
             setColorMode(newTheme);
-            {/* Ajoute ou supprime la classe 'dark' sur l'élément body en fonction du mode préféré */ }
+            {/* Add or remove the 'dark' class on the body element based on the preferred mode */ }
             bodyClass.toggle(className, prefersDarkMode);
         };
 
-        {/* Création d'une media query pour détecter le mode de couleur préféré du système */ }
+        {/* Create a media query to detect the system's preferred color mode */ }
         const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        {/* Ajout d'un écouteur d'événement pour gérer les changements de mode de couleur */ }
+        {/* Add an event listener to handle color mode changes */ }
         darkModeMediaQuery.addEventListener('change', handleColorSchemeChange);
 
         if (colorMode === null) {
-            {/* Vérifie si le mode de couleur n'est pas défini par l'utilisateur */ }
+            {/* Check if color mode is not set by the user */ }
             const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            {/* Détermine le thème initial en fonction du mode préféré */ }
+            {/* Determine the initial theme based on preference */ }
             const initialTheme = prefersDarkMode ? 'dark' : 'light';
-            {/* Met à jour l'état du mode couleur avec le thème initial */ }
+            {/* Update the color mode state with the initial theme */ }
             setColorMode(initialTheme);
-            {/* Ajoute ou supprime la classe 'dark' sur l'élément body en fonction du mode préféré */ }
+            {/* Add or remove the 'dark' class on the body element based on the preferred mode */ }
             bodyClass.toggle(className, prefersDarkMode);
         } else {
-            {/* Le mode de couleur est défini par l'utilisateur, ajoute ou supprime la classe 'dark' en fonction de la valeur */ }
+            {/* Color mode is set by the user, add or remove the 'dark' class based on the value */ }
             bodyClass.toggle(className, colorMode === 'dark');
         }
 
-        {/* Retire l'écouteur d'événement lorsque le composant est démonté ou que la dépendance change */ }
+        {/* Remove the event listener when the component is unmounted or the dependency changes */ }
         return () => {
             darkModeMediaQuery.removeEventListener('change', handleColorSchemeChange);
         };
     }, [colorMode, setColorMode]);
-    {/* Retourne l'état du mode couleur et la fonction de mise à jour du mode couleur */ }
+    {/* Return the color mode state and the color mode update function */ }
     return [colorMode, setColorMode];
 };

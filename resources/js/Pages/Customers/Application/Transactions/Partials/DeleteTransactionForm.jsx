@@ -10,9 +10,14 @@ import { useTranslation } from 'react-i18next';
 
 export default function DeleteTransactionForm({ transaction }) {
     const { t } = useTranslation();
+
+    {/* State to manage the modal visibility and user confirmation */ }
     const [confirmingTransactionDeletion, setConfirmingTransactionDeletion] = useState(false);
+
+    {/* Ref for the password input field */ }
     const passwordInput = useRef();
 
+    {/* Initialize form data and handle form submission */ }
     const {
         data,
         setData,
@@ -24,10 +29,12 @@ export default function DeleteTransactionForm({ transaction }) {
         password: '',
     });
 
+    {/* Open the confirmation modal */ }
     const confirmTransactionDeletion = () => {
         setConfirmingTransactionDeletion(true);
     };
 
+    {/* Delete the workstation */ }
     const deleteTransaction = (e) => {
         e.preventDefault();
 
@@ -39,6 +46,7 @@ export default function DeleteTransactionForm({ transaction }) {
         });
     };
 
+    {/* Close the modal and reset the form */ }
     const closeModal = () => {
         setConfirmingTransactionDeletion(false);
 

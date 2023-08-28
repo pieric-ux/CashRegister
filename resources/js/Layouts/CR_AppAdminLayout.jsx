@@ -8,7 +8,11 @@ import { useTranslation } from "react-i18next";
 
 export default function CR_AppAdminLayout({ auth, application, children, localization }) {
     const { t } = useTranslation();
+
+    {/* State to control the sidebar's open/closed state */ }
     const [sideBarOpen, setSideBarOpen] = useLocalStorage("sideBarOpen", false);
+
+    {/* Responsive NavLink components */ }
     const RespNavLink = (
         <>
             <ResponsiveNavLink href={route('dashboard')}>
@@ -40,6 +44,8 @@ export default function CR_AppAdminLayout({ auth, application, children, localiz
             </ResponsiveNavLink>
         </>
     );
+
+    {/* Dropdown Link components */ }
     const DropdownLink = (
         <>
             <Dropdown.Link href={route('dashboard')}>{t('Home')}</Dropdown.Link>
@@ -116,8 +122,6 @@ export default function CR_AppAdminLayout({ auth, application, children, localiz
                 <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
                     {/* Header Start*/}
                     <Header user={auth.customer} title={application.name} avatarPath={auth.avatarPath} RespNavLink={RespNavLink} DropdownLink={DropdownLink} sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen} localization={localization} />
-
-
                     {/* Header End*/}
 
                     {/* Main Content Start*/}

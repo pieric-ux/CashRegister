@@ -10,9 +10,14 @@ import { useTranslation } from 'react-i18next';
 
 export default function DeleteUserForm({ className = '' }) {
     const { t } = useTranslation();
+
+    {/* State to manage the modal visibility and user confirmation */ }
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
+
+    {/* Ref for the password input field */ }
     const passwordInput = useRef();
 
+    {/* Initialize form data and handle form submission */ }
     const {
         data,
         setData,
@@ -24,10 +29,12 @@ export default function DeleteUserForm({ className = '' }) {
         password: '',
     });
 
+    {/* Open the confirmation modal */ }
     const confirmUserDeletion = () => {
         setConfirmingUserDeletion(true);
     };
 
+    {/* Delete the user */ }
     const deleteUser = (e) => {
         e.preventDefault();
 
@@ -39,6 +46,7 @@ export default function DeleteUserForm({ className = '' }) {
         });
     };
 
+    {/* Close the modal and reset the form */ }
     const closeModal = () => {
         setConfirmingUserDeletion(false);
 

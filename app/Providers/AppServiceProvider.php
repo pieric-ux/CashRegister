@@ -22,16 +22,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Share localization data with Inertia.js
         Inertia::share('localization', function () {
             return [
                 'locale' => App::getLocale(),
                 'locales' => config('app.locales'),
             ];
         });
-
+        // Default configuration for password rules
         Password::defaults(function () {
             $rule = Password::min(8);
 
+            // If the application is in production, use stricter rules
             return $this->app->isProduction()
                 ? $rule->min(12)->mixedCase()->symbols()->uncompromised()
                 : $rule;

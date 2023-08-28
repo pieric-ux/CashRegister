@@ -6,15 +6,19 @@ import { useTranslation } from 'react-i18next';
 
 export default function UpdateAppPoster({ application, className }) {
     const { t } = useTranslation();
+
+    {/* Initialize form data and handle form submission */ }
     const { data, setData, post, errors } = useForm({
         appId: application.id,
         poster: '',
     });
 
+    {/* Update the selected poster file in form data */ }
     const handlePosterChange = (e) => {
         setData('poster', e.target.files[0]);
     };
 
+    {/* When the poster changes, submit the form */ }
     useEffect(() => {
         if (data.poster) {
             submit();

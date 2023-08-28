@@ -29,12 +29,15 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        // Fill the user's profile information with validated data
         $request->user()->fill($request->validated());
 
+        // If the email is changed, set email verification to null
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
 
+        // Capitalize various fields in the user's profile
         $customer = $request->user();
         $customer->company_name = ucfirst($customer->company_name);
         $customer->first_name = ucfirst($customer->first_name);
@@ -42,8 +45,10 @@ class ProfileController extends Controller
         $customer->address = ucfirst($customer->address);
         $customer->city = ucfirst($customer->city);
 
+        // Save the updated profile
         $customer->save();
 
+        // Redirect back to the profile edit page
         return Redirect::route('profile.edit');
     }
 
@@ -52,23 +57,29 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        // Validate the user's password before proceeding
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
 
         $user = $request->user();
 
+        // Clear media collection for each app associated with the user
         $user->cr_apps->each(function ($app) {
             $app->clearMediaCollection('posters');
         });
 
+        // Logout the user
         Auth::logout();
 
+        // Delete the user's account
         $user->delete();
 
+        // Invalidate the session and regenerate the CSRF token
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
+        // Redirect to the home page
         return Redirect::to('/');
     }
 }

@@ -8,6 +8,8 @@ import { useTranslation } from 'react-i18next';
 
 export default function UpdateProfileInformation({ customer, className = '' }) {
     const { t } = useTranslation();
+
+    {/* Initialize form data and handle form submission */ }
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
         company_name: customer.company_name || '',
         first_name: customer.first_name,

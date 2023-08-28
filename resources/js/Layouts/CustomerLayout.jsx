@@ -8,7 +8,11 @@ import { useTranslation } from "react-i18next";
 
 export default function CustomerLayout({ auth, children, localization }) {
     const { t } = useTranslation();
+
+    {/* State to control the sidebar's open/closed state */ }
     const [sideBarOpen, setSideBarOpen] = useLocalStorage("sideBarOpen", false);
+
+    {/* Responsive NavLink components */ }
     const RespNavLink = (
         <>
             <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
@@ -25,6 +29,8 @@ export default function CustomerLayout({ auth, children, localization }) {
             </ResponsiveNavLink>
         </>
     );
+
+    {/* Dropdown Link components */ }
     const DropdownLink = (
         <>
             <Dropdown.Link href={route('profile.edit')}>{t('Profile')}</Dropdown.Link>
@@ -62,7 +68,7 @@ export default function CustomerLayout({ auth, children, localization }) {
                         {t('Applications')}
                     </SideBarLink>
                 </Sidebar>
-                {/* SideBar Start*/}
+                {/* SideBar End*/}
 
                 {/* Content Area Start*/}
                 <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">

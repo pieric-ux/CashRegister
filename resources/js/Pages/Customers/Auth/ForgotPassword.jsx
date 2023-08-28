@@ -7,6 +7,8 @@ import { useTranslation } from 'react-i18next';
 
 export default function ForgotPassword({ status }) {
     const { t } = useTranslation();
+
+    {/* Initialize form data and handle form submission */ }
     const { data, setData, post, processing, errors } = useForm({
         email: '',
     });

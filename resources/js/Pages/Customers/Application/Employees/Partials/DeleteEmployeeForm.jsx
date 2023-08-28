@@ -10,9 +10,14 @@ import { useTranslation } from 'react-i18next';
 
 export default function DeleteEmployeeForm({ employee }) {
     const { t } = useTranslation();
+
+    {/* State to manage the modal visibility and user confirmation */ }
     const [confirmingEmployeeDeletion, setConfirmingEmployeeDeletion] = useState(false);
+
+    {/* Ref for the password input field */ }
     const passwordInput = useRef();
 
+    {/* Initialize form data and handle form submission */ }
     const {
         data,
         setData,
@@ -24,10 +29,12 @@ export default function DeleteEmployeeForm({ employee }) {
         password: '',
     });
 
+    {/* Open the confirmation modal */ }
     const confirmEmployeeDeletion = () => {
         setConfirmingEmployeeDeletion(true);
     };
 
+    {/* Delete the employee */ }
     const deleteEmployee = (e) => {
         e.preventDefault();
 
@@ -39,6 +46,7 @@ export default function DeleteEmployeeForm({ employee }) {
         });
     };
 
+    {/* Close the modal and reset the form */ }
     const closeModal = () => {
         setConfirmingEmployeeDeletion(false);
 

@@ -10,8 +10,12 @@ import { useTranslation } from 'react-i18next';
 
 export default function UpdateProductForm({ product, categories, dishes, className = '' }) {
     const { t } = useTranslation();
+
+    {/* State for controlling modal visibility and form errors display */ }
     const [openingModal, setOpeningModal] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
+
+    {/* Initialize form data and handle form submission */ }
     const { data, setData, patch, processing, errors } = useForm({
         name: product.name,
         unit: product.unit,
@@ -21,10 +25,12 @@ export default function UpdateProductForm({ product, categories, dishes, classNa
         dish: product.fk_dishes_id,
     });
 
+    {/* Open the modal */ }
     const openModal = () => {
         setOpeningModal(true);
     };
 
+    {/* Close the modal and reset form data */ }
     const closeModal = () => {
         setOpeningModal(false);
         setData({
@@ -38,6 +44,7 @@ export default function UpdateProductForm({ product, categories, dishes, classNa
         setShowErrors(false);
     };
 
+    {/* Set form data when product prop changes */ }
     useEffect(() => {
         setData({
             name: product.name,

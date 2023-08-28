@@ -12,8 +12,10 @@ class IndexEmployeesRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // Get the app instance from the route parameter
         $app = $this->route('app');
 
+        // Check if the app is owned by the authenticated user
         return $app->isOwnedBy(Auth::user());
     }
 

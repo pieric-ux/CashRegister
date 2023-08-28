@@ -13,19 +13,27 @@ class UpdateDragAndDropCategorieProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // Get the array of category data from the request input
         $categories = $this->input('categories');
+
+        // Initialize a flag to track ownership by the user
         $ownedByUser = true;
 
+        // Loop through each category data
         foreach ($categories as $categoryData) {
+            // Find the category instance
             $category = CR_Categories_Products::find($categoryData['id']);
+
+            // Get the associated app of the category
             $app = $category->cr_apps;
 
+            // Check if the app is owned by the authenticated user
             if (!$app->isOwnedBy(Auth::user())) {
                 $ownedByUser = false;
                 break;
             }
         }
-
+        // Return the ownership status
         return $ownedByUser;
     }
 

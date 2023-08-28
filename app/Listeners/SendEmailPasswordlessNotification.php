@@ -17,10 +17,13 @@ class SendEmailPasswordlessNotification
      */
     public function handle(Registered $event): void
     {
+        // Check if the registered user is an instance of CR_Employees
         if ($event->user instanceof CR_Employees) {
+            // Define the login route and application slug
             $loginRoute = 'employees.login';
             $applicationSlug = $event->user->cr_workstations->cr_apps->slug;
 
+            // Send the passwordless notification to the employee
             Notification::send($event->user, new EmployeePasswordlessNotification($event->user->passwordless, $loginRoute, $applicationSlug));
         }
     }

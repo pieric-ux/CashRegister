@@ -14,30 +14,44 @@ class UpdateDragAndDropEmployeesRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // Get the array of workstation data from the request input
         $workstations = $this->input('workstations');
+
+        // Initialize a flag to track ownership by the user
         $ownedByUser = true;
 
+        // Loop through each workstation data
         foreach ($workstations as $workstationData) {
+            // Find the workstation instance
             $workstation = CR_Workstations::find($workstationData['id']);
+
+            // Get the associated app of the workstation
             $app = $workstation->cr_apps;
 
+            // Check if the app is owned by the authenticated user
             if (!$app->isOwnedBy(Auth::user())) {
                 $ownedByUser = false;
                 break;
             }
 
+            // Get the array of employee data for the workstation
             $employees = $workstationData['cr_employees'];
 
+            // Loop through each employee data
             foreach ($employees as $employeeData) {
+                // Find the employee instance
                 $employee = CR_Employees::find($employeeData['id']);
 
+                // Get the associated app of the employee
                 $app = $employee->cr_workstations->cr_apps;
+                // Check if the app is owned by the authenticated user
                 if (!$app->isOwnedBy(Auth::user())) {
                     $ownedByUser = false;
-                    break 2;
+                    break 2; // Break out of both loops
                 }
             }
         }
+        // Return the ownership status
         return $ownedByUser;
     }
 

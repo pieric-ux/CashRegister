@@ -14,9 +14,13 @@ class UpdateEmployeeRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // Get the employee instance from the route parameter
         $employee = $this->route('employee');
+
+        // Get the associated app of the employee
         $app = $employee->cr_workstations->cr_apps;
 
+        // Check if the app is owned by the authenticated user
         return $app->isOwnedBy(Auth::user());
     }
 

@@ -6,14 +6,18 @@ import { useTranslation } from 'react-i18next';
 
 export default function UpdateUserAvatar({ avatarPath, className }) {
     const { t } = useTranslation();
+
+    {/* Initialize form data and handle form submission */ }
     const { data, setData, post, errors } = useForm({
         avatar: '',
     });
 
+    {/* Update the selected avatar file in form data */ }
     const handleAvatarChange = (e) => {
         setData('avatar', e.target.files[0]);
     };
 
+    {/* When the avatar changes, submit the form */ }
     useEffect(() => {
         if (data.avatar) {
             submit();
