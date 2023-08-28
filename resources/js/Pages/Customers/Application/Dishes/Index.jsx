@@ -21,8 +21,6 @@ export default function Index({ customerAuth, application, dishes, localization 
     const [currentPage, setCurrentPage] = useState(1);
     const [dishesPerPage, setDishesPerPage] = useState(10);
 
-    const dishesToRender = dishes.slice(1);
-
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
@@ -73,7 +71,13 @@ export default function Index({ customerAuth, application, dishes, localization 
         )
     };
 
-    const sortedDishes = sortData(dishesToRender, sortColumn, sortDirection);
+    const sortedByCreationDateDishes = dishes.slice(1).sort((a, b) => {
+        const dateA = new Date(a.created_at);
+        const dateB = new Date(b.created_at);
+        return dateA - dateB;
+    });
+
+    const sortedDishes = sortData(sortedByCreationDateDishes, sortColumn, sortDirection);
     const filteredDishes = filterData(sortedDishes, searchTerm, dishesColumns, t);
 
     const indexOfLastDishes = currentPage * dishesPerPage;

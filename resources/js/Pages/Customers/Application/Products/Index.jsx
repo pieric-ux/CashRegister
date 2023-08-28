@@ -62,7 +62,13 @@ export default function Index({ customerAuth, application, products, categories,
         )
     };
 
-    const sortedProducts = sortData(products, sortColumn, sortDirection);
+    const sortedByCreationDateProducts = products.slice().sort((a, b) => {
+        const dateA = new Date(a.created_at);
+        const dateB = new Date(b.created_at);
+        return dateA - dateB;
+    });
+
+    const sortedProducts = sortData(sortedByCreationDateProducts, sortColumn, sortDirection);
     const filteredProducts = filterData(sortedProducts, searchTerm, productsColumns, t);
 
     const indexOfLastProducts = currentPage * productPerPage;

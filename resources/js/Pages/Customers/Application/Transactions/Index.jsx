@@ -58,7 +58,13 @@ export default function Index({ customerAuth, application, transactions, localiz
         )
     };
 
-    const sortedTransactions = sortData(transactions, sortColumn, sortDirection);
+    const sortedByCreationDateTransactions = transactions.slice().sort((a, b) => {
+        const dateA = new Date(a.created_at);
+        const dateB = new Date(b.created_at);
+        return dateB - dateA;
+    });
+
+    const sortedTransactions = sortData(sortedByCreationDateTransactions, sortColumn, sortDirection);
     const filteredTransactions = filterData(sortedTransactions, searchTerm, transactionsColumns, t);
 
     const indexOfLastTransactions = currentPage * transactionPerPage;
