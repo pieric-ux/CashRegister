@@ -1,7 +1,7 @@
 {
     "name": "CashRegister",
     "description": "An application that simulates a cash register",
-    "short_name": "CR",
+    "short_name": "CashRegister",
     "dir": "auto",
     "display": "standalone",
     "icons": [
