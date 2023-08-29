@@ -9,7 +9,7 @@
 
         <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" nonce="{{ Vite::cspNonce() }}">
-        <link rel="icon" type="image/ico" sizes="any" href="/favicon.ico" nonce="{{ Vite::cspNonce() }}">
+        <link rel="icon" type="image/x-icon" sizes="any" href="/favicon.ico" nonce="{{ Vite::cspNonce() }}">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" nonce="{{ Vite::cspNonce() }}">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" nonce="{{ Vite::cspNonce() }}">
         <link rel="manifest" href="/manifest.webmanifest" nonce="{{ Vite::cspNonce() }}">
