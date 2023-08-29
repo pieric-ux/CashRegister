@@ -64,15 +64,16 @@ class Customer extends Authenticatable implements HasMedia, MustVerifyEmail
     public function registerMediaConversions(Media $media = null): void
     {
         $this
-            ->addMediaConversion('preview')
-            ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->addMediaConversion('thumb')
+            ->fit(Manipulations::FIT_CROP, 48, 48)
+            ->format(Manipulations::FORMAT_PNG)
             ->nonQueued();
     }
 
     // Get URL of the avatar image for the customer
-    public function getAvatarUrl()
+    public function getAvatarUrl($conversion = '')
     {
-        $avatar = $this->getFirstMediaUrl('avatars');
+        $avatar = $this->getFirstMediaUrl('avatars', $conversion);
 
         if ($avatar) {
             return $avatar;

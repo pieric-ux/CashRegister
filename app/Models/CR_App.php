@@ -125,15 +125,16 @@ class CR_App extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this
-            ->addMediaConversion('preview')
+            ->addMediaConversion('thumb')
             ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->format(Manipulations::FORMAT_PNG)
             ->nonQueued();
     }
 
     // Get URL of the poster image for the CR_App
-    public function getPosterUrl()
+    public function getPosterUrl($conversion = '')
     {
-        $poster = $this->getFirstMediaUrl('posters');
+        $poster = $this->getFirstMediaUrl('posters', $conversion);
 
         if ($poster) {
             return $poster;
