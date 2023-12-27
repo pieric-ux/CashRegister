@@ -1,2 +1,9 @@
 *
+!locales
+!locales/**
+!medias
+!medias/*
+!medias/avatars/default-avatar.png
+!medias/paymentMethod-pictures/*
+!medias/posters/default-poster.png
 !.gitignore
