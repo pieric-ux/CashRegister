@@ -1,23 +1,29 @@
-import { useEffect } from 'react';
-import TextInput from '@/Components/TextInput';
-import InputError from '@/Components/InputError';
-import { useForm } from '@inertiajs/react';
-import { useTranslation } from 'react-i18next';
+import { useEffect } from "react";
+import TextInput from "@/Components/TextInput";
+import InputError from "@/Components/InputError";
+import { useForm } from "@inertiajs/react";
+import { useTranslation } from "react-i18next";
 
 export default function UpdateEmployeeAvatar({ avatarPath, className }) {
     const { t } = useTranslation();
 
-    {/* Initialize form data and handle form submission */ }
+    {
+        /* Initialize form data and handle form submission */
+    }
     const { data, setData, post, errors } = useForm({
-        avatar: '',
+        avatar: "",
     });
 
-    {/* Update the selected avatar file in form data */ }
+    {
+        /* Update the selected avatar file in form data */
+    }
     const handleAvatarChange = (e) => {
-        setData('avatar', e.target.files[0]);
+        setData("avatar", e.target.files[0]);
     };
 
-    {/* When the avatar changes, submit the form */ }
+    {
+        /* When the avatar changes, submit the form */
+    }
     useEffect(() => {
         if (data.avatar) {
             submit();
@@ -26,25 +32,37 @@ export default function UpdateEmployeeAvatar({ avatarPath, className }) {
 
     const submit = () => {
         const formData = new FormData();
-        formData.append('avatar', data.avatar);
+        formData.append("avatar", data.avatar);
 
-        post(route('avatar-employee.upload'), formData);
+        post(route("avatar-employee.upload"), formData);
     };
 
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('Update Avatar')}</h2>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+                    {t("Update Avatar")}
+                </h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    {t('Update your avatar\'s profile.')}
+                    {t("Update your avatar's profile.")}
                 </p>
             </header>
-            <form className="flex flex-col items-center justify-center mt-6 space-y-4" encType="multipart/form-data">
-                <div className='relative z-30 mx-auto bg-gray-100 dark:bg-gray-900 h-52 w-52 rounded-full backdrop-blur-md transition ease-linear duration-300'>
-                    <div className='relative drop-shadow-md w-full h-full'>
-                        <img src={avatarPath} alt="avatar" className="h-48 w-48 rounded-full absolute ml-2 mt-2" />
-                        <label htmlFor="avatar" className='absolute bottom-8 right-2 h-8 w-8 flex cursor-pointer items-center justify-center rounded-full bg-sky-500 text-white hover:bg-opacity-90'>
+            <form
+                className="mt-6 flex flex-col items-center justify-center space-y-4"
+                encType="multipart/form-data"
+            >
+                <div className="relative z-30 mx-auto h-52 w-52 rounded-full bg-gray-100 backdrop-blur-md transition duration-300 ease-linear dark:bg-gray-900">
+                    <div className="relative h-full w-full drop-shadow-md">
+                        <img
+                            src={avatarPath}
+                            alt="avatar"
+                            className="absolute ml-2 mt-2 h-48 w-48 rounded-full"
+                        />
+                        <label
+                            htmlFor="avatar"
+                            className="absolute bottom-8 right-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-sky-500 text-white hover:bg-opacity-90"
+                        >
                             <svg
                                 className="fill-current"
                                 width="14"
@@ -68,13 +86,13 @@ export default function UpdateEmployeeAvatar({ avatarPath, className }) {
                                 name="avatar"
                                 type="file"
                                 className="sr-only"
-                                aria-label={t('Upload your avatar')}
+                                aria-label={t("Upload your avatar")}
                                 onChange={handleAvatarChange}
                             />
                         </label>
                     </div>
                 </div>
-                <InputError className='mt-2' message={errors.avatar} />
+                <InputError className="mt-2" message={errors.avatar} />
             </form>
         </section>
     );

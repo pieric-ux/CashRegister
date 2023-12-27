@@ -1,5 +1,5 @@
 // Import the Pagination module from the Swiper library
-import { Pagination } from 'swiper/modules';
+import { Pagination } from "swiper/modules";
 
 // Configuration object for Swiper
 export const swiperSetting = {
@@ -8,12 +8,14 @@ export const swiperSetting = {
 
     // Pagination settings
     pagination: {
-        el: '.swiper-pagination', // The element to render pagination
-        type: 'progressbar', // Type of pagination: progressbar
+        el: ".swiper-pagination", // The element to render pagination
+        type: "progressbar", // Type of pagination: progressbar
         renderProgressbar: function (progressbarFillClass) {
             // Custom rendering of the progress bar
-            return '<span class="' + progressbarFillClass + ' !bg-sky-500"></span>';
-        }
+            return (
+                '<span class="' + progressbarFillClass + ' !bg-sky-500"></span>'
+            );
+        },
     },
 
     // Breakpoints settings for responsive design
@@ -35,6 +37,6 @@ export const swiperSetting = {
         },
         1280: {
             slidesPerView: 8,
-        }
-    }
+        },
+    },
 };

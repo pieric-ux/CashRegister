@@ -1,45 +1,53 @@
-import { useEffect } from 'react';
-import Checkbox from '@/Components/Checkbox';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
-import { useTranslation } from 'react-i18next';
+import { useEffect } from "react";
+import Checkbox from "@/Components/Checkbox";
+import GuestLayout from "@/Layouts/GuestLayout";
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import PrimaryButton from "@/Components/PrimaryButton";
+import TextInput from "@/Components/TextInput";
+import { Head, Link, useForm } from "@inertiajs/react";
+import { useTranslation } from "react-i18next";
 
 export default function Login({ status, canResetPassword }) {
     const { t } = useTranslation();
 
-    {/* Initialize form data and handle form submission */ }
+    {
+        /* Initialize form data and handle form submission */
+    }
     const { data, setData, post, processing, errors, reset } = useForm({
-        email: '',
-        password: '',
+        email: "",
+        password: "",
         remember: false,
     });
 
-    {/* Reset password field when component unmounts */ }
+    {
+        /* Reset password field when component unmounts */
+    }
     useEffect(() => {
         return () => {
-            reset('password');
+            reset("password");
         };
     }, []);
 
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('customers.login'));
+        post(route("customers.login"));
     };
 
     return (
         <GuestLayout>
-            <Head title={t('Log in')} />
+            <Head title={t("Log in")} />
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+            {status && (
+                <div className="mb-4 text-sm font-medium text-green-600">
+                    {status}
+                </div>
+            )}
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="email" value={t('Email')} />
+                    <InputLabel htmlFor="email" value={t("Email")} />
 
                     <TextInput
                         id="email"
@@ -49,14 +57,14 @@ export default function Login({ status, canResetPassword }) {
                         className="mt-1 block w-full"
                         autoComplete="username"
                         isFocused={true}
-                        onChange={(e) => setData('email', e.target.value)}
+                        onChange={(e) => setData("email", e.target.value)}
                     />
 
                     <InputError message={errors.email} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value={t('Password')} />
+                    <InputLabel htmlFor="password" value={t("Password")} />
 
                     <TextInput
                         id="password"
@@ -65,35 +73,39 @@ export default function Login({ status, canResetPassword }) {
                         value={data.password}
                         className="mt-1 block w-full"
                         autoComplete="current-password"
-                        onChange={(e) => setData('password', e.target.value)}
+                        onChange={(e) => setData("password", e.target.value)}
                     />
 
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
-                <div className="block mt-4">
+                <div className="mt-4 block">
                     <label className="flex items-center">
                         <Checkbox
                             name="remember"
                             checked={data.remember}
-                            onChange={(e) => setData('remember', e.target.checked)}
+                            onChange={(e) =>
+                                setData("remember", e.target.checked)
+                            }
                         />
-                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">{t('Remember me')}</span>
+                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
+                            {t("Remember me")}
+                        </span>
                     </label>
                 </div>
 
-                <div className="flex items-center justify-end mt-4">
+                <div className="mt-4 flex items-center justify-end">
                     {canResetPassword && (
                         <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                            href={route("password.request")}
+                            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
                         >
-                            {t('Forgot your password?')}
+                            {t("Forgot your password?")}
                         </Link>
                     )}
 
                     <PrimaryButton className="ml-4" disabled={processing}>
-                        {t('Log in')}
+                        {t("Log in")}
                     </PrimaryButton>
                 </div>
             </form>

@@ -1,24 +1,30 @@
-import { useEffect } from 'react';
-import TextInput from '@/Components/TextInput';
-import InputError from '@/Components/InputError';
-import { useForm } from '@inertiajs/react';
-import { useTranslation } from 'react-i18next';
+import { useEffect } from "react";
+import TextInput from "@/Components/TextInput";
+import InputError from "@/Components/InputError";
+import { useForm } from "@inertiajs/react";
+import { useTranslation } from "react-i18next";
 
 export default function UpdateAppPoster({ application, className }) {
     const { t } = useTranslation();
 
-    {/* Initialize form data and handle form submission */ }
+    {
+        /* Initialize form data and handle form submission */
+    }
     const { data, setData, post, errors } = useForm({
         appId: application.id,
-        poster: '',
+        poster: "",
     });
 
-    {/* Update the selected poster file in form data */ }
+    {
+        /* Update the selected poster file in form data */
+    }
     const handlePosterChange = (e) => {
-        setData('poster', e.target.files[0]);
+        setData("poster", e.target.files[0]);
     };
 
-    {/* When the poster changes, submit the form */ }
+    {
+        /* When the poster changes, submit the form */
+    }
     useEffect(() => {
         if (data.poster) {
             submit();
@@ -27,18 +33,28 @@ export default function UpdateAppPoster({ application, className }) {
 
     const submit = () => {
         const formData = new FormData();
-        formData.append('appId', data.id);
-        formData.append('poster', data.poster);
+        formData.append("appId", data.id);
+        formData.append("poster", data.poster);
 
-        post(route('poster.upload'), formData);
+        post(route("poster.upload"), formData);
     };
 
     return (
-        <form className={`h-52 flex items-center justify-center ${className}`} encType="multipart/form-data">
-            <div className='relative z-30 mx-auto h-36 w-36 backdrop-blur-md transition ease-linear duration-300'>
-                <div className='relative drop-shadow-md w-full h-full'>
-                    <img src={application.posterPath} alt="poster" className="w-full h-full" />
-                    <label htmlFor={`poster-${application.id}`} className='absolute -bottom-4 -right-4 h-8 w-8 flex cursor-pointer items-center justify-center rounded-full bg-sky-500 text-white hover:bg-opacity-90'>
+        <form
+            className={`flex h-52 items-center justify-center ${className}`}
+            encType="multipart/form-data"
+        >
+            <div className="relative z-30 mx-auto h-36 w-36 backdrop-blur-md transition duration-300 ease-linear">
+                <div className="relative h-full w-full drop-shadow-md">
+                    <img
+                        src={application.posterPath}
+                        alt="poster"
+                        className="h-full w-full"
+                    />
+                    <label
+                        htmlFor={`poster-${application.id}`}
+                        className="absolute -bottom-4 -right-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-sky-500 text-white hover:bg-opacity-90"
+                    >
                         <svg
                             className="fill-current"
                             width="14"
@@ -57,17 +73,16 @@ export default function UpdateAppPoster({ application, className }) {
                                 d="M7.00004 5.83329C6.03354 5.83329 5.25004 6.61679 5.25004 7.58329C5.25004 8.54979 6.03354 9.33329 7.00004 9.33329C7.96654 9.33329 8.75004 8.54979 8.75004 7.58329C8.75004 6.61679 7.96654 5.83329 7.00004 5.83329ZM4.08337 7.58329C4.08337 5.97246 5.38921 4.66663 7.00004 4.66663C8.61087 4.66663 9.91671 5.97246 9.91671 7.58329C9.91671 9.19412 8.61087 10.5 7.00004 10.5C5.38921 10.5 4.08337 9.19412 4.08337 7.58329Z"
                             />
                         </svg>
-
                     </label>
                     <TextInput
                         id={`poster-${application.id}`}
                         name={`poster-${application.id}`}
                         type="file"
                         className="sr-only"
-                        aria-label={t('Upload your app\'s image')}
+                        aria-label={t("Upload your app's image")}
                         onChange={handlePosterChange}
                     />
-                    <InputError className='mt-2' message={errors.poster} />
+                    <InputError className="mt-2" message={errors.poster} />
                 </div>
             </div>
         </form>
