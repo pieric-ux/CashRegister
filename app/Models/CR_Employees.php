@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
@@ -64,15 +64,16 @@ class CR_Employees extends Authenticatable implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this
-            ->addMediaConversion('preview')
-            ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->addMediaConversion('thumb')
+            ->fit(Fit::Crop, 300, 300)
+            ->format('png')
             ->nonQueued();
     }
 
     // Get URL of the avatar image for the employee
-    public function getAvatarUrl()
+    public function getAvatarUrl($conversion = '')
     {
-        $avatar = $this->getFirstMediaUrl('avatars-employees');
+        $avatar = $this->getFirstMediaUrl('avatars-employees', $conversion);
 
         if ($avatar) {
             return $avatar;

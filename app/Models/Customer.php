@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Customer extends Authenticatable implements HasMedia, MustVerifyEmail
@@ -65,8 +65,8 @@ class Customer extends Authenticatable implements HasMedia, MustVerifyEmail
     {
         $this
             ->addMediaConversion('thumb')
-            ->fit(Manipulations::FIT_CROP, 48, 48)
-            ->format(Manipulations::FORMAT_PNG)
+            ->fit(Fit::Crop, 48, 48)
+            ->format('png')
             ->nonQueued();
     }
 
