@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import { Head } from "@inertiajs/react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import CR_AppAdminLayout from "@/Layouts/CR_AppAdminLayout";
-import CreateWorkstationForm from "./Partials/CreateWorkstationForm";
-import UpdateWorkstationForm from "./Partials/UpdateWorkstationForm";
-import DeleteWorkstationForm from "./Partials/DeleteWorstationForm";
+import { Head } from "@inertiajs/react";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useTranslation } from "react-i18next";
+import CreateWorkstationForm from "./Partials/CreateWorkstationForm";
+import DeleteWorkstationForm from "./Partials/DeleteWorstationForm";
+import UpdateWorkstationForm from "./Partials/UpdateWorkstationForm";
 
 export default function Index({
     customerAuth,
@@ -37,6 +37,9 @@ export default function Index({
     }, [workstations]);
 
     {
+        // Flavien: cette méthode est super longue et fait deux choses, gérer le drag and drop et faire la requête axios
+        // Je pense que c'est possible de faire deux méthodes séparées, une pour le drag and drop et une pour la requête axios
+        // Aussi, il est possible de les extraire dans un fichier à part et de les importer ici
         /* Callback for handling the end of a drag-and-drop operation */
     }
     const onDragEnd = async (result) => {
@@ -204,6 +207,8 @@ export default function Index({
                                             <h4 className="text-center underline">
                                                 {t("Employee")}
                                             </h4>
+                                            {/* Flavien: il ya trois autre `Droppable` qui ressemble à celui-ci */}
+                                            {/* Je pense que c'est possible d'extaire cette logique dans un seul composant */}
                                             <Droppable
                                                 droppableId={`workstation-${workstation.id}-employees`}
                                             >

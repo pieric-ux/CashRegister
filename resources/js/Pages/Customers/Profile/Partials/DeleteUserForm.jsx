@@ -1,4 +1,3 @@
-import { useRef, useState } from "react";
 import DangerButton from "@/Components/DangerButton";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
@@ -6,6 +5,7 @@ import Modal from "@/Components/Modal";
 import SecondaryButton from "@/Components/SecondaryButton";
 import TextInput from "@/Components/TextInput";
 import { useForm } from "@inertiajs/react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function DeleteUserForm({ className = "" }) {
@@ -36,6 +36,8 @@ export default function DeleteUserForm({ className = "" }) {
     });
 
     {
+        // Flavien: ce n'est utilisé qu'une seule fois, c'est possible de faire ça directement dans le onClick
+        // C'est un détail.
         /* Open the confirmation modal */
     }
     const confirmUserDeletion = () => {

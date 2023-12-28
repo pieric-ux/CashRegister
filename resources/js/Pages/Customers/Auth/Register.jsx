@@ -1,10 +1,10 @@
-import { useEffect } from "react";
-import GuestLayout from "@/Layouts/GuestLayout";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
+import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function Register() {
@@ -40,6 +40,7 @@ export default function Register() {
         post(route("customers.register"));
     };
 
+    // Flavien: même commentaire que ailleurs, c'est possible de faire un tableau de config des champs et de boucler dessus pour créer les éléments
     return (
         <GuestLayout>
             <Head title={t("Register")} />

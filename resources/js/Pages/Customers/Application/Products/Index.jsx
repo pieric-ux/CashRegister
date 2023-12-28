@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { Head } from "@inertiajs/react";
-import { sortData, filterData } from "@/Utils/useTableUtils";
-import CR_AppAdminLayout from "@/Layouts/CR_AppAdminLayout";
-import CreateProductForm from "./Partials/CreateProductForm";
-import UpdateProductForm from "./Partials/UpdateProductForm";
-import UpdateProdutPicture from "./Partials/UpdateProductPicture";
-import DeleteProductForm from "./Partials/DeleteProductForm";
-import TextInput from "@/Components/TextInput";
-import Table from "@/Components/Table";
 import Pagination from "@/Components/Pagination";
 import PaginationItemsPerPage from "@/Components/PaginationItemsPerPage";
+import Table from "@/Components/Table";
+import TextInput from "@/Components/TextInput";
+import CR_AppAdminLayout from "@/Layouts/CR_AppAdminLayout";
+import { filterData, sortData } from "@/Utils/useTableUtils";
+import { Head } from "@inertiajs/react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import CreateProductForm from "./Partials/CreateProductForm";
+import DeleteProductForm from "./Partials/DeleteProductForm";
+import UpdateProductForm from "./Partials/UpdateProductForm";
+import UpdateProdutPicture from "./Partials/UpdateProductPicture";
 
 export default function Index({
     customerAuth,
@@ -23,6 +23,7 @@ export default function Index({
     const { t } = useTranslation();
 
     {
+        // Flavien: ce code (les states et leur logique) pourrait être extrait dans un hook car il est utilisé ailleurs
         /* State variables for handling search, sorting, and pagination */
     }
     const [searchTerm, setSearchTerm] = useState("");

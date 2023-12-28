@@ -2,8 +2,8 @@ import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
-import { useForm } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
+import { useForm } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
 
 export default function UpdateProfileInformation({ customer, className = "" }) {
@@ -29,6 +29,60 @@ export default function UpdateProfileInformation({ customer, className = "" }) {
 
         patch(route("profile.update"));
     };
+
+    // Flavien: je vois qu'il y a beacoup de répétion des mêmes patters, une `div`, un `TextInput` et un `InputError`.
+    // Dans ce genre de cas, j'essaie de faire une array qui contiens tous les réglages et je map dessus ce qui me permet de créer les éléments de manière dynamique
+    // C'est pas nécessairement plus court mais ça permet d'avoir les champs à un endroit et les modifier plus facilement.
+    // Par exemple:
+    // const fields = [
+    //     {
+    //         id: "company_name",
+    //         name: "company_name",
+    //         value: data.company_name,
+    //         autoComplete: "organization",
+    //         onChange: (e) => setData("company_name", e.target.value),
+    //         label: t("Company Name"),
+    //         error: errors.company_name,
+    //     },
+    //     {
+    //         id: "first_name",
+    //         name: "first_name",
+    //         value: data.first_name,
+    //         autoComplete: "given-name",
+    //         onChange: (e) => setData("first_name", e.target.value),
+    //         label: t("First Name"),
+    //         error: errors.first_name,
+    //     },
+    //     {
+    // ...
+    //     },
+    // ];
+    // return (
+    //     ...
+    //     <form onSubmit={submit} className="mt-6 space-y-4">
+    //         {fields.map((field) => (
+    //             <div>
+    //                 <InputLabel
+    //                     htmlFor={field.id}
+    //                     value={field.label}
+    //                 />
+    //
+    //                 <TextInput
+    //                     id={field.id}
+    //                     name={field.name}
+    //                     value={field.value}
+    //                     className="mt-1 block w-full"
+    //                     autoComplete={field.autoComplete}
+    //                     onChange={field.onChange}
+    //                 />
+    //
+    //                 <InputError
+    //                     className="mt-2"
+    //                     message={field.error}
+    //                 />
+    //             </div>
+    //         ))}
+    //         ...
 
     return (
         <section className={className}>

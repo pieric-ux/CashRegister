@@ -1,13 +1,14 @@
-import { useForm } from "@inertiajs/react";
-import { useEffect, useState } from "react";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
-import TextInput from "@/Components/TextInput";
+import Modal from "@/Components/Modal";
 import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
-import Modal from "@/Components/Modal";
+import TextInput from "@/Components/TextInput";
+import { useForm } from "@inertiajs/react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+// Flavien: même commentaire qu'ailleurs, c'est possible d'avoir un seul composant pour les formulaires de création et de modification
 export default function UpdateWorkstationForm({ workstation, className = "" }) {
     const { t } = useTranslation();
 

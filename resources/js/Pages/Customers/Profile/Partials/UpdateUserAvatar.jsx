@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
+import TextInput from "@/Components/TextInput";
 import { useForm } from "@inertiajs/react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function UpdateUserAvatar({ avatarPath, className }) {
@@ -22,6 +22,8 @@ export default function UpdateUserAvatar({ avatarPath, className }) {
     };
 
     {
+        // Flavien: faire un early return est bien et permet d'éviter les indentations
+        // Aussi, pas besoin de useEffect ici, on peut utiliser `onSubmit` directement dans le form et appeller la méthode `submit` à ce moment
         /* When the avatar changes, submit the form */
     }
     useEffect(() => {
@@ -48,6 +50,7 @@ export default function UpdateUserAvatar({ avatarPath, className }) {
                     {t("Update your avatar's profile.")}
                 </p>
             </header>
+            {/* Flavien: utiliser un `onSubmit` et appeller la méthode `submit` à ce moment est une meilleur option que d'utiliser un `useEffect` */}
             <form
                 className="mt-6 flex flex-col items-center justify-center space-y-4"
                 encType="multipart/form-data"
@@ -63,6 +66,7 @@ export default function UpdateUserAvatar({ avatarPath, className }) {
                             htmlFor="avatar"
                             className="absolute bottom-8 right-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-sky-500 text-white hover:bg-opacity-90"
                         >
+                            {/* Flavien: je préfère personnellement extraire les SVG dans des composants */}
                             <svg
                                 className="fill-current"
                                 width="14"

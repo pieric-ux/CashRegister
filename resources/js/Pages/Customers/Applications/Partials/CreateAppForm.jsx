@@ -1,13 +1,15 @@
-import { useForm } from "@inertiajs/react";
-import { useState } from "react";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
-import TextInput from "@/Components/TextInput";
+import Modal from "@/Components/Modal";
 import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
-import Modal from "@/Components/Modal";
+import TextInput from "@/Components/TextInput";
+import { useForm } from "@inertiajs/react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+// Flavien: le composant est utilisé qu'une seule fois (sauf erreur), je pense que la props `className` peut être supprimée
+// Les classNames peuvent être directement utilisées dans le composant
 export default function CreateAppForm({ className = "" }) {
     const { t } = useTranslation();
 

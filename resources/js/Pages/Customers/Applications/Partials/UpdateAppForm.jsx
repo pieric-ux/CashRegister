@@ -1,13 +1,17 @@
-import { useForm } from "@inertiajs/react";
-import { useEffect, useState } from "react";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
-import TextInput from "@/Components/TextInput";
+import Modal from "@/Components/Modal";
 import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
-import Modal from "@/Components/Modal";
+import TextInput from "@/Components/TextInput";
+import { useForm } from "@inertiajs/react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+// Flavien: pourquoi avoir deux composants pour la création et la modification d'une application ?
+// C'est possible de faire un seul composant avec une props `application` qui contient les données de l'application
+// Si la props `application` est vide, on affiche le formulaire de création, sinon on affiche le formulaire de modification
+// Cela permet de réduire le code et de ne pas avoir à maintenir deux composants qui font la même chose
 export default function UpdateAppForm({ application, className = "" }) {
     const { t } = useTranslation();
 
@@ -131,6 +135,8 @@ export default function UpdateAppForm({ application, className = "" }) {
                             value={t("Description")}
                         />
 
+                        {/* Flavien: j'aurais extrait ce composant pour ne pas avoir toutes ces classes ici */}
+                        {/* En plus il est utilisé deux fois (dans le formulaire de création et de modification des apps) */}
                         <textarea
                             id="description"
                             name="description"

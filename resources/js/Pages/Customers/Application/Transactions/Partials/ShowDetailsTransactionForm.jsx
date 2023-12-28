@@ -1,8 +1,8 @@
-import { useState } from "react";
-import PrimaryButton from "@/Components/PrimaryButton";
 import Modal from "@/Components/Modal";
-import { useTranslation } from "react-i18next";
+import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function ShowDetailsTransactionForm({
     transaction,
@@ -11,6 +11,8 @@ export default function ShowDetailsTransactionForm({
     const { t } = useTranslation();
 
     {
+        // Flavien: Tu utilise souvent des modales, tu pourrais extraire cette logique dans un hook et le réutiliser partout
+        // Il y aurait un peu moins de code pour gérer les modales et tout est fait au même endroit
         /* State for controlling modal visibility */
     }
     const [openingModal, setOpeningModal] = useState(false);
