@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { useTranslation } from "react-i18next";
 import { swiperSetting } from "@/Config/swiperConfig";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import "swiper/css/bundle";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function Items({
     isCartVisible,
     cart,
     setCart,
     categories,
-    dishes,
+    dishes, // Flavien, on dirait que cette props est utilisée que pour faire une `Map`, il serait peut être plus simple de faire la `Map` dans le composant parent et la passer en props
     products,
 }) {
     const { t } = useTranslation();
@@ -17,6 +17,8 @@ export default function Items({
     const [isDragging, setIsDragging] = useState(false);
 
     {
+        // Flavien, une partie de cette logique (jusqu'au useEffect) pourrait être faite dans un custom hook pour faciliter la lecture du composant.
+        // C'est une préférence personnelle.
         /* Create maps for dishes and products */
     }
     const soldSeparatelydDishesMap = new Map(
@@ -36,6 +38,8 @@ export default function Items({
     ]);
 
     {
+        // Flavien, le commentaire est pas tout à fait juste, le useEffect va être appelé à chaque fois que la variable `categories` change
+        // et n'est pas utilisé que pour initialiser les valeurs.
         /* Set initial active section based on data */
     }
     useEffect(() => {
@@ -56,6 +60,8 @@ export default function Items({
     };
 
     {
+        // Flavien, Swiper n'est utilisé que ici, donc pas de problème.
+        // Mais si tu utilisais ça à plusieurs endroits, il faudrait peut être extraire tout ça dans un hook custom.
         /* Swiper settings */
     }
     const settings = {
@@ -70,8 +76,8 @@ export default function Items({
         /* Add item to cart */
     }
     const addToCart = (item, itemType) => {
-        let newCart = [...cart];
-        let price = parseFloat(item.client_price);
+        let newCart = [...cart]; // Flavien, peut être un `const` et pas un `let`, par défaut je fais toujours des `const` et je passe en `let` si j'ai besoin de modifier la variable
+        let price = parseFloat(item.client_price); // Flavien, petit trick, tu peux faire `+item.client_price` pour convertir en nombre
 
         if (itemType === "return") {
             price *= -1;
@@ -111,6 +117,7 @@ export default function Items({
     };
 
     return (
+        // Flavien: il y a le package CLSX qui te permet de simplifier les conditions pour ajouter des classes aux éléments: https://www.npmjs.com/package/clsx
         <div className={`${isCartVisible ? "hidden sm:block" : "block"}`}>
             {/* Return Dishes */}
             {returnDishesMap.size > 0 && (
@@ -165,6 +172,11 @@ export default function Items({
                     )}
                 </div>
             )}
+            {/* Flavien: plutôt que de mettre un commentaires, j'aurais extrait le code dans un composant */}
+            {/* ça permet de réduire la taille du composant et de le rendre plus lisible */}
+            {/* categories && <ShowCategories categories={categories} ... /> */}
+            {/* Tout le traitement de filter et map pourrait être fait dans le composant au lieu d'ici  */}
+
             {/* Products */}
             {categories &&
                 categories
@@ -205,6 +217,7 @@ export default function Items({
                                                     key={product.id}
                                                     className="pt-4"
                                                 >
+                                                    {/* Flavien: je pense que ça devrait être un composant réutilisé */}
                                                     <button
                                                         onClick={() => {
                                                             if (!isDragging) {
@@ -230,6 +243,7 @@ export default function Items({
                                                                     width={50}
                                                                     height={50}
                                                                 />
+                                                                {/* Flavien: Il faudrait éviter les paragraphe dans les boutons et utiliser des span à la place */}
                                                                 <p>
                                                                     {
                                                                         product.unit
@@ -251,6 +265,8 @@ export default function Items({
                             </div>
                         );
                     })}
+            {/* Flavien: pareil qu'avant, je déplacerait ce code dans un autre composant */}
+
             {/* Dishes */}
             {soldSeparatelydDishesMap.size > 0 && (
                 <div

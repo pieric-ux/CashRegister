@@ -1,4 +1,11 @@
+// Flavien: le fichier est pas très bien nommé, commencer un fichier par `use` permet d'indiquer que c'est un hook
+// Mais le code des deux fonctions n'est pas vraiment un hook.
+
 {
+    // Flavien: La méthode semble correcte mais je ne suis pas certain de comprendre ce qu'elle fait et quelle donnée elle trie.
+    // Est-ce que c'est possible de diviser cette fonction en plusieurs fonctions plus petites et plus spécifiques ?
+    // Par exemple: `sortByPaymentMethod`, `sortByCategory`, `sortByDish`,...
+    // Il pourrait avoir une logique commune mais une partie spécifique à chaque type de donnée.
     /* This function sorts the data based on the specified sorting criteria. */
 }
 export function sortData(data, sortColumn, sortDirection) {
@@ -57,6 +64,7 @@ export function sortData(data, sortColumn, sortDirection) {
 }
 
 {
+    // Flavien: Même commentaire qu'au dessus
     /* This function filters the data based on the search term and specified columns. */
 }
 export function filterData(data, searchTerm, columns, t) {

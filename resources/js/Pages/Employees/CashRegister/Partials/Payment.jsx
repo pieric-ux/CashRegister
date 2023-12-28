@@ -1,8 +1,8 @@
-import { useState } from "react";
-import Modal from "../../../../Components/Modal";
-import { useTranslation } from "react-i18next";
-import SecondaryButton from "@/Components/SecondaryButton";
 import PrimaryButton from "@/Components/PrimaryButton";
+import SecondaryButton from "@/Components/SecondaryButton";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import Modal from "../../../../Components/Modal";
 
 export default function Payment({
     paymentMethods,
@@ -22,6 +22,7 @@ export default function Payment({
 
     return (
         <>
+            {/* Flavien: Pourquoi est-ce que ce bouton est déclaré ici? Est-ce qu'il ne faudrait pas utiliser un des boutons que tu as crée dans le dossier `Components`? */}
             <button
                 className="mt-4 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-base font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-sky-700 focus:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 active:bg-sky-900 disabled:cursor-not-allowed disabled:opacity-25 dark:bg-sky-500 dark:hover:bg-sky-400 dark:focus:bg-sky-400 dark:focus:ring-offset-sky-800 dark:active:bg-sky-300"
                 onClick={handleCheckout}

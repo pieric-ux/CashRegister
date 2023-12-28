@@ -1,5 +1,7 @@
 import { useTranslation } from "react-i18next";
 
+// Flavien: C'est très bien comme tout petit composant
+
 export default function Total({ total }) {
     const { t } = useTranslation();
 

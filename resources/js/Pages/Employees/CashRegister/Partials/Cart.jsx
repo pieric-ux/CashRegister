@@ -53,6 +53,9 @@ export default function Cart({ isCartVisible, cart, removeFromCart }) {
                                     className="!px-2"
                                     onClick={() => removeFromCart(index)}
                                 >
+                                    {/* Flavien: c'est OK de mettre des SVG dans le code mais je préfère en faire un composant ailleurs afin de pouvoir les importer dans le code directement
+                                        De cette manière on sait de quoi il s'agit en lisant le code et on peut les réutiliser ailleurs.
+                                     */}
                                     <svg
                                         className="h-3 w-3 text-white"
                                         fill="currentColor"

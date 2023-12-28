@@ -1,9 +1,9 @@
 import Checkbox from "@/Components/Checkbox";
-import GuestLayout from "@/Layouts/GuestLayout";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
+import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, useForm } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
 
@@ -48,6 +48,8 @@ export default function Login({ status, application, code }) {
                         }
                     />
 
+                    {/* Flavien: le nom de ce composant est un peu étrange, je pensais qu'il s'aggisait d'un input mais c'est un paragraph */}
+                    {/* Peut être que l'apeller `FormError` serait mieux ? */}
                     <InputError
                         message={errors.passwordless}
                         className="mt-2"

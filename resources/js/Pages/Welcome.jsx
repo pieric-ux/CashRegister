@@ -1,6 +1,7 @@
 import { Head, Link } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
 
+// Flavien: on dirait que c'est un composant par défaut de Laravel, il pourrait être supprimé
 export default function Welcome({ customerAuth }) {
     const { t } = useTranslation();
 

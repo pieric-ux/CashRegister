@@ -1,9 +1,9 @@
-import EmployeeLayout from "@/Layouts/EmployeeLayout";
-import { Head } from "@inertiajs/react";
-import UpdateEmployeeAvatar from "./Partials/UpdateEmployeeAvatar";
-import { useTranslation } from "react-i18next";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
+import EmployeeLayout from "@/Layouts/EmployeeLayout";
+import { Head } from "@inertiajs/react";
+import { useTranslation } from "react-i18next";
+import UpdateEmployeeAvatar from "./Partials/UpdateEmployeeAvatar";
 
 export default function Index({ employeeAuth, localization }) {
     const { t } = useTranslation();
@@ -18,6 +18,7 @@ export default function Index({ employeeAuth, localization }) {
                         avatarPath={employeeAuth.avatarPath}
                     />
 
+                    {/* Flavien: c'est très bien de mettre des sections et d'essayer d'avoir une structure propre */}
                     <section className="mx-auto mt-6 max-w-xl">
                         <header>
                             <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -31,6 +32,8 @@ export default function Index({ employeeAuth, localization }) {
                             </p>
                         </header>
 
+                        {/* Flavien: utiliser des input désactivés est un peu curieux, c'est utile si l'utilisateur peut modifier les champs */}
+                        {/* Ca fonctionne, pas de problème mais ça m'a fait réfléchir un peu, j'aurais utilisé un paragraph vu que c'est fixe comme valeur */}
                         <div className="mt-6 space-y-6">
                             <div>
                                 <InputLabel

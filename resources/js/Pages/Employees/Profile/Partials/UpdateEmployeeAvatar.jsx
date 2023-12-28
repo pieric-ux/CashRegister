@@ -1,13 +1,14 @@
-import { useEffect } from "react";
-import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
+import TextInput from "@/Components/TextInput";
 import { useForm } from "@inertiajs/react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function UpdateEmployeeAvatar({ avatarPath, className }) {
     const { t } = useTranslation();
 
     {
+        // Flavien: je ne sais pas si ces commentaires te sont vraiment utiles, pourrait être supprimés.
         /* Initialize form data and handle form submission */
     }
     const { data, setData, post, errors } = useForm({
@@ -25,6 +26,13 @@ export default function UpdateEmployeeAvatar({ avatarPath, className }) {
         /* When the avatar changes, submit the form */
     }
     useEffect(() => {
+        // Flavien:  une autre manière de faire (c'est des préférences personnelles) est de faire un early return.
+        // Le code du useEffect resemblerait à ça:
+        /*
+        if (!data.avatar) return;
+        submit()
+        */
+
         if (data.avatar) {
             submit();
         }
@@ -34,6 +42,7 @@ export default function UpdateEmployeeAvatar({ avatarPath, className }) {
         const formData = new FormData();
         formData.append("avatar", data.avatar);
 
+        // Flavien: est-ce que c'est normal que ce `route` ne soit pas importé? Je ne connais pas inertiajs c'est peut être normal
         post(route("avatar-employee.upload"), formData);
     };
 
