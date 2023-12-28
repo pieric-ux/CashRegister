@@ -1,12 +1,13 @@
+import Dropdown from "@/Components/Dropdown";
 import Header from "@/Components/Header";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import Dropdown from "@/Components/Dropdown";
 import { useTranslation } from "react-i18next";
 
 export default function EmployeeLayout({ auth, children, localization }) {
     const { t } = useTranslation();
 
     {
+        // Flavien: peut être fait dans un autre composant ou en dehors de ce composant pour éviter de le refaire à chaque rendu
         /* Responsive NavLink components */
     }
     const RespNavLink = (
@@ -30,6 +31,7 @@ export default function EmployeeLayout({ auth, children, localization }) {
     );
 
     {
+        // Flavien: peut être fait dans un autre composant ou en dehors de ce composant pour éviter de le refaire à chaque rendu
         /* Dropdown Link components */
     }
     const DropdownLink = (

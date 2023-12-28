@@ -1,8 +1,8 @@
+import Dropdown from "@/Components/Dropdown";
 import Header from "@/Components/Header";
+import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import Sidebar from "@/Components/SideBar";
 import SideBarLink from "@/Components/SideBarLink";
-import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import Dropdown from "@/Components/Dropdown";
 import useLocalStorage from "@/Hooks/useLocalStorage";
 import { useTranslation } from "react-i18next";
 
@@ -15,6 +15,7 @@ export default function CustomerLayout({ auth, children, localization }) {
     const [sideBarOpen, setSideBarOpen] = useLocalStorage("sideBarOpen", false);
 
     {
+        // Flavien: peut être fait dans un autre composant ou en dehors de ce composant pour éviter de le refaire à chaque rendu
         /* Responsive NavLink components */
     }
     const RespNavLink = (
@@ -44,6 +45,7 @@ export default function CustomerLayout({ auth, children, localization }) {
     );
 
     {
+        // Flavien: peut être fait dans un autre composant ou en dehors de ce composant pour éviter de le refaire à chaque rendu
         /* Dropdown Link components */
     }
     const DropdownLink = (
