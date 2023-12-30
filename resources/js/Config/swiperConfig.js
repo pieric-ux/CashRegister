@@ -13,7 +13,7 @@ export const swiperSetting = {
         renderProgressbar: function (progressbarFillClass) {
             // Custom rendering of the progress bar
             return '<span class="' + progressbarFillClass + ' !bg-sky-500"></span>';
-        }
+        },
     },
 
     // Breakpoints settings for responsive design
@@ -35,6 +35,6 @@ export const swiperSetting = {
         },
         1280: {
             slidesPerView: 8,
-        }
-    }
+        },
+    },
 };

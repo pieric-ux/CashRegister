@@ -1,7 +1,13 @@
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
-export default function Modal({ children, show = false, maxWidth = '2xl', closeable = true, onClose = () => { } }) {
+export default function Modal({
+    children,
+    show = false,
+    maxWidth = '2xl',
+    closeable = true,
+    onClose = () => {},
+}) {
     const close = () => {
         if (closeable) {
             onClose();
@@ -17,36 +23,36 @@ export default function Modal({ children, show = false, maxWidth = '2xl', closea
     }[maxWidth];
 
     return (
-        <Transition show={show} as={Fragment} leave="duration-200">
+        <Transition show={show} as={Fragment} leave='duration-200'>
             <Dialog
-                as="div"
-                id="modal"
-                className="fixed inset-0 flex overflow-y-auto px-4 py-6 sm:px-0 items-center justify-center z-50 transform transition-all"
+                as='div'
+                id='modal'
+                className='fixed inset-0 z-50 flex transform items-center justify-center overflow-y-auto px-4 py-6 transition-all sm:px-0'
                 onClose={close}
             >
                 <Transition.Child
                     as={Fragment}
-                    enter="ease-out duration-300"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
+                    enter='ease-out duration-300'
+                    enterFrom='opacity-0'
+                    enterTo='opacity-100'
+                    leave='ease-in duration-200'
+                    leaveFrom='opacity-100'
+                    leaveTo='opacity-0'
                 >
-                    <div className="absolute inset-0 bg-gray-500/75 dark:bg-gray-900/75" />
+                    <div className='absolute inset-0 bg-gray-500/75 dark:bg-gray-900/75' />
                 </Transition.Child>
 
                 <Transition.Child
                     as={Fragment}
-                    enter="ease-out duration-300"
-                    enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                    enterTo="opacity-100 translate-y-0 sm:scale-100"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                    leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                    enter='ease-out duration-300'
+                    enterFrom='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
+                    enterTo='opacity-100 translate-y-0 sm:scale-100'
+                    leave='ease-in duration-200'
+                    leaveFrom='opacity-100 translate-y-0 sm:scale-100'
+                    leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
                 >
                     <Dialog.Panel
-                        className={`bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto ${maxWidthClass} overflow-y-auto max-h-[90vh]`}
+                        className={`transform overflow-hidden rounded-lg bg-white shadow-xl transition-all sm:mx-auto sm:w-full dark:bg-gray-800 ${maxWidthClass} max-h-[90vh] overflow-y-auto`}
                     >
                         {children}
                     </Dialog.Panel>

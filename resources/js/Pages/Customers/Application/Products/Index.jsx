@@ -1,100 +1,161 @@
-import { useState } from "react";
-import { Head } from "@inertiajs/react";
-import { sortData, filterData } from "@/Utils/useTableUtils";
-import CR_AppAdminLayout from "@/Layouts/CR_AppAdminLayout";
-import CreateProductForm from "./Partials/CreateProductForm";
-import UpdateProductForm from "./Partials/UpdateProductForm";
-import UpdateProdutPicture from "./Partials/UpdateProductPicture";
-import DeleteProductForm from "./Partials/DeleteProductForm";
-import TextInput from "@/Components/TextInput";
-import Table from "@/Components/Table";
-import Pagination from "@/Components/Pagination";
-import PaginationItemsPerPage from "@/Components/PaginationItemsPerPage";
-import { useTranslation } from "react-i18next";
+import { useState } from 'react';
+import { Head } from '@inertiajs/react';
+import { sortData, filterData } from '@/Utils/useTableUtils';
+import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
+import CreateProductForm from './Partials/CreateProductForm';
+import UpdateProductForm from './Partials/UpdateProductForm';
+import UpdateProdutPicture from './Partials/UpdateProductPicture';
+import DeleteProductForm from './Partials/DeleteProductForm';
+import TextInput from '@/Components/TextInput';
+import Table from '@/Components/Table';
+import Pagination from '@/Components/Pagination';
+import PaginationItemsPerPage from '@/Components/PaginationItemsPerPage';
+import { useTranslation } from 'react-i18next';
 
-export default function Index({ customerAuth, application, products, categories, dishes, localization }) {
+export default function Index({
+    customerAuth,
+    application,
+    products,
+    categories,
+    dishes,
+    localization,
+}) {
     const { t } = useTranslation();
 
-    {/* State variables for handling search, sorting, and pagination */ }
-    const [searchTerm, setSearchTerm] = useState("");
-    const [sortColumn, setSortColumn] = useState("");
-    const [sortDirection, setSortDirection] = useState("");
+    {
+        /* State variables for handling search, sorting, and pagination */
+    }
+    const [searchTerm, setSearchTerm] = useState('');
+    const [sortColumn, setSortColumn] = useState('');
+    const [sortDirection, setSortDirection] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [productPerPage, setProductPerPage] = useState(10);
 
-    {/* Handler for search input change */ }
+    {
+        /* Handler for search input change */
+    }
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
 
-    {/* Handler for column sorting */ }
+    {
+        /* Handler for column sorting */
+    }
     const handleSort = (column) => {
         if (column === sortColumn) {
-            setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+            setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
         } else {
             setSortColumn(column);
-            setSortDirection("asc");
+            setSortDirection('asc');
         }
     };
 
-    {/* Handler for page change */ }
+    {
+        /* Handler for page change */
+    }
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
 
-    {/* Handler for items per page change */ }
+    {
+        /* Handler for items per page change */
+    }
     const handleProductPerPage = (e) => {
         setProductPerPage(parseInt(e.target.value, 10));
         setCurrentPage(1);
     };
 
-    {/* Columns configuration for the table */ }
+    {
+        /* Columns configuration for the table */
+    }
     const productsColumns = [
-        { key: "picture", label: t('Picture'), className: "hidden lg:table-cell", render: (product) => <UpdateProdutPicture product={product} /> },
-        { key: "name", label: t('Name') },
-        { key: "unit", label: t('Unit'), className: "hidden md:table-cell" },
-        { key: "client_price", label: t('Client Price'), className: "hidden lg:table-cell", render: (product) => `${product.client_price} ${t('currency_symbol')}` },
-        { key: "cost_price", label: t('Cost Price'), className: "hidden xl:table-cell", render: (product) => `${product.cost_price} ${t('currency_symbol')}` },
-        { key: "category", label: t('Category'), className: "hidden xl:table-cell", render: (product) => product.cr_categories_products?.name === 'No category' ? '' : product.cr_categories_products?.name },
-        { key: "dish", label: t('Dish'), className: "hidden xl:table-cell", render: (product) => product.cr_dishes?.name === 'No dish' ? '' : `${product.cr_dishes?.name} ${product.cr_dishes?.unit}` },
+        {
+            key: 'picture',
+            label: t('Picture'),
+            className: 'hidden lg:table-cell',
+            render: (product) => <UpdateProdutPicture product={product} />,
+        },
+        { key: 'name', label: t('Name') },
+        { key: 'unit', label: t('Unit'), className: 'hidden md:table-cell' },
+        {
+            key: 'client_price',
+            label: t('Client Price'),
+            className: 'hidden lg:table-cell',
+            render: (product) => `${product.client_price} ${t('currency_symbol')}`,
+        },
+        {
+            key: 'cost_price',
+            label: t('Cost Price'),
+            className: 'hidden xl:table-cell',
+            render: (product) => `${product.cost_price} ${t('currency_symbol')}`,
+        },
+        {
+            key: 'category',
+            label: t('Category'),
+            className: 'hidden xl:table-cell',
+            render: (product) =>
+                product.cr_categories_products?.name === 'No category'
+                    ? ''
+                    : product.cr_categories_products?.name,
+        },
+        {
+            key: 'dish',
+            label: t('Dish'),
+            className: 'hidden xl:table-cell',
+            render: (product) =>
+                product.cr_dishes?.name === 'No dish'
+                    ? ''
+                    : `${product.cr_dishes?.name} ${product.cr_dishes?.unit}`,
+        },
     ];
 
-    {/* Configuration for rendering actions in each row */ }
+    {
+        /* Configuration for rendering actions in each row */
+    }
     const renderProductsActions = {
         header: () => t('Actions'),
         render: (product) => (
-            <div className="flex flex-col items-center justify-center gap-2">
+            <div className='flex flex-col items-center justify-center gap-2'>
                 <UpdateProductForm product={product} categories={categories} dishes={dishes} />
                 <DeleteProductForm product={product} />
             </div>
-        )
+        ),
     };
 
-    {/* Sorting products by creation date by ASC */ }
+    {
+        /* Sorting products by creation date by ASC */
+    }
     const sortedByCreationDateProducts = products.slice().sort((a, b) => {
         const dateA = new Date(a.created_at);
         const dateB = new Date(b.created_at);
         return dateA - dateB;
     });
 
-    {/* Applying sorting and filtering */ }
+    {
+        /* Applying sorting and filtering */
+    }
     const sortedProducts = sortData(sortedByCreationDateProducts, sortColumn, sortDirection);
     const filteredProducts = filterData(sortedProducts, searchTerm, productsColumns, t);
 
-    {/* Pagination calculation */ }
+    {
+        /* Pagination calculation */
+    }
     const indexOfLastProducts = currentPage * productPerPage;
     const indexOfFirstProducts = indexOfLastProducts - productPerPage;
     const currentProducts = filteredProducts.slice(indexOfFirstProducts, indexOfLastProducts);
 
-
     return (
-        <CR_AppAdminLayout auth={customerAuth} application={application} localization={localization}>
+        <CR_AppAdminLayout
+            auth={customerAuth}
+            application={application}
+            localization={localization}
+        >
             <Head title={application.name} />
-            <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 space-y-6">
-                <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow-md rounded-lg transition ease-linear duration-300">
-                    <CreateProductForm className="max-w-xl mx-auto" application={application} />
+            <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
+                <div className='rounded-lg bg-white p-4 shadow-md transition duration-300 ease-linear sm:p-8 dark:bg-gray-800'>
+                    <CreateProductForm className='mx-auto max-w-xl' application={application} />
                 </div>
-                <div className="flex flex-col sm:flex-row items-center justify-end pr-4 mt-4 gap-2">
+                <div className='mt-4 flex flex-col items-center justify-end gap-2 pr-4 sm:flex-row'>
                     <PaginationItemsPerPage
                         itemsPerPage={productPerPage}
                         onChange={handleProductPerPage}
@@ -102,7 +163,7 @@ export default function Index({ customerAuth, application, products, categories,
                     />
                     <TextInput
                         placeholder={t('Search products')}
-                        className="w-64 dark:!bg-gray-800 placeholder:text-gray-600 dark:placeholder:text-gray-400"
+                        className='w-64 placeholder:text-gray-600 dark:!bg-gray-800 dark:placeholder:text-gray-400'
                         value={searchTerm}
                         onChange={handleSearchChange}
                     />
@@ -124,8 +185,10 @@ export default function Index({ customerAuth, application, products, categories,
                         />
                     </>
                 ) : (
-                    <div className="p-4 sm:p-8 text-center bg-white dark:bg-gray-800 shadow sm:rounded-lg transition ease-linear duration-300">
-                        <p className="text-gray-900 dark:text-gray-100">{t('No products found.')}</p>
+                    <div className='bg-white p-4 text-center shadow transition duration-300 ease-linear sm:rounded-lg sm:p-8 dark:bg-gray-800'>
+                        <p className='text-gray-900 dark:text-gray-100'>
+                            {t('No products found.')}
+                        </p>
                     </div>
                 )}
             </div>
