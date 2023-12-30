@@ -3,7 +3,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build && vite build --ssr && vite build && vite build --ssr --ssr && vite build && vite build --ssr && vite build && vite build --ssr --ssr --ssr"
+        "build": "vite build && vite build --ssr"
     },
     "devDependencies": {
         "@headlessui/react": "^1.7.17",
@@ -14,6 +14,8 @@
         "axios": "^1.6.3",
         "laravel-vite-plugin": "^1.0.1",
         "postcss": "^8.4.32",
+        "prettier": "^3.1.1",
+        "prettier-plugin-tailwindcss": "^0.5.10",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "tailwindcss": "^3.4.0",
