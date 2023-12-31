@@ -13,25 +13,16 @@ import ShowDetailsTransactionForm from './Partials/ShowDetailsTransactionForm';
 export default function Index({ customerAuth, application, transactions, localization }) {
     const { t } = useTranslation();
 
-    {
-        /* State variables for handling search, sorting, and pagination */
-    }
     const [searchTerm, setSearchTerm] = useState('');
     const [sortColumn, setSortColumn] = useState('');
     const [sortDirection, setSortDirection] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [transactionPerPage, setTransactionPerPage] = useState(10);
 
-    {
-        /* Handler for search input change */
-    }
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
 
-    {
-        /* Handler for column sorting */
-    }
     const handleSort = (column) => {
         if (column === sortColumn) {
             setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
@@ -41,24 +32,15 @@ export default function Index({ customerAuth, application, transactions, localiz
         }
     };
 
-    {
-        /* Handler for page change */
-    }
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
 
-    {
-        /* Handler for items per page change */
-    }
     const handletransactionPerPage = (e) => {
         setTransactionPerPage(parseInt(e.target.value, 10));
         setCurrentPage(1);
     };
 
-    {
-        /* Columns configuration for the table */
-    }
     const transactionsColumns = [
         { key: 'or_number', label: t('OR Number') },
         { key: 'employee', label: t('Employee'), className: 'hidden md:table-cell' },
@@ -77,9 +59,6 @@ export default function Index({ customerAuth, application, transactions, localiz
         },
     ];
 
-    {
-        /* Configuration for rendering actions in each row */
-    }
     const renderTransactionsAction = {
         header: () => t('Actions'),
         render: (transaction) => (
@@ -90,18 +69,12 @@ export default function Index({ customerAuth, application, transactions, localiz
         ),
     };
 
-    {
-        /* Sorting transactions by creation date by DESC */
-    }
     const sortedByCreationDateTransactions = transactions.slice().sort((a, b) => {
         const dateA = new Date(a.created_at);
         const dateB = new Date(b.created_at);
         return dateB - dateA;
     });
 
-    {
-        /* Applying sorting and filtering */
-    }
     const sortedTransactions = sortData(
         sortedByCreationDateTransactions,
         sortColumn,
@@ -109,9 +82,6 @@ export default function Index({ customerAuth, application, transactions, localiz
     );
     const filteredTransactions = filterData(sortedTransactions, searchTerm, transactionsColumns, t);
 
-    {
-        /* Pagination calculation */
-    }
     const indexOfLastTransactions = currentPage * transactionPerPage;
     const indexOfFirstTransactions = indexOfLastTransactions - transactionPerPage;
     const currentTransactions = filteredTransactions.slice(
