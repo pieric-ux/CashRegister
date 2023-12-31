@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useEffect } from 'react';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
@@ -7,24 +8,15 @@ import { useTranslation } from 'react-i18next';
 export default function UpdateAppPoster({ application, className }) {
     const { t } = useTranslation();
 
-    {
-        /* Initialize form data and handle form submission */
-    }
     const { data, setData, post, errors } = useForm({
         appId: application.id,
         poster: '',
     });
 
-    {
-        /* Update the selected poster file in form data */
-    }
     const handlePosterChange = (e) => {
         setData('poster', e.target.files[0]);
     };
 
-    {
-        /* When the poster changes, submit the form */
-    }
     useEffect(() => {
         if (data.poster) {
             submit();
@@ -41,7 +33,7 @@ export default function UpdateAppPoster({ application, className }) {
 
     return (
         <form
-            className={`flex h-52 items-center justify-center ${className}`}
+            className={clsx('flex h-52 items-center justify-center', className)}
             encType='multipart/form-data'
         >
             <div className='relative z-30 mx-auto h-36 w-36 backdrop-blur-md transition duration-300 ease-linear'>

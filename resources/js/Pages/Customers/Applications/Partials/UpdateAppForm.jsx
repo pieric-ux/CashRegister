@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useForm } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import InputError from '@/Components/InputError';
@@ -11,15 +12,9 @@ import { useTranslation } from 'react-i18next';
 export default function UpdateAppForm({ application, className = '' }) {
     const { t } = useTranslation();
 
-    {
-        /* State for controlling modal visibility and form errors display */
-    }
     const [openingModal, setOpeningModal] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
 
-    {
-        /* Initialize form data and handle form submission */
-    }
     const { data, setData, patch, processing, errors } = useForm({
         name: application.name,
         description: '',
@@ -29,16 +24,10 @@ export default function UpdateAppForm({ application, className = '' }) {
         website: '',
     });
 
-    {
-        /* Open the modal */
-    }
     const openModal = () => {
         setOpeningModal(true);
     };
 
-    {
-        /* Close the modal and reset form data */
-    }
     const closeModal = () => {
         setOpeningModal(false);
         setData({
@@ -52,9 +41,6 @@ export default function UpdateAppForm({ application, className = '' }) {
         setShowErrors(false);
     };
 
-    {
-        /* Set form data when application prop changes */
-    }
     useEffect(() => {
         setData({
             name: application.name ?? '',
@@ -79,7 +65,7 @@ export default function UpdateAppForm({ application, className = '' }) {
     };
 
     return (
-        <section className={`space-y-6 ${className}`}>
+        <section className={clsx('space-y-6', className)}>
             <PrimaryButton onClick={openModal} className='!px-2' aria-label={t('Edit your app')}>
                 <svg
                     className='h-5 w-5 text-white dark:text-gray-800'
@@ -124,7 +110,13 @@ export default function UpdateAppForm({ application, className = '' }) {
                         <textarea
                             id='description'
                             name='description'
-                            className='mt-1 block w-3/4 rounded-md border-gray-300 shadow-sm transition duration-300 ease-linear focus:border-sky-500 focus:ring-sky-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-sky-600 dark:focus:ring-sky-600'
+                            className={clsx(
+                                'mt-1 block w-3/4 rounded-md border-gray-300 shadow-sm transition duration-300 ease-linear',
+                                'focus:border-sky-500 focus:ring-sky-500',
+
+                                'dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300',
+                                'dark:focus:border-sky-600 dark:focus:ring-sky-600',
+                            )}
                             rows={5}
                             value={data.description ?? ''}
                             onChange={(e) => setData('description', e.target.value)}
