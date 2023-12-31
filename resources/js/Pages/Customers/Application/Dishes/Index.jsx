@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 import { Head } from '@inertiajs/react';
 import { sortData, filterData } from '@/Utils/useTableUtils';
@@ -16,25 +17,16 @@ import UpdateDishPicture from './Partials/UpdateDishPicture';
 export default function Index({ customerAuth, application, dishes, localization }) {
     const { t } = useTranslation();
 
-    {
-        /* State variables for handling search, sorting, and pagination */
-    }
     const [searchTerm, setSearchTerm] = useState('');
     const [sortColumn, setSortColumn] = useState('');
     const [sortDirection, setSortDirection] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [dishesPerPage, setDishesPerPage] = useState(10);
 
-    {
-        /* Handler for search input change */
-    }
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
 
-    {
-        /* Handler for column sorting */
-    }
     const handleSort = (column) => {
         if (column === sortColumn) {
             setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
@@ -44,24 +36,15 @@ export default function Index({ customerAuth, application, dishes, localization 
         }
     };
 
-    {
-        /* Handler for page change */
-    }
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
 
-    {
-        /* Handler for items per page change */
-    }
     const handleDishesPerPageChange = (e) => {
         setDishesPerPage(parseInt(e.target.value, 10));
         setCurrentPage(1);
     };
 
-    {
-        /* Columns configuration for the table */
-    }
     const dishesColumns = [
         {
             key: 'picture',
@@ -109,9 +92,6 @@ export default function Index({ customerAuth, application, dishes, localization 
         },
     ];
 
-    {
-        /* Configuration for rendering actions in each row */
-    }
     const renderDishesActions = {
         header: () => t('Actions'),
         render: (dish) => (
@@ -122,24 +102,15 @@ export default function Index({ customerAuth, application, dishes, localization 
         ),
     };
 
-    {
-        /* Sorting products by creation date by ASC */
-    }
     const sortedByCreationDateDishes = dishes.slice(1).sort((a, b) => {
         const dateA = new Date(a.created_at);
         const dateB = new Date(b.created_at);
         return dateA - dateB;
     });
 
-    {
-        /* Applying sorting and filtering */
-    }
     const sortedDishes = sortData(sortedByCreationDateDishes, sortColumn, sortDirection);
     const filteredDishes = filterData(sortedDishes, searchTerm, dishesColumns, t);
 
-    {
-        /* Pagination calculation */
-    }
     const indexOfLastDishes = currentPage * dishesPerPage;
     const indexOfFirstDishes = indexOfLastDishes - dishesPerPage;
     const currentDishes = filteredDishes.slice(indexOfFirstDishes, indexOfLastDishes);
@@ -152,7 +123,12 @@ export default function Index({ customerAuth, application, dishes, localization 
         >
             <Head title={application.name} />
             <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <div className='rounded-lg bg-white p-4 shadow-md transition duration-300 ease-linear sm:p-8 dark:bg-gray-800'>
+                <div
+                    className={clsx(
+                        'rounded-lg bg-white p-4 shadow-md transition duration-300 ease-linear sm:p-8',
+                        'dark:bg-gray-800',
+                    )}
+                >
                     <CreateDishForm className='mx-auto max-w-xl' application={application} />
                 </div>
                 <div className='mt-4 flex flex-col items-center justify-end gap-2 pr-4 sm:flex-row'>
@@ -163,7 +139,10 @@ export default function Index({ customerAuth, application, dishes, localization 
                     />
                     <TextInput
                         placeholder={t('Search dishes')}
-                        className='w-64 placeholder:text-gray-600 dark:!bg-gray-800 dark:placeholder:text-gray-400'
+                        className={clsx(
+                            'w-64 placeholder:text-gray-600',
+                            'dark:!bg-gray-800 dark:placeholder:text-gray-400',
+                        )}
                         value={searchTerm}
                         onChange={handleSearchChange}
                     />
@@ -185,7 +164,12 @@ export default function Index({ customerAuth, application, dishes, localization 
                         />
                     </>
                 ) : (
-                    <div className='bg-white p-4 text-center shadow transition duration-300 ease-linear sm:rounded-lg sm:p-8 dark:bg-gray-800'>
+                    <div
+                        className={clsx(
+                            'bg-white p-4 text-center shadow transition duration-300 ease-linear sm:rounded-lg sm:p-8',
+                            'dark:bg-gray-800',
+                        )}
+                    >
                         <p className='text-gray-900 dark:text-gray-100'>{t('No dishes found.')}</p>
                     </div>
                 )}
