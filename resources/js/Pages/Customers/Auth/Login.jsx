@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useEffect } from 'react';
 import Checkbox from '@/Components/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
@@ -11,18 +12,12 @@ import { useTranslation } from 'react-i18next';
 export default function Login({ status, canResetPassword }) {
     const { t } = useTranslation();
 
-    {
-        /* Initialize form data and handle form submission */
-    }
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
         remember: false,
     });
 
-    {
-        /* Reset password field when component unmounts */
-    }
     useEffect(() => {
         return () => {
             reset('password');
@@ -92,7 +87,15 @@ export default function Login({ status, canResetPassword }) {
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
-                            className='rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800'
+                            className={clsx(
+                                'rounded-md text-sm text-gray-600 underline',
+                                'hover:text-gray-900',
+                                'focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
+
+                                'dark:text-gray-400',
+                                'dark:hover:text-gray-100',
+                                'dark:focus:ring-offset-gray-800',
+                            )}
                         >
                             {t('Forgot your password?')}
                         </Link>

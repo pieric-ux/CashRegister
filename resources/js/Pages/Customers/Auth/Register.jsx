@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useEffect } from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
@@ -10,9 +11,6 @@ import { useTranslation } from 'react-i18next';
 export default function Register() {
     const { t } = useTranslation();
 
-    {
-        /* Initialize form data and handle form submission */
-    }
     const { data, setData, post, processing, errors, reset } = useForm({
         company_name: '',
         first_name: '',
@@ -25,9 +23,6 @@ export default function Register() {
         password_confirmation: '',
     });
 
-    {
-        /* Reset password and password confirmation fields when component unmounts */
-    }
     useEffect(() => {
         return () => {
             reset('password', 'password_confirmation');
@@ -189,7 +184,15 @@ export default function Register() {
                 <div className='mt-4 flex items-center justify-end'>
                     <Link
                         href={route('customers.login')}
-                        className='rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800'
+                        className={clsx(
+                            'rounded-md text-sm text-gray-600 underline',
+                            'hover:text-gray-900',
+                            'focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
+
+                            'dark:text-gray-400',
+                            'dark:hover:text-gray-100',
+                            'dark:focus:ring-offset-gray-800',
+                        )}
                     >
                         {t('Already registered?')}
                     </Link>
