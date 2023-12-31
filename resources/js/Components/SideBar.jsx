@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { Link } from '@inertiajs/react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import ApplicationLogoDark from './ApplicationLogoDark';
@@ -30,23 +31,37 @@ export default function SideBar({ children, sideBarOpen, setSideBarOpen }) {
 
     return (
         <aside
-            className={`${
-                sideBarOpen ? 'absolute sm:flex' : 'hidden'
-            } z-50 hidden min-h-screen w-72 flex-col overflow-y-hidden bg-gray-50 transition duration-300 ease-linear lg:flex dark:bg-gray-800`}
+            className={clsx(
+                'z-50 hidden min-h-screen w-72 flex-col overflow-y-hidden bg-gray-50 transition duration-300 ease-linear lg:flex',
+                'dark:bg-gray-800',
+
+                { 'absolute sm:flex': sideBarOpen, hidden: !sideBarOpen },
+            )}
             ref={sideBarRef}
         >
             {/* SideBar Header*/}
             <header className='flex items-center p-4'>
                 <Link
                     href='/'
-                    className='focus:rounded-md focus:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:bg-gray-900 dark:focus:ring-offset-gray-800'
+                    className={clsx(
+                        'focus:rounded-md focus:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2',
+                        'dark:focus:bg-gray-900 dark:focus:ring-offset-gray-800',
+                    )}
                     aria-label='Welcome Page'
                 >
                     <ApplicationLogo className='m-auto block dark:hidden' />
                     <ApplicationLogoDark className='m-auto hidden dark:block' />
                 </Link>
                 <button
-                    className='ml-10 inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 lg:hidden dark:text-gray-500 dark:hover:bg-gray-900 dark:hover:text-gray-400 dark:focus:bg-gray-900 dark:focus:text-gray-400 dark:focus:ring-offset-gray-800'
+                    className={clsx(
+                        'ml-10 inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out lg:hidden',
+                        'hover:bg-gray-100 hover:text-gray-500',
+                        'focus:bg-gray-100 focus:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2',
+
+                        'dark:text-gray-500',
+                        'dark:hover:bg-gray-900 dark:hover:text-gray-400',
+                        'dark:focus:bg-gray-900 dark:focus:text-gray-400 dark:focus:ring-offset-gray-800',
+                    )}
                     onClick={() => setSideBarOpen(!sideBarOpen)}
                     aria-label='Close Sidebar'
                     aria-controls='sidebar'

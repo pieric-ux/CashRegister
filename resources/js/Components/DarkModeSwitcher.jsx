@@ -1,14 +1,9 @@
+import clsx from 'clsx';
 import useColorMode from '@/Hooks/useColorMode';
 
 export default function DarkModeSwitcher() {
-    {
-        /* Import and use the custom useColorMode hook */
-    }
     const [colorMode, setColorMode] = useColorMode();
 
-    {
-        /* Handles theme change by toggling between 'light' and 'dark' */
-    }
     const handleThemeChange = () => {
         const newTheme = colorMode === 'light' ? 'dark' : 'light';
         setColorMode(newTheme);
@@ -20,15 +15,20 @@ export default function DarkModeSwitcher() {
             role='switch'
             aria-label='Switch DarkMode'
             aria-checked={colorMode === 'dark'}
-            className={`relative m-0 block h-8 w-14 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
-                colorMode === 'dark' ? 'bg-sky-500' : 'bg-gray-200'
-            }`}
+            className={clsx(
+                'relative m-0 block h-8 w-14 rounded-full bg-gray-200',
+                'focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2',
+
+                'dark:bg-sky-500',
+                'dark:focus:ring-offset-gray-800',
+            )}
             onClick={handleThemeChange}
         >
             <div
-                className={`shadow-switcher absolute left-[3px] top-1/2 flex h-6 w-6 -translate-y-1/2 translate-x-0 items-center justify-center rounded-full bg-white duration-75 ease-linear ${
-                    colorMode === 'dark' && '!right-[3px] !translate-x-full'
-                }`}
+                className={clsx(
+                    'shadow-switcher absolute left-[3px] top-1/2 flex h-6 w-6 -translate-y-1/2 translate-x-0 items-center justify-center rounded-full bg-white duration-75 ease-linear',
+                    'dark:!right-[3px] dark:!translate-x-full',
+                )}
             >
                 <span className='dark:hidden'>
                     <svg

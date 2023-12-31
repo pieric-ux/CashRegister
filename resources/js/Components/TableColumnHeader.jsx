@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import TableArrowIcon from './TableArrowIcon';
 
 export default function TableColumnHeader({
@@ -10,7 +11,7 @@ export default function TableColumnHeader({
 }) {
     return (
         <th
-            className={`cursor-pointer px-4 py-2 text-left ${className}`}
+            className={clsx('cursor-pointer px-4 py-2 text-left', className)}
             onClick={() => handleSort(column)}
         >
             <div className='flex items-center gap-1'>

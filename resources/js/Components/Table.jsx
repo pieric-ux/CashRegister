@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import TableColumnHeader from './TableColumnHeader';
 
 export default function Table({
@@ -8,8 +9,15 @@ export default function Table({
     handleSort,
     actionsRenderer,
 }) {
+    const tdClasses = clsx('border-t border-gray-300 px-4 py-2 dark:border-gray-700');
+
     return (
-        <table className='min-w-full rounded-lg bg-white text-gray-900 shadow-md transition duration-300 ease-linear dark:bg-gray-800 dark:text-gray-100'>
+        <table
+            className={clsx(
+                'min-w-full rounded-lg bg-white text-gray-900 shadow-md transition duration-300 ease-linear',
+                'dark:bg-gray-800 dark:text-gray-100',
+            )}
+        >
             <thead>
                 <tr>
                     {columns.map((column) => (
@@ -35,9 +43,7 @@ export default function Table({
                         {columns.map((column) => (
                             <td
                                 key={`${item.id}-${column.key}`}
-                                className={`border-t border-gray-300 px-4 py-2 dark:border-gray-700 ${
-                                    column.className || ''
-                                }`}
+                                className={clsx(tdClasses, column.className)}
                             >
                                 {column.render ? (
                                     <div className='ml-5'>{column.render(item)}</div>
@@ -47,9 +53,7 @@ export default function Table({
                             </td>
                         ))}
                         {actionsRenderer && (
-                            <td className='border-t border-gray-300 px-4 py-2 dark:border-gray-700'>
-                                {actionsRenderer.render(item)}
-                            </td>
+                            <td className={tdClasses}>{actionsRenderer.render(item)}</td>
                         )}
                     </tr>
                 ))}
