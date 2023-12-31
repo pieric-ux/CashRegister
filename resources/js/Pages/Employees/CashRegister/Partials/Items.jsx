@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useTranslation } from 'react-i18next';
@@ -9,9 +10,6 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
     const [activeSection, setActiveSection] = useState(null);
     const [isDragging, setIsDragging] = useState(false);
 
-    {
-        /* Create maps for dishes and products */
-    }
     const soldSeparatelydDishesMap = new Map(
         dishes.filter((dish) => dish.is_SoldSeparately).map((dish) => [dish.id, dish]),
     );
@@ -23,9 +21,6 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
     }, new Map());
     const returnDishesMap = new Map([...soldSeparatelydDishesMap, ...productsDishesMap]);
 
-    {
-        /* Set initial active section based on data */
-    }
     useEffect(() => {
         if (productsDishesMap.size > 0) {
             setActiveSection('return');
@@ -34,16 +29,10 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
         }
     }, [categories]);
 
-    {
-        /* Toggle section visibility */
-    }
     const toggleSection = (section) => {
         activeSection === section ? setActiveSection(null) : setActiveSection(section);
     };
 
-    {
-        /* Swiper settings */
-    }
     const settings = {
         ...swiperSetting,
         onTransitionStart: () => setIsDragging(true),
@@ -52,9 +41,6 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
         preventClicksPropagation: isDragging,
     };
 
-    {
-        /* Add item to cart */
-    }
     const addToCart = (item, itemType) => {
         let newCart = [...cart];
         let price = parseFloat(item.client_price);
@@ -84,19 +70,37 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
         setCart(newCart);
     };
 
+    const swiperSlideClasses = clsx(
+        'm-2 mx-auto flex h-[82px] w-[82px] flex-col items-center justify-center rounded-lg bg-white p-4 transition duration-300 ease-linear',
+        'hover:bg-gray-200',
+        'focus:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2',
+        'active:bg-gray-200',
+        'disabled:cursor-not-allowed disabled:opacity-25',
+
+        'dark:bg-gray-800',
+        'dark:hover:bg-gray-700',
+        'dark:focus:bg-gray-700 dark:focus:ring-offset-gray-800',
+        'dark:active:bg-gray-700',
+    );
+
     return (
         <div className={`${isCartVisible ? 'hidden sm:block' : 'block'}`}>
             {/* Return Dishes */}
             {returnDishesMap.size > 0 && (
                 <div
-                    className={`${
-                        activeSection === 'return' ? 'p-4 !pt-0 sm:p-8' : 'p-0'
-                    } mt-6 flex cursor-pointer flex-col justify-center gap-2 rounded-lg bg-gray-100 text-gray-900 transition duration-300 ease-linear dark:bg-gray-900 dark:text-gray-100`}
+                    className={clsx(
+                        'mt-6 flex cursor-pointer flex-col justify-center gap-2 rounded-lg bg-gray-100 text-gray-900 transition duration-300 ease-linear dark:bg-gray-900 dark:text-gray-100',
+                        {
+                            'p-4 !pt-0 sm:p-8': activeSection === 'return',
+                            'p-0': activeSection !== 'return',
+                        },
+                    )}
                 >
                     <h3
-                        className={`${
-                            activeSection === 'return' ? '!pb-0 pt-4 sm:pt-8' : 'p-4 sm:p-8'
-                        }`}
+                        className={clsx({
+                            '!pb-0 pt-4 sm:pt-8': activeSection === 'return',
+                            'p-4 sm:p-8': activeSection !== 'return',
+                        })}
                         onClick={() => toggleSection('return')}
                     >
                         {t('Return Dishes')}
@@ -112,7 +116,7 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
                                                     addToCart(dish, 'return');
                                                 }
                                             }}
-                                            className='m-2 mx-auto flex h-[82px] w-[82px] flex-col items-center justify-center rounded-lg bg-white p-4 transition duration-300 ease-linear hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 active:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-25 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:bg-gray-700 dark:focus:ring-offset-gray-800 dark:active:bg-gray-700'
+                                            className={swiperSlideClasses}
                                             disabled={isDragging}
                                         >
                                             {dish.picture_url ? (
@@ -153,16 +157,20 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
                         return (
                             <div
                                 key={category.id}
-                                className={`${
-                                    activeSection === category.id ? 'p-4 !pt-0 sm:p-8' : 'p-0'
-                                } mt-6 flex cursor-pointer flex-col gap-2 rounded-lg bg-gray-100 text-gray-900 transition duration-300 ease-linear dark:bg-gray-900 dark:text-gray-100`}
+                                className={clsx(
+                                    'mt-6 flex cursor-pointer flex-col gap-2 rounded-lg bg-gray-100 text-gray-900 transition duration-300 ease-linear',
+                                    'dark:bg-gray-900 dark:text-gray-100',
+                                    {
+                                        'p-4 !pt-0 sm:p-8': activeSection === category.id,
+                                        'p-0': activeSection !== category.id,
+                                    },
+                                )}
                             >
                                 <h3
-                                    className={`${
-                                        activeSection === category.id
-                                            ? '!pb-0 pt-4 sm:pt-8'
-                                            : 'p-4 sm:p-8'
-                                    }`}
+                                    className={clsx({
+                                        '!pb-0 pt-4 sm:pt-8': activeSection === category.id,
+                                        'p-4 sm:p-8': activeSection !== category.id,
+                                    })}
                                     onClick={() => toggleSection(category.id)}
                                 >
                                     {t(category.name)}
@@ -178,7 +186,7 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
                                                                 addToCart(product, 'product');
                                                             }
                                                         }}
-                                                        className='m-2 mx-auto flex h-[82px] w-[82px] flex-col items-center justify-center rounded-lg bg-white p-4 transition duration-300 ease-linear hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 active:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-25 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:bg-gray-700 dark:focus:ring-offset-gray-800 dark:active:bg-gray-700'
+                                                        className={swiperSlideClasses}
                                                         disabled={isDragging}
                                                     >
                                                         {product.picture_url ? (
@@ -210,14 +218,20 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
             {/* Dishes */}
             {soldSeparatelydDishesMap.size > 0 && (
                 <div
-                    className={`${
-                        activeSection === 'dishes' ? 'p-4 !pt-0 sm:p-8' : 'p-0'
-                    } mt-6 flex cursor-pointer flex-col justify-center gap-2 rounded-lg bg-gray-100 text-gray-900 transition duration-300 ease-linear dark:bg-gray-900 dark:text-gray-100`}
+                    className={clsx(
+                        'mt-6 flex cursor-pointer flex-col gap-2 rounded-lg bg-gray-100 text-gray-900 transition duration-300 ease-linear',
+                        'dark:bg-gray-900 dark:text-gray-100',
+                        {
+                            'p-4 !pt-0 sm:p-8': activeSection === 'dishes',
+                            'p-0': activeSection !== 'dishes',
+                        },
+                    )}
                 >
                     <h3
-                        className={`${
-                            activeSection === 'dishes' ? '!pb-0 pt-4 sm:pt-8' : 'p-4 sm:p-8'
-                        }`}
+                        className={clsx({
+                            '!pb-0 pt-4 sm:pt-8': activeSection === 'dishes',
+                            'p-4 sm:p-8': activeSection !== 'dishes',
+                        })}
                         onClick={() => toggleSection('dishes')}
                     >
                         {t('Dishes')}
@@ -233,7 +247,7 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
                                                     addToCart(dish, 'dishes');
                                                 }
                                             }}
-                                            className='m-2 mx-auto flex h-[82px] w-[82px] flex-col items-center justify-center rounded-lg bg-white p-4 transition duration-300 ease-linear hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 active:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-25 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:bg-gray-700 dark:focus:ring-offset-gray-800 dark:active:bg-gray-700'
+                                            className={swiperSlideClasses}
                                             disabled={isDragging}
                                         >
                                             {dish.picture_url ? (

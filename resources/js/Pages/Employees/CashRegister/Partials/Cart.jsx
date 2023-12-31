@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import DangerButton from '../../../../Components/DangerButton';
 
@@ -6,11 +7,20 @@ export default function Cart({ isCartVisible, cart, removeFromCart }) {
 
     return (
         <div
-            className={`${
-                isCartVisible ? 'block' : 'hidden sm:block'
-            } overflow-x-hidden rounded-lg border border-gray-300 sm:max-h-[229px] dark:border-gray-700`}
+            className={clsx(
+                'overflow-x-hidden rounded-lg border border-gray-300 sm:max-h-[229px] dark:border-gray-700',
+                {
+                    block: isCartVisible,
+                    'hidden sm:block': !isCartVisible,
+                },
+            )}
         >
-            <table className='min-w-full divide-y divide-gray-300 text-gray-900 transition duration-300 ease-linear dark:divide-gray-700 dark:text-gray-100'>
+            <table
+                className={clsx(
+                    'min-w-full divide-y divide-gray-300 text-gray-900 transition duration-300 ease-linear',
+                    'dark:divide-gray-700 dark:text-gray-100',
+                )}
+            >
                 <thead>
                     <tr className='sticky top-0 divide-x divide-gray-300 bg-white dark:divide-gray-700 dark:bg-gray-900'>
                         <th className='w-1/12 p-2 text-center text-xs font-medium uppercase tracking-wider'>
