@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useForm } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import InputError from '@/Components/InputError';
@@ -11,15 +12,9 @@ import { useTranslation } from 'react-i18next';
 export default function UpdateProductForm({ product, categories, dishes, className = '' }) {
     const { t } = useTranslation();
 
-    {
-        /* State for controlling modal visibility and form errors display */
-    }
     const [openingModal, setOpeningModal] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
 
-    {
-        /* Initialize form data and handle form submission */
-    }
     const { data, setData, patch, processing, errors } = useForm({
         name: product.name,
         unit: product.unit,
@@ -29,16 +24,10 @@ export default function UpdateProductForm({ product, categories, dishes, classNa
         dish: product.fk_dishes_id,
     });
 
-    {
-        /* Open the modal */
-    }
     const openModal = () => {
         setOpeningModal(true);
     };
 
-    {
-        /* Close the modal and reset form data */
-    }
     const closeModal = () => {
         setOpeningModal(false);
         setData({
@@ -52,9 +41,6 @@ export default function UpdateProductForm({ product, categories, dishes, classNa
         setShowErrors(false);
     };
 
-    {
-        /* Set form data when product prop changes */
-    }
     useEffect(() => {
         setData({
             name: product.name,
@@ -77,6 +63,14 @@ export default function UpdateProductForm({ product, categories, dishes, classNa
             onSuccess: () => closeModal(),
         });
     };
+
+    const selectClasses = clsx(
+        'mt-1 block w-3/4 rounded-md border-gray-300 shadow-sm transition duration-300 ease-linear',
+        'focus:border-sky-500 focus:ring-sky-500',
+
+        'dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300',
+        'dark:focus:border-sky-600 dark:focus:ring-sky-600',
+    );
 
     return (
         <section className={`space-y-6 ${className}`}>
@@ -172,7 +166,7 @@ export default function UpdateProductForm({ product, categories, dishes, classNa
                         <select
                             id='category'
                             name='category'
-                            className='mt-1 block w-3/4 rounded-md border-gray-300 shadow-sm transition duration-300 ease-linear focus:border-sky-500 focus:ring-sky-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-sky-600 dark:focus:ring-sky-600 '
+                            className={selectClasses}
                             value={data.category}
                             onChange={(e) => setData('category', e.target.value)}
                         >
@@ -197,7 +191,7 @@ export default function UpdateProductForm({ product, categories, dishes, classNa
                         <select
                             id='dish'
                             name='dish'
-                            className='mt-1 block w-3/4 rounded-md border-gray-300 shadow-sm transition duration-300 ease-linear focus:border-sky-500 focus:ring-sky-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-sky-600 dark:focus:ring-sky-600 '
+                            className={selectClasses}
                             value={data.dish}
                             onChange={(e) => setData('dish', e.target.value)}
                         >
