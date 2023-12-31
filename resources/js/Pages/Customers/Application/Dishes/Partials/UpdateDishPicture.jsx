@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useEffect } from 'react';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
@@ -7,24 +8,15 @@ import { useTranslation } from 'react-i18next';
 export default function UpdateDishPicture({ dish, className }) {
     const { t } = useTranslation();
 
-    {
-        /* Initialize form data and handle form submission */
-    }
     const { data, setData, post, errors } = useForm({
         dishId: dish.id,
         picture: '',
     });
 
-    {
-        /* Update the selected picture file in form data */
-    }
     const handlePictureChange = (e) => {
         setData('picture', e.target.files[0]);
     };
 
-    {
-        /* When the picture changes, submit the form */
-    }
     useEffect(() => {
         if (data.picture) {
             submit();
@@ -41,7 +33,7 @@ export default function UpdateDishPicture({ dish, className }) {
 
     return (
         <form
-            className={`flex h-24 items-center justify-center ${className}`}
+            className={clsx('flex h-24 items-center justify-center', className)}
             encType='multipart/form-data'
         >
             <div className='flex w-3/4 items-center justify-center'>
