@@ -12,15 +12,9 @@ import Checkbox from '@/Components/Checkbox';
 export default function CreateDishForm({ application, className = '' }) {
     const { t } = useTranslation();
 
-    {
-        /* State for controlling modal visibility and form errors display */
-    }
     const [openingModal, setOpeningModal] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
 
-    {
-        /* Initialize form data and handle form submission */
-    }
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         unit: '',
@@ -30,25 +24,16 @@ export default function CreateDishForm({ application, className = '' }) {
         is_SoldSeparately: false,
     });
 
-    {
-        /* Update client_price when is_consigned changes */
-    }
     useEffect(() => {
         if (!data.is_consigned) {
             setData('client_price', '');
         }
     }, [data.is_consigned]);
 
-    {
-        /* Open the modal */
-    }
     const openModal = () => {
         setOpeningModal(true);
     };
 
-    {
-        /* Close the modal and reset form data */
-    }
     const closeModal = () => {
         setOpeningModal(false);
         reset();

@@ -11,19 +11,10 @@ import { useTranslation } from 'react-i18next';
 export default function DeleteDishForm({ dish }) {
     const { t } = useTranslation();
 
-    {
-        /* State to manage the modal visibility and user confirmation */
-    }
     const [confirmingDishDeletion, setConfirmingDishDeletion] = useState(false);
 
-    {
-        /* Ref for the password input field */
-    }
     const passwordInput = useRef();
 
-    {
-        /* Initialize form data and handle form submission */
-    }
     const {
         data,
         setData,
@@ -35,16 +26,10 @@ export default function DeleteDishForm({ dish }) {
         password: '',
     });
 
-    {
-        /* Open the confirmation modal */
-    }
     const confirmDishDeletion = () => {
         setConfirmingDishDeletion(true);
     };
 
-    {
-        /* Delete the dish */
-    }
     const deleteDish = (e) => {
         e.preventDefault();
 
@@ -56,9 +41,6 @@ export default function DeleteDishForm({ dish }) {
         });
     };
 
-    {
-        /* Close the modal and reset the form */
-    }
     const closeModal = () => {
         setConfirmingDishDeletion(false);
 
