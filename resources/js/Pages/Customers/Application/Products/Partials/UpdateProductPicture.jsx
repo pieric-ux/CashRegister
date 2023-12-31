@@ -7,24 +7,15 @@ import { useTranslation } from 'react-i18next';
 export default function UpdateProdutPicture({ product, className }) {
     const { t } = useTranslation();
 
-    {
-        /* Initialize form data and handle form submission */
-    }
     const { data, setData, post, errors } = useForm({
         productId: product.id,
         picture: '',
     });
 
-    {
-        /* Update the selected picture file in form data */
-    }
     const handlePictureChange = (e) => {
         setData('picture', e.target.files[0]);
     };
 
-    {
-        /* When the picture changes, submit the form */
-    }
     useEffect(() => {
         if (data.picture) {
             submit();
