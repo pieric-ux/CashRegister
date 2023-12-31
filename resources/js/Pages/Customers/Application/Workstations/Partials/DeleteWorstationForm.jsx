@@ -11,19 +11,10 @@ import { useTranslation } from 'react-i18next';
 export default function DeleteWorkstationForm({ workstation }) {
     const { t } = useTranslation();
 
-    {
-        /* State to manage the modal visibility and user confirmation */
-    }
     const [confirmingWorkstationDeletion, setConfirmingWorkstationDeletion] = useState(false);
 
-    {
-        /* Ref for the password input field */
-    }
     const passwordInput = useRef();
 
-    {
-        /* Initialize form data and handle form submission */
-    }
     const {
         data,
         setData,
@@ -35,16 +26,10 @@ export default function DeleteWorkstationForm({ workstation }) {
         password: '',
     });
 
-    {
-        /* Open the confirmation modal */
-    }
     const confirmWorkstationDeletion = () => {
         setConfirmingWorkstationDeletion(true);
     };
 
-    {
-        /* Delete the workstation */
-    }
     const deleteWorkstation = (e) => {
         e.preventDefault();
 
@@ -56,9 +41,6 @@ export default function DeleteWorkstationForm({ workstation }) {
         });
     };
 
-    {
-        /* Close the modal and reset the form */
-    }
     const closeModal = () => {
         setConfirmingWorkstationDeletion(false);
 
