@@ -11,19 +11,10 @@ import { useTranslation } from 'react-i18next';
 export default function DeleteProductForm({ product }) {
     const { t } = useTranslation();
 
-    {
-        /* State to manage the modal visibility and user confirmation */
-    }
     const [confirmingProductDeletion, setConfirmingProductDeletion] = useState(false);
 
-    {
-        /* Ref for the password input field */
-    }
     const passwordInput = useRef();
 
-    {
-        /* Initialize form data and handle form submission */
-    }
     const {
         data,
         setData,
@@ -35,16 +26,10 @@ export default function DeleteProductForm({ product }) {
         password: '',
     });
 
-    {
-        /* Open the confirmation modal */
-    }
     const confirmProductDeletion = () => {
         setConfirmingProductDeletion(true);
     };
 
-    {
-        /* Delete the product */
-    }
     const deleteProduct = (e) => {
         e.preventDefault();
 
@@ -56,9 +41,6 @@ export default function DeleteProductForm({ product }) {
         });
     };
 
-    {
-        /* Close the modal and reset the form */
-    }
     const closeModal = () => {
         setConfirmingProductDeletion(false);
 
