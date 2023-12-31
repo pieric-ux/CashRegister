@@ -11,19 +11,10 @@ import { useTranslation } from 'react-i18next';
 export default function DeleteAppForm({ application }) {
     const { t } = useTranslation();
 
-    {
-        /* State to manage the modal visibility and user confirmation */
-    }
     const [confirmingAppDeletion, setConfirmingAppDeletion] = useState(false);
 
-    {
-        /* Ref for the password input field */
-    }
     const passwordInput = useRef();
 
-    {
-        /* Initialize form data and handle form submission */
-    }
     const {
         data,
         setData,
@@ -35,16 +26,10 @@ export default function DeleteAppForm({ application }) {
         password: '',
     });
 
-    {
-        /* Open the confirmation modal */
-    }
     const confirmAppDeletion = () => {
         setConfirmingAppDeletion(true);
     };
 
-    {
-        /* Delete the app */
-    }
     const deleteApp = (e) => {
         e.preventDefault();
 
@@ -56,9 +41,6 @@ export default function DeleteAppForm({ application }) {
         });
     };
 
-    {
-        /* Close the modal and reset the form */
-    }
     const closeModal = () => {
         setConfirmingAppDeletion(false);
 
