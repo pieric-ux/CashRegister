@@ -10,9 +10,6 @@ import { useTranslation } from 'react-i18next';
 export default function ResetPassword({ token, email }) {
     const { t } = useTranslation();
 
-    {
-        /* Initialize form data and handle form submission */
-    }
     const { data, setData, post, processing, errors, reset } = useForm({
         token: token,
         email: email,
@@ -20,9 +17,6 @@ export default function ResetPassword({ token, email }) {
         password_confirmation: '',
     });
 
-    {
-        /* Reset password and password confirmation fields when component unmounts */
-    }
     useEffect(() => {
         return () => {
             reset('password', 'password_confirmation');
