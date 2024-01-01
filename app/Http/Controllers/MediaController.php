@@ -20,12 +20,10 @@ class MediaController extends Controller
      */
     public function uploadAvatar(UploadAvatarRequest $request, Customer $customer): RedirectResponse
     {
-        // Retrieve the authenticated customer
         $customer = auth()->user();
 
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
-            // Call the 'uploadAvatar' method on the customer model
             $customer->uploadAvatar($avatar);
         }
 
@@ -37,12 +35,10 @@ class MediaController extends Controller
      */
     public function uploadPoster(UploadPosterRequest $request, CR_App $app): RedirectResponse
     {
-        // Find the application based on the provided ID
         $app = $app::find($request->appId);
 
         if ($request->hasFile('poster')) {
             $poster = $request->file('poster');
-            // Call the 'uploadPoster' method on the CR_App model
             $app->uploadPoster($poster);
         }
 
@@ -54,12 +50,10 @@ class MediaController extends Controller
      */
     public function uploadProductPicture(UploadProductPictureRequest $request, CR_Products $product): RedirectResponse
     {
-        // Find the product based on the provided ID
         $product = $product::find($request->productId);
 
         if ($request->hasFile('picture')) {
             $picture = $request->file('picture');
-            // Call the 'uploadProductPicture' method on the CR_Products model
             $product->uploadProductPicture($picture);
         }
 
@@ -71,12 +65,10 @@ class MediaController extends Controller
      */
     public function uploadDishPicture(UploadDishPictureRequest $request, CR_Dishes $dish): RedirectResponse
     {
-        // Find the dish based on the provided ID
         $dish = $dish::find($request->dishId);
 
         if ($request->hasFile('picture')) {
             $picture = $request->file('picture');
-            // Call the 'uploadDishPicture' method on the CR_Dishes model
             $dish->uploadDishPicture($picture);
         }
 
@@ -88,12 +80,10 @@ class MediaController extends Controller
      */
     public function uploadEmployeeAvatar(UploadAvatarRequest $request, CR_Employees $employee): RedirectResponse
     {
-        // Retrieve the authenticated employee
         $employee = auth('employee')->user();
 
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
-            // Call the 'uploadAvatar' method on the CR_Employees model
             $employee->uploadAvatar($avatar);
         }
 

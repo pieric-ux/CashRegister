@@ -22,10 +22,8 @@ class ProductsController extends Controller
      */
     public function index(IndexProductsRequest $request, CR_App $app): Response
     {
-        // Retrieve categories with their associated products and dishes
         $categories = $app->cr_categories_products()->with('cr_products.cr_categories_products', 'cr_products.cr_dishes')->get();
 
-        // Map and format products with picture paths
         $products = $categories->flatMap(function ($category) {
             return $category->cr_products->map(function ($product) {
                 $product->picturePath = $product->getPictureUrl('thumb');
@@ -33,7 +31,6 @@ class ProductsController extends Controller
             });
         });
 
-        // Retrieve dishes associated with the app
         $dishes = $app->cr_dishes;
 
         return Inertia::render('Customers/Application/Products/Index', [
@@ -49,11 +46,9 @@ class ProductsController extends Controller
      */
     public function store(StoreProductRequeset $request, CR_App $app): RedirectResponse
     {
-        // Retrieve the default category and dish for the app
         $category = $app->cr_categories_products->first();
         $dish = $app->cr_dishes->first();
 
-        // Create a new product under the default category and dish
         $category->cr_products()->create([
             'name' => ucfirst($request->input('name')),
             'unit' => $request->input('unit'),
@@ -70,7 +65,6 @@ class ProductsController extends Controller
      */
     public function update(UpdateProductRequest $request, CR_Products $product): RedirectResponse
     {
-        // Update product details based on validated data
         $product->name = ucfirst($request->input('name'));
         $product->unit = $request->input('unit');
         $product->client_price = $request->input('client_price');
@@ -87,17 +81,13 @@ class ProductsController extends Controller
      */
     public function updateDragAndDrop(UpdateDragAndDropProductsRequest $request)
     {
-        // Retrieve workstation data and associated product IDs from the request
         $workstations = $request->input('workstations');
 
         foreach ($workstations as $workstationData) {
-            // Find the workstation based on the ID
             $workstation = CR_Workstations::find($workstationData['id']);
 
-            // Collect the IDs of products associated with the workstation
             $productIds = collect($workstationData['cr_products'])->pluck('id')->all();
 
-            // Sync the products associated with the workstation
             $workstation->cr_products()->sync($productIds);
         }
 
@@ -112,12 +102,10 @@ class ProductsController extends Controller
      */
     public function destroy(DeleteProductRequest $request, CR_Products $product): RedirectResponse
     {
-        // Validate the user's password before proceeding
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
 
-        // Delete the product
         $product->delete();
 
         return Redirect::route('products.index', $product->cr_categories_products->cr_apps);
