@@ -1,6 +1,7 @@
 import { Pagination } from 'swiper/modules';
+import { SwiperOptions } from 'swiper/types';
 
-export const swiperSetting = {
+export const swiperSetting: SwiperOptions = {
     modules: [Pagination],
 
     pagination: {
