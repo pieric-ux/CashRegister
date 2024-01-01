@@ -87,6 +87,7 @@ class CashregisterController extends Controller
                 if ($dish['is_consigned'] == 1) {
                     $client_price -= $dish['client_price'];
                     $with_consigned = true;
+                }
 
                 if ($dish['name'] != 'No dish') {
                     $dish_details = [
