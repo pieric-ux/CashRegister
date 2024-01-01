@@ -12,13 +12,10 @@ class DeleteCategorieProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Get the category instance from the route parameter
         $category = $this->route('category');
 
-        // Get the associated app of the category
         $app = $category->cr_apps;
 
-        // Check if the app is owned by the authenticated user
         return $app->isOwnedBy(Auth::user());
     }
 
