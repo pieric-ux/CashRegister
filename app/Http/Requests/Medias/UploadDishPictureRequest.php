@@ -13,16 +13,12 @@ class UploadDishPictureRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Get the dish ID from the request input
         $dishId = $this->input('dishId');
 
-        // Find the dish instance
         $dish = CR_Dishes::find($dishId);
 
-        // Get the associated app of the dish
         $app = $dish->cr_apps;
 
-        // Check if the app is owned by the authenticated user
         return $app->isOwnedBy(Auth::user());
     }
 
