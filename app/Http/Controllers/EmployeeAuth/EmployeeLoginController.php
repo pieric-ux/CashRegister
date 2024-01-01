@@ -19,10 +19,9 @@ class EmployeeLoginController extends Controller
      */
     public function create(Request $request, CR_App $app, $code = null): Response
     {
-        // Get the application from the route
+        
         $app = $request->route('app');
 
-        // Render the login view with application, status, and code
         return Inertia::render('Employees/Auth/Login', [
             'application' => $app,
             'status' => session('status'),
@@ -35,13 +34,10 @@ class EmployeeLoginController extends Controller
      */
     public function store(LoginEmployeeRequest $request): RedirectResponse
     {
-        // Authenticate the employee using the provided credentials
         $request->authenticate();
 
-        // Regenerate the session ID to prevent session fixation attacks
         $request->session()->regenerate();
 
-        // Redirect to the intended URL after successful login
         return redirect()->intended(RouteServiceProvider::EMPLOYEE_HOME);
     }
 
@@ -50,14 +46,11 @@ class EmployeeLoginController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        // Log out the authenticated employee using the employee guard
         Auth::guard('employee')->logout();
 
-        // Invalidate the session and regenerate a new session token
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        // Redirect to the home page
         return redirect('/');
     }
 }
