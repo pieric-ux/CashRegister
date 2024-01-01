@@ -1,14 +1,8 @@
-{
-    /* This function sorts the data based on the specified sorting criteria. */
-}
 export function sortData(data, sortColumn, sortDirection) {
     return data.slice().sort((a, b) => {
         if (sortColumn) {
             let valueA, valueB;
 
-            {
-                /* Extract values to compare based on the sorting column */
-            }
             if (sortColumn === 'paymentMethod') {
                 valueA = a.cr_payment_methods?.name?.toLowerCase();
                 valueB = b.cr_payment_methods?.name?.toLowerCase();
@@ -22,9 +16,7 @@ export function sortData(data, sortColumn, sortDirection) {
                 valueA = a[sortColumn];
                 valueB = b[sortColumn];
             }
-            {
-                /* Convert values to numbers if needed */
-            }
+
             if (
                 sortColumn === 'client_price' ||
                 sortColumn === 'cost_price' ||
@@ -38,22 +30,13 @@ export function sortData(data, sortColumn, sortDirection) {
                 valueB = valueB ? valueB.toLowerCase() : '';
             }
 
-            {
-                /* Compare based on the sorting direction */
-            }
             return sortDirection === 'asc' ? (valueA > valueB ? 1 : -1) : valueA < valueB ? 1 : -1;
         }
         return 0;
     });
 }
 
-{
-    /* This function filters the data based on the search term and specified columns. */
-}
 export function filterData(data, searchTerm, columns, t) {
-    {
-        /* Return unfiltered data if no search term */
-    }
     if (!searchTerm) return data;
     const searchTermLowerCase = searchTerm.toLowerCase();
 
@@ -61,15 +44,9 @@ export function filterData(data, searchTerm, columns, t) {
         columns.some((column) => {
             const value = item[column.key];
 
-            {
-                /* Filtering logic based on value type */
-            }
             if (typeof value === 'string') {
                 return value.toLowerCase()?.includes(searchTermLowerCase);
             } else if (typeof value === 'number') {
-                {
-                    /* Special filtering for boolean columns */
-                }
                 if (column.key === 'is_consigned' && searchTermLowerCase === t('consigned')) {
                     return value === 1;
                 } else {
