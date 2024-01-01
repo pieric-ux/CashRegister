@@ -29,25 +29,21 @@ class CR_Products extends Model implements HasMedia
         'fk_dishes_id',
     ];
 
-    // Relationship with CR_Categories_Products model
     public function cr_categories_products()
     {
         return $this->belongsTo(CR_Categories_Products::class, 'fk_categories_products_id');
     }
 
-    // Relationship with CR_Dishes model
     public function cr_dishes()
     {
         return $this->belongsTo(CR_Dishes::class, 'fk_dishes_id');
     }
 
-    // Relationship with CR_Workstations model
     public function cr_workstations()
     {
         return $this->belongsToMany(CR_Workstations::class, 'cr_workstations_products', 'fk_products_id', 'fk_workstations_id');
     }
 
-    // Register media conversions for media items
     public function registerMediaConversions(Media $media = null): void
     {
         $this
@@ -57,7 +53,6 @@ class CR_Products extends Model implements HasMedia
             ->nonQueued();
     }
 
-    // Get URL of the picture image for the product
     public function getPictureUrl($conversion = '')
     {
         $picture = $this->getFirstMediaUrl('products-pictures', $conversion);
@@ -65,7 +60,6 @@ class CR_Products extends Model implements HasMedia
         return $picture;
     }
 
-    // Upload a new picture image for the product
     public function uploadProductPicture($picture)
     {
         $this->clearMediaCollection('products-pictures');

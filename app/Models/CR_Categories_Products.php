@@ -22,13 +22,11 @@ class CR_Categories_Products extends Model
         'fk_apps_id',
     ];
 
-    // Relationship with CR_App model
     public function cr_apps()
     {
         return $this->belongsTo(CR_App::class, 'fk_apps_id');
     }
 
-    // Relationship with CR_Products model
     public function cr_products()
     {
         return $this->hasMany(CR_Products::class, 'fk_categories_products_id');

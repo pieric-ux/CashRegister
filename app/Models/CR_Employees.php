@@ -43,13 +43,11 @@ class CR_Employees extends Authenticatable implements HasMedia
         'remember_token',
     ];
 
-    // Relationship with CR_Workstations model
     public function cr_workstations()
     {
         return $this->belongsTo(CR_Workstations::class, 'fk_workstations_id');
     }
 
-    // Attempt to authenticate an employee by passwordless code
     public static function attemptByPasswordless($passwordless)
     {
         $user = static::where('passwordless', $passwordless)->first();
@@ -60,7 +58,7 @@ class CR_Employees extends Authenticatable implements HasMedia
 
         return null;
     }
-    // Register media conversions for media items
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this
@@ -70,7 +68,6 @@ class CR_Employees extends Authenticatable implements HasMedia
             ->nonQueued();
     }
 
-    // Get URL of the avatar image for the employee
     public function getAvatarUrl($conversion = '')
     {
         $avatar = $this->getFirstMediaUrl('avatars-employees', $conversion);
@@ -82,7 +79,6 @@ class CR_Employees extends Authenticatable implements HasMedia
         return '/storage/medias/avatars/default-avatar.png';
     }
 
-    // Upload a new picture image for the employee
     public function uploadAvatar($avatar)
     {
         $this->clearMediaCollection('avatars-employees');

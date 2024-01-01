@@ -30,19 +30,16 @@ class CR_Dishes extends Model implements HasMedia
         'fk_apps_id',
     ];
 
-    // Relationship with CR_App model
     public function cr_apps()
     {
         return $this->belongsTo(CR_App::class, 'fk_apps_id');
     }
 
-    // Relationship with CR_Products model
     public function cr_products()
     {
         return $this->hasMany(CR_Products::class, 'fk_dishes_id');
     }
 
-    // Register media conversions for media items
     public function registerMediaConversions(Media $media = null): void
     {
         $this
@@ -52,7 +49,6 @@ class CR_Dishes extends Model implements HasMedia
             ->nonQueued();
     }
 
-    // Get URL of the picture image for the dish
     public function getPictureUrl($conversion = '')
     {
         $picture = $this->getFirstMediaUrl('dishes-pictures', $conversion);
@@ -60,7 +56,6 @@ class CR_Dishes extends Model implements HasMedia
         return $picture;
     }
 
-    // Upload a new picture image for the dish
     public function uploadDishPicture($picture)
     {
         $this->clearMediaCollection('dishes-pictures');

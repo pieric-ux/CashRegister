@@ -54,13 +54,11 @@ class Customer extends Authenticatable implements HasMedia, MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    // Relationship with CR_App model
     public function cr_apps()
     {
         return $this->hasMany(CR_App::class, 'fk_customer_id');
     }
 
-    // Register media conversions for media items
     public function registerMediaConversions(Media $media = null): void
     {
         $this
@@ -70,7 +68,6 @@ class Customer extends Authenticatable implements HasMedia, MustVerifyEmail
             ->nonQueued();
     }
 
-    // Get URL of the avatar image for the customer
     public function getAvatarUrl($conversion = '')
     {
         $avatar = $this->getFirstMediaUrl('avatars', $conversion);
@@ -81,8 +78,7 @@ class Customer extends Authenticatable implements HasMedia, MustVerifyEmail
 
         return '/storage/medias/avatars/default-avatar.png';
     }
-
-    // Upload a new avatar image for the customer
+    
     public function uploadAvatar($avatar)
     {
         $this->clearMediaCollection('avatars');
