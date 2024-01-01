@@ -12,13 +12,10 @@ class DeleteWorkstationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Get the workstation instance from the route parameter
         $workstation = $this->route('workstation');
 
-        // Get the associated app of the workstation
         $app = $workstation->cr_apps;
 
-        // Check if the app is owned by the authenticated user
         return $app->isOwnedBy(Auth::user());
     }
 
