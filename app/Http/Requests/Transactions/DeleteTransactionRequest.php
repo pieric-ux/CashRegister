@@ -12,13 +12,10 @@ class DeleteTransactionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Get the transaction instance from the route parameter
         $transaction = $this->route('transaction');
 
-        // Get the associated app of the transaction
         $app = $transaction->cr_payment_methods->cr_apps;
 
-        // Check if the app is owned by the authenticated user
         return $app->isOwnedBy(Auth::user());
     }
 
