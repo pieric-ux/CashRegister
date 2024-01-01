@@ -14,44 +14,32 @@ class UpdateDragAndDropProductsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Get the array of workstation data from the request input
         $workstations = $this->input('workstations');
 
-        // Initialize a flag to track ownership by the user
         $ownedByUser = true;
 
-        // Loop through each workstation data
         foreach ($workstations as $workstationData) {
-            // Find the workstation instance
             $workstation = CR_Workstations::find($workstationData['id']);
 
-            // Get the associated app of the workstation
             $app = $workstation->cr_apps;
 
-            // Check if the app is owned by the authenticated user
             if (!$app->isOwnedBy(Auth::user())) {
                 $ownedByUser = false;
                 break;
             }
 
-            // Get the array of product data for the workstation
             $products = $workstationData['cr_products'];
 
-            // Loop through each product data
             foreach ($products as $productData) {
-                // Find the product instance
                 $product = CR_Products::find($productData['id']);
 
-                // Get the associated app of the product
                 $app = $product->cr_categories_products->cr_apps;
-                // Check if the app is owned by the authenticated user
                 if (!$app->isOwnedBy(Auth::user())) {
                     $ownedByUser = false;
-                    break 2; // Break out of both loops
+                    break 2;
                 }
             }
         }
-        // Return the ownership status
         return $ownedByUser;
     }
 

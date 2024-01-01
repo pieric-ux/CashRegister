@@ -13,13 +13,10 @@ class UpdateProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Get the product instance from the route parameter
         $product = $this->route('product');
 
-        // Get the associated app of the product
         $app = $product->cr_categories_products->cr_apps;
 
-        // Check if the app is owned by the authenticated user
         return $app->isOwnedBy(Auth::user());
     }
 
