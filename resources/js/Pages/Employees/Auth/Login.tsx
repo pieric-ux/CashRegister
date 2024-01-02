@@ -2,10 +2,10 @@ import Checkbox from '@/Components/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/Components/ui/button';
 
 export default function Login({ status, application, code }) {
     const { t } = useTranslation();
@@ -56,9 +56,9 @@ export default function Login({ status, application, code }) {
                 </div>
 
                 <div className='mt-4 flex items-center justify-end'>
-                    <PrimaryButton className='ml-4' disabled={processing}>
+                    <Button className='ml-4' disabled={processing}>
                         {t('Log in')}
-                    </PrimaryButton>
+                    </Button>
                 </div>
             </form>
         </GuestLayout>

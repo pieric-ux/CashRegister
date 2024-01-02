@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
-import PrimaryButton from '@/Components/PrimaryButton';
-import SecondaryButton from '@/Components/SecondaryButton';
 import Modal from '@/Components/Modal';
 import { useTranslation } from 'react-i18next';
 import Checkbox from '@/Components/Checkbox';
+import clsx from 'clsx';
+import { Button } from '@/Components/ui/button';
 
 export default function UpdateDishForm({ dish, className = '' }) {
     const { t } = useTranslation();
@@ -71,17 +71,17 @@ export default function UpdateDishForm({ dish, className = '' }) {
     };
 
     return (
-        <section className={`space-y-6 ${className}`}>
-            <PrimaryButton onClick={openModal} className='!px-2' aria-label={t('Edit the dish')}>
+        <section className={clsx('space-y-6', className)}>
+            <Button size={'icon'} onClick={openModal} aria-label={t('Edit the dish')}>
                 <svg
-                    className='h-5 w-5 text-white dark:text-gray-800'
+                    className='text-background h-5 w-5'
                     fill='currentColor'
                     xmlns='http://www.w3.org/2000/svg'
                     viewBox='0 0 512 512'
                 >
                     <path d='M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z' />
                 </svg>
-            </PrimaryButton>
+            </Button>
 
             <Modal show={openingModal} onClose={closeModal}>
                 <form onSubmit={submit} className='p-6'>
@@ -194,14 +194,16 @@ export default function UpdateDishForm({ dish, className = '' }) {
                     </div>
 
                     <div className='mt-6 flex justify-end'>
-                        <SecondaryButton onClick={closeModal}>{t('Cancel')}</SecondaryButton>
-                        <PrimaryButton
+                        <Button variant={'secondary'} onClick={closeModal}>
+                            {t('Cancel')}
+                        </Button>
+                        <Button
                             className='ml-3'
                             disabled={processing}
                             aria-label={t('Edit the dish')}
                         >
                             {t('Save')}
-                        </PrimaryButton>
+                        </Button>
                     </div>
                 </form>
             </Modal>

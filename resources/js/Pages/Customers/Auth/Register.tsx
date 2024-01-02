@@ -3,10 +3,10 @@ import { useEffect } from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/Components/ui/button';
 
 export default function Register() {
     const { t } = useTranslation();
@@ -197,9 +197,9 @@ export default function Register() {
                         {t('Already registered?')}
                     </Link>
 
-                    <PrimaryButton className='ml-4' disabled={processing}>
+                    <Button className='ml-4' disabled={processing}>
                         {t('Register')}
-                    </PrimaryButton>
+                    </Button>
                 </div>
             </form>
         </GuestLayout>

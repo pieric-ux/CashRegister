@@ -4,6 +4,7 @@ import Modal from '../../../../Components/Modal';
 import { useTranslation } from 'react-i18next';
 import SecondaryButton from '@/Components/SecondaryButton';
 import PrimaryButton from '@/Components/PrimaryButton';
+import { Button } from '@/Components/ui/button';
 
 export default function Payment({ paymentMethods, isCartEmpty, setSelectedPaymentMethod }) {
     const { t } = useTranslation();
@@ -47,7 +48,7 @@ export default function Payment({ paymentMethods, isCartEmpty, setSelectedPaymen
                     <div className='flex items-center justify-around gap-2'>
                         {paymentMethods.map((paymentMethod) => {
                             return (
-                                <PrimaryButton
+                                <Button
                                     key={paymentMethod.id}
                                     onClick={() => {
                                         setSelectedPaymentMethod(paymentMethod.id);
@@ -68,19 +69,20 @@ export default function Payment({ paymentMethods, isCartEmpty, setSelectedPaymen
                                     ) : (
                                         <p>{t(`${paymentMethod.name}`)}</p>
                                     )}
-                                </PrimaryButton>
+                                </Button>
                             );
                         })}
                     </div>
                     <div className='mt-4 self-end'>
-                        <SecondaryButton
+                        <Button
+                            variant={'secondary'}
                             onClick={() => {
                                 setSelectedPaymentMethod(null);
                                 closeModal();
                             }}
                         >
                             {t('Cancel')}
-                        </SecondaryButton>
+                        </Button>
                     </div>
                 </div>
             </Modal>

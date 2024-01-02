@@ -1,12 +1,11 @@
 import { useRef, useState } from 'react';
-import DangerButton from '@/Components/DangerButton';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import Modal from '@/Components/Modal';
-import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/Components/ui/button';
 
 export default function DeleteDishForm({ dish }) {
     const { t } = useTranslation();
@@ -49,13 +48,14 @@ export default function DeleteDishForm({ dish }) {
 
     return (
         <section>
-            <DangerButton
+            <Button
+                variant={'destructive'}
+                size={'icon'}
                 onClick={confirmDishDeletion}
-                className='!px-2'
                 aria-label={t('Delete the dish')}
             >
                 <svg
-                    className='h-5 w-5 text-white'
+                    className='text-background dark:text-foreground h-5 w-5'
                     fill='currentColor'
                     xmlns='http://www.w3.org/2000/svg'
                     viewBox='0 0 430.901 583.409'
@@ -74,7 +74,7 @@ export default function DeleteDishForm({ dish }) {
                         />
                     </g>
                 </svg>
-            </DangerButton>
+            </Button>
 
             <Modal show={confirmingDishDeletion} onClose={closeModal}>
                 <form onSubmit={deleteDish} className='p-6'>
@@ -107,15 +107,18 @@ export default function DeleteDishForm({ dish }) {
                     </div>
 
                     <div className='mt-6 flex justify-end'>
-                        <SecondaryButton onClick={closeModal}>{t('Cancel')}</SecondaryButton>
+                        <Button variant={'secondary'} onClick={closeModal}>
+                            {t('Cancel')}
+                        </Button>
 
-                        <DangerButton
+                        <Button
+                            variant={'destructive'}
                             className='ml-3'
                             disabled={processing}
                             aria-label={t('Delete the dish')}
                         >
                             {t('Delete Dish')}
-                        </DangerButton>
+                        </Button>
                     </div>
                 </form>
             </Modal>

@@ -4,10 +4,9 @@ import { useState } from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
-import PrimaryButton from '@/Components/PrimaryButton';
-import SecondaryButton from '@/Components/SecondaryButton';
 import Modal from '@/Components/Modal';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/Components/ui/button';
 
 export default function CreateProductForm({ application, className = '' }) {
     const { t } = useTranslation();
@@ -56,9 +55,10 @@ export default function CreateProductForm({ application, className = '' }) {
                     )}
                 </p>
             </header>
-            <PrimaryButton onClick={openModal} aria-label={t('Create your product')}>
+
+            <Button onClick={openModal} aria-label={t('Create your product')}>
                 {t('Create')}
-            </PrimaryButton>
+            </Button>
 
             <Modal show={openingModal} onClose={closeModal}>
                 <form onSubmit={submit} className='p-6'>
@@ -136,14 +136,16 @@ export default function CreateProductForm({ application, className = '' }) {
                     </div>
 
                     <div className='mt-6 flex justify-end'>
-                        <SecondaryButton onClick={closeModal}>{t('Cancel')}</SecondaryButton>
-                        <PrimaryButton
+                        <Button variant={'secondary'} onClick={closeModal}>
+                            {t('Cancel')}
+                        </Button>
+                        <Button
                             className='ml-3'
                             disabled={processing}
                             aria-label={t('Create your product')}
                         >
                             {t('Create')}
-                        </PrimaryButton>
+                        </Button>
                     </div>
                 </form>
             </Modal>

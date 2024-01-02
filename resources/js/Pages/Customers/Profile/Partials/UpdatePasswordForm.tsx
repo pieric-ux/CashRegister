@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/Components/ui/button';
 
 export default function UpdatePasswordForm({ className = '' }) {
     const { t } = useTranslation();
@@ -102,12 +102,9 @@ export default function UpdatePasswordForm({ className = '' }) {
                 </div>
 
                 <div className='flex items-center gap-4'>
-                    <PrimaryButton
-                        disabled={processing}
-                        aria-label={t('Save your updated password')}
-                    >
+                    <Button disabled={processing} aria-label={t('Save your updated password')}>
                         {t('Save')}
-                    </PrimaryButton>
+                    </Button>
 
                     <Transition
                         show={recentlySuccessful}

@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import GuestLayout from '@/Layouts/GuestLayout';
-import PrimaryButton from '@/Components/PrimaryButton';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/Components/ui/button';
 
 export default function VerifyEmail({ status }) {
     const { t } = useTranslation();
@@ -34,9 +34,7 @@ export default function VerifyEmail({ status }) {
 
             <form onSubmit={submit}>
                 <div className='mt-4 flex items-center justify-between'>
-                    <PrimaryButton disabled={processing}>
-                        {t('Resend Verification Email')}
-                    </PrimaryButton>
+                    <Button disabled={processing}>{t('Resend Verification Email')}</Button>
 
                     <Link
                         href={route('logout')}

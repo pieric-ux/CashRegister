@@ -1,12 +1,11 @@
 import { useRef, useState } from 'react';
-import DangerButton from '@/Components/DangerButton';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import Modal from '@/Components/Modal';
-import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/Components/ui/button';
 
 export default function DeleteAppForm({ application }) {
     const { t } = useTranslation();
@@ -49,13 +48,14 @@ export default function DeleteAppForm({ application }) {
 
     return (
         <section>
-            <DangerButton
+            <Button
+                variant={'destructive'}
+                size={'icon'}
                 onClick={confirmAppDeletion}
-                className='!px-2'
                 aria-label={t('Delete your app')}
             >
                 <svg
-                    className='h-5 w-5 text-white'
+                    className='text-background dark:text-foreground h-5 w-5'
                     fill='currentColor'
                     xmlns='http://www.w3.org/2000/svg'
                     viewBox='0 0 430.901 583.409'
@@ -74,7 +74,7 @@ export default function DeleteAppForm({ application }) {
                         />
                     </g>
                 </svg>
-            </DangerButton>
+            </Button>
 
             <Modal show={confirmingAppDeletion} onClose={closeModal}>
                 <form onSubmit={deleteApp} className='p-6'>
@@ -107,15 +107,18 @@ export default function DeleteAppForm({ application }) {
                     </div>
 
                     <div className='mt-6 flex justify-end'>
-                        <SecondaryButton onClick={closeModal}>{t('Cancel')}</SecondaryButton>
+                        <Button variant={'secondary'} onClick={closeModal}>
+                            {t('Cancel')}
+                        </Button>
 
-                        <DangerButton
+                        <Button
+                            variant={'destructive'}
                             className='ml-3'
                             disabled={processing}
                             aria-label={t('Delete your app')}
                         >
                             {t('Delete App')}
-                        </DangerButton>
+                        </Button>
                     </div>
                 </form>
             </Modal>

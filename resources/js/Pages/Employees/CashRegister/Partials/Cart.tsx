@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import DangerButton from '../../../../Components/DangerButton';
+import { Button } from '@/Components/ui/button';
 
 export default function Cart({ isCartVisible, cart, removeFromCart }) {
     const { t } = useTranslation();
@@ -57,12 +57,13 @@ export default function Cart({ isCartVisible, cart, removeFromCart }) {
                                 item.quantity * item.client_price
                             } ${t('currency_symbol')}`}</td>
                             <td className='p-1 text-center'>
-                                <DangerButton
-                                    className='!px-2'
+                                <Button
+                                    variant={'destructive'}
+                                    size={'icon'}
                                     onClick={() => removeFromCart(index)}
                                 >
                                     <svg
-                                        className='h-3 w-3 text-white'
+                                        className='text-background dark:text-foreground h-3 w-3'
                                         fill='currentColor'
                                         xmlns='http://www.w3.org/2000/svg'
                                         viewBox='0 0 430.901 583.409'
@@ -81,7 +82,7 @@ export default function Cart({ isCartVisible, cart, removeFromCart }) {
                                             />
                                         </g>
                                     </svg>
-                                </DangerButton>
+                                </Button>
                             </td>
                         </tr>
                     ))}
