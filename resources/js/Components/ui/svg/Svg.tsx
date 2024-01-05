@@ -8,6 +8,7 @@ const svgVariants = cva('', {
     variants: {
         variant: {
             default: 'text-background',
+            secondary: 'text-foreground',
             destructive: 'text-background dark:text-foreground',
             sideBar: 'text-foreground/70',
         },
