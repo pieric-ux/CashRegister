@@ -6,6 +6,13 @@ import { useForm } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/Components/ui/card/card';
 
 export default function UpdatePasswordForm({ className = '' }) {
     const { t } = useTranslation();
@@ -40,82 +47,90 @@ export default function UpdatePasswordForm({ className = '' }) {
 
     return (
         <section className={className}>
-            <header>
-                <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
-                    {t('Update Password')}
-                </h2>
+            <Card>
+                <CardHeader size={'xl'}>
+                    <CardTitle>{t('Update Password')}</CardTitle>
+                    <CardDescription>
+                        {t('Ensure your account is using a long, random password to stay secure.')}
+                    </CardDescription>
+                </CardHeader>
+                <CardContent size={'xl'}>
+                    <form onSubmit={updatePassword} className='space-y-6'>
+                        <div>
+                            <InputLabel htmlFor='current_password' value={t('Current Password')} />
 
-                <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
-                    {t('Ensure your account is using a long, random password to stay secure.')}
-                </p>
-            </header>
+                            <TextInput
+                                id='current_password'
+                                name='current_password'
+                                ref={currentPasswordInput}
+                                value={data.current_password}
+                                onChange={(e) => setData('current_password', e.target.value)}
+                                type='password'
+                                className='mt-1 block w-full'
+                                autoComplete='current-password'
+                            />
 
-            <form onSubmit={updatePassword} className='mt-6 space-y-6'>
-                <div>
-                    <InputLabel htmlFor='current_password' value={t('Current Password')} />
+                            <InputError message={errors.current_password} className='mt-2' />
+                        </div>
 
-                    <TextInput
-                        id='current_password'
-                        name='current_password'
-                        ref={currentPasswordInput}
-                        value={data.current_password}
-                        onChange={(e) => setData('current_password', e.target.value)}
-                        type='password'
-                        className='mt-1 block w-full'
-                        autoComplete='current-password'
-                    />
+                        <div>
+                            <InputLabel htmlFor='password' value={t('New Password')} />
 
-                    <InputError message={errors.current_password} className='mt-2' />
-                </div>
+                            <TextInput
+                                id='password'
+                                name='password'
+                                ref={passwordInput}
+                                value={data.password}
+                                onChange={(e) => setData('password', e.target.value)}
+                                type='password'
+                                className='mt-1 block w-full'
+                                autoComplete='new-password'
+                            />
 
-                <div>
-                    <InputLabel htmlFor='password' value={t('New Password')} />
+                            <InputError message={errors.password} className='mt-2' />
+                        </div>
 
-                    <TextInput
-                        id='password'
-                        name='password'
-                        ref={passwordInput}
-                        value={data.password}
-                        onChange={(e) => setData('password', e.target.value)}
-                        type='password'
-                        className='mt-1 block w-full'
-                        autoComplete='new-password'
-                    />
+                        <div>
+                            <InputLabel
+                                htmlFor='password_confirmation'
+                                value={t('Confirm Password')}
+                            />
 
-                    <InputError message={errors.password} className='mt-2' />
-                </div>
+                            <TextInput
+                                id='password_confirmation'
+                                name='password_confirmation'
+                                value={data.password_confirmation}
+                                onChange={(e) => setData('password_confirmation', e.target.value)}
+                                type='password'
+                                className='mt-1 block w-full'
+                                autoComplete='new-password'
+                            />
 
-                <div>
-                    <InputLabel htmlFor='password_confirmation' value={t('Confirm Password')} />
+                            <InputError message={errors.password_confirmation} className='mt-2' />
+                        </div>
 
-                    <TextInput
-                        id='password_confirmation'
-                        name='password_confirmation'
-                        value={data.password_confirmation}
-                        onChange={(e) => setData('password_confirmation', e.target.value)}
-                        type='password'
-                        className='mt-1 block w-full'
-                        autoComplete='new-password'
-                    />
+                        <div className='flex items-center gap-4'>
+                            <Button
+                                disabled={processing}
+                                aria-label={t('Save your updated password')}
+                            >
+                                {t('Save')}
+                            </Button>
 
-                    <InputError message={errors.password_confirmation} className='mt-2' />
-                </div>
-
-                <div className='flex items-center gap-4'>
-                    <Button disabled={processing} aria-label={t('Save your updated password')}>
-                        {t('Save')}
-                    </Button>
-
-                    <Transition
-                        show={recentlySuccessful}
-                        enterFrom='opacity-0'
-                        leaveTo='opacity-0'
-                        className='transition ease-in-out'
-                    >
-                        <p className='text-sm text-gray-600 dark:text-gray-400'>{t('Saved.')}</p>
-                    </Transition>
-                </div>
-            </form>
+                            <Transition
+                                show={recentlySuccessful}
+                                enterFrom='opacity-0'
+                                leaveTo='opacity-0'
+                                className='transition ease-in-out'
+                            >
+                                <p className='text-sm text-gray-600 dark:text-gray-400'>
+                                    {t('Saved.')}
+                                </p>
+                            </Transition>
+                        </div>
+                    </form>
+                </CardContent>
+            </Card>
         </section>
     );
 }

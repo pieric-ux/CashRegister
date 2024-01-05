@@ -8,6 +8,7 @@ import UpdateWorkstationForm from './Partials/UpdateWorkstationForm';
 import DeleteWorkstationForm from './Partials/DeleteWorstationForm';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
+import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card/card';
 
 export default function Index({ customerAuth, application, workstations, localization }) {
     const { t } = useTranslation();
@@ -94,331 +95,340 @@ export default function Index({ customerAuth, application, workstations, localiz
             localization={localization}
         >
             <Head title={application.name} />
+
             <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <div className='rounded-lg bg-white p-4 shadow-md transition duration-300 ease-linear sm:p-8 dark:bg-gray-800'>
-                    <CreateWorkstationForm className='mx-auto max-w-xl' application={application} />
-                </div>
+                <CreateWorkstationForm application={application} />
+
                 {updatedWorkstations.length > 1 ? (
-                    <ul className='mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3'>
+                    <div className='mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3'>
                         {updatedWorkstations.slice(1).map((workstation) => (
-                            <li
-                                className={clsx(
-                                    'flex flex-col rounded-lg bg-white p-4 text-gray-900 shadow-md transition duration-300 ease-linear sm:p-8',
-                                    'dark:bg-gray-800 dark:text-gray-100',
-                                )}
-                                key={workstation.id}
-                            >
-                                <div
-                                    className={clsx(
-                                        'flex items-center justify-between border-b border-gray-300 pb-4 drop-shadow-sm',
-                                        'dark:border-gray-700 dark:drop-shadow-none',
-                                    )}
+                            <Card key={workstation.id}>
+                                <CardHeader
+                                    variant={'flex-row'}
+                                    className='justify-between border-b border-border'
                                 >
-                                    <h3>{workstation.name}</h3>
+                                    <CardTitle>{workstation.name}</CardTitle>
                                     <div className='flex gap-2'>
                                         <UpdateWorkstationForm workstation={workstation} />
                                         <DeleteWorkstationForm workstation={workstation} />
                                     </div>
-                                </div>
-                                <DragDropContext onDragEnd={onDragEnd}>
-                                    <div className='mt-4 flex h-full gap-2'>
-                                        <div className='flex h-full w-1/2 flex-col'>
-                                            <h4 className='text-center underline'>
-                                                {t('Employee')}
-                                            </h4>
-                                            <Droppable
-                                                droppableId={`workstation-${workstation.id}-employees`}
-                                            >
-                                                {(provided, snapshot) => (
-                                                    <ul
-                                                        className={clsx(
-                                                            'mt-2 flex flex-grow flex-col gap-1 p-2',
-                                                            {
-                                                                'rounded-md bg-gray-100 transition duration-300 ease-linear dark:bg-gray-900':
-                                                                    snapshot.isDraggingOver,
-                                                            },
-                                                        )}
-                                                        ref={provided.innerRef}
-                                                        {...provided.droppableProps}
-                                                    >
-                                                        {workstation.cr_employees &&
-                                                        workstation.cr_employees.length > 0
-                                                            ? workstation.cr_employees.map(
-                                                                  (cr_employee, index) => (
-                                                                      <Draggable
-                                                                          key={cr_employee.id}
-                                                                          draggableId={`employee-${cr_employee.id}`}
-                                                                          index={index}
-                                                                      >
-                                                                          {(provided, snapshot) => (
-                                                                              <li
-                                                                                  ref={
-                                                                                      provided.innerRef
-                                                                                  }
-                                                                                  {...provided.draggableProps}
-                                                                                  {...provided.dragHandleProps}
-                                                                                  key={
-                                                                                      cr_employee.id
-                                                                                  }
-                                                                                  className={clsx(
-                                                                                      'rounded-md border-2 border-sky-400 bg-white p-1 text-gray-900 shadow-sm transition duration-300 ease-linear',
-                                                                                      'hover:bg-gray-200 hover:duration-150',
+                                </CardHeader>
+                                <CardContent>
+                                    <DragDropContext onDragEnd={onDragEnd}>
+                                        <div className='mt-4 flex h-full gap-2'>
+                                            <div className='flex h-full w-1/2 flex-col'>
+                                                <h4 className='text-center underline'>
+                                                    {t('Employee')}
+                                                </h4>
+                                                <Droppable
+                                                    droppableId={`workstation-${workstation.id}-employees`}
+                                                >
+                                                    {(provided, snapshot) => (
+                                                        <ul
+                                                            className={clsx(
+                                                                'mt-2 flex flex-grow flex-col gap-1 p-2',
+                                                                {
+                                                                    'rounded-md bg-gray-100 transition duration-300 ease-linear dark:bg-gray-900':
+                                                                        snapshot.isDraggingOver,
+                                                                },
+                                                            )}
+                                                            ref={provided.innerRef}
+                                                            {...provided.droppableProps}
+                                                        >
+                                                            {workstation.cr_employees &&
+                                                            workstation.cr_employees.length > 0
+                                                                ? workstation.cr_employees.map(
+                                                                      (cr_employee, index) => (
+                                                                          <Draggable
+                                                                              key={cr_employee.id}
+                                                                              draggableId={`employee-${cr_employee.id}`}
+                                                                              index={index}
+                                                                          >
+                                                                              {(
+                                                                                  provided,
+                                                                                  snapshot,
+                                                                              ) => (
+                                                                                  <li
+                                                                                      ref={
+                                                                                          provided.innerRef
+                                                                                      }
+                                                                                      {...provided.draggableProps}
+                                                                                      {...provided.dragHandleProps}
+                                                                                      key={
+                                                                                          cr_employee.id
+                                                                                      }
+                                                                                      className={clsx(
+                                                                                          'rounded-md border-2 border-sky-400 bg-white p-1 text-gray-900 shadow-sm transition duration-300 ease-linear',
+                                                                                          'hover:bg-gray-200 hover:duration-150',
 
-                                                                                      'dark:border-sky-600 dark:bg-gray-800 dark:text-gray-100',
-                                                                                      'dark:hover:bg-gray-700',
+                                                                                          'dark:border-sky-600 dark:bg-gray-800 dark:text-gray-100',
+                                                                                          'dark:hover:bg-gray-700',
 
-                                                                                      {
-                                                                                          'bg-sky-500':
-                                                                                              snapshot.isDragging,
-                                                                                      },
-                                                                                  )}
-                                                                              >
-                                                                                  <div className='flex items-center justify-center gap-2 overflow-auto'>
-                                                                                      <p>
                                                                                           {
-                                                                                              cr_employee.first_name
-                                                                                          }
-                                                                                      </p>
-                                                                                      <p>
-                                                                                          {cr_employee.last_name.charAt(
-                                                                                              0,
-                                                                                          )}
-                                                                                          .
-                                                                                      </p>
-                                                                                  </div>
-                                                                              </li>
-                                                                          )}
-                                                                      </Draggable>
-                                                                  ),
-                                                              )
-                                                            : null}
-                                                        {provided.placeholder}
-                                                    </ul>
-                                                )}
-                                            </Droppable>
-                                        </div>
-                                        <div className='border-r border-gray-300 dark:border-gray-700'></div>
-                                        <div className='flex h-full w-1/2 flex-col'>
-                                            <h4 className='text-center underline'>
-                                                {t('Employee Free')}
-                                            </h4>
-                                            <Droppable
-                                                droppableId={`workstation-${defaultWorkstationId}-employees`}
-                                            >
-                                                {(provided, snapshot) => (
-                                                    <ul
-                                                        className={clsx(
-                                                            'mt-2 flex flex-grow flex-col gap-1 p-2',
-                                                            {
-                                                                'rounded-md bg-gray-100 transition duration-300 ease-linear dark:bg-gray-900':
-                                                                    snapshot.isDraggingOver,
-                                                            },
-                                                        )}
-                                                        ref={provided.innerRef}
-                                                        {...provided.droppableProps}
-                                                    >
-                                                        {updatedWorkstations[0].cr_employees &&
-                                                        updatedWorkstations[0].cr_employees.length >
-                                                            0
-                                                            ? updatedWorkstations[0].cr_employees.map(
-                                                                  (cr_employee, index) => (
-                                                                      <Draggable
-                                                                          key={cr_employee.id}
-                                                                          draggableId={`employee-${cr_employee.id}`}
-                                                                          index={index}
-                                                                      >
-                                                                          {(provided, snapshot) => (
-                                                                              <li
-                                                                                  ref={
-                                                                                      provided.innerRef
-                                                                                  }
-                                                                                  {...provided.draggableProps}
-                                                                                  {...provided.dragHandleProps}
-                                                                                  key={
-                                                                                      cr_employee.id
-                                                                                  }
-                                                                                  className={clsx(
-                                                                                      'rounded-md border-2 border-sky-400 bg-white p-1 text-gray-900 shadow-sm transition duration-300 ease-linear',
-                                                                                      'hover:bg-gray-200 hover:duration-150',
+                                                                                              'bg-sky-500':
+                                                                                                  snapshot.isDragging,
+                                                                                          },
+                                                                                      )}
+                                                                                  >
+                                                                                      <div className='flex items-center justify-center gap-2 overflow-auto'>
+                                                                                          <p>
+                                                                                              {
+                                                                                                  cr_employee.first_name
+                                                                                              }
+                                                                                          </p>
+                                                                                          <p>
+                                                                                              {cr_employee.last_name.charAt(
+                                                                                                  0,
+                                                                                              )}
+                                                                                              .
+                                                                                          </p>
+                                                                                      </div>
+                                                                                  </li>
+                                                                              )}
+                                                                          </Draggable>
+                                                                      ),
+                                                                  )
+                                                                : null}
+                                                            {provided.placeholder}
+                                                        </ul>
+                                                    )}
+                                                </Droppable>
+                                            </div>
+                                            <div className='border-r border-gray-300 dark:border-gray-700'></div>
+                                            <div className='flex h-full w-1/2 flex-col'>
+                                                <h4 className='text-center underline'>
+                                                    {t('Employee Free')}
+                                                </h4>
+                                                <Droppable
+                                                    droppableId={`workstation-${defaultWorkstationId}-employees`}
+                                                >
+                                                    {(provided, snapshot) => (
+                                                        <ul
+                                                            className={clsx(
+                                                                'mt-2 flex flex-grow flex-col gap-1 p-2',
+                                                                {
+                                                                    'rounded-md bg-gray-100 transition duration-300 ease-linear dark:bg-gray-900':
+                                                                        snapshot.isDraggingOver,
+                                                                },
+                                                            )}
+                                                            ref={provided.innerRef}
+                                                            {...provided.droppableProps}
+                                                        >
+                                                            {updatedWorkstations[0].cr_employees &&
+                                                            updatedWorkstations[0].cr_employees
+                                                                .length > 0
+                                                                ? updatedWorkstations[0].cr_employees.map(
+                                                                      (cr_employee, index) => (
+                                                                          <Draggable
+                                                                              key={cr_employee.id}
+                                                                              draggableId={`employee-${cr_employee.id}`}
+                                                                              index={index}
+                                                                          >
+                                                                              {(
+                                                                                  provided,
+                                                                                  snapshot,
+                                                                              ) => (
+                                                                                  <li
+                                                                                      ref={
+                                                                                          provided.innerRef
+                                                                                      }
+                                                                                      {...provided.draggableProps}
+                                                                                      {...provided.dragHandleProps}
+                                                                                      key={
+                                                                                          cr_employee.id
+                                                                                      }
+                                                                                      className={clsx(
+                                                                                          'rounded-md border-2 border-sky-400 bg-white p-1 text-gray-900 shadow-sm transition duration-300 ease-linear',
+                                                                                          'hover:bg-gray-200 hover:duration-150',
 
-                                                                                      'dark:border-sky-600 dark:bg-gray-800 dark:text-gray-100',
-                                                                                      'dark:hover:bg-gray-700',
+                                                                                          'dark:border-sky-600 dark:bg-gray-800 dark:text-gray-100',
+                                                                                          'dark:hover:bg-gray-700',
 
-                                                                                      {
-                                                                                          'bg-sky-500':
-                                                                                              snapshot.isDragging,
-                                                                                      },
-                                                                                  )}
-                                                                              >
-                                                                                  <div className='flex items-center justify-center gap-2 overflow-auto'>
-                                                                                      <p>
                                                                                           {
-                                                                                              cr_employee.first_name
-                                                                                          }
-                                                                                      </p>
-                                                                                      <p>
-                                                                                          {cr_employee.last_name.charAt(
-                                                                                              0,
-                                                                                          )}
-                                                                                          .
-                                                                                      </p>
-                                                                                  </div>
-                                                                              </li>
-                                                                          )}
-                                                                      </Draggable>
-                                                                  ),
-                                                              )
-                                                            : null}
-                                                        {provided.placeholder}
-                                                    </ul>
-                                                )}
-                                            </Droppable>
+                                                                                              'bg-sky-500':
+                                                                                                  snapshot.isDragging,
+                                                                                          },
+                                                                                      )}
+                                                                                  >
+                                                                                      <div className='flex items-center justify-center gap-2 overflow-auto'>
+                                                                                          <p>
+                                                                                              {
+                                                                                                  cr_employee.first_name
+                                                                                              }
+                                                                                          </p>
+                                                                                          <p>
+                                                                                              {cr_employee.last_name.charAt(
+                                                                                                  0,
+                                                                                              )}
+                                                                                              .
+                                                                                          </p>
+                                                                                      </div>
+                                                                                  </li>
+                                                                              )}
+                                                                          </Draggable>
+                                                                      ),
+                                                                  )
+                                                                : null}
+                                                            {provided.placeholder}
+                                                        </ul>
+                                                    )}
+                                                </Droppable>
+                                            </div>
                                         </div>
-                                    </div>
-                                </DragDropContext>
-                                <DragDropContext onDragEnd={onDragEnd}>
-                                    <div className='mt-4 flex h-full gap-2'>
-                                        <div className='flex h-full w-1/2 flex-col'>
-                                            <h4 className='text-center underline'>
-                                                {t('Products')}
-                                            </h4>
-                                            <Droppable
-                                                droppableId={`workstation-${workstation.id}-products`}
-                                            >
-                                                {(provided, snapshot) => (
-                                                    <ul
-                                                        className={clsx(
-                                                            'mt-2 flex flex-grow flex-col gap-1 p-2',
-                                                            {
-                                                                'rounded-md bg-gray-100 transition duration-300 ease-linear dark:bg-gray-900':
-                                                                    snapshot.isDraggingOver,
-                                                            },
-                                                        )}
-                                                        ref={provided.innerRef}
-                                                        {...provided.droppableProps}
-                                                    >
-                                                        {workstation.cr_products.map(
-                                                            (cr_product, index) => (
-                                                                <Draggable
-                                                                    key={cr_product.id}
-                                                                    draggableId={`product-${cr_product.id}`}
-                                                                    index={index}
-                                                                >
-                                                                    {(provided, snapshot) => (
-                                                                        <li
-                                                                            ref={provided.innerRef}
-                                                                            {...provided.draggableProps}
-                                                                            {...provided.dragHandleProps}
-                                                                            key={cr_product.id}
-                                                                            className={clsx(
-                                                                                'rounded-md border-2 border-sky-400 bg-white p-1 text-gray-900 shadow-sm transition duration-300 ease-linear',
-                                                                                'hover:bg-gray-200 hover:duration-150',
+                                    </DragDropContext>
+                                    <DragDropContext onDragEnd={onDragEnd}>
+                                        <div className='mt-4 flex h-full gap-2'>
+                                            <div className='flex h-full w-1/2 flex-col'>
+                                                <h4 className='text-center underline'>
+                                                    {t('Products')}
+                                                </h4>
+                                                <Droppable
+                                                    droppableId={`workstation-${workstation.id}-products`}
+                                                >
+                                                    {(provided, snapshot) => (
+                                                        <ul
+                                                            className={clsx(
+                                                                'mt-2 flex flex-grow flex-col gap-1 p-2',
+                                                                {
+                                                                    'rounded-md bg-gray-100 transition duration-300 ease-linear dark:bg-gray-900':
+                                                                        snapshot.isDraggingOver,
+                                                                },
+                                                            )}
+                                                            ref={provided.innerRef}
+                                                            {...provided.droppableProps}
+                                                        >
+                                                            {workstation.cr_products.map(
+                                                                (cr_product, index) => (
+                                                                    <Draggable
+                                                                        key={cr_product.id}
+                                                                        draggableId={`product-${cr_product.id}`}
+                                                                        index={index}
+                                                                    >
+                                                                        {(provided, snapshot) => (
+                                                                            <li
+                                                                                ref={
+                                                                                    provided.innerRef
+                                                                                }
+                                                                                {...provided.draggableProps}
+                                                                                {...provided.dragHandleProps}
+                                                                                key={cr_product.id}
+                                                                                className={clsx(
+                                                                                    'rounded-md border-2 border-sky-400 bg-white p-1 text-gray-900 shadow-sm transition duration-300 ease-linear',
+                                                                                    'hover:bg-gray-200 hover:duration-150',
 
-                                                                                'dark:border-sky-600 dark:bg-gray-800 dark:text-gray-100',
-                                                                                'dark:hover:bg-gray-700',
+                                                                                    'dark:border-sky-600 dark:bg-gray-800 dark:text-gray-100',
+                                                                                    'dark:hover:bg-gray-700',
 
-                                                                                {
-                                                                                    'bg-sky-500':
-                                                                                        snapshot.isDragging,
-                                                                                },
-                                                                            )}
-                                                                        >
-                                                                            <div className='flex items-center justify-center gap-2 overflow-auto'>
-                                                                                <p>
                                                                                     {
-                                                                                        cr_product.name
-                                                                                    }
-                                                                                </p>
-                                                                                <p>
+                                                                                        'bg-sky-500':
+                                                                                            snapshot.isDragging,
+                                                                                    },
+                                                                                )}
+                                                                            >
+                                                                                <div className='flex items-center justify-center gap-2 overflow-auto'>
+                                                                                    <p>
+                                                                                        {
+                                                                                            cr_product.name
+                                                                                        }
+                                                                                    </p>
+                                                                                    <p>
+                                                                                        {
+                                                                                            cr_product.unit
+                                                                                        }
+                                                                                        .
+                                                                                    </p>
+                                                                                </div>
+                                                                            </li>
+                                                                        )}
+                                                                    </Draggable>
+                                                                ),
+                                                            )}
+                                                            {provided.placeholder}
+                                                        </ul>
+                                                    )}
+                                                </Droppable>
+                                            </div>
+                                            <div className='border-r border-gray-300 dark:border-gray-700'></div>
+                                            <div className='flex h-full w-1/2 flex-col'>
+                                                <h4 className='text-center underline'>
+                                                    {t('Products')}
+                                                </h4>
+                                                <Droppable droppableId={`products-0`}>
+                                                    {(provided, snapshot) => (
+                                                        <ul
+                                                            className={clsx(
+                                                                'mt-2 flex flex-grow flex-col gap-1 p-2',
+                                                                {
+                                                                    'rounded-md bg-gray-100 transition duration-300 ease-linear dark:bg-gray-900':
+                                                                        snapshot.isDraggingOver,
+                                                                },
+                                                            )}
+                                                            ref={provided.innerRef}
+                                                            {...provided.droppableProps}
+                                                        >
+                                                            {workstation.generalProducts.map(
+                                                                (product, index) => (
+                                                                    <Draggable
+                                                                        key={product.id}
+                                                                        draggableId={`product-${product.id}`}
+                                                                        index={index}
+                                                                    >
+                                                                        {(provided, snapshot) => (
+                                                                            <li
+                                                                                ref={
+                                                                                    provided.innerRef
+                                                                                }
+                                                                                {...provided.draggableProps}
+                                                                                {...provided.dragHandleProps}
+                                                                                key={product.id}
+                                                                                className={clsx(
+                                                                                    'rounded-md border-2 border-sky-400 bg-white p-1 text-gray-900 shadow-sm transition duration-300 ease-linear',
+                                                                                    'hover:bg-gray-200 hover:duration-150',
+
+                                                                                    'dark:border-sky-600 dark:bg-gray-800 dark:text-gray-100',
+                                                                                    'dark:hover:bg-gray-700',
+
                                                                                     {
-                                                                                        cr_product.unit
-                                                                                    }
-                                                                                    .
-                                                                                </p>
-                                                                            </div>
-                                                                        </li>
-                                                                    )}
-                                                                </Draggable>
-                                                            ),
-                                                        )}
-                                                        {provided.placeholder}
-                                                    </ul>
-                                                )}
-                                            </Droppable>
+                                                                                        'bg-sky-500':
+                                                                                            snapshot.isDragging,
+                                                                                    },
+                                                                                )}
+                                                                            >
+                                                                                <div className='flex items-center justify-center gap-2 overflow-auto'>
+                                                                                    <p>
+                                                                                        {
+                                                                                            product.name
+                                                                                        }
+                                                                                    </p>
+                                                                                    <p>
+                                                                                        {
+                                                                                            product.unit
+                                                                                        }
+                                                                                        .
+                                                                                    </p>
+                                                                                </div>
+                                                                            </li>
+                                                                        )}
+                                                                    </Draggable>
+                                                                ),
+                                                            )}
+                                                            {provided.placeholder}
+                                                        </ul>
+                                                    )}
+                                                </Droppable>
+                                            </div>
                                         </div>
-                                        <div className='border-r border-gray-300 dark:border-gray-700'></div>
-                                        <div className='flex h-full w-1/2 flex-col'>
-                                            <h4 className='text-center underline'>
-                                                {t('Products')}
-                                            </h4>
-                                            <Droppable droppableId={`products-0`}>
-                                                {(provided, snapshot) => (
-                                                    <ul
-                                                        className={clsx(
-                                                            'mt-2 flex flex-grow flex-col gap-1 p-2',
-                                                            {
-                                                                'rounded-md bg-gray-100 transition duration-300 ease-linear dark:bg-gray-900':
-                                                                    snapshot.isDraggingOver,
-                                                            },
-                                                        )}
-                                                        ref={provided.innerRef}
-                                                        {...provided.droppableProps}
-                                                    >
-                                                        {workstation.generalProducts.map(
-                                                            (product, index) => (
-                                                                <Draggable
-                                                                    key={product.id}
-                                                                    draggableId={`product-${product.id}`}
-                                                                    index={index}
-                                                                >
-                                                                    {(provided, snapshot) => (
-                                                                        <li
-                                                                            ref={provided.innerRef}
-                                                                            {...provided.draggableProps}
-                                                                            {...provided.dragHandleProps}
-                                                                            key={product.id}
-                                                                            className={clsx(
-                                                                                'rounded-md border-2 border-sky-400 bg-white p-1 text-gray-900 shadow-sm transition duration-300 ease-linear',
-                                                                                'hover:bg-gray-200 hover:duration-150',
-
-                                                                                'dark:border-sky-600 dark:bg-gray-800 dark:text-gray-100',
-                                                                                'dark:hover:bg-gray-700',
-
-                                                                                {
-                                                                                    'bg-sky-500':
-                                                                                        snapshot.isDragging,
-                                                                                },
-                                                                            )}
-                                                                        >
-                                                                            <div className='flex items-center justify-center gap-2 overflow-auto'>
-                                                                                <p>
-                                                                                    {product.name}
-                                                                                </p>
-                                                                                <p>
-                                                                                    {product.unit}.
-                                                                                </p>
-                                                                            </div>
-                                                                        </li>
-                                                                    )}
-                                                                </Draggable>
-                                                            ),
-                                                        )}
-                                                        {provided.placeholder}
-                                                    </ul>
-                                                )}
-                                            </Droppable>
-                                        </div>
-                                    </div>
-                                </DragDropContext>
-                            </li>
+                                    </DragDropContext>
+                                </CardContent>
+                            </Card>
                         ))}
-                    </ul>
-                ) : (
-                    <div className='bg-white p-4 text-center shadow transition duration-300 ease-linear sm:rounded-lg sm:p-8 dark:bg-gray-800'>
-                        <p className='text-gray-900 dark:text-gray-100'>
-                            {t('No workstation found.')}
-                        </p>
                     </div>
+                ) : (
+                    <Card>
+                        <CardHeader size={'xl'} className='items-center'>
+                            {t('No workstation found.')}
+                        </CardHeader>
+                    </Card>
                 )}
             </div>
         </CR_AppAdminLayout>

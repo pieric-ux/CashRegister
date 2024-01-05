@@ -11,6 +11,7 @@ import { sortData, filterData } from '@/Utils/useTableUtils';
 import Pagination from '@/Components/Pagination';
 import PaginationItemsPerPage from '@/Components/PaginationItemsPerPage';
 import { useTranslation } from 'react-i18next';
+import { Card, CardHeader } from '@/Components/ui/card/card';
 
 export default function Index({ customerAuth, application, employees, localization }) {
     const { t } = useTranslation();
@@ -75,10 +76,10 @@ export default function Index({ customerAuth, application, employees, localizati
             localization={localization}
         >
             <Head title={application.name} />
+
             <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <div className='rounded-lg bg-white p-4 shadow-md transition duration-300 ease-linear sm:p-8 dark:bg-gray-800'>
-                    <CreateEmployeeForm className='mx-auto max-w-xl' application={application} />
-                </div>
+                <CreateEmployeeForm application={application} />
+
                 <div className='mt-4 flex flex-col items-center justify-end gap-2 pr-4 sm:flex-row'>
                     <PaginationItemsPerPage
                         itemsPerPage={employeesPerPage}
@@ -109,11 +110,11 @@ export default function Index({ customerAuth, application, employees, localizati
                         />
                     </>
                 ) : (
-                    <div className='bg-white p-4 text-center shadow transition duration-300 ease-linear sm:rounded-lg sm:p-8 dark:bg-gray-800'>
-                        <p className='text-gray-900 dark:text-gray-100'>
+                    <Card>
+                        <CardHeader size={'xl'} className='items-center'>
                             {t('No employees found.')}
-                        </p>
-                    </div>
+                        </CardHeader>
+                    </Card>
                 )}
             </div>
         </CR_AppAdminLayout>

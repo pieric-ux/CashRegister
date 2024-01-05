@@ -7,6 +7,13 @@ import Modal from '@/Components/Modal';
 import { useTranslation } from 'react-i18next';
 import Checkbox from '@/Components/Checkbox';
 import { Button } from '@/Components/ui/button';
+import {
+    Card,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from '@/Components/ui/card/card';
 
 export default function CreateDishForm({ application, className = '' }) {
     const { t } = useTranslation();
@@ -50,21 +57,22 @@ export default function CreateDishForm({ application, className = '' }) {
         });
     };
     return (
-        <section className={`space-y-6 ${className}`}>
-            <header>
-                <h1 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
-                    {t('Create a Dish')}
-                </h1>
-
-                <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
-                    {t(
-                        "Don't have any dish yet? Looking to add another one? Click the 'Create' button to begin.",
-                    )}
-                </p>
-            </header>
-            <Button onClick={openModal} aria-label={t('Create your dish')}>
-                {t('Create')}
-            </Button>
+        <section className={className}>
+            <Card>
+                <CardHeader size={'xl'}>
+                    <CardTitle>{t('Create a Dish')}</CardTitle>
+                    <CardDescription>
+                        {t(
+                            "Don't have any dish yet? Looking to add another one? Click the 'Create' button to begin.",
+                        )}
+                    </CardDescription>
+                </CardHeader>
+                <CardFooter size={'xl'}>
+                    <Button onClick={openModal} aria-label={t('Create your dish')}>
+                        {t('Create')}
+                    </Button>
+                </CardFooter>
+            </Card>
 
             <Modal show={openingModal} onClose={closeModal}>
                 <form onSubmit={submit} className='p-6'>

@@ -6,6 +6,13 @@ import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button';
+import {
+    Card,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from '@/Components/ui/card/card';
 
 export default function DeleteUserForm({ className = '' }) {
     const { t } = useTranslation();
@@ -47,26 +54,26 @@ export default function DeleteUserForm({ className = '' }) {
     };
 
     return (
-        <section className={`space-y-6 ${className}`}>
-            <header>
-                <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
-                    {t('Delete Account')}
-                </h2>
-
-                <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
-                    {t(
-                        'Once your account is deleted, all of its resources and data will be permanently deleted.',
-                    )}
-                </p>
-            </header>
-
-            <Button
-                variant={'destructive'}
-                onClick={confirmUserDeletion}
-                aria-label={t('Delete your account')}
-            >
-                {t('Delete Account')}
-            </Button>
+        <section className={className}>
+            <Card>
+                <CardHeader size={'xl'}>
+                    <CardTitle>{t('Delete Account')}</CardTitle>
+                    <CardDescription>
+                        {t(
+                            'Once your account is deleted, all of its resources and data will be permanently deleted.',
+                        )}
+                    </CardDescription>
+                </CardHeader>
+                <CardFooter size={'xl'}>
+                    <Button
+                        variant={'destructive'}
+                        onClick={confirmUserDeletion}
+                        aria-label={t('Delete your account')}
+                    >
+                        {t('Delete Account')}
+                    </Button>
+                </CardFooter>
+            </Card>
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
                 <form onSubmit={deleteUser} className='p-6'>

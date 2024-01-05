@@ -7,6 +7,7 @@ import Payment from '@/Pages/Employees/CashRegister/Partials/Payment';
 import Buttons from '@/Pages/Employees/CashRegister/Partials/Buttons';
 import Items from './Partials/Items';
 import { useTranslation } from 'react-i18next';
+import { Card, CardHeader } from '@/Components/ui/card/card';
 
 export default function CashRegister({
     employeeAuth,
@@ -95,28 +96,33 @@ export default function CashRegister({
             )}
 
             <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <div className='flex flex-col rounded-lg bg-white p-4 shadow-md transition duration-300 ease-linear sm:p-8 dark:bg-gray-800'>
-                    <Cart
-                        isCartVisible={isCartVisible}
-                        cart={cart}
-                        removeFromCart={removeFromCart}
-                    />
-                    <Total total={total} />
-                    <Payment
-                        paymentMethods={paymentMethods}
-                        isCartEmpty={isCartEmpty}
-                        setSelectedPaymentMethod={setSelectedPaymentMethod}
-                    />
-                    <Buttons isCartVisible={isCartVisible} setIsCartVisible={setIsCartVisible} />
-                    <Items
-                        isCartVisible={isCartVisible}
-                        cart={cart}
-                        setCart={setCart}
-                        categories={categories}
-                        dishes={dishes}
-                        products={products}
-                    />
-                </div>
+                <Card>
+                    <CardHeader>
+                        <Cart
+                            isCartVisible={isCartVisible}
+                            cart={cart}
+                            removeFromCart={removeFromCart}
+                        />
+                        <Total total={total} />
+                        <Payment
+                            paymentMethods={paymentMethods}
+                            isCartEmpty={isCartEmpty}
+                            setSelectedPaymentMethod={setSelectedPaymentMethod}
+                        />
+                        <Buttons
+                            isCartVisible={isCartVisible}
+                            setIsCartVisible={setIsCartVisible}
+                        />
+                        <Items
+                            isCartVisible={isCartVisible}
+                            cart={cart}
+                            setCart={setCart}
+                            categories={categories}
+                            dishes={dishes}
+                            products={products}
+                        />
+                    </CardHeader>
+                </Card>
             </div>
         </EmployeeLayout>
     );

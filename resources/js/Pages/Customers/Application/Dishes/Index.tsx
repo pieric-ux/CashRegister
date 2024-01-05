@@ -13,6 +13,7 @@ import Checkbox from '@/Components/Checkbox';
 import UpdateDishForm from './Partials/UpdateDishForm';
 import DeleteDishForm from './Partials/DeleteDishForm';
 import UpdateDishPicture from './Partials/UpdateDishPicture';
+import { Card, CardHeader } from '@/Components/ui/card/card';
 
 export default function Index({ customerAuth, application, dishes, localization }) {
     const { t } = useTranslation();
@@ -122,15 +123,10 @@ export default function Index({ customerAuth, application, dishes, localization 
             localization={localization}
         >
             <Head title={application.name} />
+
             <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <div
-                    className={clsx(
-                        'rounded-lg bg-white p-4 shadow-md transition duration-300 ease-linear sm:p-8',
-                        'dark:bg-gray-800',
-                    )}
-                >
-                    <CreateDishForm className='mx-auto max-w-xl' application={application} />
-                </div>
+                <CreateDishForm application={application} />
+
                 <div className='mt-4 flex flex-col items-center justify-end gap-2 pr-4 sm:flex-row'>
                     <PaginationItemsPerPage
                         itemsPerPage={dishesPerPage}
@@ -164,14 +160,11 @@ export default function Index({ customerAuth, application, dishes, localization 
                         />
                     </>
                 ) : (
-                    <div
-                        className={clsx(
-                            'bg-white p-4 text-center shadow transition duration-300 ease-linear sm:rounded-lg sm:p-8',
-                            'dark:bg-gray-800',
-                        )}
-                    >
-                        <p className='text-gray-900 dark:text-gray-100'>{t('No dishes found.')}</p>
-                    </div>
+                    <Card>
+                        <CardHeader size={'xl'} className='items-center'>
+                            {t('No dishes found.')}
+                        </CardHeader>
+                    </Card>
                 )}
             </div>
         </CR_AppAdminLayout>

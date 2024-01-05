@@ -8,6 +8,7 @@ import UpdateCategorieProductForm from './Partials/UpdateCategorieProductFrom';
 import DeleteCategorieProductForm from './Partials/DeleteCategorieProductForm';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
+import { Card, CardHeader, CardTitle } from '@/Components/ui/card/card';
 
 export default function Index({ customerAuth, application, categories, localization }) {
     const { t } = useTranslation();
@@ -56,18 +57,10 @@ export default function Index({ customerAuth, application, categories, localizat
             localization={localization}
         >
             <Head title={application.name} />
+
             <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <div
-                    className={clsx(
-                        'rounded-lg bg-white p-4 shadow-md transition duration-300 ease-linear sm:p-8',
-                        'dark:bg-gray-800',
-                    )}
-                >
-                    <CreateCategorieProductForm
-                        className='mx-auto max-w-xl'
-                        application={application}
-                    />
-                </div>
+                <CreateCategorieProductForm application={application} />
+
                 {updatedCategories.length > 1 ? (
                     <DragDropContext onDragEnd={onDragEnd}>
                         <Droppable droppableId='categories'>
@@ -87,23 +80,17 @@ export default function Index({ customerAuth, application, categories, localizat
                                             index={index + 1}
                                         >
                                             {(provided) => (
-                                                <li
+                                                <Card
                                                     ref={provided.innerRef}
                                                     {...provided.draggableProps}
                                                     {...provided.dragHandleProps}
                                                     key={category.id}
-                                                    className={clsx(
-                                                        'flex flex-col rounded-lg bg-white p-4 text-gray-900 shadow-md transition duration-300 ease-linear sm:p-8',
-                                                        'dark:bg-gray-800 dark:text-gray-100',
-                                                    )}
                                                 >
-                                                    <div
-                                                        className={clsx(
-                                                            'flex items-center justify-between drop-shadow-sm',
-                                                            'dark:drop-shadow-none',
-                                                        )}
+                                                    <CardHeader
+                                                        variant={'flex-row'}
+                                                        className='items-center justify-between'
                                                     >
-                                                        <h3>{category.name}</h3>
+                                                        <CardTitle>{category.name}</CardTitle>
                                                         <div className='flex gap-2'>
                                                             <UpdateCategorieProductForm
                                                                 category={category}
@@ -112,8 +99,8 @@ export default function Index({ customerAuth, application, categories, localizat
                                                                 category={category}
                                                             />
                                                         </div>
-                                                    </div>
-                                                </li>
+                                                    </CardHeader>
+                                                </Card>
                                             )}
                                         </Draggable>
                                     ))}
@@ -123,16 +110,11 @@ export default function Index({ customerAuth, application, categories, localizat
                         </Droppable>
                     </DragDropContext>
                 ) : (
-                    <div
-                        className={clsx(
-                            'bg-white p-4 text-center shadow transition duration-300 ease-linear sm:rounded-lg sm:p-8',
-                            'dark:bg-gray-800',
-                        )}
-                    >
-                        <p className='text-gray-900 dark:text-gray-100'>
+                    <Card>
+                        <CardHeader size={'xl'} className='items-center'>
                             {t('No categories of products found.')}
-                        </p>
-                    </div>
+                        </CardHeader>
+                    </Card>
                 )}
             </div>
         </CR_AppAdminLayout>

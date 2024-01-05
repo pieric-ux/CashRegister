@@ -9,6 +9,7 @@ import PaginationItemsPerPage from '@/Components/PaginationItemsPerPage';
 import { useTranslation } from 'react-i18next';
 import DeleteTransactionForm from './Partials/DeleteTransactionForm';
 import ShowDetailsTransactionForm from './Partials/ShowDetailsTransactionForm';
+import { Card, CardHeader } from '@/Components/ui/card/card';
 
 export default function Index({ customerAuth, application, transactions, localization }) {
     const { t } = useTranslation();
@@ -127,11 +128,11 @@ export default function Index({ customerAuth, application, transactions, localiz
                         />
                     </>
                 ) : (
-                    <div className='bg-white p-4 text-center shadow transition duration-300 ease-linear sm:rounded-lg sm:p-8 dark:bg-gray-800'>
-                        <p className='text-gray-900 dark:text-gray-100'>
+                    <Card>
+                        <CardHeader size={'xl'} className='items-center'>
                             {t('No transactions found.')}
-                        </p>
-                    </div>
+                        </CardHeader>
+                    </Card>
                 )}
             </div>
         </CR_AppAdminLayout>
