@@ -31,21 +31,24 @@ export interface SvgProps
     type: IconType;
 }
 
-const Svg: React.FC<SvgProps> = ({ className, type, variant, size, ...props }) => {
-    const allIcons = { ...actionIcons, ...sideBarIcons };
-    const { fill, xmlns, viewBox, path } = allIcons[type];
-    return (
-        <svg
-            className={cn(svgVariants({ variant, size, className }))}
-            fill={fill}
-            xmlns={xmlns}
-            viewBox={viewBox}
-            {...props}
-        >
-            {path}
-        </svg>
-    );
-};
+const Svg = React.forwardRef<SVGSVGElement, SvgProps>(
+    ({ className, type, variant, size, ...props }, ref) => {
+        const allIcons = { ...actionIcons, ...sideBarIcons };
+        const { fill, xmlns, viewBox, path } = allIcons[type];
+        return (
+            <svg
+                className={cn(svgVariants({ variant, size, className }))}
+                fill={fill}
+                xmlns={xmlns}
+                viewBox={viewBox}
+                ref={ref}
+                {...props}
+            >
+                {path}
+            </svg>
+        );
+    },
+);
 
 Svg.displayName = 'Svg';
 
