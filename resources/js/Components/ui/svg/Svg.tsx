@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { SVGAttributes, forwardRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { actionIcons, sideBarIcons } from './iconsDefinitions';
 
@@ -25,13 +25,11 @@ const svgVariants = cva('', {
 
 type IconType = keyof typeof actionIcons | keyof typeof sideBarIcons;
 
-export interface SvgProps
-    extends React.SVGAttributes<SVGSVGElement>,
-        VariantProps<typeof svgVariants> {
+export interface SvgProps extends SVGAttributes<SVGSVGElement>, VariantProps<typeof svgVariants> {
     type: IconType;
 }
 
-const Svg = React.forwardRef<SVGSVGElement, SvgProps>(
+const Svg = forwardRef<SVGSVGElement, SvgProps>(
     ({ className, type, variant, size, ...props }, ref) => {
         const allIcons = { ...actionIcons, ...sideBarIcons };
         const { fill, xmlns, viewBox, path } = allIcons[type];

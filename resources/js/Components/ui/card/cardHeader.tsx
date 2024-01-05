@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { HTMLAttributes, forwardRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
@@ -27,10 +27,10 @@ const cardHeaderVariants = cva('', {
 });
 
 export interface CardHeaderProps
-    extends React.HTMLAttributes<HTMLDivElement>,
+    extends HTMLAttributes<HTMLDivElement>,
         VariantProps<typeof cardHeaderVariants> {}
 
-const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
+const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
     ({ className, variant, size, ...props }, ref) => (
         <div
             className={cn(cardHeaderVariants({ variant, size, className }))}
