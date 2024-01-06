@@ -5,19 +5,15 @@ import { Overlay, DialogOverlayProps as RadixDialogOverlayProps } from '@radix-u
 import { cn } from '@/lib/utils';
 
 const dialogOverlayVariants = cva(
-    'fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+    'fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
     {
         variants: {
             variant: {
                 default: '',
             },
-            size: {
-                default: '',
-            },
         },
         defaultVariants: {
             variant: 'default',
-            size: 'default',
         },
     },
 );
@@ -28,9 +24,9 @@ export interface DialogOverlayProps
         RadixDialogOverlayProps {}
 
 const DialogOverlay = forwardRef<HTMLDivElement, DialogOverlayProps>(
-    ({ className, variant, size, ...props }, ref) => (
+    ({ className, variant, ...props }, ref) => (
         <Overlay
-            className={cn(dialogOverlayVariants({ variant, size, className }))}
+            className={cn(dialogOverlayVariants({ variant, className }))}
             ref={ref}
             {...props}
         />

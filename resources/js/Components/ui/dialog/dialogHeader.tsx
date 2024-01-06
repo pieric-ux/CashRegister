@@ -3,18 +3,17 @@ import { VariantProps, cva } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
 
-const dialogHeaderVariants = cva('flex flex-col space-y-1.5 text-center sm:text-left', {
+const dialogHeaderVariants = cva('text-center', {
     variants: {
         variant: {
-            default: '',
-        },
-        size: {
-            default: '',
+            default: 'flex flex-col space-y-1.5 sm:text-left',
+            'flex-row': 'flex flex-row',
+            'flex-col': 'flex flex-col',
+            grid: 'grid',
         },
     },
     defaultVariants: {
         variant: 'default',
-        size: 'default',
     },
 });
 
@@ -22,8 +21,8 @@ export interface DialogHeaderProps
     extends HTMLAttributes<HTMLDivElement>,
         VariantProps<typeof dialogHeaderVariants> {}
 
-const DialogHeader = ({ className, variant, size, ...props }: DialogHeaderProps) => (
-    <div className={cn(dialogHeaderVariants({ variant, size, className }))} {...props} />
+const DialogHeader = ({ className, variant, ...props }: DialogHeaderProps) => (
+    <div className={cn(dialogHeaderVariants({ variant, className }))} {...props} />
 );
 DialogHeader.displayName = 'DialogHeader';
 

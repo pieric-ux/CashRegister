@@ -9,13 +9,9 @@ const dialogTitleVariants = cva('', {
         variant: {
             default: 'text-lg font-medium',
         },
-        size: {
-            default: '',
-        },
     },
     defaultVariants: {
         variant: 'default',
-        size: 'default',
     },
 });
 
@@ -25,12 +21,8 @@ export interface DialogTitleProps
         RadixDialogTitleProps {}
 
 const DialogTitle = forwardRef<HTMLHeadingElement, DialogTitleProps>(
-    ({ className, variant, size, ...props }, ref) => (
-        <Title
-            className={cn(dialogTitleVariants({ variant, size, className }))}
-            ref={ref}
-            {...props}
-        />
+    ({ className, variant, ...props }, ref) => (
+        <Title className={cn(dialogTitleVariants({ variant, className }))} ref={ref} {...props} />
     ),
 );
 DialogTitle.displayName = Title.displayName;

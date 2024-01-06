@@ -12,13 +12,9 @@ const dialogDescriptionVariants = cva('', {
         variant: {
             default: 'text-sm text-muted-foreground',
         },
-        size: {
-            default: '',
-        },
     },
     defaultVariants: {
         variant: 'default',
-        size: 'default',
     },
 });
 
@@ -28,9 +24,9 @@ export interface DialogDescriptionProps
         RadixDialogDescriptionProps {}
 
 const DialogDescription = forwardRef<HTMLParagraphElement, DialogDescriptionProps>(
-    ({ className, variant, size, ...props }, ref) => (
+    ({ className, variant, ...props }, ref) => (
         <Description
-            className={cn(dialogDescriptionVariants({ variant, size, className }))}
+            className={cn(dialogDescriptionVariants({ variant, className }))}
             ref={ref}
             {...props}
         />
