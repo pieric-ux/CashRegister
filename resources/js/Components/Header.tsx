@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Dropdown from '@/Components/Dropdown';
 import DarkModeSwitcher from './DarkModeSwitcher';
 import LanguageSwitcher from './LanguageSwitcher';
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar/avatar';
 
 export default function Header({
     user,
@@ -87,11 +88,14 @@ export default function Header({
                                         )}
                                     >
                                         {user.first_name}
-                                        <img
-                                            src={avatarPath}
-                                            alt='avatar'
-                                            className='ml-2 h-12 w-12 rounded-full backdrop-blur-md'
-                                        />
+
+                                        <Avatar className='ml-2'>
+                                            <AvatarImage src={avatarPath} alt='avatar' />
+                                            <AvatarFallback>
+                                                {user.first_name.charAt(0) +
+                                                    user.last_name.charAt(0)}
+                                            </AvatarFallback>
+                                        </Avatar>
 
                                         <svg
                                             className='-mr-0.5 ml-2 h-4 w-4'

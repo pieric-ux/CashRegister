@@ -15,6 +15,7 @@ const avatarVariants = cva('relative overflow-hidden rounded-full', {
         },
         size: {
             default: 'h-12 w-12',
+            update: 'h-52 w-52',
         },
     },
     defaultVariants: {

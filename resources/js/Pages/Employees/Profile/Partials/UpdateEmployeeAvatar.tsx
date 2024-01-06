@@ -4,6 +4,7 @@ import InputError from '@/Components/InputError';
 import { useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { Svg } from '@/Components/ui/svg/Svg';
+import { Avatar, AvatarImage } from '@/Components/ui/avatar/avatar';
 import {
     Card,
     CardContent,
@@ -50,16 +51,14 @@ export default function UpdateEmployeeAvatar({ avatarPath, className }) {
                     >
                         <div className='relative z-30 mx-auto h-52 w-52 rounded-full bg-gray-100 backdrop-blur-md transition duration-300 ease-linear dark:bg-gray-900'>
                             <div className='relative h-full w-full drop-shadow-md'>
-                                <img
-                                    src={avatarPath}
-                                    alt='avatar'
-                                    className='absolute ml-2 mt-2 h-48 w-48 rounded-full'
-                                />
+                                <Avatar size={'update'}>
+                                    <AvatarImage src={avatarPath} alt='avatar' />
+                                </Avatar>
                                 <label
                                     htmlFor='avatar'
-                                    className='absolute bottom-8 right-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-sky-500 text-white hover:bg-opacity-90'
+                                    className='absolute bottom-4 right-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-sky-500 text-white hover:bg-opacity-90'
                                 >
-                                    <Svg type={'addPicture'} />
+                                    <Svg variant={'destructive'} type={'addPicture'} />
                                     <TextInput
                                         id='avatar'
                                         name='avatar'
