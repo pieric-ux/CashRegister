@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import Modal from '@/Components/Modal';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
@@ -13,13 +12,22 @@ import {
     CardHeader,
     CardTitle,
 } from '@/Components/ui/card/card';
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/Components/ui/dialog/dialog';
 
 export default function DeleteUserForm({ className = '' }) {
     const { t } = useTranslation();
 
-    const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
-
-    const passwordInput = useRef();
+    const [open, setOpen] = useState(false);
+    const [showErrors, setShowErrors] = useState(false);
 
     const {
         data,
@@ -32,25 +40,25 @@ export default function DeleteUserForm({ className = '' }) {
         password: '',
     });
 
-    const confirmUserDeletion = () => {
-        setConfirmingUserDeletion(true);
+    const passwordInput = useRef();
+
+    const closeDialog = () => {
+        reset();
+        setShowErrors(false);
+        setOpen(false);
     };
 
-    const deleteUser = (e) => {
+    const submit = (e) => {
         e.preventDefault();
 
         destroy(route('profile.destroy'), {
             preserveScroll: true,
-            onSuccess: () => closeModal(),
-            onError: () => passwordInput.current.focus(),
-            onFinish: () => reset(),
+            onSuccess: () => closeDialog(),
+            onError: () => {
+                setShowErrors(true);
+                passwordInput.current.focus();
+            },
         });
-    };
-
-    const closeModal = () => {
-        setConfirmingUserDeletion(false);
-
-        reset();
     };
 
     return (
@@ -65,62 +73,71 @@ export default function DeleteUserForm({ className = '' }) {
                     </CardDescription>
                 </CardHeader>
                 <CardFooter size={'xl'}>
-                    <Button
-                        variant={'destructive'}
-                        onClick={confirmUserDeletion}
-                        aria-label={t('Delete your account')}
-                    >
-                        {t('Delete Account')}
-                    </Button>
+                    <Dialog open={open} onOpenChange={setOpen}>
+                        <DialogTrigger asChild>
+                            <Button variant={'destructive'} aria-label={t('Delete your account')}>
+                                {t('Delete Account')}
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent size={'2xl'}>
+                            <DialogHeader>
+                                <DialogTitle>
+                                    {t('Are you sure you want to delete your account?')}
+                                </DialogTitle>
+                                <DialogDescription>
+                                    {t(
+                                        'Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.',
+                                    )}
+                                </DialogDescription>
+                            </DialogHeader>
+                            <form onSubmit={submit}>
+                                <fieldset>
+                                    <InputLabel
+                                        htmlFor='password'
+                                        value={t('Password')}
+                                        className='sr-only'
+                                    />
+
+                                    <TextInput
+                                        id='password'
+                                        type='password'
+                                        name='password'
+                                        ref={passwordInput}
+                                        value={data.password}
+                                        onChange={(e) => setData('password', e.target.value)}
+                                        className='mt-1 block w-3/4'
+                                        isFocused
+                                        placeholder={t('Password')}
+                                    />
+
+                                    <InputError
+                                        className='mt-2'
+                                        message={showErrors ? errors.password : null}
+                                    />
+                                </fieldset>
+
+                                <DialogFooter className='mt-6 flex justify-end'>
+                                    <DialogClose asChild>
+                                        <Button variant={'secondary'} onClick={closeDialog}>
+                                            {t('Cancel')}
+                                        </Button>
+                                    </DialogClose>
+
+                                    <Button
+                                        className='ml-3'
+                                        variant={'destructive'}
+                                        onClick={submit}
+                                        disabled={processing}
+                                        aria-label={t('Delete your account')}
+                                    >
+                                        {t('Delete Account')}
+                                    </Button>
+                                </DialogFooter>
+                            </form>
+                        </DialogContent>
+                    </Dialog>
                 </CardFooter>
             </Card>
-
-            <Modal show={confirmingUserDeletion} onClose={closeModal}>
-                <form onSubmit={deleteUser} className='p-6'>
-                    <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
-                        {t('Are you sure you want to delete your account?')}
-                    </h2>
-
-                    <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
-                        {t(
-                            'Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.',
-                        )}
-                    </p>
-
-                    <div className='mt-6'>
-                        <InputLabel htmlFor='password' value={t('Password')} className='sr-only' />
-
-                        <TextInput
-                            id='password'
-                            type='password'
-                            name='password'
-                            ref={passwordInput}
-                            value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
-                            className='mt-1 block w-3/4'
-                            isFocused
-                            placeholder={t('Password')}
-                        />
-
-                        <InputError message={errors.password} className='mt-2' />
-                    </div>
-
-                    <div className='mt-6 flex justify-end'>
-                        <Button variant={'secondary'} onClick={closeModal}>
-                            {t('Cancel')}
-                        </Button>
-
-                        <Button
-                            variant={'destructive'}
-                            className='ml-3'
-                            disabled={processing}
-                            aria-label={t('Delete your account')}
-                        >
-                            {t('Delete Account')}
-                        </Button>
-                    </div>
-                </form>
-            </Modal>
         </section>
     );
 }

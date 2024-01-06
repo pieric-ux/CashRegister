@@ -3,7 +3,6 @@ import { useState } from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
-import Modal from '@/Components/Modal';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button';
 import {
@@ -13,25 +12,31 @@ import {
     CardHeader,
     CardTitle,
 } from '@/Components/ui/card/card';
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/Components/ui/dialog/dialog';
 
 export default function CreateWorkstationForm({ application, className = '' }) {
     const { t } = useTranslation();
 
-    const [openingModal, setOpeningModal] = useState(false);
+    const [open, setOpen] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
 
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
     });
 
-    const openModal = () => {
-        setOpeningModal(true);
-    };
-
-    const closeModal = () => {
-        setOpeningModal(false);
+    const closeDialog = () => {
         reset();
         setShowErrors(false);
+        setOpen(false);
     };
 
     const submit = (e) => {
@@ -39,10 +44,10 @@ export default function CreateWorkstationForm({ application, className = '' }) {
 
         post(route('workstations.store', application.slug), {
             preserveScroll: true,
+            onSuccess: () => closeDialog(),
             onError: () => {
                 setShowErrors(true);
             },
-            onSuccess: () => closeModal(),
         });
     };
     return (
@@ -57,54 +62,59 @@ export default function CreateWorkstationForm({ application, className = '' }) {
                     </CardDescription>
                 </CardHeader>
                 <CardFooter size={'xl'}>
-                    <Button onClick={openModal} aria-label={t('Create a workstation')}>
-                        {t('Create')}
-                    </Button>
+                    <Dialog open={open} onOpenChange={setOpen}>
+                        <DialogTrigger asChild>
+                            <Button aria-label={t('Create a workstation')}>{t('Create')}</Button>
+                        </DialogTrigger>
+                        <DialogContent size={'2xl'}>
+                            <DialogHeader>
+                                <DialogTitle>{t('Create Workstation')}</DialogTitle>
+                                <DialogDescription>
+                                    {t(
+                                        "Ready to create a new workstation? Fill out the form below with the required details and hit the 'Create' button to get started.",
+                                    )}
+                                </DialogDescription>
+                            </DialogHeader>
+                            <form onSubmit={submit}>
+                                <fieldset>
+                                    <InputLabel htmlFor='name' value={t('Name')} />
+
+                                    <TextInput
+                                        id='name'
+                                        name='name'
+                                        className='mt-1 block w-3/4'
+                                        value={data.name}
+                                        isFocused={true}
+                                        onChange={(e) => setData('name', e.target.value)}
+                                    />
+
+                                    <InputError
+                                        className='mt-2'
+                                        message={showErrors ? errors.name : null}
+                                    />
+                                </fieldset>
+
+                                <DialogFooter className='mt-6 flex justify-end'>
+                                    <DialogClose asChild>
+                                        <Button variant={'secondary'} onClick={closeDialog}>
+                                            {t('Cancel')}
+                                        </Button>
+                                    </DialogClose>
+
+                                    <Button
+                                        className='ml-3'
+                                        disabled={processing}
+                                        onClick={submit}
+                                        aria-label={t('Create a Workstation')}
+                                    >
+                                        {t('Create')}
+                                    </Button>
+                                </DialogFooter>
+                            </form>
+                        </DialogContent>
+                    </Dialog>
                 </CardFooter>
             </Card>
-
-            <Modal show={openingModal} onClose={closeModal}>
-                <form onSubmit={submit} className='p-6'>
-                    <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
-                        {t('Create Workstation')}
-                    </h2>
-
-                    <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
-                        {t(
-                            "Ready to create a new workstation? Fill out the form below with the required details and hit the 'Create' button to get started.",
-                        )}
-                    </p>
-
-                    <div className='mt-6'>
-                        <InputLabel htmlFor='name' value={t('Name')} />
-
-                        <TextInput
-                            id='name'
-                            name='name'
-                            className='mt-1 block w-3/4'
-                            value={data.name}
-                            isFocused={true}
-                            onChange={(e) => setData('name', e.target.value)}
-                        />
-
-                        <InputError className='mt-2' message={showErrors ? errors.name : null} />
-                    </div>
-
-                    <div className='mt-6 flex justify-end'>
-                        <Button variant={'secondary'} onClick={closeModal}>
-                            {t('Cancel')}
-                        </Button>
-
-                        <Button
-                            className='ml-3'
-                            disabled={processing}
-                            aria-label={t('Create a Workstation')}
-                        >
-                            {t('Create')}
-                        </Button>
-                    </div>
-                </form>
-            </Modal>
         </section>
     );
 }

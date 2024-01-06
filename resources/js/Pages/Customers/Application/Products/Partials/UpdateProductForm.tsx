@@ -4,15 +4,24 @@ import { useEffect, useState } from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
-import Modal from '@/Components/Modal';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button';
 import { Svg } from '@/Components/ui/svg/Svg';
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/Components/ui/dialog/dialog';
 
 export default function UpdateProductForm({ product, categories, dishes, className = '' }) {
     const { t } = useTranslation();
 
-    const [openingModal, setOpeningModal] = useState(false);
+    const [open, setOpen] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
 
     const { data, setData, patch, processing, errors } = useForm({
@@ -23,23 +32,6 @@ export default function UpdateProductForm({ product, categories, dishes, classNa
         category: product.fk_categories_products_id,
         dish: product.fk_dishes_id,
     });
-
-    const openModal = () => {
-        setOpeningModal(true);
-    };
-
-    const closeModal = () => {
-        setOpeningModal(false);
-        setData({
-            name: product.name,
-            unit: product.unit,
-            client_price: product.client_price,
-            cost_price: product.cost_price,
-            category: product.fk_categories_products_id,
-            dish: product.fk_dishes_id,
-        });
-        setShowErrors(false);
-    };
 
     useEffect(() => {
         setData({
@@ -52,15 +44,28 @@ export default function UpdateProductForm({ product, categories, dishes, classNa
         });
     }, [product]);
 
+    const closeDialog = () => {
+        setData({
+            name: product.name,
+            unit: product.unit,
+            client_price: product.client_price,
+            cost_price: product.cost_price,
+            category: product.fk_categories_products_id,
+            dish: product.fk_dishes_id,
+        });
+        setShowErrors(false);
+        setOpen(false);
+    };
+
     const submit = (e) => {
         e.preventDefault();
 
         patch(route('products.update', product), {
             preserveScroll: true,
+            onSuccess: () => closeDialog(),
             onError: () => {
                 setShowErrors(true);
             },
-            onSuccess: () => closeModal(),
         });
     };
 
@@ -73,148 +78,163 @@ export default function UpdateProductForm({ product, categories, dishes, classNa
     );
 
     return (
-        <section className={`space-y-6 ${className}`}>
-            <Button size={'icon'} onClick={openModal} aria-label={t('Edit the product')}>
-                <Svg type={'edit'} />
-            </Button>
+        <section className={className}>
+            <Dialog open={open} onOpenChange={setOpen}>
+                <DialogTrigger asChild>
+                    <Button size={'icon'} aria-label={t('Edit the product')}>
+                        <Svg type={'edit'} />
+                    </Button>
+                </DialogTrigger>
+                <DialogContent size={'2xl'}>
+                    <DialogHeader>
+                        <DialogTitle>{t('Edit Product')}</DialogTitle>
+                        <DialogDescription>
+                            {t(
+                                "Ready to update the product? Fill out the form below with the required details and click the 'Save' button to apply the changes.",
+                            )}
+                        </DialogDescription>
+                    </DialogHeader>
+                    <form onSubmit={submit}>
+                        <fieldset className='space-y-6'>
+                            <div>
+                                <InputLabel htmlFor='name' value={t('Name')} />
 
-            <Modal show={openingModal} onClose={closeModal}>
-                <form onSubmit={submit} className='p-6'>
-                    <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
-                        {t('Edit Product')}
-                    </h2>
+                                <TextInput
+                                    id='name'
+                                    name='name'
+                                    className='mt-1 block w-3/4'
+                                    value={data.name}
+                                    isFocused={true}
+                                    onChange={(e) => setData('name', e.target.value)}
+                                />
 
-                    <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
-                        {t(
-                            "Ready to update the product? Fill out the form below with the required details and click the 'Save' button to apply the changes.",
-                        )}
-                    </p>
+                                <InputError
+                                    className='mt-2'
+                                    message={showErrors ? errors.name : null}
+                                />
+                            </div>
 
-                    <div className='mt-6'>
-                        <InputLabel htmlFor='name' value={t('Name')} />
+                            <div>
+                                <InputLabel htmlFor='unit' value={t('Unit')} />
 
-                        <TextInput
-                            id='name'
-                            name='name'
-                            className='mt-1 block w-3/4'
-                            value={data.name}
-                            isFocused={true}
-                            onChange={(e) => setData('name', e.target.value)}
-                        />
+                                <TextInput
+                                    id='unit'
+                                    name='unit'
+                                    className='mt-1 block w-3/4'
+                                    value={data.unit}
+                                    onChange={(e) => setData('unit', e.target.value)}
+                                />
 
-                        <InputError className='mt-2' message={showErrors ? errors.name : null} />
-                    </div>
+                                <InputError
+                                    className='mt-2'
+                                    message={showErrors ? errors.unit : null}
+                                />
+                            </div>
 
-                    <div className='mt-6'>
-                        <InputLabel htmlFor='unit' value={t('Unit')} />
+                            <div>
+                                <InputLabel htmlFor='client_price' value={t('Client Price')} />
 
-                        <TextInput
-                            id='unit'
-                            name='unit'
-                            className='mt-1 block w-3/4'
-                            value={data.unit}
-                            onChange={(e) => setData('unit', e.target.value)}
-                        />
+                                <TextInput
+                                    id='client_price'
+                                    name='client_price'
+                                    className='mt-1 block w-3/4'
+                                    value={data.client_price}
+                                    onChange={(e) => setData('client_price', e.target.value)}
+                                />
 
-                        <InputError className='mt-2' message={showErrors ? errors.unit : null} />
-                    </div>
+                                <InputError
+                                    className='mt-2'
+                                    message={showErrors ? errors.client_price : null}
+                                />
+                            </div>
 
-                    <div className='mt-6'>
-                        <InputLabel htmlFor='client_price' value={t('Client Price')} />
+                            <div>
+                                <InputLabel htmlFor='cost_price' value={t('Cost Price')} />
 
-                        <TextInput
-                            id='client_price'
-                            name='client_price'
-                            className='mt-1 block w-3/4'
-                            value={data.client_price}
-                            onChange={(e) => setData('client_price', e.target.value)}
-                        />
+                                <TextInput
+                                    id='cost_price'
+                                    name='cost_price'
+                                    className='mt-1 block w-3/4'
+                                    value={data.cost_price}
+                                    onChange={(e) => setData('cost_price', e.target.value)}
+                                />
 
-                        <InputError
-                            className='mt-2'
-                            message={showErrors ? errors.client_price : null}
-                        />
-                    </div>
+                                <InputError
+                                    className='mt-2'
+                                    message={showErrors ? errors.cost_price : null}
+                                />
+                            </div>
 
-                    <div className='mt-6'>
-                        <InputLabel htmlFor='cost_price' value={t('Cost Price')} />
+                            <div>
+                                <InputLabel htmlFor='category' value={t('Category')} />
 
-                        <TextInput
-                            id='cost_price'
-                            name='cost_price'
-                            className='mt-1 block w-3/4'
-                            value={data.cost_price}
-                            onChange={(e) => setData('cost_price', e.target.value)}
-                        />
+                                <select
+                                    id='category'
+                                    name='category'
+                                    className={selectClasses}
+                                    value={data.category}
+                                    onChange={(e) => setData('category', e.target.value)}
+                                >
+                                    {categories.map((category) => (
+                                        <option key={category.id} value={category.id}>
+                                            {category.name === 'No category'
+                                                ? t('No category')
+                                                : category.name}
+                                        </option>
+                                    ))}
+                                </select>
 
-                        <InputError
-                            className='mt-2'
-                            message={showErrors ? errors.cost_price : null}
-                        />
-                    </div>
+                                <InputError
+                                    className='mt-2'
+                                    message={showErrors ? errors.category : null}
+                                />
+                            </div>
 
-                    <div className='mt-6'>
-                        <InputLabel htmlFor='category' value={t('Category')} />
+                            <div>
+                                <InputLabel htmlFor='dish' value={t('Dish')} />
 
-                        <select
-                            id='category'
-                            name='category'
-                            className={selectClasses}
-                            value={data.category}
-                            onChange={(e) => setData('category', e.target.value)}
-                        >
-                            {categories.map((category) => (
-                                <option key={category.id} value={category.id}>
-                                    {category.name === 'No category'
-                                        ? t('No category')
-                                        : category.name}
-                                </option>
-                            ))}
-                        </select>
+                                <select
+                                    id='dish'
+                                    name='dish'
+                                    className={selectClasses}
+                                    value={data.dish}
+                                    onChange={(e) => setData('dish', e.target.value)}
+                                >
+                                    {dishes.map((dish) => (
+                                        <option key={dish.id} value={dish.id}>
+                                            {dish.name === 'No dish'
+                                                ? t('No dish')
+                                                : `${dish.name} ${dish.unit}`}
+                                        </option>
+                                    ))}
+                                </select>
 
-                        <InputError
-                            className='mt-2'
-                            message={showErrors ? errors.category : null}
-                        />
-                    </div>
+                                <InputError
+                                    className='mt-2'
+                                    message={showErrors ? errors.dish : null}
+                                />
+                            </div>
+                        </fieldset>
 
-                    <div className='mt-6'>
-                        <InputLabel htmlFor='dish' value={t('Dish')} />
+                        <DialogFooter className='mt-6 flex justify-end'>
+                            <DialogClose asChild>
+                                <Button variant={'secondary'} onClick={closeDialog}>
+                                    {t('Cancel')}
+                                </Button>
+                            </DialogClose>
 
-                        <select
-                            id='dish'
-                            name='dish'
-                            className={selectClasses}
-                            value={data.dish}
-                            onChange={(e) => setData('dish', e.target.value)}
-                        >
-                            {dishes.map((dish) => (
-                                <option key={dish.id} value={dish.id}>
-                                    {dish.name === 'No dish'
-                                        ? t('No dish')
-                                        : `${dish.name} ${dish.unit}`}
-                                </option>
-                            ))}
-                        </select>
-
-                        <InputError className='mt-2' message={showErrors ? errors.dish : null} />
-                    </div>
-
-                    <div className='mt-6 flex justify-end'>
-                        <Button variant={'secondary'} onClick={closeModal}>
-                            {t('Cancel')}
-                        </Button>
-
-                        <Button
-                            className='ml-3'
-                            disabled={processing}
-                            aria-label={t('Edit the product')}
-                        >
-                            {t('Save')}
-                        </Button>
-                    </div>
-                </form>
-            </Modal>
+                            <Button
+                                className='ml-3'
+                                onClick={submit}
+                                disabled={processing}
+                                aria-label={t('Edit the product')}
+                            >
+                                {t('Save')}
+                            </Button>
+                        </DialogFooter>
+                    </form>
+                </DialogContent>
+            </Dialog>
         </section>
     );
 }

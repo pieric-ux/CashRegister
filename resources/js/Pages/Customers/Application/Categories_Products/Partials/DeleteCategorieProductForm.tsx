@@ -1,19 +1,27 @@
 import { useRef, useState } from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import Modal from '@/Components/Modal';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button';
 import { Svg } from '@/Components/ui/svg/Svg';
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/Components/ui/dialog/dialog';
 
-export default function DeleteCategorieProductForm({ category }) {
+export default function DeleteCategorieProductForm({ category, className = '' }) {
     const { t } = useTranslation();
 
-    const [confirmingCategoryDeletion, setConfirmingCategoryDeletion] = useState(false);
-
-    const passwordInput = useRef();
+    const [open, setOpen] = useState(false);
+    const [showErrors, setShowErrors] = useState(false);
 
     const {
         data,
@@ -26,84 +34,96 @@ export default function DeleteCategorieProductForm({ category }) {
         password: '',
     });
 
-    const confirmCategoryDeletion = () => {
-        setConfirmingCategoryDeletion(true);
+    const passwordInput = useRef();
+
+    const closeDialog = () => {
+        reset();
+        setShowErrors(false);
+        setOpen(false);
     };
 
-    const deleteCategory = (e) => {
+    const submit = (e) => {
         e.preventDefault();
 
         destroy(route('categories.destroy', category), {
             preserveScroll: true,
-            onSuccess: () => closeModal(),
-            onError: () => passwordInput.current.focus(),
-            onFinish: () => reset(),
+            onSuccess: () => closeDialog(),
+            onError: () => {
+                setShowErrors(true);
+                passwordInput.current.focus();
+            },
         });
     };
 
-    const closeModal = () => {
-        setConfirmingCategoryDeletion(false);
-
-        reset();
-    };
-
     return (
-        <section>
-            <Button
-                variant={'destructive'}
-                size={'icon'}
-                onClick={confirmCategoryDeletion}
-                aria-label={t('Delete the category of product')}
-            >
-                <Svg type={'delete'} variant={'destructive'} />
-            </Button>
+        <section className={className}>
+            <Dialog open={open} onOpenChange={setOpen}>
+                <DialogTrigger asChild>
+                    <Button
+                        variant={'destructive'}
+                        size={'icon'}
+                        aria-label={t('Delete the category of product')}
+                    >
+                        <Svg type={'delete'} variant={'destructive'} />
+                    </Button>
+                </DialogTrigger>
+                <DialogContent size={'2xl'}>
+                    <DialogHeader>
+                        <DialogTitle>
+                            {t('Are you sure you want to delete your category of product?')}
+                        </DialogTitle>
+                        <DialogDescription>
+                            {t(
+                                'Once your category of product is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your category of product.',
+                            )}
+                        </DialogDescription>
+                    </DialogHeader>
+                    <form onSubmit={submit}>
+                        <fieldset>
+                            <InputLabel
+                                htmlFor='password'
+                                value={t('Password')}
+                                className='sr-only'
+                            />
 
-            <Modal show={confirmingCategoryDeletion} onClose={closeModal}>
-                <form onSubmit={deleteCategory} className='p-6'>
-                    <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
-                        {t('Are you sure you want to delete your category of product?')}
-                    </h2>
+                            <TextInput
+                                id='password'
+                                type='password'
+                                name='password'
+                                ref={passwordInput}
+                                value={data.password}
+                                onChange={(e) => setData('password', e.target.value)}
+                                className='mt-1 block w-3/4'
+                                isFocused
+                                placeholder={t('Password')}
+                            />
 
-                    <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
-                        {t(
-                            'Once your category of product is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your category of product.',
-                        )}
-                    </p>
+                            <InputError
+                                className='mt-2'
+                                message={showErrors ? errors.password : null}
+                            />
+                        </fieldset>
 
-                    <div className='mt-6'>
-                        <InputLabel htmlFor='password' value={t('Password')} className='sr-only' />
+                        <DialogFooter className='mt-6 flex justify-end'>
+                            <DialogClose asChild>
+                                <Button variant={'secondary'} onClick={closeDialog}>
+                                    {t('Cancel')}
+                                </Button>
+                            </DialogClose>
 
-                        <TextInput
-                            id='password'
-                            type='password'
-                            name='password'
-                            ref={passwordInput}
-                            value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
-                            className='mt-1 block w-3/4'
-                            isFocused
-                            placeholder={t('Password')}
-                        />
-
-                        <InputError message={errors.password} className='mt-2' />
-                    </div>
-
-                    <div className='mt-6 flex justify-end'>
-                        <Button variant={'secondary'} onClick={closeModal}>
-                            {t('Cancel')}
-                        </Button>
-
-                        <Button
-                            variant={'destructive'}
-                            className='ml-3'
-                            disabled={processing}
-                            aria-label={t('Delete the category of product')}
-                        >
-                            {t('Delete Category')}
-                        </Button>
-                    </div>
-                </form>
-            </Modal>
+                            <Button
+                                variant={'destructive'}
+                                className='ml-3'
+                                onClick={submit}
+                                disabled={processing}
+                                aria-label={t('Delete the category of product')}
+                            >
+                                {t('Delete Category')}
+                            </Button>
+                        </DialogFooter>
+                    </form>
+                </DialogContent>
+            </Dialog>
         </section>
     );
 }
