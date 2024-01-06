@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Modal from '@/Components/Modal';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button';
 import { Svg } from '@/Components/ui/svg/Svg';
@@ -7,10 +6,7 @@ import {
     Dialog,
     DialogClose,
     DialogContent,
-    DialogDescription,
     DialogFooter,
-    DialogHeader,
-    DialogTitle,
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
