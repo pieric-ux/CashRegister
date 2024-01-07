@@ -2,6 +2,7 @@ import Header from '@/Components/Header';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import Dropdown from '@/Components/Dropdown';
 import { useTranslation } from 'react-i18next';
+import { Link } from '@inertiajs/react';
 
 export default function EmployeeLayout({ auth, children, localization }) {
     const { t } = useTranslation();
@@ -26,15 +27,14 @@ export default function EmployeeLayout({ auth, children, localization }) {
         </>
     );
 
-    const DropdownLink = (
-        <>
-            <Dropdown.Link href={route('cashregister.index')}>{t('Cash Register')}</Dropdown.Link>
-            <Dropdown.Link href={route('employee-profil.index')}>{t('Profile')}</Dropdown.Link>
-            <Dropdown.Link href={route('logout')} method='post' as='button'>
-                {t('Logout')}
-            </Dropdown.Link>
-        </>
-    );
+    const dropdownLinks = [
+        <Link href={route('cashregister.index')}>{t('Cash Register')}</Link>,
+        <Link href={route('employee-profil.index')}>{t('Profile')}</Link>,
+        <Link href={route('logout')} method='post' as='button'>
+            {t('Logout')}
+        </Link>,
+    ];
+
     return (
         <div className='bg-gray-100 transition duration-300 ease-linear dark:bg-gray-900'>
             <div className='flex h-screen overflow-hidden'>
@@ -44,7 +44,7 @@ export default function EmployeeLayout({ auth, children, localization }) {
                         title={t(auth.employee.cr_workstations.name)}
                         avatarPath={auth.avatarPath}
                         RespNavLink={RespNavLink}
-                        DropdownLink={DropdownLink}
+                        dropdownLinks={dropdownLinks}
                         localization={localization}
                     />
                     <main>

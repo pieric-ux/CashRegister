@@ -2,10 +2,10 @@ import Header from '@/Components/Header';
 import Sidebar from '@/Components/SideBar';
 import SideBarLink from '@/Components/SideBarLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import Dropdown from '@/Components/Dropdown';
 import useLocalStorage from '@/Hooks/useLocalStorage';
 import { useTranslation } from 'react-i18next';
 import { Svg } from '@/Components/ui/svg/Svg';
+import { Link } from '@inertiajs/react';
 
 export default function CustomerLayout({ auth, children, localization }) {
     const { t } = useTranslation();
@@ -35,14 +35,14 @@ export default function CustomerLayout({ auth, children, localization }) {
         </>
     );
 
-    const DropdownLink = (
-        <>
-            <Dropdown.Link href={route('profile.edit')}>{t('Profile')}</Dropdown.Link>
-            <Dropdown.Link href={route('logout')} method='post' as='button'>
-                {t('Logout')}
-            </Dropdown.Link>
-        </>
-    );
+    const dropdownLinks = [
+        <Link className='block w-full' href={route('profile.edit')}>
+            {t('Profile')}
+        </Link>,
+        <Link className='block w-full' href={route('logout')} method='post' as='button'>
+            {t('Logout')}
+        </Link>,
+    ];
 
     return (
         <div className='bg-gray-100 transition duration-300 ease-linear dark:bg-gray-900'>
@@ -81,7 +81,7 @@ export default function CustomerLayout({ auth, children, localization }) {
                         user={auth.customer}
                         avatarPath={auth.avatarPath}
                         RespNavLink={RespNavLink}
-                        DropdownLink={DropdownLink}
+                        dropdownLinks={dropdownLinks}
                         sideBarOpen={sideBarOpen}
                         setSideBarOpen={setSideBarOpen}
                         localization={localization}
