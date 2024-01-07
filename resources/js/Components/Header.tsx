@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import Dropdown from '@/Components/Dropdown';
-import DarkModeSwitcher from './DarkModeSwitcher';
+import ThemeSwitcher from './themes/ThemeSwitcher';
 import LanguageSwitcher from './LanguageSwitcher';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar/avatar';
 
@@ -69,7 +69,7 @@ export default function Header({
                 </div>
                 <div className='flex items-center gap-2'>
                     <LanguageSwitcher localization={localization} />
-                    <DarkModeSwitcher aria-label='Dark Mode Switch' tabIndex='0' />
+                    <ThemeSwitcher />
                     <div className='hidden sm:flex'>
                         <Dropdown>
                             <Dropdown.Trigger>
