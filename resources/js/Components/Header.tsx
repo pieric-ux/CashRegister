@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import Dropdown from '@/Components/Dropdown';
 import ThemeSwitcher from './themes/ThemeSwitcher';
-import LanguageSwitcher from './LanguageSwitcher';
+import LanguageSwitcher from './themes/LanguageSwitcher';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar/avatar';
 
 export default function Header({
