@@ -8,26 +8,23 @@ import { CardFooter } from './cardFooter';
 
 import { cn } from '@/lib/utils';
 
-const cardVariants = cva(
-    'border bg-card text-card-foreground shadow-md transition duration-300 ease-linear',
-    {
-        variants: {
-            variant: {
-                default: 'rounded-lg',
-                sm: 'rounded-sm',
-                md: 'rounded-md',
-                xl: 'rounded-xl ',
-            },
-            size: {
-                default: '',
-            },
+const cardVariants = cva('bg-card text-card-foreground transition duration-300 ease-linear', {
+    variants: {
+        variant: {
+            default: 'border shadow-md',
         },
-        defaultVariants: {
-            variant: 'default',
-            size: 'default',
+        size: {
+            default: 'rounded-lg',
+            sm: 'rounded-sm',
+            md: 'rounded-md',
+            xl: 'rounded-xl ',
         },
     },
-);
+    defaultVariants: {
+        variant: 'default',
+        size: 'default',
+    },
+});
 
 export interface CardProps
     extends HTMLAttributes<HTMLDivElement>,

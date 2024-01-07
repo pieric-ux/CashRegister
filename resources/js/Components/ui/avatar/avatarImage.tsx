@@ -4,10 +4,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
 
-const avatarImageVariants = cva('h-full w-full backdrop-blur-md', {
+const avatarImageVariants = cva('aspect-square h-full w-full', {
     variants: {
         variant: {
-            default: 'aspect-square',
+            default: 'backdrop-blur-md',
         },
     },
     defaultVariants: {

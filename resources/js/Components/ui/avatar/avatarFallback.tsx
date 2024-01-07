@@ -4,10 +4,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
 
-const avatarFallbackVariants = cva('h-full w-full rounded-full bg-muted', {
+const avatarFallbackVariants = cva('flex h-full w-full items-center justify-center rounded-full', {
     variants: {
         variant: {
-            default: 'flex items-center justify-center',
+            default: 'bg-muted',
         },
     },
     defaultVariants: {
