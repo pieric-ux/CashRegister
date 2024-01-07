@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/Components/ui/button';
+import { Button } from '@/Components/ui/button/button';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { Card, CardHeader } from '@/Components/ui/card/card';
 

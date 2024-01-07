@@ -5,7 +5,7 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/Components/ui/button';
+import { Button } from '@/Components/ui/button/button';
 import { Svg } from '@/Components/ui/svg/Svg';
 import {
     Dialog,

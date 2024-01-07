@@ -5,7 +5,7 @@ import UpdateAppForm from './Partials/UpdateAppForm';
 import DeleteAppForm from './Partials/DeleteAppForm';
 import UpdateAppPoster from './Partials/UpdateAppPoster';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/Components/ui/button';
+import { Button } from '@/Components/ui/button/button';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card/card';
 

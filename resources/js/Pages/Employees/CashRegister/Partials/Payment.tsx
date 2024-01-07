@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/Components/ui/button';
+import { Button } from '@/Components/ui/button/button';
 import {
     Dialog,
     DialogContent,

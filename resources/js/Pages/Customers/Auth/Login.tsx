@@ -7,7 +7,7 @@ import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/Components/ui/button';
+import { Button } from '@/Components/ui/button/button';
 
 export default function Login({ status, canResetPassword }) {
     const { t } = useTranslation();

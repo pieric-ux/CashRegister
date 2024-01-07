@@ -1,4 +1,4 @@
-import { Button } from '@/Components/ui/button';
+import { Button } from '@/Components/ui/button/button';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';

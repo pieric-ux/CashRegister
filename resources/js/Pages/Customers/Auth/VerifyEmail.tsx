@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/Components/ui/button';
+import { Button } from '@/Components/ui/button/button';
 
 export default function VerifyEmail({ status }) {
     const { t } = useTranslation();

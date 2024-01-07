@@ -3,7 +3,7 @@ import InputError from '@/Components/InputError';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/Components/ui/button';
+import { Button } from '@/Components/ui/button/button';
 
 export default function ForgotPassword({ status }) {
     const { t } = useTranslation();
