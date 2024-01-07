@@ -1,6 +1,6 @@
 import Header from '@/Components/Header';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import Dropdown from '@/Components/Dropdown';
+import Dropdown from '@/Components/old_Dropdown';
 import { useTranslation } from 'react-i18next';
 import { Link } from '@inertiajs/react';
 
@@ -28,9 +28,13 @@ export default function EmployeeLayout({ auth, children, localization }) {
     );
 
     const dropdownLinks = [
-        <Link href={route('cashregister.index')}>{t('Cash Register')}</Link>,
-        <Link href={route('employee-profil.index')}>{t('Profile')}</Link>,
-        <Link href={route('logout')} method='post' as='button'>
+        <Link className='block w-full' href={route('cashregister.index')}>
+            {t('Cash Register')}
+        </Link>,
+        <Link className='block w-full' href={route('employee-profil.index')}>
+            {t('Profile')}
+        </Link>,
+        <Link className='block w-full' href={route('logout')} method='post' as='button'>
             {t('Logout')}
         </Link>,
     ];
