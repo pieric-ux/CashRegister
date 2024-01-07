@@ -7,7 +7,7 @@ import {
     Close,
     Content,
     Portal,
-    DialogContentProps as RadixDialogContentProps,
+    type DialogContentProps as RadixDialogContentProps,
 } from '@radix-ui/react-dialog';
 
 import { cn } from '@/lib/utils';

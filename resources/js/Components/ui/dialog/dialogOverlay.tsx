@@ -1,6 +1,9 @@
 import { forwardRef, ComponentPropsWithoutRef } from 'react';
-import { VariantProps, cva } from 'class-variance-authority';
-import { Overlay, DialogOverlayProps as RadixDialogOverlayProps } from '@radix-ui/react-dialog';
+import { cva, type VariantProps } from 'class-variance-authority';
+import {
+    Overlay,
+    type DialogOverlayProps as RadixDialogOverlayProps,
+} from '@radix-ui/react-dialog';
 
 import { cn } from '@/lib/utils';
 

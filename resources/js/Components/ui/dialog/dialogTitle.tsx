@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Title, DialogTitleProps as RadixDialogTitleProps } from '@radix-ui/react-dialog';
+import { Title, type DialogTitleProps as RadixDialogTitleProps } from '@radix-ui/react-dialog';
 
 import { cn } from '@/lib/utils';
 

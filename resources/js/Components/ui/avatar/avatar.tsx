@@ -3,7 +3,7 @@
 import { forwardRef, ComponentPropsWithoutRef } from 'react';
 import { AvatarImage } from './avatarImage';
 import { AvatarFallback } from './avatarFallback';
-import { Root, AvatarProps as RadixAvatarProps } from '@radix-ui/react-avatar';
+import { Root, type AvatarProps as RadixAvatarProps } from '@radix-ui/react-avatar';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';

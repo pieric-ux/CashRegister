@@ -1,5 +1,5 @@
 import { forwardRef, ComponentPropsWithoutRef } from 'react';
-import { Image, AvatarImageProps as RadixAvatarImageProps } from '@radix-ui/react-avatar';
+import { Image, type AvatarImageProps as RadixAvatarImageProps } from '@radix-ui/react-avatar';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';

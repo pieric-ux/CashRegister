@@ -1,6 +1,9 @@
 import { forwardRef, ComponentPropsWithoutRef } from 'react';
-import { Fallback, AvatarFallbackProps as RadixAvatarFallbackProps } from '@radix-ui/react-avatar';
 import { cva, type VariantProps } from 'class-variance-authority';
+import {
+    Fallback,
+    type AvatarFallbackProps as RadixAvatarFallbackProps,
+} from '@radix-ui/react-avatar';
 
 import { cn } from '@/lib/utils';
 
