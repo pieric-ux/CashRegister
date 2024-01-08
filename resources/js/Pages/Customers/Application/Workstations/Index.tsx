@@ -1,14 +1,15 @@
-import clsx from 'clsx';
 import { useState, useEffect } from 'react';
 import { Head } from '@inertiajs/react';
+import clsx from 'clsx';
+import axios from 'axios';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
 import CreateWorkstationForm from './Partials/CreateWorkstationForm';
 import UpdateWorkstationForm from './Partials/UpdateWorkstationForm';
 import DeleteWorkstationForm from './Partials/DeleteWorstationForm';
-import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card/card';
+import { Separator } from '@/Components/ui/separator/separator';
 
 export default function Index({ customerAuth, application, workstations, localization }) {
     const { t } = useTranslation();
@@ -103,16 +104,14 @@ export default function Index({ customerAuth, application, workstations, localiz
                     <div className='mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3'>
                         {updatedWorkstations.slice(1).map((workstation) => (
                             <Card key={workstation.id}>
-                                <CardHeader
-                                    variant={'flex-row'}
-                                    className='justify-between border-b border-border'
-                                >
+                                <CardHeader variant={'flex-row'} className='justify-between'>
                                     <CardTitle>{workstation.name}</CardTitle>
                                     <div className='flex gap-2'>
                                         <UpdateWorkstationForm workstation={workstation} />
                                         <DeleteWorkstationForm workstation={workstation} />
                                     </div>
                                 </CardHeader>
+                                <Separator />
                                 <CardContent>
                                     <DragDropContext onDragEnd={onDragEnd}>
                                         <div className='mt-4 flex h-full gap-2'>
