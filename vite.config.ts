@@ -12,6 +12,6 @@ export default defineConfig({
         react(),
     ],
     ssr: {
-        noExternal: /^\@radix-ui/,
+        noExternal: [/^\@radix-ui/, '@radix-ui/react-checkbox'],
     },
 });
