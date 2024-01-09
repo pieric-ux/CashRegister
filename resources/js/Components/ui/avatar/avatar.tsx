@@ -1,10 +1,10 @@
 'use client';
 
 import { forwardRef, ComponentPropsWithoutRef } from 'react';
-import { AvatarImage } from './avatarImage';
-import { AvatarFallback } from './avatarFallback';
-import { Root, type AvatarProps as RadixAvatarProps } from '@radix-ui/react-avatar';
+import { AvatarImage } from '@/Components/ui/avatar/avatarImage';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { AvatarFallback } from '@/Components/ui/avatar/avatarFallback';
+import { Root, type AvatarProps as RadixAvatarProps } from '@radix-ui/react-avatar';
 
 import { cn } from '@/lib/utils';
 

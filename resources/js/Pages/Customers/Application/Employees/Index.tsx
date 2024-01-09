@@ -1,17 +1,17 @@
 import { useState } from 'react';
-import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
 import { Head } from '@inertiajs/react';
-import CreateEmployeeForm from './Partials/CreateEmployeeForm';
-import UpdateEmployeeForm from './Partials/UpdateEmployeeForm';
-import DeleteEmployeeForm from './Partials/DeleteEmployeeForm';
-import RegenerateEmployeeForm from './Partials/RegenerateEmployeeForm';
-import TextInput from '@/Components/TextInput';
-import Table from '@/Components/Table';
-import { sortData, filterData } from '@/Utils/useTableUtils';
-import Pagination from '@/Components/Pagination';
-import PaginationItemsPerPage from '@/Components/PaginationItemsPerPage';
+import Table from '@/Components/old_Table';
 import { useTranslation } from 'react-i18next';
+import TextInput from '@/Components/TextInput';
+import Pagination from '@/Components/old_Pagination';
+import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
 import { Card, CardHeader } from '@/Components/ui/card/card';
+import { sortData, filterData } from '@/Utils/useTableUtils';
+import PaginationItemsPerPage from '@/Components/old_PaginationItemsPerPage';
+import CreateEmployeeForm from '@/Pages/Customers/Application/Employees/Partials/CreateEmployeeForm';
+import UpdateEmployeeForm from '@/Pages/Customers/Application/Employees/Partials/UpdateEmployeeForm';
+import DeleteEmployeeForm from '@/Pages/Customers/Application/Employees/Partials/DeleteEmployeeForm';
+import RegenerateEmployeeForm from '@/Pages/Customers/Application/Employees/Partials/RegenerateEmployeeForm';
 
 export default function Index({ customerAuth, application, employees, localization }) {
     const { t } = useTranslation();

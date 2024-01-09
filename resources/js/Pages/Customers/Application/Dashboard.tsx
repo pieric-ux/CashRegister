@@ -1,6 +1,6 @@
+import { Head } from '@inertiajs/react';
 import { Card, CardHeader } from '@/Components/ui/card/card';
 import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
-import { Head } from '@inertiajs/react';
 
 export default function Dashboard({ customerAuth, application, localization }) {
     return (

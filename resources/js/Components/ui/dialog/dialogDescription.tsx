@@ -1,11 +1,10 @@
+import { cn } from '@/lib/utils';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import {
     Description,
     type DialogDescriptionProps as RadixDialogDescriptionProps,
 } from '@radix-ui/react-dialog';
-
-import { cn } from '@/lib/utils';
 
 const dialogDescriptionVariants = cva('', {
     variants: {

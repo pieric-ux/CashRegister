@@ -1,6 +1,11 @@
-import { Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from '../ui/dropdown/dropdown';
-import { Avatar, AvatarFallback, AvatarImage } from './../ui/avatar/avatar';
+import {
+    Dropdown,
+    DropdownContent,
+    DropdownItem,
+    DropdownTrigger,
+} from '@/Components/ui/dropdown/dropdown';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
+import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar/avatar';
 
 export default function DropdownMenu({ user, avatarPath, dropdownLinks }) {
     return (

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
+import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
-import { Svg } from '@/Components/ui/svg/Svg';
 import { Card, CardHeader } from '@/Components/ui/card/card';
 
 export default function Cart({ isCartVisible, cart, removeFromCart }) {

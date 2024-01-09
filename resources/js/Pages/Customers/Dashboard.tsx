@@ -1,7 +1,7 @@
-import { Card, CardHeader, CardTitle } from '@/Components/ui/card/card';
-import CustomerLayout from '@/Layouts/CustomerLayout';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import CustomerLayout from '@/Layouts/CustomerLayout';
+import { Card, CardHeader, CardTitle } from '@/Components/ui/card/card';
 
 export default function Dashboard({ customerAuth, localization }) {
     const { t } = useTranslation();

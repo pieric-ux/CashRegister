@@ -9,7 +9,7 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from './../ui/select/select';
+} from '@/Components/ui/select/select';
 
 export default function LanguageSwitcher({ localization }) {
     const { i18n } = useTranslation();

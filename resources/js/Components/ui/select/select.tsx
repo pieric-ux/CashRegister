@@ -1,13 +1,13 @@
 'use client';
 
-import { SelectTrigger } from './selectTrigger';
-import { SelectScrollUpButton } from './selectScrollUpButton';
-import { SelectScrollDownButton } from './selectScrollDownButton';
-import { SelectContent } from './selectContent';
-import { SelectLabel } from './selectLabel';
-import { SelectItem } from './selectItem';
-import { SelectSeparator } from './selectSeparator';
+import { SelectItem } from '@/Components/ui/select/selectItem';
+import { SelectLabel } from '@/Components/ui/select/selectLabel';
 import { Root, Group, Value, Icon } from '@radix-ui/react-select';
+import { SelectTrigger } from '@/Components/ui/select/selectTrigger';
+import { SelectContent } from '@/Components/ui/select/selectContent';
+import { SelectSeparator } from '@/Components/ui/select/selectSeparator';
+import { SelectScrollUpButton } from '@/Components/ui/select/selectScrollUpButton';
+import { SelectScrollDownButton } from '@/Components/ui/select/selectScrollDownButton';
 
 const Select = Root;
 

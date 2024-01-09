@@ -1,5 +1,5 @@
-import { Card, CardHeader } from '@/Components/ui/card/card';
 import { useTranslation } from 'react-i18next';
+import { Card, CardHeader } from '@/Components/ui/card/card';
 
 export default function Total({ total }) {
     const { t } = useTranslation();

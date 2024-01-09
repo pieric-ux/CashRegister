@@ -1,10 +1,9 @@
 'use client';
 
-import { Input } from '@/Components/ui/input/input';
 import { useState } from 'react';
-import { PaginationComplex } from '@/Components/ui/table/reusable/pagination/paginationComplex';
-import { ViewOptions } from '@/Components/ui/table/reusable/options/viewOptions';
-import { useTranslation } from 'react-i18next';
+import { Input } from '@/Components/ui/input/input';
+import { ViewOptions } from '@/Components/ui/table/templates/options/viewOptions';
+import { PaginationComplex } from '@/Components/ui/table/templates/pagination/paginationComplex';
 import {
     ColumnDef,
     ColumnFiltersState,
@@ -29,9 +28,16 @@ import {
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
+    filterPlaceholder: string;
+    textNoData: string;
 }
 
-export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({
+    columns,
+    data,
+    filterPlaceholder,
+    textNoData,
+}: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [globalFilter, setGlobalFilter] = useState('');
@@ -58,7 +64,6 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
         onColumnVisibilityChange: setColumnVisibility,
         onRowSelectionChange: setRowSelection,
     });
-    const { t } = useTranslation();
 
     return (
         <div className='space-y-6'>
@@ -67,7 +72,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                     value={globalFilter ?? ''}
                     onChange={(event) => setGlobalFilter(event.target.value)}
                     className='max-w-sm'
-                    placeholder={t('Search transactions')}
+                    placeholder={filterPlaceholder}
                 />
                 <ViewOptions table={table} />
             </div>
@@ -111,7 +116,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                         ) : (
                             <TableRow>
                                 <TableCell colSpan={columns.length} className='h-24 text-center'>
-                                    {t('No transactions found.')}
+                                    {textNoData}
                                 </TableCell>
                             </TableRow>
                         )}

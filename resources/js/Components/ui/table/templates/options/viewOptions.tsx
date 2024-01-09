@@ -1,9 +1,9 @@
 'use client';
 
-import { MixerHorizontalIcon } from '@radix-ui/react-icons';
 import { Table } from '@tanstack/react-table';
-import { Button } from '../../../button/button';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/Components/ui/button/button';
+import { MixerHorizontalIcon } from '@radix-ui/react-icons';
 import {
     Dropdown,
     DropdownCheckboxItem,
@@ -11,7 +11,7 @@ import {
     DropdownLabel,
     DropdownSeparator,
     DropdownTrigger,
-} from '../../../dropdown/dropdown';
+} from '@/Components/ui/dropdown/dropdown';
 
 export interface TableOptionsProps<TData> {
     table: Table<TData>;

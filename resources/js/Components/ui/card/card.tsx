@@ -1,10 +1,10 @@
 import { HTMLAttributes, forwardRef } from 'react';
+import { CardTitle } from '@/Components/ui/card/cardTitle';
+import { CardFooter } from '@/Components/ui/card/cardFooter';
+import { CardHeader } from '@/Components/ui/card/cardHeader';
+import { CardContent } from '@/Components/ui/card/cardContent';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { CardContent } from './cardContent';
-import { CardHeader } from './cardHeader';
-import { CardTitle } from './cardTitle';
-import { CardDescription } from './cardDescription';
-import { CardFooter } from './cardFooter';
+import { CardDescription } from '@/Components/ui/card/cardDescription';
 
 import { cn } from '@/lib/utils';
 

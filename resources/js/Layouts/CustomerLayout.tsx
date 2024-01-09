@@ -1,11 +1,11 @@
+import { Link } from '@inertiajs/react';
 import Header from '@/Components/Header';
 import Sidebar from '@/Components/SideBar';
-import SideBarLink from '@/Components/SideBarLink';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import useLocalStorage from '@/Hooks/useLocalStorage';
-import { useTranslation } from 'react-i18next';
 import { Svg } from '@/Components/ui/svg/Svg';
-import { Link } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
+import SideBarLink from '@/Components/SideBarLink';
+import useLocalStorage from '@/Hooks/useLocalStorage';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 
 export default function CustomerLayout({ auth, children, localization }) {
     const { t } = useTranslation();

@@ -1,7 +1,6 @@
-import { forwardRef, ElementRef, ComponentPropsWithoutRef } from 'react';
-import { Separator } from '@radix-ui/react-select';
-
 import { cn } from '@/lib/utils';
+import { Separator } from '@radix-ui/react-select';
+import { forwardRef, ElementRef, ComponentPropsWithoutRef } from 'react';
 
 const SelectSeparator = forwardRef<
     ElementRef<typeof Separator>,

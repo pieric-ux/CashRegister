@@ -1,12 +1,12 @@
 'use client';
 
+import { DialogTitle } from '@/Components/ui/dialog/dialogTitle';
+import { DialogHeader } from '@/Components/ui/dialog/dialogHeader';
+import { DialogFooter } from '@/Components/ui/dialog/dialogFooter';
+import { DialogContent } from '@/Components/ui/dialog/dialogContent';
+import { DialogOverlay } from '@/Components/ui/dialog/dialogOverlay';
 import { Root, Trigger, Portal, Close } from '@radix-ui/react-dialog';
-import { DialogContent } from './dialogContent';
-import { DialogHeader } from './dialogHeader';
-import { DialogTitle } from './dialogTitle';
-import { DialogDescription } from './dialogDescription';
-import { DialogFooter } from './dialogFooter';
-import { DialogOverlay } from './dialogOverlay';
+import { DialogDescription } from '@/Components/ui/dialog/dialogDescription';
 
 const Dialog = Root;
 

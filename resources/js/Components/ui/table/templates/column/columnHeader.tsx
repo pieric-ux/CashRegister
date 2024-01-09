@@ -1,17 +1,16 @@
+import { cn } from '@/lib/utils';
 import { HTMLAttributes } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, EyeNoneIcon } from '@radix-ui/react-icons';
 import { Column } from '@tanstack/react-table';
-import { Button } from '../../button/button';
+import { Button } from '@/Components/ui/button/button';
+import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, EyeNoneIcon } from '@radix-ui/react-icons';
 import {
     Dropdown,
     DropdownTrigger,
     DropdownContent,
     DropdownItem,
     DropdownSeparator,
-} from '../../dropdown/dropdown';
-
-import { cn } from '@/lib/utils';
+} from '@/Components/ui/dropdown/dropdown';
 
 interface ColumnHeaderProps<TData, TValue> extends HTMLAttributes<HTMLDivElement> {
     column: Column<TData, TValue>;

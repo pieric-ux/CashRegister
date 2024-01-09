@@ -1,12 +1,12 @@
 'use client';
 
-import { ColumnDef } from '@tanstack/react-table';
-import { useTranslation } from 'react-i18next';
 import currencyCodes from 'currency-codes';
-import ShowDetailsTransactionForm from '../ShowDetailsTransactionForm';
-import DeleteTransactionForm from '../DeleteTransactionForm';
-import { ColumnHeader } from '@/Components/ui/table/reusable/columnHeader';
+import { useTranslation } from 'react-i18next';
+import { ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
+import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
+import DeleteTransactionForm from '@/Pages/Customers/Application/Transactions/Partials/DeleteTransactionForm';
+import ShowDetailsTransactionForm from '@/Pages/Customers/Application/Transactions/Partials/ShowDetailsTransactionForm';
 
 export type Transaction = {
     or_number: string;

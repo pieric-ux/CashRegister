@@ -1,14 +1,14 @@
 import clsx from 'clsx';
-import { useState, useEffect } from 'react';
-import { Head } from '@inertiajs/react';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
-import CreateCategorieProductForm from './Partials/CreateCategorieProductForm';
-import UpdateCategorieProductForm from './Partials/UpdateCategorieProductFrom';
-import DeleteCategorieProductForm from './Partials/DeleteCategorieProductForm';
 import axios from 'axios';
+import { Head } from '@inertiajs/react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
 import { Card, CardHeader, CardTitle } from '@/Components/ui/card/card';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import CreateCategorieProductForm from '@/Pages/Customers/Application/Categories_Products/Partials/CreateCategorieProductForm';
+import UpdateCategorieProductForm from '@/Pages/Customers/Application/Categories_Products/Partials/UpdateCategorieProductFrom';
+import DeleteCategorieProductForm from '@/Pages/Customers/Application/Categories_Products/Partials/DeleteCategorieProductForm';
 
 export default function Index({ customerAuth, application, categories, localization }) {
     const { t } = useTranslation();

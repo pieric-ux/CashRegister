@@ -1,7 +1,7 @@
-import { Switch, SwitchThumb } from '../ui/switch/switch';
-import useColorMode from '@/Hooks/useColorMode';
+import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
-import { Svg } from '../ui/svg/Svg';
+import useColorMode from '@/Hooks/useColorMode';
+import { Switch, SwitchThumb } from '@/Components/ui/switch/switch';
 
 export default function ThemeSwitcher() {
     const { t } = useTranslation();

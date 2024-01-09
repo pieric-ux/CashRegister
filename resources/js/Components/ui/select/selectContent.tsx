@@ -1,7 +1,7 @@
 import { forwardRef, ComponentPropsWithoutRef } from 'react';
-import { SelectScrollUpButton } from './selectScrollUpButton';
-import { SelectScrollDownButton } from './selectScrollDownButton';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { SelectScrollUpButton } from '@/Components/ui/select/selectScrollUpButton';
+import { SelectScrollDownButton } from '@/Components/ui/select/selectScrollDownButton';
 import {
     Content,
     Portal,

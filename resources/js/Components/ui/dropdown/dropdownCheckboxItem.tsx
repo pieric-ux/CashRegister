@@ -1,13 +1,12 @@
-import { forwardRef, ComponentPropsWithoutRef } from 'react';
+import { cn } from '@/lib/utils';
 import { CheckIcon } from '@radix-ui/react-icons';
+import { forwardRef, ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import {
     CheckboxItem,
     ItemIndicator,
     type DropdownMenuCheckboxItemProps as RadixDropdownMenuCheckboxItemProps,
 } from '@radix-ui/react-dropdown-menu';
-
-import { cn } from '@/lib/utils';
 
 const dropdownCheckboxItemVariants = cva(
     'relative flex cursor-default select-none transition duration-300 ease-linear data-[disabled]:pointer-events-none data-[disabled]:opacity-50',

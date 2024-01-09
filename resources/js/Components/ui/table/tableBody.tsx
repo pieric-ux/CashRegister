@@ -1,6 +1,5 @@
-import { forwardRef, HTMLAttributes } from 'react';
-
 import { cn } from '@/lib/utils';
+import { forwardRef, HTMLAttributes } from 'react';
 
 const TableBody = forwardRef<HTMLTableSectionElement, HTMLAttributes<HTMLTableSectionElement>>(
     ({ className, ...props }, ref) => (

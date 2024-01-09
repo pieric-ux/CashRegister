@@ -1,11 +1,11 @@
 import { useForm } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import TextInput from '@/Components/TextInput';
-import { useTranslation } from 'react-i18next';
-import { Button } from '@/Components/ui/button/button';
 import { Svg } from '@/Components/ui/svg/Svg';
+import { useTranslation } from 'react-i18next';
+import TextInput from '@/Components/TextInput';
+import InputLabel from '@/Components/InputLabel';
+import InputError from '@/Components/InputError';
+import { Button } from '@/Components/ui/button/button';
 import {
     Dialog,
     DialogClose,

@@ -1,13 +1,13 @@
-import { type TableOptionsProps } from './viewOptions';
-import { ChevronDownIcon } from '@radix-ui/react-icons';
-import { Button } from '../../../button/button';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/Components/ui/button/button';
+import { ChevronDownIcon } from '@radix-ui/react-icons';
+import { type TableOptionsProps } from '@/Components/ui/table/templates/options/viewOptions';
 import {
     Dropdown,
     DropdownCheckboxItem,
     DropdownContent,
     DropdownTrigger,
-} from '../../../dropdown/dropdown';
+} from '@/Components/ui/dropdown/dropdown';
 
 export function ColumnToggle<TData>({ table }: TableOptionsProps<TData>) {
     const { t } = useTranslation();

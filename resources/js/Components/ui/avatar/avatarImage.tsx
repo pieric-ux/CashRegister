@@ -1,8 +1,7 @@
-import { forwardRef, ComponentPropsWithoutRef } from 'react';
-import { Image, type AvatarImageProps as RadixAvatarImageProps } from '@radix-ui/react-avatar';
-import { cva, type VariantProps } from 'class-variance-authority';
-
 import { cn } from '@/lib/utils';
+import { forwardRef, ComponentPropsWithoutRef } from 'react';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { Image, type AvatarImageProps as RadixAvatarImageProps } from '@radix-ui/react-avatar';
 
 const avatarImageVariants = cva('aspect-square h-full w-full', {
     variants: {

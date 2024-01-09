@@ -1,10 +1,10 @@
 import { useForm } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
+import Checkbox from '@/Components/Checkbox';
 import TextInput from '@/Components/TextInput';
 import { useTranslation } from 'react-i18next';
-import Checkbox from '@/Components/Checkbox';
+import InputError from '@/Components/InputError';
+import InputLabel from '@/Components/InputLabel';
 import { Button } from '@/Components/ui/button/button';
 import {
     Card,

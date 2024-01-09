@@ -1,7 +1,7 @@
-import { Button } from '@/Components/ui/button/button';
-import { Svg } from '@/Components/ui/svg/Svg';
 import { useForm } from '@inertiajs/react';
+import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/Components/ui/button/button';
 
 export default function RegenerateEmployeeForm({ employee }) {
     const { t } = useTranslation();

@@ -1,6 +1,6 @@
+import { Link } from '@inertiajs/react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import ApplicationLogoDark from '@/Components/ApplicationLogoDark';
-import { Link } from '@inertiajs/react';
 
 export default function Guest({ children }) {
     return (
@@ -12,7 +12,7 @@ export default function Guest({ children }) {
                 </Link>
             </div>
 
-            <div className='mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg dark:bg-gray-800'>
+            <div className='mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md dark:bg-gray-800 sm:max-w-md sm:rounded-lg'>
                 {children}
             </div>
         </div>

@@ -1,9 +1,9 @@
-import EmployeeLayout from '@/Layouts/EmployeeLayout';
 import { Head } from '@inertiajs/react';
-import UpdateEmployeeAvatar from './Partials/UpdateEmployeeAvatar';
 import { useTranslation } from 'react-i18next';
-import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
+import InputLabel from '@/Components/InputLabel';
+import EmployeeLayout from '@/Layouts/EmployeeLayout';
+import UpdateEmployeeAvatar from '@/Pages/Employees/Profile/Partials/UpdateEmployeeAvatar';
 import {
     Card,
     CardContent,

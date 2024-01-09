@@ -1,8 +1,7 @@
-import Header from '@/Components/Header';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import Dropdown from '@/Components/old_Dropdown';
-import { useTranslation } from 'react-i18next';
 import { Link } from '@inertiajs/react';
+import Header from '@/Components/Header';
+import { useTranslation } from 'react-i18next';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 
 export default function EmployeeLayout({ auth, children, localization }) {
     const { t } = useTranslation();

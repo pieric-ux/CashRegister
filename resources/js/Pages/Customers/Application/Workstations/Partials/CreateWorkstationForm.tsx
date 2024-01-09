@@ -1,9 +1,9 @@
-import { useForm } from '@inertiajs/react';
 import { useState } from 'react';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
+import { useForm } from '@inertiajs/react';
 import TextInput from '@/Components/TextInput';
 import { useTranslation } from 'react-i18next';
+import InputError from '@/Components/InputError';
+import InputLabel from '@/Components/InputLabel';
 import { Button } from '@/Components/ui/button/button';
 import {
     Card,

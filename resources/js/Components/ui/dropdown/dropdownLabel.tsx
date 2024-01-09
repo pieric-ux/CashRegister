@@ -1,11 +1,10 @@
+import { cn } from '@/lib/utils';
 import { forwardRef, ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import {
     Label,
     type DropdownMenuLabelProps as RadixDropdownMenuLabelProps,
 } from '@radix-ui/react-dropdown-menu';
-
-import { cn } from '@/lib/utils';
 
 const dropdownLabelVariants = cva('', {
     variants: {

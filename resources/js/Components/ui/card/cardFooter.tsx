@@ -1,7 +1,6 @@
+import { cn } from '@/lib/utils';
 import { HTMLAttributes, forwardRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-
-import { cn } from '@/lib/utils';
 
 const cardFooterVariants = cva('p-6 pt-0', {
     variants: {

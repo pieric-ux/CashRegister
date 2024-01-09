@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { useTranslation } from 'react-i18next';
-import { swiperSetting } from '@/Config/swiperConfig';
 import 'swiper/css/bundle';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { swiperSetting } from '@/Config/swiperConfig';
 
 export default function Items({ isCartVisible, cart, setCart, categories, dishes, products }) {
     const { t } = useTranslation();

@@ -1,11 +1,11 @@
+import { Link } from '@inertiajs/react';
 import Header from '@/Components/Header';
 import Sidebar from '@/Components/SideBar';
+import { Svg } from '@/Components/ui/svg/Svg';
+import { useTranslation } from 'react-i18next';
 import SideBarLink from '@/Components/SideBarLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import useLocalStorage from '@/Hooks/useLocalStorage';
-import { useTranslation } from 'react-i18next';
-import { Svg } from '@/Components/ui/svg/Svg';
-import { Link } from '@inertiajs/react';
 
 export default function CR_AppAdminLayout({ auth, application, children, localization }) {
     const { t } = useTranslation();

@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import { useEffect } from 'react';
+import { useForm } from '@inertiajs/react';
+import { Svg } from '@/Components/ui/svg/Svg';
+import { useTranslation } from 'react-i18next';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
-import { useForm } from '@inertiajs/react';
-import { useTranslation } from 'react-i18next';
-import { Svg } from '@/Components/ui/svg/Svg';
 
 export default function UpdateDishPicture({ dish, className }) {
     const { t } = useTranslation();

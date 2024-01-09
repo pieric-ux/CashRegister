@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogFooter,
     DialogHeader,
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
-import { DialogClose, DialogTitle } from '@radix-ui/react-dialog';
 
 export default function Payment({ paymentMethods, isCartEmpty, setSelectedPaymentMethod }) {
     const { t } = useTranslation();

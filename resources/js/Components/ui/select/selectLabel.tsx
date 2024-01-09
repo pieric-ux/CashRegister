@@ -1,8 +1,7 @@
+import { cn } from '@/lib/utils';
 import { forwardRef, ComponentPropsWithoutRef } from 'react';
 import { Label, type SelectLabelProps as RadixSelectLabelProps } from '@radix-ui/react-select';
 import { cva, type VariantProps } from 'class-variance-authority';
-
-import { cn } from '@/lib/utils';
 
 const selectLabelVariants = cva('', {
     variants: {

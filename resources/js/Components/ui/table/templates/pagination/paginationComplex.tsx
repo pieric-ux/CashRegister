@@ -1,19 +1,19 @@
 import { Table } from '@tanstack/react-table';
 import { useTranslation } from 'react-i18next';
-import { Button } from '../../../button/button';
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '../../../select/select';
+import { Button } from '@/Components/ui/button/button';
 import {
     ChevronLeftIcon,
     ChevronRightIcon,
     DoubleArrowLeftIcon,
     DoubleArrowRightIcon,
 } from '@radix-ui/react-icons';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/Components/ui/select/select';
 
 export interface TablePaginationProps<TData> {
     table: Table<TData>;

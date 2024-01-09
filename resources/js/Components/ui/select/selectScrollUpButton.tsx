@@ -1,8 +1,7 @@
-import { forwardRef, ElementRef, ComponentPropsWithoutRef } from 'react';
+import { cn } from '@/lib/utils';
 import { ChevronUpIcon } from '@radix-ui/react-icons';
 import { ScrollUpButton } from '@radix-ui/react-select';
-
-import { cn } from '@/lib/utils';
+import { forwardRef, ElementRef, ComponentPropsWithoutRef } from 'react';
 
 const SelectScrollUpButton = forwardRef<
     ElementRef<typeof ScrollUpButton>,

@@ -1,11 +1,10 @@
+import { cn } from '@/lib/utils';
 import { forwardRef, ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import {
     Trigger,
     type SelectTriggerProps as RadixSelectTriggerProps,
 } from '@radix-ui/react-select';
-
-import { cn } from '@/lib/utils';
 
 const selectTriggerVariants = cva(
     'flex whitespace-nowrap disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',

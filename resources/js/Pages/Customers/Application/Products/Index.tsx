@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { Head } from '@inertiajs/react';
-import { sortData, filterData } from '@/Utils/useTableUtils';
-import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
-import CreateProductForm from './Partials/CreateProductForm';
-import UpdateProductForm from './Partials/UpdateProductForm';
-import UpdateProdutPicture from './Partials/UpdateProductPicture';
-import DeleteProductForm from './Partials/DeleteProductForm';
-import TextInput from '@/Components/TextInput';
-import Table from '@/Components/Table';
-import Pagination from '@/Components/Pagination';
-import PaginationItemsPerPage from '@/Components/PaginationItemsPerPage';
+import Table from '@/Components/old_Table';
 import { useTranslation } from 'react-i18next';
+import TextInput from '@/Components/TextInput';
+import Pagination from '@/Components/old_Pagination';
+import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
 import { Card, CardHeader } from '@/Components/ui/card/card';
+import { sortData, filterData } from '@/Utils/useTableUtils';
+import PaginationItemsPerPage from '@/Components/old_PaginationItemsPerPage';
+import CreateProductForm from '@/Pages/Customers/Application/Products/Partials/CreateProductForm';
+import UpdateProductForm from '@/Pages/Customers/Application/Products/Partials/UpdateProductForm';
+import DeleteProductForm from '@/Pages/Customers/Application/Products/Partials/DeleteProductForm';
+import UpdateProdutPicture from '@/Pages/Customers/Application/Products/Partials/UpdateProductPicture';
 
 export default function Index({
     customerAuth,

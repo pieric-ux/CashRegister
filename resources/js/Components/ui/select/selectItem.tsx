@@ -1,14 +1,13 @@
+import { cn } from '@/lib/utils';
+import { CheckIcon } from '@radix-ui/react-icons';
 import { forwardRef, ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { CheckIcon } from '@radix-ui/react-icons';
 import {
     Item,
     ItemIndicator,
     ItemText,
     type SelectItemProps as RadixSelectItemProps,
 } from '@radix-ui/react-select';
-
-import { cn } from '@/lib/utils';
 
 const selectItemVariants = cva(
     'relative flex cursor-default select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50',

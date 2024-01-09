@@ -1,11 +1,11 @@
 import { forwardRef, HTMLAttributes } from 'react';
-import { TableHeader } from './tableHeader';
-import { TableBody } from './tableBody';
-import { TableFooter } from './tableFooter';
-import { TableRow } from './tableRow';
-import { TableHead } from './tableHead';
-import { TableCell } from './tableCell';
-import { TableCaption } from './tableCaption';
+import { TableRow } from '@/Components/ui/table/tableRow';
+import { TableBody } from '@/Components/ui/table/tableBody';
+import { TableHead } from '@/Components/ui/table/tableHead';
+import { TableCell } from '@/Components/ui/table/tableCell';
+import { TableHeader } from '@/Components/ui/table/tableHeader';
+import { TableFooter } from '@/Components/ui/table/tableFooter';
+import { TableCaption } from '@/Components/ui/table/tableCaption';
 
 import { cn } from '@/lib/utils';
 

@@ -1,6 +1,5 @@
-import { forwardRef, TdHTMLAttributes } from 'react';
-
 import { cn } from '@/lib/utils';
+import { forwardRef, TdHTMLAttributes } from 'react';
 
 const TableCell = forwardRef<HTMLTableCellElement, TdHTMLAttributes<HTMLTableCellElement>>(
     ({ className, ...props }, ref) => (

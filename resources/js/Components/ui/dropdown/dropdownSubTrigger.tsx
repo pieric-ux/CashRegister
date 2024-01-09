@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { forwardRef, ComponentPropsWithoutRef } from 'react';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -5,8 +6,6 @@ import {
     SubTrigger,
     type DropdownMenuSubTriggerProps as RadixDropdownMenuSubTriggerProps,
 } from '@radix-ui/react-dropdown-menu';
-
-import { cn } from '@/lib/utils';
 
 const dropdownSubTriggerVariants = cva(
     'flex cursor-default select-none data-[state=open]:bg-accent',

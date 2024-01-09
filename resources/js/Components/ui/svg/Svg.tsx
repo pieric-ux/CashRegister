@@ -1,8 +1,7 @@
+import { cn } from '@/lib/utils';
 import { SVGAttributes, forwardRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { actionIcons, sideBarIcons, themeIcons } from './iconsDefinitions';
-
-import { cn } from '@/lib/utils';
+import { actionIcons, sideBarIcons, themeIcons } from '@/Components/ui/svg/iconsDefinitions';
 
 const svgVariants = cva('', {
     variants: {

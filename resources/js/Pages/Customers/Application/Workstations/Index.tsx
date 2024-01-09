@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
-import { Head } from '@inertiajs/react';
 import clsx from 'clsx';
 import axios from 'axios';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
-import CreateWorkstationForm from './Partials/CreateWorkstationForm';
-import UpdateWorkstationForm from './Partials/UpdateWorkstationForm';
-import DeleteWorkstationForm from './Partials/DeleteWorstationForm';
+import { Head } from '@inertiajs/react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card/card';
+import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
 import { Separator } from '@/Components/ui/separator/separator';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card/card';
+import DeleteWorkstationForm from '@/Pages/Customers/Application/Workstations/Partials/DeleteWorstationForm';
+import CreateWorkstationForm from '@/Pages/Customers/Application/Workstations/Partials/CreateWorkstationForm';
+import UpdateWorkstationForm from '@/Pages/Customers/Application/Workstations/Partials/UpdateWorkstationForm';
 
 export default function Index({ customerAuth, application, workstations, localization }) {
     const { t } = useTranslation();
