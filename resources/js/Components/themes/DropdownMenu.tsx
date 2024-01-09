@@ -13,7 +13,7 @@ export default function DropdownMenu({ user, avatarPath, dropdownLinks }) {
                         {user.first_name.charAt(0) + user.last_name.charAt(0)}
                     </AvatarFallback>
                 </Avatar>
-                <ChevronDownIcon className='-mr-0.5 ml-2 h-4 w-4' />
+                <ChevronDownIcon className='-mr-0.5 ml-1 h-4 w-4' />
             </DropdownTrigger>
             <DropdownContent>
                 {dropdownLinks.map((link, index) => (
