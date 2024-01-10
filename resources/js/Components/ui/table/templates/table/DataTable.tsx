@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { useState } from 'react';
 import { Input } from '@/Components/ui/input/input';
 import { ViewOptions } from '@/Components/ui/table/templates/options/viewOptions';
@@ -28,13 +29,19 @@ import {
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
-    filterPlaceholder: string;
-    textNoData: string;
+    withFilter?: boolean;
+    withPagination?: boolean;
+    filterPlaceholder?: string;
+    textNoData?: string;
+    className?: string;
 }
 
 export function DataTable<TData, TValue>({
+    className,
     columns,
     data,
+    withFilter = true,
+    withPagination = true,
     filterPlaceholder,
     textNoData,
 }: DataTableProps<TData, TValue>) {
@@ -66,16 +73,18 @@ export function DataTable<TData, TValue>({
     });
 
     return (
-        <div className='space-y-6'>
-            <div className='flex items-center'>
-                <Input
-                    value={globalFilter ?? ''}
-                    onChange={(event) => setGlobalFilter(event.target.value)}
-                    className='max-w-sm'
-                    placeholder={filterPlaceholder}
-                />
-                <ViewOptions table={table} />
-            </div>
+        <div className={clsx('space-y-6', className)}>
+            {withFilter && (
+                <div className='flex items-center'>
+                    <Input
+                        value={globalFilter ?? ''}
+                        onChange={(event) => setGlobalFilter(event.target.value)}
+                        className='max-w-sm'
+                        placeholder={filterPlaceholder}
+                    />
+                    <ViewOptions table={table} />
+                </div>
+            )}
             <div className='rounded-md border'>
                 <Table>
                     <TableHeader>
@@ -123,7 +132,7 @@ export function DataTable<TData, TValue>({
                     </TableBody>
                 </Table>
             </div>
-            <PaginationComplex table={table} />
+            {withPagination && <PaginationComplex table={table} />}
         </div>
     );
 }
