@@ -39,7 +39,6 @@ export function ViewOptions<TData>({ table }: TableOptionsProps<TData>) {
                         return (
                             <DropdownCheckboxItem
                                 key={column.id}
-                                className='capitalize'
                                 checked={column.getIsVisible()}
                                 onCheckedChange={(value) => column.toggleVisibility(!!value)}
                             >
