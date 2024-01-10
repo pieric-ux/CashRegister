@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import TableArrowIcon from './TableArrowIcon';
+import TableArrowIcon from './old_TableArrowIcon';
 
 export default function TableColumnHeader({
     column,

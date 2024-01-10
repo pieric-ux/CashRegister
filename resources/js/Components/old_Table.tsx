@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import TableColumnHeader from './TableColumnHeader';
+import TableColumnHeader from './old_TableColumnHeader';
 
 export default function Table({
     data,

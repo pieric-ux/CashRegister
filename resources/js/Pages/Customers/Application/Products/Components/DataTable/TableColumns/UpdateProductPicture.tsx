@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 
-export default function UpdateProdutPicture({ product, className }) {
+export default function UpdateProdutPicture({ product, className = '' }) {
     const { t } = useTranslation();
 
     const { data, setData, post, errors } = useForm({

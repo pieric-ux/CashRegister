@@ -48,7 +48,10 @@ export default function DeleteEmployeeForm({ employee, className }) {
         destroy(route('employees.destroy', employee), {
             preserveScroll: true,
             onSuccess: () => closeDialog(),
-            onError: () => passwordInput.current.focus(),
+            onError: () => {
+                setShowErrors(true);
+                passwordInput.current.focus();
+            },
         });
     };
 
@@ -95,7 +98,10 @@ export default function DeleteEmployeeForm({ employee, className }) {
                                 placeholder={t('Password')}
                             />
 
-                            <InputError message={errors.password} className='mt-2' />
+                            <InputError
+                                className='mt-2'
+                                message={showErrors ? errors.password : null}
+                            />
                         </fieldset>
 
                         <DialogFooter className='mt-6 flex justify-end'>

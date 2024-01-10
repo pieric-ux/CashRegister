@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
 import { Card, CardHeader } from '@/Components/ui/card/card';
 import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
-import { getColumns } from '@/Pages/Customers/Application/Transactions/Partials/TableColumns';
+import { getColumns } from '@/Pages/Customers/Application/Transactions/Components/DataTable/TableColumns';
 
 export default function Index({ customerAuth, application, transactions, localization }) {
     const { t } = useTranslation();
