@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
-import { HTMLAttributes } from 'react';
+import { type HTMLAttributes } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Column } from '@tanstack/react-table';
+import { type Column } from '@tanstack/react-table';
 import { Button } from '@/Components/ui/button/button';
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, EyeNoneIcon } from '@radix-ui/react-icons';
 import {
@@ -17,11 +17,11 @@ interface ColumnHeaderProps<TData, TValue> extends HTMLAttributes<HTMLDivElement
     title: string;
 }
 
-export function ColumnHeader<TData, TValue>({
+export const ColumnHeader = <TData, TValue>({
     column,
     title,
     className,
-}: ColumnHeaderProps<TData, TValue>) {
+}: ColumnHeaderProps<TData, TValue>): JSX.Element => {
     const { t } = useTranslation();
 
     if (!column.getCanSort()) {
@@ -65,4 +65,4 @@ export function ColumnHeader<TData, TValue>({
             </Dropdown>
         </div>
     );
-}
+};

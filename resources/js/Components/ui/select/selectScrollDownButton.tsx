@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 import { ScrollDownButton } from '@radix-ui/react-select';
-import { forwardRef, ElementRef, ComponentPropsWithoutRef } from 'react';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const SelectScrollDownButton = forwardRef<
     ElementRef<typeof ScrollDownButton>,

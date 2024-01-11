@@ -1,4 +1,4 @@
-import { HTMLAttributes, forwardRef } from 'react';
+import { forwardRef, type HTMLAttributes } from 'react';
 import { CardTitle } from '@/Components/ui/card/cardTitle';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
 import { CardHeader } from '@/Components/ui/card/cardHeader';

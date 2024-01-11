@@ -1,14 +1,15 @@
+import { type FC } from 'react';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import useColorMode from '@/Hooks/useColorMode';
 import { Switch, SwitchThumb } from '@/Components/ui/switch/switch';
 
-export default function ThemeSwitcher() {
+const ThemeSwitcher: FC = () => {
     const { t } = useTranslation();
 
     const [colorMode, setColorMode] = useColorMode();
 
-    const handleThemeChange = () => {
+    const handleThemeChange = (): void => {
         const newTheme = colorMode === 'light' ? 'dark' : 'light';
         setColorMode(newTheme);
     };
@@ -29,4 +30,6 @@ export default function ThemeSwitcher() {
             </SwitchThumb>
         </Switch>
     );
-}
+};
+
+export default ThemeSwitcher;

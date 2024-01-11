@@ -1,6 +1,6 @@
 'use client';
 
-import { Table } from '@tanstack/react-table';
+import { type Table } from '@tanstack/react-table';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import { MixerHorizontalIcon } from '@radix-ui/react-icons';
@@ -17,7 +17,7 @@ export interface TableOptionsProps<TData> {
     table: Table<TData>;
 }
 
-export function ViewOptions<TData>({ table }: TableOptionsProps<TData>) {
+export function ViewOptions<TData>({ table }: TableOptionsProps<TData>): JSX.Element {
     const { t } = useTranslation();
     return (
         <Dropdown>

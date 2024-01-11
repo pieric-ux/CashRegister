@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { FC, HTMLAttributes } from 'react';
+import { type FC, type HTMLAttributes } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const dropdownShortcutVariants = cva('', {

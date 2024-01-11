@@ -2,9 +2,9 @@
 
 import { cn } from '@/lib/utils';
 import { SwitchThumb } from './switchThumb';
-import { forwardRef, ComponentPropsWithoutRef } from 'react';
+import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Root, SwitchProps as RadixSwitchProps } from '@radix-ui/react-switch';
+import { Root, type SwitchProps as RadixSwitchProps } from '@radix-ui/react-switch';
 
 const switchVariants = cva(
     'peer inline-flex shrink-0 cursor-pointer items-center rounded-full transition duration-75 ease-linear disabled:cursor-not-allowed disabled:opacity-50',

@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { forwardRef, ComponentPropsWithoutRef } from 'react';
+import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { cva, type VariantProps } from 'class-variance-authority';
 import {
@@ -33,7 +33,7 @@ export interface DropdownSubTriggerProps
 }
 
 const DropdownSubTrigger = forwardRef<HTMLDivElement, DropdownSubTriggerProps>(
-    ({ className, variant, size, inset, children, ...props }, ref) => (
+    ({ className, variant, size, inset = false, children, ...props }, ref) => (
         <SubTrigger
             ref={ref}
             className={cn(

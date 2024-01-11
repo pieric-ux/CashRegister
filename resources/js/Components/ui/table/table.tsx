@@ -1,4 +1,4 @@
-import { forwardRef, HTMLAttributes } from 'react';
+import { forwardRef, type HTMLAttributes } from 'react';
 import { TableRow } from '@/Components/ui/table/tableRow';
 import { TableBody } from '@/Components/ui/table/tableBody';
 import { TableHead } from '@/Components/ui/table/tableHead';

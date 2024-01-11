@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
-import { HTMLAttributes, forwardRef } from 'react';
+import { forwardRef, type HTMLAttributes } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Thumb, SwitchThumbProps as RadixSwitchThumbProps } from '@radix-ui/react-switch';
+import { Thumb, type SwitchThumbProps as RadixSwitchThumbProps } from '@radix-ui/react-switch';
 
 const switchThumbVariants = cva(
     'pointer-events-none flex items-center justify-center rounded-full transition duration-75 ease-linear',

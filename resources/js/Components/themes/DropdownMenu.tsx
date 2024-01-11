@@ -1,13 +1,23 @@
+import { type ReactElement, type FC } from 'react';
+import { ChevronDownIcon } from '@radix-ui/react-icons';
+import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar/avatar';
 import {
     Dropdown,
     DropdownContent,
     DropdownItem,
     DropdownTrigger,
 } from '@/Components/ui/dropdown/dropdown';
-import { ChevronDownIcon } from '@radix-ui/react-icons';
-import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar/avatar';
 
-export default function DropdownMenu({ user, avatarPath, dropdownLinks }) {
+interface DropdownMenuProps {
+    user: {
+        first_name: string;
+        last_name: string;
+    };
+    avatarPath: string;
+    dropdownLinks: ReactElement[];
+}
+
+const DropdownMenu: FC<DropdownMenuProps> = ({ user, avatarPath, dropdownLinks }) => {
     return (
         <Dropdown>
             <DropdownTrigger className='flex items-center justify-center text-sm font-medium leading-4'>
@@ -27,4 +37,6 @@ export default function DropdownMenu({ user, avatarPath, dropdownLinks }) {
             </DropdownContent>
         </Dropdown>
     );
-}
+};
+
+export default DropdownMenu;

@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { forwardRef, ComponentPropsWithoutRef } from 'react';
+import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import {
     Item,
@@ -33,7 +33,7 @@ export interface DropdownItemProps
 }
 
 const DropdownItem = forwardRef<HTMLDivElement, DropdownItemProps>(
-    ({ className, variant, size, inset, ...props }, ref) => (
+    ({ className, variant, size, inset = false, ...props }, ref) => (
         <Item
             ref={ref}
             className={cn(dropdownItemVariants({ variant, size, className }), inset && 'pl-8')}

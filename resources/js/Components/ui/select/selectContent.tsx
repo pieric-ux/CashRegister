@@ -1,4 +1,5 @@
-import { forwardRef, ComponentPropsWithoutRef } from 'react';
+import { cn } from '@/lib/utils';
+import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { SelectScrollUpButton } from '@/Components/ui/select/selectScrollUpButton';
 import { SelectScrollDownButton } from '@/Components/ui/select/selectScrollDownButton';
@@ -26,8 +27,6 @@ const selectContentVariants = cva(
         },
     },
 );
-
-import { cn } from '@/lib/utils';
 
 export interface SelectContentProps
     extends ComponentPropsWithoutRef<typeof Content>,

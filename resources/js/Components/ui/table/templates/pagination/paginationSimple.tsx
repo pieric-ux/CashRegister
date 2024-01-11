@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import { type TablePaginationProps } from '@/Components/ui/table/templates/pagination/paginationComplex';
 
-export function PaginationSimple<TData>({ table }: TablePaginationProps<TData>) {
+export function PaginationSimple<TData>({ table }: TablePaginationProps<TData>): JSX.Element {
     const { t } = useTranslation();
 
     return (

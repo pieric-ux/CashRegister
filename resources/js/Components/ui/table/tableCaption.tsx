@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { forwardRef, HTMLAttributes } from 'react';
+import { forwardRef, type HTMLAttributes } from 'react';
 
 const TableCaption = forwardRef<HTMLTableCaptionElement, HTMLAttributes<HTMLTableCaptionElement>>(
     ({ className, ...props }, ref) => (

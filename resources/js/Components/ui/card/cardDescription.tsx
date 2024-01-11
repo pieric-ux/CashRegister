@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { HTMLAttributes, forwardRef } from 'react';
+import { forwardRef, type HTMLAttributes } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const cardDescriptionVariants = cva('', {

@@ -9,7 +9,7 @@ import {
     DropdownTrigger,
 } from '@/Components/ui/dropdown/dropdown';
 
-export function ColumnToggle<TData>({ table }: TableOptionsProps<TData>) {
+export function ColumnToggle<TData>({ table }: TableOptionsProps<TData>): JSX.Element {
     const { t } = useTranslation();
 
     return (

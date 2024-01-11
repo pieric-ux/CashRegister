@@ -3,7 +3,7 @@ import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { DialogOverlay } from '@/Components/ui/dialog/dialogOverlay';
-import { forwardRef, ComponentPropsWithoutRef, ReactNode } from 'react';
+import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import {
     Close,
     Content,

@@ -1,7 +1,6 @@
 import { cn } from '@/lib/utils';
-import { HTMLAttributes } from 'react';
+import { type HTMLAttributes } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-
 
 const dialogHeaderVariants = cva('text-center', {
     variants: {

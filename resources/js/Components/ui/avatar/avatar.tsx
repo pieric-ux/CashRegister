@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef, ComponentPropsWithoutRef } from 'react';
+import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { AvatarImage } from '@/Components/ui/avatar/avatarImage';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { AvatarFallback } from '@/Components/ui/avatar/avatarFallback';

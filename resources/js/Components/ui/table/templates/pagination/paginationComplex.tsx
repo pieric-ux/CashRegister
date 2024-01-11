@@ -1,4 +1,4 @@
-import { Table } from '@tanstack/react-table';
+import { type Table } from '@tanstack/react-table';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import {
@@ -19,7 +19,7 @@ export interface TablePaginationProps<TData> {
     table: Table<TData>;
 }
 
-export function PaginationComplex<TData>({ table }: TablePaginationProps<TData>) {
+export function PaginationComplex<TData>({ table }: TablePaginationProps<TData>): JSX.Element {
     const { t } = useTranslation();
 
     return (

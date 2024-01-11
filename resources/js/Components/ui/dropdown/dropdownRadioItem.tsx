@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { DotFilledIcon } from '@radix-ui/react-icons';
-import { forwardRef, ComponentPropsWithoutRef } from 'react';
+import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import {
     RadioItem,
