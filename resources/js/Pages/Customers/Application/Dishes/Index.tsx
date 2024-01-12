@@ -9,6 +9,8 @@ import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 export default function Index({ customerAuth, application, dishes, localization }) {
     const { t } = useTranslation();
 
+    const dishesFilter = dishes.filter((dish) => dish.name !== 'No dish');
+
     return (
         <CR_AppAdminLayout
             auth={customerAuth}
@@ -24,7 +26,7 @@ export default function Index({ customerAuth, application, dishes, localization 
                     <CardHeader>
                         <DataTable
                             columns={columns}
-                            data={dishes}
+                            data={dishesFilter}
                             filterPlaceholder={t('Search dishes')}
                             textNoData={t('No dishes found.')}
                         />
