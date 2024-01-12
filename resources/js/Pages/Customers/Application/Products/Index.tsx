@@ -1,10 +1,13 @@
+import { createContext } from 'react';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
 import { Card, CardHeader } from '@/Components/ui/card/card';
-import { getColumns } from './Components/DataTable/TableColumns';
+import { columns } from './Components/DataTable/TableColumns';
 import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 import CreateProductForm from '@/Pages/Customers/Application/Products/Components/CreateProductForm/CreateProductForm';
+
+export const TableContext = createContext({ categories: [], dishes: [] });
 
 export default function Index({
     customerAuth,
@@ -15,8 +18,6 @@ export default function Index({
     localization,
 }) {
     const { t } = useTranslation();
-
-    const columns = getColumns({ categories, dishes });
 
     return (
         <CR_AppAdminLayout
@@ -31,12 +32,14 @@ export default function Index({
 
                 <Card>
                     <CardHeader>
-                        <DataTable
-                            columns={columns}
-                            data={products}
-                            filterPlaceholder={t('Search products')}
-                            textNoData={t('No products found.')}
-                        />
+                        <TableContext.Provider value={{ categories, dishes }}>
+                            <DataTable
+                                columns={columns}
+                                data={products}
+                                filterPlaceholder={t('Search products')}
+                                textNoData={t('No products found.')}
+                            />
+                        </TableContext.Provider>
                     </CardHeader>
                 </Card>
             </div>

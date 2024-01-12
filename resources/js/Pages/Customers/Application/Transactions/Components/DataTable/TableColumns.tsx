@@ -5,8 +5,8 @@ import currencyCodes from 'currency-codes';
 import { type ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
-import ShowDetailsTransaction from '@/Pages/Customers/Application/Transactions/Components/DataTable/TableColumns/ShowDetailsTransactions/ShowDetailsTransaction';
 import DeleteTransactionForm from '@/Pages/Customers/Application/Transactions/Components/DataTable/TableColumns/DeleteTransactionForm';
+import ShowDetailsTransaction from '@/Pages/Customers/Application/Transactions/Components/DataTable/TableColumns/ShowDetailsTransactions/ShowDetailsTransaction';
 
 export interface Transaction {
     or_number: string;

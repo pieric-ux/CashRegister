@@ -98,10 +98,9 @@ export default function DeleteTransactionForm({ transaction, className = '' }) {
                                 placeholder={t('Password')}
                             />
 
-                            <InputError
-                                className='mt-2'
-                                message={showErrors ? errors.password : null}
-                            />
+                            {showErrors && (
+                                <InputError className='mt-2' message={errors.password} />
+                            )}
                         </fieldset>
 
                         <DialogFooter className='mt-6 flex justify-end'>

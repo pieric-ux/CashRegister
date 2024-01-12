@@ -1,12 +1,13 @@
 import clsx from 'clsx';
 import { useForm } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
 import { Svg } from '@/Components/ui/svg/Svg';
+import { TableContext } from '../../../Index';
 import TextInput from '@/Components/TextInput';
 import { useTranslation } from 'react-i18next';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import { Button } from '@/Components/ui/button/button';
+import { useContext, useEffect, useState } from 'react';
 import {
     Dialog,
     DialogClose,
@@ -18,8 +19,10 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function UpdateProductForm({ product, categories, dishes, className = '' }) {
+export default function UpdateProductForm({ product, className = '' }) {
     const { t } = useTranslation();
+
+    const { categories, dishes } = useContext(TableContext);
 
     const [open, setOpen] = useState(false);
     const [showErrors, setShowErrors] = useState(false);

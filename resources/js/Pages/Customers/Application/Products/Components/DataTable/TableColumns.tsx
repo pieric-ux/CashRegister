@@ -1,171 +1,167 @@
 'use client';
 
+import i18n from '@/Config/i18n';
 import currencyCodes from 'currency-codes';
-import { useTranslation } from 'react-i18next';
-import { ColumnDef } from '@tanstack/react-table';
+import { type ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import UpdateProductForm from './TableColumns/UpdateProductForm';
 import DeleteProductForm from './TableColumns/DeleteProductForm';
-import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
 import UpdateProdutPicture from './TableColumns/UpdateProductPicture';
+import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
 
-export type Product = {
+export interface Product {
     name: string;
     unit: string;
     client_price: number;
     cost_price: number;
     cr_categories_products: Category;
     cr_dishes: Dish;
-};
-type Category = {
+}
+interface Category {
     name: string;
-};
+}
 
-type Dish = {
+interface Dish {
     name: string;
     unit: string;
-};
+}
 
-export const getColumns = ({ categories, dishes }): ColumnDef<Product>[] => {
-    const { t } = useTranslation();
-
-    return [
-        {
-            id: 'select',
-            header: ({ table }) => (
-                <Checkbox
-                    checked={
-                        table.getIsAllPageRowsSelected() ||
-                        (table.getIsSomePageRowsSelected() && 'indeterminate')
-                    }
-                    onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-                    aria-label={t('Select all')}
-                />
-            ),
-            cell: ({ row }) => (
-                <Checkbox
-                    checked={row.getIsSelected()}
-                    onCheckedChange={(value) => row.toggleSelected(!!value)}
-                    aria-label={t('Select row')}
-                />
-            ),
-            enableSorting: false,
-            enableHiding: false,
+export const columns: ColumnDef<Product>[] = [
+    {
+        id: 'Select',
+        header: ({ table }) => (
+            <Checkbox
+                checked={
+                    table.getIsAllPageRowsSelected() ||
+                    (table.getIsSomePageRowsSelected() && 'indeterminate')
+                }
+                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                aria-label={i18n.t('Select all')}
+            />
+        ),
+        cell: ({ row }) => (
+            <Checkbox
+                checked={row.getIsSelected()}
+                onCheckedChange={(value) => row.toggleSelected(!!value)}
+                aria-label={i18n.t('Select row')}
+            />
+        ),
+        enableSorting: false,
+        enableHiding: false,
+    },
+    {
+        id: 'Picture',
+        header: () => {
+            return <div className='text-left font-medium'>{i18n.t('Picture')}</div>;
         },
-        {
-            id: t('Picture'),
-            header: t('Picture'),
-            cell: ({ row }) => {
-                const product = row.original;
+        cell: ({ row }) => {
+            const product = row.original;
 
-                return <UpdateProdutPicture product={product} />;
-            },
+            return <UpdateProdutPicture product={product} />;
         },
-        {
-            id: t('Name'),
-            accessorKey: 'name',
-            header: ({ column }) => {
-                return <ColumnHeader column={column} title={t('Name')} />;
-            },
+    },
+    {
+        id: 'Name',
+        accessorKey: 'name',
+        header: ({ column }) => {
+            return <ColumnHeader column={column} title={i18n.t('Name')} />;
         },
-        {
-            id: t('Unit'),
-            accessorKey: 'unit',
-            header: ({ column }) => {
-                return <ColumnHeader column={column} title={t('Unit')} />;
-            },
+    },
+    {
+        id: 'Unit',
+        accessorKey: 'unit',
+        header: ({ column }) => {
+            return <ColumnHeader column={column} title={i18n.t('Unit')} />;
         },
-        {
-            id: t('Client Price'),
-            accessorKey: 'client_price',
-            header: ({ column }) => {
-                return <ColumnHeader column={column} title={t('Client Price')} />;
-            },
-            cell: ({ row }) => {
-                const price = row.original.client_price;
-
-                const locale = document.documentElement.lang;
-
-                //const currencyCode = currencyCodes.code(userLang);
-
-                const formatted = new Intl.NumberFormat(locale, {
-                    style: 'currency',
-                    currency: 'USD',
-                }).format(price);
-
-                return <div className='text-left font-medium'>{formatted}</div>;
-            },
+    },
+    {
+        id: 'Client Price',
+        accessorKey: 'client_price',
+        header: ({ column }) => {
+            return <ColumnHeader column={column} title={i18n.t('Client Price')} />;
         },
-        {
-            id: t('Cost Price'),
-            accessorKey: 'cost_price',
-            header: ({ column }) => {
-                return <ColumnHeader column={column} title={t('Cost Price')} />;
-            },
-            cell: ({ row }) => {
-                const price = row.original.cost_price;
+        cell: ({ row }) => {
+            const price = row.original.client_price;
 
-                const locale = document.documentElement.lang;
+            const locale = document.documentElement.lang;
 
-                //const currencyCode = currencyCodes.code(userLang);
+            // const currencyCode = currencyCodes.code(userLang);
 
-                const formatted = new Intl.NumberFormat(locale, {
-                    style: 'currency',
-                    currency: 'USD',
-                }).format(price);
+            const formatted = new Intl.NumberFormat(locale, {
+                style: 'currency',
+                currency: 'USD',
+            }).format(price);
 
-                return <div className='text-left font-medium'>{formatted}</div>;
-            },
+            return <div className='text-left font-medium'>{formatted}</div>;
         },
-        {
-            id: t('Category'),
-            accessorKey: 'cr_categories_products',
-            header: ({ column }) => {
-                return <ColumnHeader column={column} title={t('Category')} />;
-            },
-            cell: ({ row }) => {
-                return (
-                    <div className='text-left font-medium'>
-                        {row.original.cr_categories_products?.name === 'No category'
-                            ? ''
-                            : row.original.cr_categories_products?.name}
-                    </div>
-                );
-            },
+    },
+    {
+        id: 'Cost Price',
+        accessorKey: 'cost_price',
+        header: ({ column }) => {
+            return <ColumnHeader column={column} title={i18n.t('Cost Price')} />;
         },
-        {
-            id: t('Dish'),
-            accessorKey: 'cr_dishes',
-            header: ({ column }) => {
-                return <ColumnHeader column={column} title={t('Dish')} />;
-            },
-            cell: ({ row }) => {
-                return (
-                    <div className='text-left font-medium'>
-                        {row.original.cr_dishes?.name === 'No dish'
-                            ? ''
-                            : `${row.original.cr_dishes?.name} ${row.original.cr_dishes?.unit}`}
-                    </div>
-                );
-            },
-        },
-        {
-            id: 'action',
-            header: t('Actions'),
-            cell: ({ row }) => {
-                const product = row.original;
+        cell: ({ row }) => {
+            const price = row.original.cost_price;
 
-                return (
-                    <div className='flex flex-col items-center justify-center gap-2'>
-                        <UpdateProductForm
-                            product={product}
-                            categories={categories}
-                            dishes={dishes}
-                        />
-                        <DeleteProductForm product={product} />
-                    </div>
-                );
-            },
+            const locale = document.documentElement.lang;
+
+            // const currencyCode = currencyCodes.code(userLang);
+
+            const formatted = new Intl.NumberFormat(locale, {
+                style: 'currency',
+                currency: 'USD',
+            }).format(price);
+
+            return <div className='text-left font-medium'>{formatted}</div>;
         },
-    ];
-};
+    },
+    {
+        id: 'Category',
+        accessorKey: 'cr_categories_products',
+        header: ({ column }) => {
+            return <ColumnHeader column={column} title={i18n.t('Category')} />;
+        },
+        cell: ({ row }) => {
+            return (
+                <div className='text-left font-medium'>
+                    {row.original.cr_categories_products?.name === 'No category'
+                        ? ''
+                        : row.original.cr_categories_products?.name}
+                </div>
+            );
+        },
+    },
+    {
+        id: 'Dish',
+        accessorKey: 'cr_dishes',
+        header: ({ column }) => {
+            return <ColumnHeader column={column} title={i18n.t('Dish')} />;
+        },
+        cell: ({ row }) => {
+            return (
+                <div className='text-left font-medium'>
+                    {row.original.cr_dishes?.name === 'No dish'
+                        ? ''
+                        : `${row.original.cr_dishes?.name} ${row.original.cr_dishes?.unit}`}
+                </div>
+            );
+        },
+    },
+    {
+        id: 'Actions',
+        header: () => {
+            return <div className='text-left font-medium'>{i18n.t('Actions')}</div>;
+        },
+        cell: ({ row }) => {
+            const product = row.original;
+
+            return (
+                <div className='flex flex-col items-center justify-center gap-2'>
+                    <UpdateProductForm product={product} />
+                    <DeleteProductForm product={product} />
+                </div>
+            );
+        },
+    },
+];

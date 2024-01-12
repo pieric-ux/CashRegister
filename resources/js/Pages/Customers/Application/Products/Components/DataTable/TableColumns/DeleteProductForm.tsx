@@ -48,7 +48,10 @@ export default function DeleteProductForm({ product, className = '' }) {
         destroy(route('products.destroy', product), {
             preserveScroll: true,
             onSuccess: () => closeDialog(),
-            onError: () => passwordInput.current.focus(),
+            onError: () => {
+                setShowErrors(true);
+                passwordInput.current.focus();
+            },
         });
     };
 
@@ -94,11 +97,9 @@ export default function DeleteProductForm({ product, className = '' }) {
                                 isFocused
                                 placeholder={t('Password')}
                             />
-
-                            <InputError
-                                className='mt-2'
-                                message={showErrors ? errors.password : null}
-                            />
+                            {showErrors && (
+                                <InputError className='mt-2' message={errors.password} />
+                            )}
                         </fieldset>
 
                         <DialogFooter className='mt-6 flex justify-end'>
