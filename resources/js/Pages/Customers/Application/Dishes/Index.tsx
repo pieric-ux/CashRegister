@@ -3,13 +3,12 @@ import CR_AppAdminLayout from '@/Layouts/CR_AppAdminLayout';
 import CreateDishForm from './Components/CreateDishForm/CreateDishForm';
 import { useTranslation } from 'react-i18next';
 import { Card, CardHeader } from '@/Components/ui/card/card';
-import { getColumns } from './Components/DataTable/TableColumn';
+import { columns } from './Components/DataTable/TableColumn';
 import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 
 export default function Index({ customerAuth, application, dishes, localization }) {
     const { t } = useTranslation();
 
-    const columns = getColumns();
     return (
         <CR_AppAdminLayout
             auth={customerAuth}
