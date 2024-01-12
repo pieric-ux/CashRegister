@@ -17,7 +17,7 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function DeleteEmployeeForm({ employee, className }) {
+export default function DeleteEmployeeForm({ employee, className = '' }) {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);
