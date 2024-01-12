@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useForm } from '@inertiajs/react';
 import { Svg } from '@/Components/ui/svg/Svg';
-import { TableContext } from '../../../Index';
+import { ProductsTableContext } from '@/Hooks/useContext';
 import TextInput from '@/Components/TextInput';
 import { useTranslation } from 'react-i18next';
 import InputError from '@/Components/InputError';
@@ -22,7 +22,7 @@ import {
 export default function UpdateProductForm({ product, className = '' }) {
     const { t } = useTranslation();
 
-    const { categories, dishes } = useContext(TableContext);
+    const { categories, dishes } = useContext(ProductsTableContext);
 
     const [open, setOpen] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
