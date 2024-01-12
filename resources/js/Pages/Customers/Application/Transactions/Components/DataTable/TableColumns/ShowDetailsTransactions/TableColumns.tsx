@@ -1,70 +1,74 @@
 'use client';
 
+import i18n from '@/Config/i18n';
 import currencyCodes from 'currency-codes';
-import { useTranslation } from 'react-i18next';
-import { ColumnDef } from '@tanstack/react-table';
+import { type ColumnDef } from '@tanstack/react-table';
 
-export type DetailsTransaction = {
+export interface DetailsTransaction {
     quantity: number;
     item_name: string;
     unit: string;
     client_price: number;
-};
+}
 
-export const getColumns = (): ColumnDef<DetailsTransaction>[] => {
-    const { t } = useTranslation();
-
-    return [
-        {
-            id: t('QTY'),
-            accessorKey: 'quantity',
-            header: t('QTY'),
+export const columns: ColumnDef<DetailsTransaction>[] = [
+    {
+        id: 'QTY',
+        accessorKey: 'quantity',
+        header: () => {
+            return <div className='text-left font-medium'>{i18n.t('QTY')}</div>;
         },
-        {
-            id: t('Product'),
-            accessorKey: 'item_name',
-            header: t('Product'),
-            cell: ({ row }) => (
-                <div className='text-left font-medium'>{`${row.original.item_name} ${row.original.unit}`}</div>
-            ),
+    },
+    {
+        id: 'Product',
+        accessorKey: 'item_name',
+        header: () => {
+            return <div className='text-left font-medium'>{i18n.t('Product')}</div>;
         },
-        {
-            id: t('Price'),
-            accessorKey: 'client_price',
-            header: t('Price'),
-            cell: ({ row }) => {
-                const price = row.original.client_price;
-
-                const locale = document.documentElement.lang;
-
-                //const currencyCode = currencyCodes.code(userLang);
-
-                const formatted = new Intl.NumberFormat(locale, {
-                    style: 'currency',
-                    currency: 'USD',
-                }).format(price);
-
-                return <div className='text-left font-medium'>{formatted}</div>;
-            },
+        cell: ({ row }) => (
+            <div className='text-left font-medium'>{`${row.original.item_name} ${row.original.unit}`}</div>
+        ),
+    },
+    {
+        id: 'Price',
+        accessorKey: 'client_price',
+        header: () => {
+            return <div className='text-left font-medium'>{i18n.t('Price')}</div>;
         },
-        {
-            id: t('Sub-Total'),
-            accessorKey: 'sub_total',
-            header: t('Sub-Total'),
-            cell: ({ row }) => {
-                const total = row.original.quantity * row.original.client_price;
+        cell: ({ row }) => {
+            const price = row.original.client_price;
 
-                const locale = document.documentElement.lang;
+            const locale = document.documentElement.lang;
 
-                //const currencyCode = currencyCodes.code(userLang);
+            // const currencyCode = currencyCodes.code(userLang);
 
-                const formatted = new Intl.NumberFormat(locale, {
-                    style: 'currency',
-                    currency: 'USD',
-                }).format(total);
+            const formatted = new Intl.NumberFormat(locale, {
+                style: 'currency',
+                currency: 'USD',
+            }).format(price);
 
-                return <div className='text-left font-medium'>{formatted}</div>;
-            },
+            return <div className='text-left font-medium'>{formatted}</div>;
         },
-    ];
-};
+    },
+    {
+        id: 'Sub-Total',
+        accessorKey: 'sub_total',
+        header: () => {
+            return <div className='text-left font-medium'>{i18n.t('Sub-Total')}</div>;
+        },
+        cell: ({ row }) => {
+            const total = row.original.quantity * row.original.client_price;
+
+            const locale = document.documentElement.lang;
+
+            // const currencyCode = currencyCodes.code(userLang);
+
+            const formatted = new Intl.NumberFormat(locale, {
+                style: 'currency',
+                currency: 'USD',
+            }).format(total);
+
+            return <div className='text-left font-medium'>{formatted}</div>;
+        },
+    },
+];

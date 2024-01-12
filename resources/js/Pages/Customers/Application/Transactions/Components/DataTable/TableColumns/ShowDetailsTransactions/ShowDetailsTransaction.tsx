@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { columns } from './TableColumns';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
+import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 import {
     Dialog,
     DialogClose,
@@ -9,8 +11,6 @@ import {
     DialogFooter,
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
-import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
-import { getColumns } from './TableColumns';
 
 export default function ShowDetailsTransaction({ transaction, className = '' }) {
     const { t } = useTranslation();
@@ -21,7 +21,6 @@ export default function ShowDetailsTransaction({ transaction, className = '' }) 
         setOpen(false);
     };
 
-    const columns = getColumns();
     const data = transaction.cr_details_transactions;
 
     return (
