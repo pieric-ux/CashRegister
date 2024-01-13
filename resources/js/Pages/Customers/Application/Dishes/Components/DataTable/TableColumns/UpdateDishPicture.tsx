@@ -50,7 +50,7 @@ export default function UpdateDishPicture({ dish, className = '' }) {
                                 htmlFor={`picture-${dish.id}`}
                                 className='absolute -bottom-4 -right-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-sky-500 text-white hover:bg-opacity-90'
                             >
-                                <Svg type={'addPicture'} />
+                                <Svg variant={'destructive'} type={'addPicture'} />
                             </label>
                             <TextInput
                                 id={`picture-${dish.id}`}
