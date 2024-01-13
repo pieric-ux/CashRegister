@@ -8,7 +8,7 @@ const switchThumbVariants = cva(
     {
         variants: {
             variant: {
-                default: 'bg-background shadow-lg ring-0',
+                default: 'bg-white shadow-lg ring-0',
             },
             size: {
                 default:

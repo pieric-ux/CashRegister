@@ -7,12 +7,12 @@ import {
 } from '@radix-ui/react-select';
 
 const selectTriggerVariants = cva(
-    'flex whitespace-nowrap disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
+    'flex whitespace-nowrap transition duration-300 ease-linear disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
     {
         variants: {
             variant: {
                 default:
-                    'items-center justify-between rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring',
+                    'items-center justify-between rounded-md border border-input bg-popover px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring',
             },
             size: {
                 default: 'h-9 w-full',

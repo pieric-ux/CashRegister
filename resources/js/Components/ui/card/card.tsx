@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 const cardVariants = cva('bg-card text-card-foreground transition duration-300 ease-linear', {
     variants: {
         variant: {
-            default: 'border shadow-md',
+            default: 'shadow-md',
         },
         size: {
             default: 'rounded-lg',

@@ -12,7 +12,7 @@ const switchVariants = cva(
         variants: {
             variant: {
                 default:
-                    'border-2 border-transparent shadow-sm  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
+                    'border-2 border-transparent shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[state=checked]:bg-ring data-[state=unchecked]:bg-input',
             },
             size: {
                 default: 'h-5 w-9',
