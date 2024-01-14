@@ -62,7 +62,12 @@ export function LoginForm({ canResetPassword }: { canResetPassword: boolean }): 
                         <FormItem>
                             <FormLabel>{t('Email')}</FormLabel>
                             <FormControl>
-                                <Input type='email' {...field} />
+                                <Input
+                                    type='email'
+                                    isFocused={true}
+                                    autoComplete='username'
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage>{errors.email}</FormMessage>
                         </FormItem>
@@ -75,7 +80,7 @@ export function LoginForm({ canResetPassword }: { canResetPassword: boolean }): 
                         <FormItem>
                             <FormLabel>{t('Password')}</FormLabel>
                             <FormControl>
-                                <Input type='password' {...field} />
+                                <Input type='password' autoComplete='current-password' {...field} />
                             </FormControl>
                             <FormMessage>{errors.password}</FormMessage>
                         </FormItem>

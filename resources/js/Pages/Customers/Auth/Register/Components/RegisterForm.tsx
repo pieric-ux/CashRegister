@@ -76,7 +76,7 @@ export function RegisterForm(): JSX.Element {
                                 {t('Company Name')} <small>({t('facultative')})</small>
                             </FormLabel>
                             <FormControl>
-                                <Input {...field} />
+                                <Input isFocused={true} autoComplete='organization' {...field} />
                             </FormControl>
                             <FormMessage>{errors.company_name}</FormMessage>
                         </FormItem>
@@ -89,7 +89,7 @@ export function RegisterForm(): JSX.Element {
                         <FormItem>
                             <FormLabel>{t('First Name')}</FormLabel>
                             <FormControl>
-                                <Input {...field} />
+                                <Input autoComplete='given-name' {...field} />
                             </FormControl>
                             <FormMessage>{errors.first_name}</FormMessage>
                         </FormItem>
@@ -102,7 +102,7 @@ export function RegisterForm(): JSX.Element {
                         <FormItem>
                             <FormLabel>{t('Last Name')}</FormLabel>
                             <FormControl>
-                                <Input {...field} />
+                                <Input autoComplete='family-name' {...field} />
                             </FormControl>
                             <FormMessage>{errors.last_name}</FormMessage>
                         </FormItem>
@@ -115,7 +115,7 @@ export function RegisterForm(): JSX.Element {
                         <FormItem>
                             <FormLabel>{t('Address')}</FormLabel>
                             <FormControl>
-                                <Input {...field} />
+                                <Input autoComplete='street-address' {...field} />
                             </FormControl>
                             <FormMessage>{errors.address}</FormMessage>
                         </FormItem>
@@ -129,7 +129,7 @@ export function RegisterForm(): JSX.Element {
                             <FormItem>
                                 <FormLabel>{t('City')}</FormLabel>
                                 <FormControl>
-                                    <Input {...field} />
+                                    <Input autoComplete='address-level2' {...field} />
                                 </FormControl>
                                 <FormMessage>{errors.city}</FormMessage>
                             </FormItem>
@@ -142,7 +142,7 @@ export function RegisterForm(): JSX.Element {
                             <FormItem>
                                 <FormLabel>{t('NPA')}</FormLabel>
                                 <FormControl>
-                                    <Input {...field} />
+                                    <Input autoComplete='postal-code' {...field} />
                                 </FormControl>
                                 <FormMessage>{errors.npa}</FormMessage>
                             </FormItem>
@@ -156,7 +156,7 @@ export function RegisterForm(): JSX.Element {
                         <FormItem>
                             <FormLabel>{t('Email')}</FormLabel>
                             <FormControl>
-                                <Input type='email' {...field} />
+                                <Input type='email' autoComplete='username' {...field} />
                             </FormControl>
                             <FormMessage>{errors.email}</FormMessage>
                         </FormItem>
@@ -169,7 +169,7 @@ export function RegisterForm(): JSX.Element {
                         <FormItem>
                             <FormLabel>{t('Password')}</FormLabel>
                             <FormControl>
-                                <Input type='password' {...field} />
+                                <Input type='password' autoComplete='new-password' {...field} />
                             </FormControl>
                             <FormMessage>{errors.password}</FormMessage>
                         </FormItem>

@@ -56,7 +56,7 @@ export function ForgotPasswordForm(): JSX.Element {
                         <FormItem>
                             <FormLabel>{t('Email')}</FormLabel>
                             <FormControl>
-                                <Input type='email' {...field} />
+                                <Input type='email' isFocused={true} {...field} />
                             </FormControl>
                             <FormMessage>{errors.email}</FormMessage>
                         </FormItem>

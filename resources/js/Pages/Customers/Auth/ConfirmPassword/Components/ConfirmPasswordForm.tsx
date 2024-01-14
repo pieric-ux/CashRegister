@@ -57,7 +57,7 @@ export function ConfirmPasswordForm(): JSX.Element {
                         <FormItem>
                             <FormLabel>{t('Password')}</FormLabel>
                             <FormControl>
-                                <Input type='password' {...field} />
+                                <Input type='password' isFocused={true} {...field} />
                             </FormControl>
                             <FormMessage>{errors.password}</FormMessage>
                         </FormItem>
