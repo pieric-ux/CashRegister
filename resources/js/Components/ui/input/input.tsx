@@ -19,14 +19,17 @@ const inputVariants = cva(
 
 export interface InputProps
     extends InputHTMLAttributes<HTMLInputElement>,
-        VariantProps<typeof inputVariants> {}
+        VariantProps<typeof inputVariants> {
+    isFocused?: boolean;
+}
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ className, variant, type, ...props }, ref) => {
+    ({ className, variant, type, isFocused = false, ...props }, ref) => {
         return (
             <input
                 type={type}
                 className={cn(inputVariants({ variant, className }))}
+                autoFocus={isFocused}
                 ref={ref}
                 {...props}
             />
