@@ -28,8 +28,8 @@
         --destructive: 0 72.2% 50.6%; /* red-600 */
         --destructive-foreground: 0 0% 100%; /* white */
 
-        --success: 142 76% 36%; /* green-600 */
-        --success-foreground: 142 76% 36%;
+        --success: 142.1 76.2% 36.3%; /* green-600 */
+        --success-foreground: 142.8 64.2% 24.1%; /* green-800 */
 
         --border: 216 12.2% 83.9%; /* gray-300 */
         --input: 216 12.2% 83.9%; /* gray-300 */
