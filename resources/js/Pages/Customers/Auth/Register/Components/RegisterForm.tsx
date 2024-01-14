@@ -60,7 +60,6 @@ export function RegisterForm(): JSX.Element {
         post(route('customers.register'), {
             onSuccess: () => {
                 reset('password', 'password_confirmation');
-                console.log('reset');
             },
         });
     }
