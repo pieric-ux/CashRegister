@@ -3,8 +3,8 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link } from '@inertiajs/react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import ApplicationLogoDark from '@/Components/ApplicationLogoDark';
-import { ConfirmPasswordForm } from './Components/ConfirmPasswordForm';
 import { Card, CardContent, CardDescription, CardHeader } from '@/Components/ui/card/card';
+import { ConfirmPasswordForm } from '@/Pages/Customers/Auth/ConfirmPassword/Components/ConfirmPasswordForm';
 
 export default function ConfirmPassword(): JSX.Element {
     const { t } = useTranslation();

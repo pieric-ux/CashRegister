@@ -5,7 +5,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import ApplicationLogoDark from '@/Components/ApplicationLogoDark';
 import { Alert, AlertDescription } from '@/Components/ui/alert/alert';
 import { Card, CardContent, CardHeader } from '@/Components/ui/card/card';
-import { LoginForm } from './Components/LoginForm';
+import { LoginForm } from '@/Pages/Customers/Auth/Login/Components/LoginForm';
 
 export default function Login({
     status,
