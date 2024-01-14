@@ -7,7 +7,7 @@ import { Switch, SwitchThumb } from '@/Components/ui/switch/switch';
 const ThemeSwitcher: FC = () => {
     const { t } = useTranslation();
 
-    const [colorMode, setColorMode] = useColorMode();
+    const [colorMode, setColorMode] = useColorMode(); // FIXME: state of switch isn't stable after new render
 
     const handleThemeChange = (): void => {
         const newTheme = colorMode === 'light' ? 'dark' : 'light';
