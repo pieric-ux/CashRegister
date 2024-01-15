@@ -26,7 +26,7 @@ class EmployeesController extends Controller
             return $workstation->cr_employees;
         });
 
-        return Inertia::render('Customers/Application/Employees/Index', [
+        return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Employees/Index', [
             'application' => $app,
             'employees' => $employees,
         ]);

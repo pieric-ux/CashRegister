@@ -1,13 +1,13 @@
 import { Head } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import EmployeeLayout from '@/Layouts/EmployeeLayout';
 import { Card, CardHeader } from '@/Components/ui/card/card';
 import Cart from '@/Pages/Employees/CashRegister/Partials/Cart';
 import Total from '@/Pages/Employees/CashRegister/Partials/Total';
 import Items from '@/Pages/Employees/CashRegister/Partials/Items';
 import Payment from '@/Pages/Employees/CashRegister/Partials/Payment';
 import Buttons from '@/Pages/Employees/CashRegister/Partials/Buttons';
+import EmployeeLayout from '@/Components/layouts/Auth/Employee/EmployeeLayout';
 
 export default function CashRegister({
     employeeAuth,

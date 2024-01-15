@@ -19,7 +19,7 @@ class CustomerLoginController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Customers/Auth/Login/Login', [
+        return Inertia::render('Customers/Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
         ]);

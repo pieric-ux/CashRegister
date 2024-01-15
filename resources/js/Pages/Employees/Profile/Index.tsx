@@ -2,8 +2,8 @@ import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import TextInput from '@/Components/TextInput';
 import InputLabel from '@/Components/InputLabel';
-import EmployeeLayout from '@/Layouts/EmployeeLayout';
-import UpdateEmployeeAvatar from '@/Pages/Employees/Profile/Partials/UpdateEmployeeAvatar';
+import EmployeeLayout from '@/Components/layouts/Auth/Employee/EmployeeLayout';
+import UpdateUserAvatar from '@/Components/features/update-user-avatar/UpdateUserAvatar';
 import {
     Card,
     CardContent,
@@ -19,7 +19,7 @@ export default function Index({ employeeAuth, localization }) {
         <EmployeeLayout auth={employeeAuth} localization={localization}>
             <Head title={t('Profile')} />
             <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <UpdateEmployeeAvatar avatarPath={employeeAuth.avatarPath} />
+                <UpdateUserAvatar isEmployee={true} avatarPath={employeeAuth.avatarPath} />
 
                 <section>
                     <Card>

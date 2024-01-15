@@ -25,7 +25,7 @@ class DishesController extends Controller
             return $dish;
         });
 
-        return Inertia::render('Customers/Application/Dishes/Index', [
+        return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Dishes/Index', [
             'application' => $app,
             'dishes' => $dishes,
         ]);

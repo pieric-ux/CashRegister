@@ -23,7 +23,7 @@ class CategoriesProductsController extends Controller
     {
         $categories = $app->cr_categories_products;
 
-        return Inertia::render('Customers/Application/Categories_Products/Index', [
+        return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Categories_Products/Index', [
             'application' => $app,
             'categories' => $categories,
         ]);

@@ -33,7 +33,7 @@ class ProductsController extends Controller
 
         $dishes = $app->cr_dishes;
 
-        return Inertia::render('Customers/Application/Products/Index', [
+        return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Products/Index', [
             'application' => $app,
             'products' => $products,
             'categories' => $categories,

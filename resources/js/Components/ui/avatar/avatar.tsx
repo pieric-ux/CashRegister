@@ -8,14 +8,16 @@ import { Root, type AvatarProps as RadixAvatarProps } from '@radix-ui/react-avat
 
 import { cn } from '@/lib/utils';
 
-const avatarVariants = cva('relative overflow-hidden rounded-full', {
+const avatarVariants = cva('relative overflow-hidden', {
     variants: {
         variant: {
-            default: 'flex shrink-0',
+            default: 'flex shrink-0 rounded-full',
+            square: 'flex shrink-0',
         },
         size: {
             default: 'h-12 w-12',
-            update: 'h-52 w-52',
+            avatar: 'h-52 w-52',
+            poster: 'h-36 w-36',
         },
     },
     defaultVariants: {

@@ -1,11 +1,11 @@
 import Checkbox from '@/Components/Checkbox';
 import TextInput from '@/Components/TextInput';
 import { useTranslation } from 'react-i18next';
-import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import { Head, useForm } from '@inertiajs/react';
 import { Button } from '@/Components/ui/button/button';
+import GuestLayout from '@/Components/layouts/Guest/GuestLayout';
 
 export default function Login({ status, application, code }) {
     const { t } = useTranslation();

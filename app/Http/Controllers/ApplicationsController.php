@@ -28,7 +28,7 @@ class ApplicationsController extends Controller
             return $app;
         });
 
-        return Inertia::render('Customers/Applications/Index', [
+        return Inertia::render('Customers/Modules/CashRegisterModule/Index', [
             'applications' => $applications,
         ]);
     }
@@ -58,7 +58,7 @@ class ApplicationsController extends Controller
      */
     public function show(ShowApplicationRequest $request, CR_App $app): Response
     {
-        return Inertia::render('Customers/Application/Dashboard', [
+        return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Dashboard', [
             'application' => $app,
         ]);
     }

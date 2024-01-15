@@ -1,5 +1,5 @@
 {
-    "A new verification link has been sent to the email address you provided during registration.": "Un nouveau lien de vérification a été envoyé à l'adresse e-mail que vous avez fournie lors de l'inscription.",
+    "A new verification link has been sent to your email address.": "Un nouveau lien de vérification a été envoyé à votre adresse e-mail.",
     "Actions": "Actions",
     "Activation Code": "Code d'Activation",
     "Address": "Adresse",
@@ -24,6 +24,7 @@
     "Category": "Catégorie",
     "City": "Ville",
     "Client Price": "Prix Client",
+    "Click here to re-send the verification email.": "Cliquez ici pour renvoyer l'e-mail de vérification.",
     "Close": "Fermer",
     "Columns": "Colonnes",
     "Company Name": "Nom de l'entreprise",
@@ -203,6 +204,7 @@
     "Welcome": "Bienvenue",
     "Workstation": "Poste de travail",
     "Workstations": "Postes de travail",
+    "Your email address is unverified.": "Votre adresse électronique n'est pas vérifiée.",
     "consigned": "consigné",
     "currency_symbol": "CHF",
     "dishes": "articles",
