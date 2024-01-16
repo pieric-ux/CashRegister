@@ -32,7 +32,7 @@ export function UpdateModulePosterForm({ application }): JSX.Element {
         defaultValues: data,
     });
 
-    const handleAvatarChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const handlePosterChange = (e: ChangeEvent<HTMLInputElement>): void => {
         setData('poster', e.target.files?.[0]);
     };
 
@@ -47,7 +47,7 @@ export function UpdateModulePosterForm({ application }): JSX.Element {
         if (data.poster !== undefined) {
             const formData = new FormData();
             formData.append('appId', data.appId);
-            formData.append('avatar', data.poster);
+            formData.append('poster', data.poster);
 
             post(route('poster.upload'), formData);
         }
@@ -71,7 +71,7 @@ export function UpdateModulePosterForm({ application }): JSX.Element {
                                         <Input
                                             type='file'
                                             className='sr-only'
-                                            onChange={handleAvatarChange}
+                                            onChange={handlePosterChange}
                                         />
                                     </FormControl>
                                 </FormLabel>
