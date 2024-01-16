@@ -1,10 +1,10 @@
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import DeleteUser from '@/Pages/Customers/Profile/Components/DeleteUser';
+import DeleteUser from './Components/DeleteUser';
+import UpdatePassword from './Components/UpdatePassword';
+import UpdateProfileInformation from './Components/UpdateProfileInformation';
 import CustomerLayout from '@/Components/layouts/Auth/Customer/CustomerLayout';
-import UpdatePassword from '@/Pages/Customers/Profile/Components/UpdatePassword';
 import UpdateUserAvatar from '@/Components/features/update-user-avatar/UpdateUserAvatar';
-import UpdateProfileInformation from '@/Pages/Customers/Profile/Components/UpdateProfileInformation';
 
 export default function Edit({
     customerAuth,

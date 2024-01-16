@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Input } from '@/Components/ui/input/input';
 import { Button } from '@/Components/ui/button/button';
 import { useForm as useFormInertia } from '@inertiajs/react';
-import { DialogClose, DialogFooter } from '../ui/dialog/dialog';
+import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 import {
     Form,
     FormControl,

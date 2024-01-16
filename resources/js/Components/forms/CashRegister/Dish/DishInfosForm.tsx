@@ -6,7 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { Input } from '@/Components/ui/input/input';
 import { Button } from '@/Components/ui/button/button';
 import { useForm as useFormInertia } from '@inertiajs/react';
-import { DialogClose, DialogFooter } from '../ui/dialog/dialog';
+import { Checkbox } from '@/Components/ui/checkbox/checkbox';
+import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 import {
     Form,
     FormControl,
@@ -15,7 +16,6 @@ import {
     FormLabel,
     FormMessage,
 } from '@/Components/ui/form/form';
-import { Checkbox } from '../ui/checkbox/checkbox';
 
 interface FormInput {
     name: string;
@@ -48,7 +48,7 @@ export function DishInfosForm({
         is_SoldSeparately: isUpdate ? dish.is_SoldSeparately : false,
     };
 
-    const { data, setData, post, patch, processing, errors, reset } = useFormInertia(defaultValues);
+    const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
 
     const form = useForm<FormInput>({
         defaultValues: data,
