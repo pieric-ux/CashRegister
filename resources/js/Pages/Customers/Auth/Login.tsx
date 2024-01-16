@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { CardContent } from '@/Components/ui/card/card';
-import { LoginForm } from '@/Components/forms/LoginForm';
+import { LoginForm } from '@/Components/forms/Auth/LoginForm';
 import GuestLayout from '@/Components/layouts/Guest/GuestLayout';
 import { Alert, AlertDescription } from '@/Components/ui/alert/alert';
 
