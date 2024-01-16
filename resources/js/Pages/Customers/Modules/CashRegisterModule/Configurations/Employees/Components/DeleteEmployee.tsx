@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
-import { EmployeeProfileForm } from '@/Components/forms/CashRegister/Employee/EmployeeProfileForm';
+import { ConfirmDeleteForm } from '@/Components/forms/Common/ConfirmDeleteForm';
 import {
     Dialog,
     DialogContent,
@@ -12,7 +12,7 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function UpdateEmployee({ employee }): JSX.Element {
+export default function DeleteEmployee({ employee }): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);
@@ -25,23 +25,30 @@ export default function UpdateEmployee({ employee }): JSX.Element {
         <section>
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
-                    <Button size={'icon'} aria-label={t('Edit your employee')}>
-                        <Svg type={'edit'} />
+                    <Button
+                        variant={'destructive'}
+                        size={'icon'}
+                        aria-label={t('Delete your employee')}
+                    >
+                        <Svg type={'delete'} variant={'destructive'} />
                     </Button>
                 </DialogTrigger>
                 <DialogContent size={'2xl'}>
                     <DialogHeader>
-                        <DialogTitle>{t('Edit Employee')}</DialogTitle>
+                        <DialogTitle>
+                            {t('Are you sure you want to delete your employee?')}
+                        </DialogTitle>
                         <DialogDescription>
                             {t(
-                                "Ready to update the employee? Fill out the form below with the required details and click the 'Save' button to apply the changes.",
+                                'Once your employee is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your employee.',
                             )}
                         </DialogDescription>
                     </DialogHeader>
-                    <EmployeeProfileForm
-                        employee={employee}
+                    <ConfirmDeleteForm
+                        route={route('employees.destroy', employee)}
                         closeDialog={closeDialog}
-                        isUpdate={true}
+                        ariaLabel={t('Delete your employee')}
+                        buttonTiltle={t('Delete Employee')}
                     />
                 </DialogContent>
             </Dialog>

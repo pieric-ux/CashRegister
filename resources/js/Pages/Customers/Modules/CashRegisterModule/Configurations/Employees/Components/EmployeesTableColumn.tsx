@@ -1,12 +1,12 @@
 'use client';
 
 import i18n from '@/Config/i18n';
+import UpdateEmployee from './UpdateEmployee';
+import DeleteEmployee from './DeleteEmployee';
 import { type ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
-import RegenerateEmployeeForm from './TableColumns/RegenerateEmployeeForm';
-import UpdateEmployeeForm from './TableColumns/UpdateEmployeeForm';
-import DeleteEmployeeForm from './TableColumns/DeleteEmployeeForm';
+import RegenerateEmployeeForm from '@/Components/forms/CashRegister/Employee/RegenerateEmployeeForm';
 
 export interface Employee {
     first_name: string;
@@ -75,8 +75,8 @@ export const columns: ColumnDef<Employee>[] = [
             return (
                 <div className='flex items-center justify-center gap-2'>
                     <RegenerateEmployeeForm employee={employee} />
-                    <UpdateEmployeeForm employee={employee} />
-                    <DeleteEmployeeForm employee={employee} />
+                    <UpdateEmployee employee={employee} />
+                    <DeleteEmployee employee={employee} />
                 </div>
             );
         },

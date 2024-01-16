@@ -1,12 +1,12 @@
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import CR_AppAdminLayout from '@/Components/layouts/Auth/Customer/CR_AppAdminLayout';
+import CreateEmployee from './Components/CreateEmployee';
+import { columns } from './Components/EmployeesTableColumn';
 import { Card, CardHeader } from '@/Components/ui/card/card';
-import { columns } from './Components/ProductsTableColumn';
 import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
-import CreateEmployeeForm from './Components/CreateEmployeeForm';
+import CR_AppAdminLayout from '@/Components/layouts/Auth/Customer/CR_AppAdminLayout';
 
-export default function Index({ customerAuth, application, employees, localization }) {
+export default function Index({ customerAuth, application, employees, localization }): JSX.Element {
     const { t } = useTranslation();
 
     return (
@@ -18,7 +18,7 @@ export default function Index({ customerAuth, application, employees, localizati
             <Head title={application.name} />
 
             <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <CreateEmployeeForm application={application} />
+                <CreateEmployee application={application} />
 
                 <Card>
                     <CardHeader>
