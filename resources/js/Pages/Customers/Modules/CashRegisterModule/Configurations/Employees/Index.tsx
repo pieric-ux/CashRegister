@@ -2,9 +2,9 @@ import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import CR_AppAdminLayout from '@/Components/layouts/Auth/Customer/CR_AppAdminLayout';
 import { Card, CardHeader } from '@/Components/ui/card/card';
-import { columns } from './Components/DataTable/TableColumns';
+import { columns } from './Components/ProductsTableColumn';
 import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
-import CreateEmployeeForm from './Components/CreateEmployeeForm/CreateEmployeeForm';
+import CreateEmployeeForm from './Components/CreateEmployeeForm';
 
 export default function Index({ customerAuth, application, employees, localization }) {
     const { t } = useTranslation();
