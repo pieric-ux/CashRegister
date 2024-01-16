@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Card, CardHeader } from '@/Components/ui/card/card';
-import ShowCashRegisterInfos from '@/Components/features/show-CashRegister-Infos/showCashRegisterInfos';
+import ShowCashRegisterInfos from '@/Components/features/show-CashRegister-Infos/ShowCashRegisterInfos';
 
 export default function ShowCashRegisters({ applications }): JSX.Element {
     const { t } = useTranslation();
