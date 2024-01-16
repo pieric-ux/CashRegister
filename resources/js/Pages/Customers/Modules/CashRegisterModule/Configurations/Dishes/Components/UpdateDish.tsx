@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
-import { DishInfosForm } from '@/Components/forms/DishInfosForm';
+import { DishInfosForm } from '@/Components/forms/Dish/DishInfosForm';
 import {
     Dialog,
     DialogContent,
