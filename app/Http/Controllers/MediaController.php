@@ -50,7 +50,7 @@ class MediaController extends Controller
      */
     public function uploadProductPicture(UploadProductPictureRequest $request, CR_Products $product): RedirectResponse
     {
-        $product = $product::find($request->productId);
+        $product = $product::find($request->itemId);
 
         if ($request->hasFile('picture')) {
             $picture = $request->file('picture');
@@ -65,7 +65,7 @@ class MediaController extends Controller
      */
     public function uploadDishPicture(UploadDishPictureRequest $request, CR_Dishes $dish): RedirectResponse
     {
-        $dish = $dish::find($request->dishId);
+        $dish = $dish::find($request->itemId);
 
         if ($request->hasFile('picture')) {
             $picture = $request->file('picture');

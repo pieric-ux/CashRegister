@@ -12,7 +12,7 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function UpdateDishForm({ dish }): JSX.Element {
+export default function UpdateDish({ dish }): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);

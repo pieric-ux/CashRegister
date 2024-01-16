@@ -18,6 +18,7 @@ const avatarVariants = cva('relative overflow-hidden', {
             default: 'h-12 w-12',
             avatar: 'h-52 w-52',
             poster: 'h-36 w-36',
+            picture: 'h-16 w-16',
         },
     },
     defaultVariants: {

@@ -13,7 +13,7 @@ class UploadDishPictureRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $dishId = $this->input('dishId');
+        $dishId = $this->input('itemId');
 
         $dish = CR_Dishes::find($dishId);
 

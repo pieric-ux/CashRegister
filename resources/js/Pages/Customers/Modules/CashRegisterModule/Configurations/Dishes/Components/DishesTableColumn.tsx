@@ -1,13 +1,13 @@
 'use client';
 
 import i18n from '@/Config/i18n';
-import currencyCodes from 'currency-codes';
+import currencyCodes from 'currency-codes'; //FIXME: change languagues with region for currency
 import { type ColumnDef } from '@tanstack/react-table';
-import UpdateDishForm from './TableColumns/UpdateDishForm';
-import DeleteDishForm from './TableColumns/DeleteDishForm';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
-import UpdateDishPicture from './TableColumns/UpdateDishPicture';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
+import { UpdateItemsPictureForm } from '@/Components/forms/UpdateItemsPictureForm';
+import UpdateDish from '@/Pages/Customers/Modules/CashRegisterModule/Configurations/Dishes/Components/UpdateDish';
+import DeleteDish from '@/Pages/Customers/Modules/CashRegisterModule/Configurations/Dishes/Components/DeleteDish';
 
 export interface Dish {
     name: string;
@@ -49,7 +49,7 @@ export const columns: ColumnDef<Dish>[] = [
         cell: ({ row }) => {
             const dish = row.original;
 
-            return <UpdateDishPicture dish={dish} />;
+            return <UpdateItemsPictureForm item={dish} route={route('picture-dish.upload')} />;
         },
     },
     {
@@ -150,8 +150,8 @@ export const columns: ColumnDef<Dish>[] = [
 
             return (
                 <div className='flex items-center justify-center gap-2'>
-                    <UpdateDishForm dish={dish} />
-                    <DeleteDishForm dish={dish} />
+                    <UpdateDish dish={dish} />
+                    <DeleteDish dish={dish} />
                 </div>
             );
         },

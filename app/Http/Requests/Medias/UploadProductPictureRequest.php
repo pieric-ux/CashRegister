@@ -13,7 +13,7 @@ class UploadProductPictureRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $productId = $this->input('productId');
+        $productId = $this->input('itemId');
 
         $product = CR_Products::find($productId);
 
