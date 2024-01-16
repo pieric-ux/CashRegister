@@ -3,7 +3,7 @@ import { type Customer } from '@/@types';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import { Alert, AlertDescription } from '@/Components/ui/alert/alert';
-import { CustomerProfileForm } from '@/Components/forms/CustomerProfileForm';
+import { CustomerProfileForm } from '@/Components/forms/Customer/CustomerProfileForm';
 import {
     Card,
     CardContent,
