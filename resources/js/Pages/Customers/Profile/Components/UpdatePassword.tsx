@@ -6,7 +6,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/Components/ui/card/card';
-import { UpdateUserPasswordForm } from '@/Components/forms/UpdateUserPasswordForm';
+import { UpdateUserPasswordForm } from '@/Components/forms/Common/UpdateUserPasswordForm';
 
 export default function UpdatePassword(): JSX.Element {
     const { t } = useTranslation();
