@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import { Svg } from '@/Components/ui/svg/Svg';
-import { CashRegisterInfosForm } from '@/Components/forms/CashRegisterInfosForm';
+import { CashRegisterInfosForm } from '@/Components/forms/CashRegister/CashRegisterInfosForm';
 import {
     Dialog,
     DialogContent,
