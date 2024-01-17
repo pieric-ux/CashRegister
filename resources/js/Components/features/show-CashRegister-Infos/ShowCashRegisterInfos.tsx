@@ -3,8 +3,8 @@ import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import InfoBlock from '@/Components/features/show-CashRegister-Infos/InfoBlock';
-import { UpdateModulePosterForm } from '@/Components/forms/UpdateModulePosterForm';
 import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card/card';
+import { UpdateModulePosterForm } from '@/Components/forms/Common/UpdateModulePosterForm';
 import UpdateCashRegister from '@/Pages/Customers/Modules/CashRegisterModule/Components/UpdateCashRegister';
 import DeleteCashRegister from '@/Pages/Customers/Modules/CashRegisterModule/Components/DeleteCashRegister';
 
