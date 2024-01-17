@@ -24,6 +24,7 @@ const buttonVariants = cva(
                 lg: 'h-10 px-8',
                 icon: 'h-9 w-9',
                 sm_icon: 'h-7 w-7',
+                touch: 'h-32 w-32',
             },
         },
         defaultVariants: {

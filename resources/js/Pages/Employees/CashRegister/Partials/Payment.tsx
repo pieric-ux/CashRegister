@@ -52,6 +52,7 @@ export default function Payment({ paymentMethods, isCartEmpty, setSelectedPaymen
                     {paymentMethods.map((paymentMethod) => {
                         return (
                             <Button
+                                size={'touch'}
                                 key={paymentMethod.id}
                                 onClick={() => {
                                     setSelectedPaymentMethod(paymentMethod.id);
