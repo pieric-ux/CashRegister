@@ -5,12 +5,17 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardHeader, CardTitle } from '@/Components/ui/card/card';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import CreateCategoriesProduct from './Components/CreateCategoriesProduct';
+import UpdateCategoriesProduct from './Components/UpdateCategoriesProduct';
+import DeleteCategoriesProduct from './Components/DeleteCategoriesProduct';
 import CR_AppAdminLayout from '@/Components/layouts/Auth/Customer/CR_AppAdminLayout';
-import CreateCategorieProductForm from '@/Pages/Customers/Modules/CashRegisterModule/Configurations/Categories_Products/Partials/CreateCategorieProductForm';
-import UpdateCategorieProductForm from '@/Pages/Customers/Modules/CashRegisterModule/Configurations/Categories_Products/Partials/UpdateCategorieProductFrom';
-import DeleteCategorieProductForm from '@/Pages/Customers/Modules/CashRegisterModule/Configurations/Categories_Products/Partials/DeleteCategorieProductForm';
 
-export default function Index({ customerAuth, application, categories, localization }) {
+export default function Index({
+    customerAuth,
+    application,
+    categories,
+    localization,
+}): JSX.Element {
     const { t } = useTranslation();
 
     const [updatedCategories, setUpdatedCategories] = useState(categories);
@@ -59,9 +64,10 @@ export default function Index({ customerAuth, application, categories, localizat
             <Head title={application.name} />
 
             <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <CreateCategorieProductForm application={application} />
+                <CreateCategoriesProduct application={application} />
 
                 {updatedCategories.length > 1 ? (
+                    // TODO: Refactor dnd component
                     <DragDropContext onDragEnd={onDragEnd}>
                         <Droppable droppableId='categories'>
                             {(provided, snapshot) => (
@@ -92,10 +98,10 @@ export default function Index({ customerAuth, application, categories, localizat
                                                     >
                                                         <CardTitle>{category.name}</CardTitle>
                                                         <div className='flex gap-2'>
-                                                            <UpdateCategorieProductForm
+                                                            <UpdateCategoriesProduct
                                                                 category={category}
                                                             />
-                                                            <DeleteCategorieProductForm
+                                                            <DeleteCategoriesProduct
                                                                 category={category}
                                                             />
                                                         </div>

@@ -1,10 +1,7 @@
 import { useState } from 'react';
-import { useForm } from '@inertiajs/react';
-import TextInput from '@/Components/TextInput';
 import { useTranslation } from 'react-i18next';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
 import { Button } from '@/Components/ui/button/button';
+import { CategoryProductsInfosForm } from '@/Components/forms/CashRegister/CategoryProducts/CategoryProductsInfosForm';
 import {
     Card,
     CardDescription,
@@ -14,44 +11,24 @@ import {
 } from '@/Components/ui/card/card';
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function CreateCategorieProductForm({ application, className = '' }) {
+export default function CreateCategoriesProduct({ application }): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);
-    const [showErrors, setShowErrors] = useState(false);
 
-    const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-    });
-
-    const closeDialog = () => {
-        reset();
-        setShowErrors(false);
+    const closeDialog = (): void => {
         setOpen(false);
     };
 
-    const submit = (e) => {
-        e.preventDefault();
-
-        post(route('categories.store', application.slug), {
-            preserveScroll: true,
-            onSuccess: () => closeDialog(),
-            onError: () => {
-                setShowErrors(true);
-            },
-        });
-    };
     return (
-        <section className={className}>
+        <section>
             <Card>
                 <CardHeader size={'xl'}>
                     <CardTitle>{t('Create a Category of Product')}</CardTitle>
@@ -77,42 +54,10 @@ export default function CreateCategorieProductForm({ application, className = ''
                                     )}
                                 </DialogDescription>
                             </DialogHeader>
-                            <form onSubmit={submit}>
-                                <fieldset>
-                                    <InputLabel htmlFor='name' value={t('Name')} />
-
-                                    <TextInput
-                                        id='name'
-                                        name='name'
-                                        className='mt-1 block w-3/4'
-                                        value={data.name}
-                                        isFocused={true}
-                                        onChange={(e) => setData('name', e.target.value)}
-                                    />
-
-                                    <InputError
-                                        className='mt-2'
-                                        message={showErrors ? errors.name : null}
-                                    />
-                                </fieldset>
-
-                                <DialogFooter className='mt-6 flex justify-end'>
-                                    <DialogClose asChild>
-                                        <Button variant={'secondary'} onClick={closeDialog}>
-                                            {t('Cancel')}
-                                        </Button>
-                                    </DialogClose>
-
-                                    <Button
-                                        className='ml-3'
-                                        onClick={submit}
-                                        disabled={processing}
-                                        aria-label={t('Create your category of product')}
-                                    >
-                                        {t('Create')}
-                                    </Button>
-                                </DialogFooter>
-                            </form>
+                            <CategoryProductsInfosForm
+                                application={application}
+                                closeDialog={closeDialog}
+                            />
                         </DialogContent>
                     </Dialog>
                 </CardFooter>
