@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { UpdateUserPasswordForm } from '@/Components/forms/Common/UpdateUserPasswordForm';
 import {
     Card,
     CardContent,
@@ -6,7 +7,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/Components/ui/card/card';
-import { UpdateUserPasswordForm } from '@/Components/forms/Common/UpdateUserPasswordForm';
 
 export default function UpdatePassword(): JSX.Element {
     const { t } = useTranslation();

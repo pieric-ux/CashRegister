@@ -3,7 +3,7 @@
 import i18n from '@/Config/i18n';
 import UpdateDish from './UpdateDish';
 import DeleteDish from './DeleteDish';
-import currencyCodes from 'currency-codes'; //FIXME: change languagues with region for currency
+import currencyCodes from 'currency-codes'; //TODO: change languagues with region for currency
 import { type ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';

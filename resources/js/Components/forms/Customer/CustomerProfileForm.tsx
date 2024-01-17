@@ -34,7 +34,7 @@ export function CustomerProfileForm({
     customer,
     isUpdate = false,
 }: {
-    customer?: any; // FIXME: type customer
+    customer?: any; // TODO: type customer
     isUpdate?: boolean;
 }): JSX.Element {
     const { t } = useTranslation();
@@ -204,7 +204,7 @@ export function CustomerProfileForm({
                             leaveTo='opacity-0'
                             className='transition ease-in-out'
                         >
-                            <p className='text-sm text-muted'>{t('Saved.')}</p>
+                            <p className='text-sm text-muted-foreground'>{t('Saved.')}</p>
                         </Transition>
                     </CardFooter>
                 ) : (

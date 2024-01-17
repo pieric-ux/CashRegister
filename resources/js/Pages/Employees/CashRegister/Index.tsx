@@ -1,3 +1,4 @@
+// TODO: Refactor
 import { Head } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';

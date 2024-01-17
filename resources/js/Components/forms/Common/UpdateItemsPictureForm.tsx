@@ -20,7 +20,7 @@ interface FormInput {
     picture: File | undefined;
 }
 
-//FIXME: type item any
+//TODO: type item
 export function UpdateItemsPictureForm({ item, route }: { item: any; route: string }): JSX.Element {
     const defaultValues: FormInput = {
         itemId: item.id,

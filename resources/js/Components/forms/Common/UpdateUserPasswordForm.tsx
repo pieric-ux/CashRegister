@@ -49,7 +49,7 @@ export function UpdateUserPasswordForm(): JSX.Element {
 
         put(route('password.update'), {
             preserveScroll: true,
-            onSuccess: () => reset(),
+            onSuccess: () => reset(), // FIXME: reset password data
         });
     }
 
@@ -107,7 +107,7 @@ export function UpdateUserPasswordForm(): JSX.Element {
                         leaveTo='opacity-0'
                         className='transition ease-in-out'
                     >
-                        <p className='text-sm text-muted'>{t('Saved.')}</p>
+                        <p className='text-sm text-muted-foreground'>{t('Saved.')}</p>
                     </Transition>
                 </CardFooter>
             </form>

@@ -1,3 +1,4 @@
+// TODO: Refactor
 import Checkbox from '@/Components/Checkbox';
 import TextInput from '@/Components/TextInput';
 import { useTranslation } from 'react-i18next';

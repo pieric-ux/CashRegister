@@ -39,8 +39,8 @@ export function ProductInfosForm({
     closeDialog,
     isUpdate = false,
 }: {
-    application?: any;
-    product?: any; // FIXME: type application & product
+    application?: any; // TODO: type application
+    product?: any; // TODO: type product
     closeDialog: () => void;
     isUpdate?: boolean;
 }): JSX.Element {

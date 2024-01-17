@@ -1,7 +1,7 @@
 'use client';
 
 import i18n from '@/Config/i18n';
-import currencyCodes from 'currency-codes'; //FIXME: change languagues with region for currency
+import currencyCodes from 'currency-codes'; //TODO: change languagues with region for currency
 import UpdateProduct from './UpdateProduct';
 import DeleteProduct from './DeleteProduct';
 import { type ColumnDef } from '@tanstack/react-table';

@@ -30,7 +30,7 @@ export function CashRegisterInfosForm({
     closeDialog,
     isUpdate = false,
 }: {
-    application?: any; // FIXME: type application (CashRegister)
+    application?: any; // TODO: type application
     closeDialog: () => void;
     isUpdate?: boolean;
 }): JSX.Element {

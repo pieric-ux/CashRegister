@@ -32,8 +32,8 @@ export function DishInfosForm({
     closeDialog,
     isUpdate = false,
 }: {
-    application?: any;
-    dish?: any; // FIXME: type application & dish
+    application?: any; // TODO: type dish
+    dish?: any; // TODO: type dish
     closeDialog: () => void;
     isUpdate?: boolean;
 }): JSX.Element {
@@ -127,7 +127,7 @@ export function DishInfosForm({
                         </FormItem>
                     )}
                 />
-                <FormField
+                <FormField // TODO: space between checkbox
                     control={form.control}
                     name='is_consigned'
                     render={({ field }) => (

@@ -29,8 +29,8 @@ export function EmployeeProfileForm({
     closeDialog,
     isUpdate = false,
 }: {
-    application?: any; // FIXME: type application
-    employee?: any; // FIXME: type employee
+    application?: any; // TODO: type application
+    employee?: any; // TODO: type employee
     closeDialog: () => void;
     isUpdate?: boolean;
 }): JSX.Element {

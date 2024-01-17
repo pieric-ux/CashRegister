@@ -26,8 +26,8 @@ export function CategoryProductsInfosForm({
     closeDialog,
     isUpdate = false,
 }: {
-    application?: any;
-    category?: any; // FIXME: type application & category
+    application?: any; // TODO: type application
+    category?: any; // TODO: type category
     closeDialog: () => void;
     isUpdate?: boolean;
 }): JSX.Element {

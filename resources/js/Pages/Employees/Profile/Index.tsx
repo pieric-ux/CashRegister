@@ -1,3 +1,4 @@
+// TODO: Refactor
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import TextInput from '@/Components/TextInput';
