@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { UpdateUserAvatarForm } from '@/Components/forms/UpdateUserAvatarForm';
+import { UpdateUserAvatarForm } from '@/Components/forms/Common/UpdateUserAvatarForm';
 import {
     Card,
     CardContent,
