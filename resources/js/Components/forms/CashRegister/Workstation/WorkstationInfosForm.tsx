@@ -1,5 +1,5 @@
 'use client';
-// TODO: Maybe refactor with WorkstationInfosForm
+// TODO: Maybe refactor with CategoryProductsInfosForm
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -20,21 +20,21 @@ interface FormInput {
     name: string;
 }
 
-export function CategoryProductsInfosForm({
+export function WorkstationInfosForm({
     application,
-    category,
+    workstation,
     closeDialog,
     isUpdate = false,
 }: {
     application?: any; // TODO: type application
-    category?: any; // TODO: type category
+    workstation?: any; // TODO: type workstation
     closeDialog: () => void;
     isUpdate?: boolean;
 }): JSX.Element {
     const { t } = useTranslation();
 
     const defaultValues: FormInput = {
-        name: isUpdate ? category.name : '',
+        name: isUpdate ? workstation.name : '',
     };
 
     const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
@@ -51,11 +51,11 @@ export function CategoryProductsInfosForm({
     function onSubmit(values: FormInput): void {
         setData(values);
         isUpdate
-            ? patch(route('categories.update', category), {
+            ? patch(route('workstations.update', workstation), {
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               })
-            : post(route('categories.store', application.slug), {
+            : post(route('workstations.store', application.slug), {
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               });
@@ -89,9 +89,7 @@ export function CategoryProductsInfosForm({
                         className='ml-3'
                         disabled={processing}
                         aria-label={
-                            isUpdate
-                                ? t('Edit the category of product')
-                                : t('Create your category of product')
+                            isUpdate ? t('Edit the workstation') : t('Create a Workstation')
                         }
                     >
                         {isUpdate ? t('Save') : t('Create')}
