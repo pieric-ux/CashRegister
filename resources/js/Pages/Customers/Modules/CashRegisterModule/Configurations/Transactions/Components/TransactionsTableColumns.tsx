@@ -1,12 +1,12 @@
 'use client';
 
 import i18n from '@/Config/i18n';
-import currencyCodes from 'currency-codes';
+import currencyCodes from 'currency-codes'; //TODO: change languagues with region for currency
 import { type ColumnDef } from '@tanstack/react-table';
+import DeleteTransaction from './DeleteTransaction';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
+import ShowDetailsTransaction from './ShowDetailsTransaction';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
-import DeleteTransactionForm from '@/Pages/Customers/Modules/CashRegisterModule/Configurations/Transactions/Components/DataTable/TableColumns/DeleteTransactionForm';
-import ShowDetailsTransaction from '@/Pages/Customers/Modules/CashRegisterModule/Configurations/Transactions/Components/DataTable/TableColumns/ShowDetailsTransactions/ShowDetailsTransaction';
 
 export interface Transaction {
     or_number: string;
@@ -106,7 +106,7 @@ export const columns: ColumnDef<Transaction>[] = [
             return (
                 <div className='flex items-center justify-center gap-2'>
                     <ShowDetailsTransaction transaction={transaction} />
-                    <DeleteTransactionForm transaction={transaction} />
+                    <DeleteTransaction transaction={transaction} />
                 </div>
             );
         },

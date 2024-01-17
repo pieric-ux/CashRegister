@@ -1,9 +1,9 @@
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardHeader } from '@/Components/ui/card/card';
+import { columns } from './Components/TransactionsTableColumns';
 import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 import CR_AppAdminLayout from '@/Components/layouts/Auth/Customer/CR_AppAdminLayout';
-import { columns } from '@/Pages/Customers/Modules/CashRegisterModule/Configurations/Transactions/Components/DataTable/TableColumns';
 
 export default function Index({ customerAuth, application, transactions, localization }) {
     const { t } = useTranslation();

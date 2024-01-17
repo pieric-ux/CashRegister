@@ -1,62 +1,28 @@
-import { useRef, useState } from 'react';
-import { useForm } from '@inertiajs/react';
+import { useState } from 'react';
 import { Svg } from '@/Components/ui/svg/Svg';
-import TextInput from '@/Components/TextInput';
 import { useTranslation } from 'react-i18next';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
 import { Button } from '@/Components/ui/button/button';
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
+import { ConfirmDeleteForm } from '@/Components/forms/Common/ConfirmDeleteForm';
 
-export default function DeleteTransactionForm({ transaction, className = '' }) {
+export default function DeleteTransaction({ transaction }): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);
-    const [showErrors, setShowErrors] = useState(false);
 
-    const {
-        data,
-        setData,
-        delete: destroy,
-        processing,
-        errors,
-        reset,
-    } = useForm({
-        password: '',
-    });
-
-    const passwordInput = useRef();
-
-    const closeDialog = () => {
-        reset();
-        setShowErrors(false);
+    const closeDialog = (): void => {
         setOpen(false);
     };
 
-    const submit = (e) => {
-        e.preventDefault();
-
-        destroy(route('transactions.destroy', transaction), {
-            preserveScroll: true,
-            onSuccess: () => closeDialog(),
-            onError: () => {
-                setShowErrors(true);
-                passwordInput.current.focus();
-            },
-        });
-    };
-
     return (
-        <section className={className}>
+        <section>
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                     <Button
@@ -78,49 +44,12 @@ export default function DeleteTransactionForm({ transaction, className = '' }) {
                             )}
                         </DialogDescription>
                     </DialogHeader>
-                    <form onSubmit={submit}>
-                        <fieldset>
-                            <InputLabel
-                                htmlFor='password'
-                                value={t('Password')}
-                                className='sr-only'
-                            />
-
-                            <TextInput
-                                id='password'
-                                type='password'
-                                name='password'
-                                ref={passwordInput}
-                                value={data.password}
-                                onChange={(e) => setData('password', e.target.value)}
-                                className='mt-1 block w-3/4'
-                                isFocused
-                                placeholder={t('Password')}
-                            />
-
-                            {showErrors && (
-                                <InputError className='mt-2' message={errors.password} />
-                            )}
-                        </fieldset>
-
-                        <DialogFooter className='mt-6 flex justify-end'>
-                            <DialogClose asChild>
-                                <Button variant={'secondary'} onClick={closeDialog}>
-                                    {t('Cancel')}
-                                </Button>
-                            </DialogClose>
-
-                            <Button
-                                className='ml-3'
-                                variant={'destructive'}
-                                onClick={submit}
-                                disabled={processing}
-                                aria-label={t('Delete the transaction')}
-                            >
-                                {t('Delete Transaction')}
-                            </Button>
-                        </DialogFooter>
-                    </form>
+                    <ConfirmDeleteForm
+                        route={route('transactions.destroy', transaction)}
+                        closeDialog={closeDialog}
+                        ariaLabel={t('Delete the transaction')}
+                        buttonTiltle={t('Delete Transaction')}
+                    />
                 </DialogContent>
             </Dialog>
         </section>

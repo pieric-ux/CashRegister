@@ -1,7 +1,7 @@
 'use client';
 
 import i18n from '@/Config/i18n';
-import currencyCodes from 'currency-codes';
+import currencyCodes from 'currency-codes'; //TODO: change languagues with region for currency
 import { type ColumnDef } from '@tanstack/react-table';
 
 export interface DetailsTransaction {
