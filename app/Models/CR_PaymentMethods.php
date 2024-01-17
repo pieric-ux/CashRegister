@@ -36,7 +36,7 @@ class CR_PaymentMethods extends Model implements HasMedia
         return $this->hasMany(CR_Transactions::class, 'fk_paymentMethods_id');
     }
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(Media $media = null): void // FIXME: format png without transparency
     {
         $this
             ->addMediaConversion('thumb')

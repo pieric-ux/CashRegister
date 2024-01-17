@@ -44,7 +44,7 @@ class CR_Products extends Model implements HasMedia
         return $this->belongsToMany(CR_Workstations::class, 'cr_workstations_products', 'fk_products_id', 'fk_workstations_id');
     }
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(Media $media = null): void // FIXME: format png without transparency
     {
         $this
             ->addMediaConversion('thumb')

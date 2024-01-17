@@ -109,7 +109,7 @@ class CR_App extends Model implements HasMedia
         return $this->fk_customer_id === $customer->id;
     }
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(Media $media = null): void // FIXME: format png without transparency
     {
         $this
             ->addMediaConversion('thumb')

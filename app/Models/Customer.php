@@ -59,7 +59,7 @@ class Customer extends Authenticatable implements HasMedia, MustVerifyEmail
         return $this->hasMany(CR_App::class, 'fk_customer_id');
     }
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(Media $media = null): void // FIXME: format png without transparency
     {
         $this
             ->addMediaConversion('thumb')
