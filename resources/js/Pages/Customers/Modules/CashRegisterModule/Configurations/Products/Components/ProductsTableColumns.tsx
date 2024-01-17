@@ -1,13 +1,13 @@
 'use client';
 
 import i18n from '@/Config/i18n';
-import currencyCodes from 'currency-codes';
+import currencyCodes from 'currency-codes'; //FIXME: change languagues with region for currency
+import UpdateProduct from './UpdateProduct';
+import DeleteProduct from './DeleteProduct';
 import { type ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
-import UpdateProductForm from './TableColumns/UpdateProductForm';
-import DeleteProductForm from './TableColumns/DeleteProductForm';
-import UpdateProdutPicture from './TableColumns/UpdateProductPicture';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
+import { UpdateItemsPictureForm } from '@/Components/forms/Common/UpdateItemsPictureForm';
 
 export interface Product {
     name: string;
@@ -57,7 +57,9 @@ export const columns: ColumnDef<Product>[] = [
         cell: ({ row }) => {
             const product = row.original;
 
-            return <UpdateProdutPicture product={product} />;
+            return (
+                <UpdateItemsPictureForm item={product} route={route('picture-product.upload')} />
+            );
         },
     },
     {
@@ -158,8 +160,8 @@ export const columns: ColumnDef<Product>[] = [
 
             return (
                 <div className='flex flex-col items-center justify-center gap-2'>
-                    <UpdateProductForm product={product} />
-                    <DeleteProductForm product={product} />
+                    <UpdateProduct product={product} />
+                    <DeleteProduct product={product} />
                 </div>
             );
         },

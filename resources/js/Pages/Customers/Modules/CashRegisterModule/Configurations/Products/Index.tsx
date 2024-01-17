@@ -1,11 +1,11 @@
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import CreateProduct from './Components/CreateProduct';
+import { columns } from './Components/ProductsTableColumns';
 import { Card, CardHeader } from '@/Components/ui/card/card';
-import { columns } from './Components/DataTable/TableColumns';
 import { ProductsTableContext } from '@/Context/ProductsTableContext';
 import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 import CR_AppAdminLayout from '@/Components/layouts/Auth/Customer/CR_AppAdminLayout';
-import CreateProductForm from '@/Pages/Customers/Modules/CashRegisterModule/Configurations/Products/Components/CreateProductForm/CreateProductForm';
 
 export default function Index({
     customerAuth,
@@ -14,7 +14,7 @@ export default function Index({
     categories,
     dishes,
     localization,
-}) {
+}): JSX.Element {
     const { t } = useTranslation();
 
     return (
@@ -26,7 +26,7 @@ export default function Index({
             <Head title={application.name} />
 
             <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <CreateProductForm application={application} />
+                <CreateProduct application={application} />
 
                 <Card>
                     <CardHeader>
