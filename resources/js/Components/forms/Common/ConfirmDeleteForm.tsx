@@ -1,28 +1,15 @@
 'use client';
 
-import { useEffect } from 'react';
+import { type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Input } from '@/Components/ui/input/input';
+import { Form } from '@/Components/ui/form/form';
+import { type Auth } from '@/Shared/Types/AuthTypes';
+import { GenericFormField } from './GenericFormField';
 import { Button } from '@/Components/ui/button/button';
 import { useForm as useFormInertia } from '@inertiajs/react';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/Components/ui/form/form';
-
-interface FormInput {
-    password: string;
-}
-
-const defaultValues: FormInput = {
-    password: '',
-};
+import { defaultValues, formDatas } from '@/Shared/Datas/ConfirmDeleteFormDatas';
 
 export function ConfirmDeleteForm({ route, closeDialog, ariaLabel, buttonTiltle }): JSX.Element {
     const { t } = useTranslation();
@@ -36,17 +23,12 @@ export function ConfirmDeleteForm({ route, closeDialog, ariaLabel, buttonTiltle 
         reset,
     } = useFormInertia(defaultValues);
 
-    const form = useForm<FormInput>({
+    const form = useForm<Auth>({
         defaultValues: data,
     });
 
-    useEffect(() => {
-        // FIXME: don't use useEffect to changing data with setData
-        setData(form.getValues());
-    }, [form.getValues(), setData]);
-
-    function onSubmit(values: FormInput): void {
-        setData(values);
+    function onSubmit(e: FormEvent): void {
+        e.preventDefault();
 
         destroy(route, {
             preserveScroll: true,
@@ -59,25 +41,12 @@ export function ConfirmDeleteForm({ route, closeDialog, ariaLabel, buttonTiltle 
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormField
-                    control={form.control}
-                    name='password'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel className='sr-only'>{t('Password')}</FormLabel>
-                            <FormControl>
-                                <Input
-                                    type='password'
-                                    isFocused={true}
-                                    autoComplete='current-password'
-                                    placeholder={t('password')}
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage>{errors.password}</FormMessage>
-                        </FormItem>
-                    )}
+            <form onSubmit={onSubmit}>
+                <GenericFormField
+                    form={form}
+                    setData={setData}
+                    errors={errors}
+                    formData={formDatas}
                 />
 
                 <DialogFooter className='mt-6 flex justify-end'>

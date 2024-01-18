@@ -12,7 +12,7 @@ export default function CR_AppAdminLayout({ auth, application, children, localiz
     const { t } = useTranslation();
 
     const [sideBarOpen, setSideBarOpen] = useLocalStorage('sideBarOpen', false);
-
+    // TODO: Flavien: peut être fait dans un autre composant ou en dehors de ce composant pour éviter de le refaire à chaque rendu
     const RespNavLink = (
         <>
             <ResponsiveNavLink href={route('dashboard')}>{t('Home')}</ResponsiveNavLink>

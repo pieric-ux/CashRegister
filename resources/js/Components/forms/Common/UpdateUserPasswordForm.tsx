@@ -5,12 +5,12 @@ import { useForm } from 'react-hook-form';
 import { Transition } from '@headlessui/react';
 import { useTranslation } from 'react-i18next';
 import { Form } from '@/Components/ui/form/form';
+import { type Auth } from '@/Shared/Types/AuthTypes';
 import { GenericFormField } from './GenericFormField';
 import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
 import { useForm as useFormInertia } from '@inertiajs/react';
 import { defaultValues, formDatas } from '@/Shared/Datas/UserPasswordFormDatas';
-import { type UserPasswordFormInput } from '@/Shared/Types/UserPasswordFormTypes';
 
 export function UpdateUserPasswordForm(): JSX.Element {
     const { t } = useTranslation();
@@ -18,7 +18,7 @@ export function UpdateUserPasswordForm(): JSX.Element {
     const { data, setData, put, processing, errors, reset, recentlySuccessful } =
         useFormInertia(defaultValues);
 
-    const form = useForm<UserPasswordFormInput>({
+    const form = useForm<Auth>({
         defaultValues: data,
     });
 
