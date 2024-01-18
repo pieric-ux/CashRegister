@@ -4,24 +4,13 @@ import { type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { Transition } from '@headlessui/react';
 import { useTranslation } from 'react-i18next';
-import { Input } from '@/Components/ui/input/input';
+import { Form } from '@/Components/ui/form/form';
 import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
+import { GenericFormField } from '../Common/GenericFormField';
 import { Link, useForm as useFormInertia } from '@inertiajs/react';
 import { formDatas, getDefaultValues } from '@/Shared/Datas/CustomerProfileFormData';
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/Components/ui/form/form';
-import {
-    type Customer,
-    type CustomerProfileFormInput,
-    type CustomerProfileFormData,
-} from '@/Shared/Types/customerTypes';
+import { type Customer, type CustomerProfileFormInput } from '@/Shared/Types/customerTypes';
 
 export function CustomerProfileForm({
     customer,
@@ -53,54 +42,64 @@ export function CustomerProfileForm({
                   },
               });
     }
-    // TODO: Check with other forms if we can reuse this component
-    const renderFormField = (formData: CustomerProfileFormData): JSX.Element => (
-        <FormField
-            key={formData.name}
-            control={form.control}
-            name={formData.name}
-            render={({ field }) => (
-                <FormItem>
-                    <FormLabel>
-                        {t(formData.label)}{' '}
-                        {formData.facultative !== undefined && formData.facultative && (
-                            <small>({t('facultative')})</small>
-                        )}
-                    </FormLabel>
-                    <FormControl>
-                        <Input
-                            type={formData.type ?? 'text'}
-                            isFocused={formData.isFocused}
-                            autoComplete={formData.autoComplete}
-                            {...field}
-                            onChange={(e) => {
-                                field.onChange(e);
-                                setData(formData.name, e.target.value);
-                            }}
-                        />
-                    </FormControl>
-                    <FormMessage>{errors[formData.name]}</FormMessage>
-                </FormItem>
-            )}
-        />
-    );
 
     return (
         <Form {...form}>
             <form onSubmit={onSubmit}>
-                {formDatas.base.map(renderFormField)}
+                {formDatas.base.map((formData) => (
+                    <GenericFormField
+                        key={formData.name}
+                        form={form}
+                        setData={setData}
+                        errors={errors}
+                        formData={formData}
+                    />
+                ))}
 
                 {formDatas.flex !== undefined && formDatas.flex !== null && (
-                    <div className='flex gap-4'>{formDatas.flex.map(renderFormField)}</div>
+                    <div className='flex gap-4'>
+                        {formDatas.flex.map((formData) => (
+                            <GenericFormField
+                                key={formData.name}
+                                form={form}
+                                setData={setData}
+                                errors={errors}
+                                formData={formData}
+                            />
+                        ))}
+                    </div>
                 )}
 
-                {isUpdate && formDatas.update?.map(renderFormField)}
+                {isUpdate &&
+                    formDatas.update?.map((formData) => (
+                        <GenericFormField
+                            key={formData.name}
+                            form={form}
+                            setData={setData}
+                            errors={errors}
+                            formData={formData}
+                        />
+                    ))}
 
-                {formDatas.end !== undefined &&
-                    formDatas.end !== null &&
-                    renderFormField(formDatas.end)}
+                {formDatas.end !== undefined && formDatas.end !== null && (
+                    <GenericFormField
+                        form={form}
+                        setData={setData}
+                        errors={errors}
+                        formData={formDatas.end}
+                    />
+                )}
 
-                {!isUpdate && formDatas.create?.map(renderFormField)}
+                {!isUpdate &&
+                    formDatas.create?.map((formData) => (
+                        <GenericFormField
+                            key={formData.name}
+                            form={form}
+                            setData={setData}
+                            errors={errors}
+                            formData={formData}
+                        />
+                    ))}
 
                 {isUpdate ? (
                     <CardFooter className='mt-4 flex items-center gap-4 p-0'>

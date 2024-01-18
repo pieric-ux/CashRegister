@@ -4,20 +4,13 @@ import { type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { Transition } from '@headlessui/react';
 import { useTranslation } from 'react-i18next';
-import { Input } from '@/Components/ui/input/input';
+import { Form } from '@/Components/ui/form/form';
+import { GenericFormField } from './GenericFormField';
 import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
 import { useForm as useFormInertia } from '@inertiajs/react';
 import { defaultValues, formDatas } from '@/Shared/Datas/UserPasswordFormDatas';
 import { type UserPasswordFormInput } from '@/Shared/Types/UserPasswordFormTypes';
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/Components/ui/form/form';
 
 export function UpdateUserPasswordForm(): JSX.Element {
     const { t } = useTranslation();
@@ -45,27 +38,12 @@ export function UpdateUserPasswordForm(): JSX.Element {
         <Form {...form}>
             <form onSubmit={onSubmit}>
                 {formDatas.map((formData) => (
-                    <FormField
+                    <GenericFormField
                         key={formData.name}
-                        control={form.control}
-                        name={formData.name}
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>{t(formData.label)}</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type={formData.type}
-                                        autoComplete={formData.autoComplete}
-                                        {...field}
-                                        onChange={(e) => {
-                                            field.onChange(e);
-                                            setData(formData.name, e.target.value);
-                                        }}
-                                    />
-                                </FormControl>
-                                <FormMessage>{errors[formData.name]}</FormMessage>
-                            </FormItem>
-                        )}
+                        form={form}
+                        setData={setData}
+                        errors={errors}
+                        formData={formData}
                     />
                 ))}
 
