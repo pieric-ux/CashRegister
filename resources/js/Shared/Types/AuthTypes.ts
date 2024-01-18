@@ -38,3 +38,11 @@ export interface LoginFormDatas {
     isFocused?: true;
     autoComplete: string;
 }
+
+export interface ResetPasswordFormDatas {
+    name: 'email' | 'password' | 'password_confirmation';
+    label: string;
+    type: string;
+    isFocused?: boolean;
+    autoComplete?: string;
+}
