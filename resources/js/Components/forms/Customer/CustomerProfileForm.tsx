@@ -9,7 +9,7 @@ import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
 import { GenericFormField } from '../Common/GenericFormField';
 import { Link, useForm as useFormInertia } from '@inertiajs/react';
-import { formDatas, getDefaultValues } from '@/Shared/Datas/CustomerProfileFormData';
+import { formDatas, getDefaultValues } from '@/Shared/Datas/CustomerProfileFormDatas';
 import { type Customer, type CustomerProfileFormInput } from '@/Shared/Types/customerTypes';
 
 export function CustomerProfileForm({
