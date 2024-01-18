@@ -34,6 +34,7 @@ export function ConfirmDeleteForm({ route, closeDialog, ariaLabel, buttonTiltle 
             preserveScroll: true,
             onSuccess: () => {
                 reset();
+                form.reset();
                 closeDialog();
             },
         });

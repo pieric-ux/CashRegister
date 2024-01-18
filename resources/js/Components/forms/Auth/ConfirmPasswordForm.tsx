@@ -25,7 +25,10 @@ export function ConfirmPasswordForm(): JSX.Element {
 
         post(route('password.confirm'), {
             preserveScroll: true,
-            onSuccess: () => reset('password'),
+            onSuccess: () => {
+                reset('password');
+                form.reset({ password: '' });
+            },
         });
     }
 
