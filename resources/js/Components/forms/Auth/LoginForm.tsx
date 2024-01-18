@@ -1,91 +1,50 @@
 'use client';
 
-import { useEffect } from 'react';
+import { type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Input } from '@/Components/ui/input/input';
+import { type Auth } from '@/Shared/Types/AuthTypes';
 import { Button } from '@/Components/ui/button/button';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
+import { GenericFormField } from '../Common/GenericFormField';
 import { Link, useForm as useFormInertia } from '@inertiajs/react';
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/Components/ui/form/form';
-
-interface FormInput {
-    email: string;
-    password: string;
-    remember: boolean;
-}
-
-const defaultValues: FormInput = {
-    email: '',
-    password: '',
-    remember: false,
-};
+import { defaultValues, formDatas } from '@/Shared/Datas/LoginFormDatas';
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/Components/ui/form/form';
 
 export function LoginForm({ canResetPassword }: { canResetPassword: boolean }): JSX.Element {
     const { t } = useTranslation();
 
     const { data, setData, post, processing, errors, reset } = useFormInertia(defaultValues);
 
-    const form = useForm<FormInput>({
+    const form = useForm<Auth>({
         defaultValues: data,
     });
 
-    useEffect(() => {
-        // FIXME: don't use useEffect to changing data with setData
-        setData(form.getValues());
-    }, [form.getValues(), setData]);
-
-    function onSubmit(values: FormInput): void {
-        setData(values);
+    function onSubmit(e: FormEvent): void {
+        e.preventDefault();
 
         post(route('customers.login'), {
             preserveScroll: true,
-            onSuccess: () => reset('password'),
+            onSuccess: () => {
+                reset('password');
+                form.reset({ password: '' });
+            },
         });
     }
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
-                <FormField
-                    control={form.control}
-                    name='email'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Email')}</FormLabel>
-                            <FormControl>
-                                <Input
-                                    type='email'
-                                    isFocused={true}
-                                    autoComplete='username'
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage>{errors.email}</FormMessage>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name='password'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Password')}</FormLabel>
-                            <FormControl>
-                                <Input type='password' autoComplete='current-password' {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.password}</FormMessage>
-                        </FormItem>
-                    )}
-                />
+            <form onSubmit={onSubmit}>
+                {formDatas.map((formData) => (
+                    <GenericFormField
+                        key={formData.name}
+                        form={form}
+                        setData={setData}
+                        errors={errors}
+                        formData={formData}
+                    />
+                ))}
                 <FormField
                     control={form.control}
                     name='remember'

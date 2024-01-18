@@ -30,3 +30,11 @@ export interface ForgotPasswordFormDatas {
     type: string;
     isFocused: true;
 }
+
+export interface LoginFormDatas {
+    name: 'email' | 'password';
+    label: string;
+    type: string;
+    isFocused?: true;
+    autoComplete: string;
+}
