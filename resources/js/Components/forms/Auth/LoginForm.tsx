@@ -35,7 +35,7 @@ export function LoginForm({ canResetPassword }: { canResetPassword: boolean }): 
 
     return (
         <Form {...form}>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className='space-y-4'>
                 {formDatas.map((formData) => (
                     <GenericFormField
                         key={formData.name}
