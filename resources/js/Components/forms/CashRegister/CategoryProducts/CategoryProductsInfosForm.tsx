@@ -18,7 +18,7 @@ export function CategoryProductsInfosForm({
     isUpdate = false,
 }: {
     application?: any; // TODO: type application
-    category: CategoryProducts;
+    category: any; // TODO: type category
     closeDialog: () => void;
     isUpdate?: boolean;
 }): JSX.Element {
