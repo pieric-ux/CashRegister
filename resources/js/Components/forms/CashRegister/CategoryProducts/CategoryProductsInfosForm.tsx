@@ -1,24 +1,15 @@
 'use client';
 // TODO: Maybe refactor with WorkstationInfosForm
-import { useEffect } from 'react';
+import { type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Input } from '@/Components/ui/input/input';
+import { Form } from '@/Components/ui/form/form';
 import { Button } from '@/Components/ui/button/button';
 import { useForm as useFormInertia } from '@inertiajs/react';
+import { GenericFormField } from '../../Common/GenericFormField';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/Components/ui/form/form';
-
-interface FormInput {
-    name: string;
-}
+import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
+import { getDefaultValues, formDatas } from '@/Shared/Datas/CategoryProductsInfosFormDatas';
 
 export function CategoryProductsInfosForm({
     application,
@@ -27,29 +18,23 @@ export function CategoryProductsInfosForm({
     isUpdate = false,
 }: {
     application?: any; // TODO: type application
-    category?: any; // TODO: type category
+    category: CategoryProducts;
     closeDialog: () => void;
     isUpdate?: boolean;
 }): JSX.Element {
     const { t } = useTranslation();
 
-    const defaultValues: FormInput = {
-        name: isUpdate ? category.name : '',
-    };
+    const defaultValues = getDefaultValues(category, isUpdate);
 
     const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
 
-    const form = useForm<FormInput>({
+    const form = useForm<CategoryProducts>({
         defaultValues: data,
     });
 
-    useEffect(() => {
-        // FIXME: don't use useEffect to changing data with setData
-        setData(form.getValues());
-    }, [form.getValues(), setData]);
+    function onSubmit(e: FormEvent): void {
+        e.preventDefault();
 
-    function onSubmit(values: FormInput): void {
-        setData(values);
         isUpdate
             ? patch(route('categories.update', category), {
                   preserveScroll: true,
@@ -63,19 +48,12 @@ export function CategoryProductsInfosForm({
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormField
-                    control={form.control}
-                    name='name'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Name')}</FormLabel>
-                            <FormControl>
-                                <Input isFocused={true} {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.name}</FormMessage>
-                        </FormItem>
-                    )}
+            <form onSubmit={onSubmit}>
+                <GenericFormField
+                    form={form}
+                    setData={setData}
+                    errors={errors}
+                    formData={formDatas}
                 />
 
                 <DialogFooter className='mt-6 flex justify-end'>
