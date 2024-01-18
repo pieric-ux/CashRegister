@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { Input } from '@/Components/ui/input/input';
-import { useEffect, type ChangeEvent } from 'react';
+import { useEffect } from 'react';
 import { useForm as useFormInertia } from '@inertiajs/react';
 import { Avatar, AvatarImage } from '@/Components/ui/avatar/avatar';
 import {
@@ -32,15 +32,9 @@ export function UpdateModulePosterForm({ application }): JSX.Element {
         defaultValues: data,
     });
 
-    const handlePosterChange = (e: ChangeEvent<HTMLInputElement>): void => {
-        setData('poster', e.target.files?.[0]);
-    };
-
     useEffect(() => {
-        // FIXME: don't use useEffect to changing data.poster
-        if (data.poster !== null && data.poster !== undefined) {
-            onSubmit();
-        }
+        // FIXME: Check with Flavien how i can do without useEffect and without submit button
+        onSubmit();
     }, [data.poster]);
 
     function onSubmit(): void {
@@ -71,7 +65,9 @@ export function UpdateModulePosterForm({ application }): JSX.Element {
                                         <Input
                                             type='file'
                                             className='sr-only'
-                                            onChange={handlePosterChange}
+                                            onChange={(e) => {
+                                                setData('poster', e.target.files?.[0]);
+                                            }}
                                         />
                                     </FormControl>
                                 </FormLabel>

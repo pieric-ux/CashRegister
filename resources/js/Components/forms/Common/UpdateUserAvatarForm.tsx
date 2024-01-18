@@ -1,9 +1,9 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { Input } from '@/Components/ui/input/input';
-import { useEffect, type ChangeEvent } from 'react';
 import { useForm as useFormInertia } from '@inertiajs/react';
 import { Avatar, AvatarImage } from '@/Components/ui/avatar/avatar';
 import {
@@ -36,15 +36,9 @@ export function UpdateUserAvatarForm({
         defaultValues: data,
     });
 
-    const handleAvatarChange = (e: ChangeEvent<HTMLInputElement>): void => {
-        setData('avatar', e.target.files?.[0]);
-    };
-
     useEffect(() => {
-        // FIXME: don't use useEffect to changing data.avatar
-        if (data.avatar !== null && data.avatar !== undefined) {
-            onSubmit();
-        }
+        // FIXME: Check with Flavien how i can do without useEffect and without submit button
+        onSubmit();
     }, [data.avatar]);
 
     function onSubmit(): void {
@@ -76,7 +70,9 @@ export function UpdateUserAvatarForm({
                                         <Input
                                             type='file'
                                             className='sr-only'
-                                            onChange={handleAvatarChange}
+                                            onChange={(e) => {
+                                                setData('avatar', e.target.files?.[0]);
+                                            }}
                                         />
                                     </FormControl>
                                 </FormLabel>

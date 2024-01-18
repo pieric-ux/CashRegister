@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { Input } from '@/Components/ui/input/input';
-import { useEffect, type ChangeEvent } from 'react';
+import { useEffect } from 'react';
 import { useForm as useFormInertia } from '@inertiajs/react';
 import { Avatar, AvatarImage } from '@/Components/ui/avatar/avatar';
 import {
@@ -33,15 +33,9 @@ export function UpdateItemsPictureForm({ item, route }: { item: any; route: stri
         defaultValues: data,
     });
 
-    const handlePictureChange = (e: ChangeEvent<HTMLInputElement>): void => {
-        setData('picture', e.target.files?.[0]);
-    };
-
     useEffect(() => {
-        // FIXME: don't use useEffect to changing data.poster
-        if (data.picture !== null && data.picture !== undefined) {
-            onSubmit();
-        }
+        // FIXME: Check with Flavien how i can do without useEffect and without submit button
+        onSubmit();
     }, [data.picture]);
 
     function onSubmit(): void {
@@ -79,7 +73,9 @@ export function UpdateItemsPictureForm({ item, route }: { item: any; route: stri
                                                     type='file'
                                                     variant={'file'}
                                                     className='sr-only'
-                                                    onChange={handlePictureChange}
+                                                    onChange={(e) => {
+                                                        setData('picture', e.target.files?.[0]);
+                                                    }}
                                                 />
                                             </FormControl>
                                         </FormLabel>
@@ -97,7 +93,9 @@ export function UpdateItemsPictureForm({ item, route }: { item: any; route: stri
                                             type='file'
                                             variant={'file'}
                                             className='sr-only'
-                                            onChange={handlePictureChange}
+                                            onChange={(e) => {
+                                                setData('picture', e.target.files?.[0]);
+                                            }}
                                         />
                                     </FormControl>
                                 </FormLabel>
