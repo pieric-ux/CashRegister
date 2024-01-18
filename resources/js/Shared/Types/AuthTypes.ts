@@ -23,3 +23,10 @@ export interface ConfirmPasswordFormDatas {
     type: string;
     isFocused: boolean;
 }
+
+export interface ForgotPasswordFormDatas {
+    name: 'email';
+    label: string;
+    type: string;
+    isFocused: true;
+}
