@@ -1,45 +1,27 @@
 'use client';
 
-import { useEffect } from 'react';
+import { type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Input } from '@/Components/ui/input/input';
+import { Form } from '@/Components/ui/form/form';
+import { type Auth } from '@/Shared/Types/AuthTypes';
 import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
 import { useForm as useFormInertia } from '@inertiajs/react';
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/Components/ui/form/form';
-
-interface FormInput {
-    password: string;
-}
-
-const defaultValues: FormInput = {
-    password: '',
-};
+import { GenericFormField } from '../Common/GenericFormField';
+import { defaultValues, formDatas } from '@/Shared/Datas/ConfirmPasswordFormDatas';
 
 export function ConfirmPasswordForm(): JSX.Element {
     const { t } = useTranslation();
 
     const { data, setData, post, processing, errors, reset } = useFormInertia(defaultValues);
 
-    const form = useForm<FormInput>({
+    const form = useForm<Auth>({
         defaultValues: data,
     });
 
-    useEffect(() => {
-        // FIXME: don't use useEffect to changing data with setData
-        setData(form.getValues());
-    }, [form.getValues(), setData]);
-
-    function onSubmit(values: FormInput): void {
-        setData(values);
+    function onSubmit(e: FormEvent): void {
+        e.preventDefault();
 
         post(route('password.confirm'), {
             preserveScroll: true,
@@ -49,19 +31,12 @@ export function ConfirmPasswordForm(): JSX.Element {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormField
-                    control={form.control}
-                    name='password'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Password')}</FormLabel>
-                            <FormControl>
-                                <Input type='password' isFocused={true} {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.password}</FormMessage>
-                        </FormItem>
-                    )}
+            <form onSubmit={onSubmit}>
+                <GenericFormField
+                    form={form}
+                    setData={setData}
+                    errors={errors}
+                    formData={formDatas}
                 />
 
                 <CardFooter className='mt-4 flex items-center justify-end p-0'>

@@ -16,3 +16,10 @@ export interface ConfirmDeleteFormDatas {
     autoComplete: string;
     placeholder: string;
 }
+
+export interface ConfirmPasswordFormDatas {
+    name: 'password';
+    label: string;
+    type: string;
+    isFocused: boolean;
+}
