@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { Transition } from '@headlessui/react';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +8,8 @@ import { Input } from '@/Components/ui/input/input';
 import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
 import { useForm as useFormInertia } from '@inertiajs/react';
+import { defaultValues, formDatas } from '@/Shared/Datas/UserPasswordFormDatas';
+import { type UserPasswordFormInput } from '@/Shared/Types/UserPasswordFormTypes';
 import {
     Form,
     FormControl,
@@ -17,84 +19,55 @@ import {
     FormMessage,
 } from '@/Components/ui/form/form';
 
-interface FormInput {
-    current_password: string;
-    password: string;
-    password_confirmation: string;
-}
-
-const defaultValues: FormInput = {
-    current_password: '',
-    password: '',
-    password_confirmation: '',
-};
-
 export function UpdateUserPasswordForm(): JSX.Element {
     const { t } = useTranslation();
 
     const { data, setData, put, processing, errors, reset, recentlySuccessful } =
         useFormInertia(defaultValues);
 
-    const form = useForm<FormInput>({
+    const form = useForm<UserPasswordFormInput>({
         defaultValues: data,
     });
 
-    useEffect(() => {
-        // FIXME: don't use useEffect to changing data with setData
-        setData(form.getValues());
-    }, [form.getValues(), setData]);
-
-    function onSubmit(values: FormInput): void {
-        setData(values);
+    function onSubmit(e: FormEvent): void {
+        e.preventDefault();
 
         put(route('password.update'), {
             preserveScroll: true,
-            onSuccess: () => reset(), // FIXME: reset password data
+            onSuccess: () => {
+                reset();
+                form.reset();
+            },
         });
     }
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormField
-                    control={form.control}
-                    name='current_password'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Current Password')}</FormLabel>
-                            <FormControl>
-                                <Input type='password' autoComplete='current-password' {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.current_password}</FormMessage>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name='password'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('New Password')}</FormLabel>
-                            <FormControl>
-                                <Input type='password' autoComplete='new-password' {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.password}</FormMessage>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name='password_confirmation'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Confirm Password')}</FormLabel>
-                            <FormControl>
-                                <Input type='password' autoComplete='new-password' {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.password_confirmation}</FormMessage>
-                        </FormItem>
-                    )}
-                />
+            <form onSubmit={onSubmit}>
+                {formDatas.map((formData) => (
+                    <FormField
+                        key={formData.name}
+                        control={form.control}
+                        name={formData.name}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>{t(formData.label)}</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        type={formData.type}
+                                        autoComplete={formData.autoComplete}
+                                        {...field}
+                                        onChange={(e) => {
+                                            field.onChange(e);
+                                            setData(formData.name, e.target.value);
+                                        }}
+                                    />
+                                </FormControl>
+                                <FormMessage>{errors[formData.name]}</FormMessage>
+                            </FormItem>
+                        )}
+                    />
+                ))}
 
                 <CardFooter className='mt-4 flex items-center gap-4 p-0'>
                     <Button disabled={processing} aria-label={t('Save your updated password')}>
