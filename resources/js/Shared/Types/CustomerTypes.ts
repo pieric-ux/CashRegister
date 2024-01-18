@@ -1,5 +1,5 @@
 export interface Customer {
-    id: number;
+    id?: number;
     company_name: string;
     first_name: string;
     last_name: string;
@@ -18,7 +18,6 @@ export interface CustomerProfileFormInput extends Partial<Customer> {
 
 export interface CustomerProfileFormData {
     name:
-        | 'id'
         | 'company_name'
         | 'first_name'
         | 'last_name'
