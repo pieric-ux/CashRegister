@@ -30,18 +30,19 @@ export const GenericFormField = ({
             render={({ field }) => (
                 <FormItem>
                     <FormLabel className={formData?.srOnly && 'sr-only'}>
-                        {t(formData.label)}{' '}
-                        {formData.facultative !== undefined && formData.facultative && (
+                        {t(formData?.label)}{' '}
+                        {formData.facultative !== undefined && formData?.facultative && (
                             <small>({t('facultative')})</small>
                         )}
                     </FormLabel>
                     <FormControl>
                         <Input
-                            type={formData.type ?? 'text'}
-                            disabled={formData.canBeDisabled && !data.is_consigned}
+                            type={formData?.type ?? 'text'}
+                            disabled={formData?.canBeDisabled && !data.is_consigned}
                             isFocused={formData.isFocused}
-                            autoComplete={formData.autoComplete}
-                            placeholder={t(formData.placeholder)}
+                            autoComplete={formData?.autoComplete}
+                            placeholder={formData?.placeholder}
+                            pattern={formData?.pattern}
                             {...field}
                             onChange={(e) => {
                                 field.onChange(e);
