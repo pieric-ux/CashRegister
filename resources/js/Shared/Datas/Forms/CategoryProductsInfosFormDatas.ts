@@ -1,4 +1,7 @@
-import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
+import {
+    type CategoryProducts,
+    type CategoryProductsFormDatas,
+} from '@/Shared/Types/CategoryProductsTypes';
 
 export const getDefaultValues = (
     category: CategoryProducts,
@@ -9,6 +12,6 @@ export const getDefaultValues = (
     };
 };
 
-export const formDatas = {
+export const formDatas: CategoryProductsFormDatas = {
     name: 'name',
 };

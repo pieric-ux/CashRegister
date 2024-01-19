@@ -1,7 +1,7 @@
 import {
     type Customer,
     type CustomerProfileFormInput,
-    type CustomerProfileFormDataObject,
+    type CustomerProfileFormDatasObject,
 } from '@/Shared/Types/CustomerTypes';
 
 export const getDefaultValues = (
@@ -22,7 +22,7 @@ export const getDefaultValues = (
     };
 };
 
-export const formDatas: CustomerProfileFormDataObject = {
+export const formDatas: CustomerProfileFormDatasObject = {
     base: [
         {
             name: 'company_name',

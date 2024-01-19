@@ -18,7 +18,7 @@ export interface CustomerProfileFormInput extends Partial<Customer> {
     password_confirmation: string;
 }
 
-export interface CustomerProfileFormData {
+export interface CustomerProfileFormDatas {
     name:
         | 'company_name'
         | 'first_name'
@@ -38,10 +38,10 @@ export interface CustomerProfileFormData {
     facultative?: boolean;
 }
 
-export interface CustomerProfileFormDataObject {
-    base: CustomerProfileFormData[];
-    flex?: CustomerProfileFormData[];
-    update?: CustomerProfileFormData[];
-    end?: CustomerProfileFormData;
-    create?: CustomerProfileFormData[];
+export interface CustomerProfileFormDatasObject {
+    base: CustomerProfileFormDatas[];
+    flex?: CustomerProfileFormDatas[];
+    update?: CustomerProfileFormDatas[];
+    end?: CustomerProfileFormDatas;
+    create?: CustomerProfileFormDatas[];
 }

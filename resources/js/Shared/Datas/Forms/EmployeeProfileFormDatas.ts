@@ -1,4 +1,4 @@
-import { type Employee, type EmployeeProfileFormData } from '@/Shared/Types/EmployeeTypes';
+import { type Employee, type EmployeeProfileFormDatas } from '@/Shared/Types/EmployeeTypes';
 
 export const getDefaultValues = (employee: Employee, isUpdate: boolean): Employee => {
     return {
@@ -9,7 +9,7 @@ export const getDefaultValues = (employee: Employee, isUpdate: boolean): Employe
     };
 };
 
-export const formDatas: EmployeeProfileFormData[] = [
+export const formDatas: EmployeeProfileFormDatas[] = [
     {
         name: 'first_name',
         label: 'First Name',

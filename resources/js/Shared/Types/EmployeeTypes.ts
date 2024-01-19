@@ -11,7 +11,7 @@ export interface Employee {
     updated_at?: string;
 }
 
-export interface EmployeeProfileFormData {
+export interface EmployeeProfileFormDatas {
     name: 'first_name' | 'last_name' | 'phone' | 'email';
     label: string;
     isFocused?: boolean;

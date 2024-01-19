@@ -1,4 +1,4 @@
-import { type Dish, type DishInfosFormData } from '@/Shared/Types/DishTypes';
+import { type Dish, type DishInfosFormDatas } from '@/Shared/Types/DishTypes';
 
 export const getDefaultValues = (dish: Dish, isUpdate: boolean): Dish => {
     return {
@@ -11,7 +11,7 @@ export const getDefaultValues = (dish: Dish, isUpdate: boolean): Dish => {
     };
 };
 
-export const formDatas: DishInfosFormData[] = [
+export const formDatas: DishInfosFormDatas[] = [
     {
         name: 'name',
         label: 'Name',

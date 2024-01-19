@@ -11,7 +11,7 @@ export interface Dish {
     updated_at?: string;
 }
 
-export interface DishInfosFormData {
+export interface DishInfosFormDatas {
     name: 'name' | 'unit' | 'client_price' | 'cost_price';
     label: string;
     isFocused?: boolean;
