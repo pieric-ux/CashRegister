@@ -68,7 +68,7 @@ export function DishInfosForm({
                             <FormLabel className='flex items-center'>
                                 <FormControl>
                                     <Checkbox
-                                        defaultChecked={field.value} // FIXME: checkbox icon
+                                        defaultChecked={field.value}
                                         onCheckedChange={(isChecked) => {
                                             field.onChange(isChecked);
                                             setData('is_consigned', isChecked);
@@ -88,7 +88,7 @@ export function DishInfosForm({
                             <FormLabel className='flex items-center'>
                                 <FormControl>
                                     <Checkbox
-                                        defaultChecked={field.value} // FIXME: checkbox icon
+                                        defaultChecked={field.value}
                                         onCheckedChange={(isChecked) => {
                                             field.onChange(isChecked);
                                             setData('is_SoldSeparately', isChecked);
