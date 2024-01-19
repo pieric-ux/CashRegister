@@ -9,7 +9,7 @@ export interface Dish {
 }
 
 export interface DishInfosFormData {
-    name: 'name' | 'unit' | 'client_price' | 'cost_price' | 'is_consigned';
+    name: 'name' | 'unit' | 'client_price' | 'cost_price';
     label: string;
     isFocused?: boolean;
     canBeDisabled?: boolean;
