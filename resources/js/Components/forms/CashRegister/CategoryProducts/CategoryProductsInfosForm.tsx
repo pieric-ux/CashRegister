@@ -9,7 +9,7 @@ import { useForm as useFormInertia } from '@inertiajs/react';
 import { GenericFormField } from '../../Common/GenericFormField';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
-import { getDefaultValues, formDatas } from '@/Shared/Datas/CategoryProductsInfosFormDatas';
+import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/CategoryProductsInfosFormDatas';
 
 export function CategoryProductsInfosForm({
     application,

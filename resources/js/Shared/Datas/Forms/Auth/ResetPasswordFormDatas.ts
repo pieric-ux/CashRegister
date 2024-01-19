@@ -1,4 +1,4 @@
-import { type Auth, type ResetPasswordFormDatas } from '../Types/AuthTypes';
+import { type Auth, type ResetPasswordFormDatas } from '@/Shared/Types/AuthTypes';
 
 export const getDefaultValues = ({ token, email }: { token: string; email: string }): Auth => {
     return { token, email, password: '', password_confirmation: '' };

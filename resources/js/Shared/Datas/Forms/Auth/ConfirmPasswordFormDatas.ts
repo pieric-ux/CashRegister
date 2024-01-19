@@ -1,4 +1,4 @@
-import { type Auth, type ConfirmPasswordFormDatas } from '../Types/AuthTypes';
+import { type Auth, type ConfirmPasswordFormDatas } from '@/Shared/Types/AuthTypes';
 
 export const defaultValues: Auth = {
     password: '',

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { UpdateUserPasswordForm } from '@/Components/forms/Common/UpdateUserPasswordForm';
+import { UpdateUserPasswordForm } from '@/Components/forms/Auth/UpdateUserPasswordForm';
 import {
     Card,
     CardContent,

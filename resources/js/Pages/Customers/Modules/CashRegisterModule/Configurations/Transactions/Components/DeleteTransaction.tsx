@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
+import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
 import {
     Dialog,
     DialogContent,
@@ -10,7 +11,6 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
-import { ConfirmDeleteForm } from '@/Components/forms/Common/ConfirmDeleteForm';
 
 export default function DeleteTransaction({ transaction }): JSX.Element {
     const { t } = useTranslation();

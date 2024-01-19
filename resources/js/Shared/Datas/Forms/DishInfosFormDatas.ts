@@ -1,4 +1,4 @@
-import { type Dish, type DishInfosFormData } from '../Types/DishTypes';
+import { type Dish, type DishInfosFormData } from '@/Shared/Types/DishTypes';
 
 export const getDefaultValues = (dish: Dish, isUpdate: boolean): Dish => {
     return {

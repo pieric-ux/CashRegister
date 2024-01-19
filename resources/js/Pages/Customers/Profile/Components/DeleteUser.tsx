@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
-import { ConfirmDeleteForm } from '@/Components/forms/Common/ConfirmDeleteForm';
+import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
 import {
     Card,
     CardDescription,

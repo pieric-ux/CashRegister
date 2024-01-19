@@ -9,7 +9,7 @@ import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
 import { useForm as useFormInertia } from '@inertiajs/react';
 import { GenericFormField } from '../Common/GenericFormField';
-import { getDefaultValues, formDatas } from '@/Shared/Datas/ResetPasswordFormDatas';
+import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/ResetPasswordFormDatas';
 
 export function ResetPasswordForm({ token, email }: { token: string; email: string }): JSX.Element {
     const { t } = useTranslation();

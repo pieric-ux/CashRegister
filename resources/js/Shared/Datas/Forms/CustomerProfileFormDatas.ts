@@ -2,7 +2,7 @@ import {
     type Customer,
     type CustomerProfileFormInput,
     type CustomerProfileFormDataObject,
-} from '../Types/customerTypes';
+} from '@/Shared/Types/CustomerTypes';
 
 export const getDefaultValues = (
     customer: Customer,

@@ -9,7 +9,7 @@ import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
 import { GenericFormField } from '../Common/GenericFormField';
 import { Link, useForm as useFormInertia } from '@inertiajs/react';
-import { defaultValues, formDatas } from '@/Shared/Datas/LoginFormDatas';
+import { defaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/LoginFormDatas';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/Components/ui/form/form';
 
 export function LoginForm({ canResetPassword }: { canResetPassword: boolean }): JSX.Element {

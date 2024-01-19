@@ -1,4 +1,4 @@
-import { type CategoryProducts } from '../Types/CategoryProductsTypes';
+import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 
 export const getDefaultValues = (
     category: CategoryProducts,

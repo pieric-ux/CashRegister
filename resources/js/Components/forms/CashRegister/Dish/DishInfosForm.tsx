@@ -9,7 +9,7 @@ import { useForm as useFormInertia } from '@inertiajs/react';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import { GenericFormField } from '../../Common/GenericFormField';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
-import { getDefaultValues, formDatas } from '@/Shared/Datas/DishInfosFormDatas';
+import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/DishInfosFormDatas';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/Components/ui/form/form';
 
 export function DishInfosForm({

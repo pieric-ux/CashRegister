@@ -9,7 +9,7 @@ import { GenericFormField } from './GenericFormField';
 import { Button } from '@/Components/ui/button/button';
 import { useForm as useFormInertia } from '@inertiajs/react';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
-import { defaultValues, formDatas } from '@/Shared/Datas/ConfirmDeleteFormDatas';
+import { defaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/ConfirmDeleteFormDatas';
 
 export function ConfirmDeleteForm({ route, closeDialog, ariaLabel, buttonTiltle }): JSX.Element {
     const { t } = useTranslation();

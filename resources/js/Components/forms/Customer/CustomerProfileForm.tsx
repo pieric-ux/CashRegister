@@ -9,14 +9,14 @@ import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
 import { GenericFormField } from '../Common/GenericFormField';
 import { Link, useForm as useFormInertia } from '@inertiajs/react';
-import { formDatas, getDefaultValues } from '@/Shared/Datas/CustomerProfileFormDatas';
-import { type Customer, type CustomerProfileFormInput } from '@/Shared/Types/customerTypes';
+import { formDatas, getDefaultValues } from '@/Shared/Datas/Forms/CustomerProfileFormDatas';
+import { type Customer, type CustomerProfileFormInput } from '@/Shared/Types/CustomerTypes';
 
 export function CustomerProfileForm({
     customer,
     isUpdate = false,
 }: {
-    customer: Customer;
+    customer?: Customer;
     isUpdate?: boolean;
 }): JSX.Element {
     const { t } = useTranslation();

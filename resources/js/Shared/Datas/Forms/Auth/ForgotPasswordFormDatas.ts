@@ -1,4 +1,4 @@
-import { type Auth, type ForgotPasswordFormDatas } from '../Types/AuthTypes';
+import { type Auth, type ForgotPasswordFormDatas } from '@/Shared/Types/AuthTypes';
 
 export const defaultValues: Auth = {
     email: '',

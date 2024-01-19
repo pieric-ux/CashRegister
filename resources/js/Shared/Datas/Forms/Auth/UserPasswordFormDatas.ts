@@ -1,5 +1,4 @@
-import { type UserPasswordFormDatas } from '@/Shared/Types/UserPasswordFormTypes';
-import { type Auth } from '../Types/AuthTypes';
+import { type Auth, type UserPasswordFormDatas } from '@/Shared/Types/AuthTypes';
 
 export const defaultValues: Auth = {
     current_password: '',
