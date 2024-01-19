@@ -7,8 +7,20 @@ import {
     FormLabel,
     FormMessage,
 } from '@/Components/ui/form/form';
-// TODO: check with Flavien how to type this
-export const GenericFormField = ({ form, setData, errors, formData }): JSX.Element => {
+// TODO: check type
+export const GenericFormField = ({
+    form,
+    data,
+    setData,
+    errors,
+    formData,
+}: {
+    form: any;
+    data?: any;
+    setData: any;
+    errors: any;
+    formData: any;
+}): JSX.Element => {
     const { t } = useTranslation();
 
     return (
@@ -26,6 +38,7 @@ export const GenericFormField = ({ form, setData, errors, formData }): JSX.Eleme
                     <FormControl>
                         <Input
                             type={formData.type ?? 'text'}
+                            disabled={formData.canBeDisabled && !data.is_consigned}
                             isFocused={formData.isFocused}
                             autoComplete={formData.autoComplete}
                             placeholder={t(formData.placeholder)}

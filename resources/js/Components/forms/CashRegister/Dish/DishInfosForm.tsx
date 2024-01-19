@@ -1,30 +1,16 @@
 'use client';
 
-import { useEffect } from 'react';
+import { type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Input } from '@/Components/ui/input/input';
+import { type Dish } from '@/Shared/Types/DishTypes';
 import { Button } from '@/Components/ui/button/button';
 import { useForm as useFormInertia } from '@inertiajs/react';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
+import { GenericFormField } from '../../Common/GenericFormField';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/Components/ui/form/form';
-
-interface FormInput {
-    name: string;
-    unit: string;
-    client_price: string;
-    cost_price: string;
-    is_consigned: boolean;
-    is_SoldSeparately: boolean;
-}
+import { getDefaultValues, formDatas } from '@/Shared/Datas/DishInfosFormDatas';
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/Components/ui/form/form';
 
 export function DishInfosForm({
     application,
@@ -39,28 +25,17 @@ export function DishInfosForm({
 }): JSX.Element {
     const { t } = useTranslation();
 
-    const defaultValues: FormInput = {
-        name: isUpdate ? dish.name : '',
-        unit: isUpdate ? dish.unit : '',
-        client_price: isUpdate ? dish.client_price : '',
-        cost_price: isUpdate ? dish.cost_price : '',
-        is_consigned: isUpdate ? dish.is_consigned : true,
-        is_SoldSeparately: isUpdate ? dish.is_SoldSeparately : false,
-    };
+    const defaultValues = getDefaultValues(dish, isUpdate);
 
     const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
 
-    const form = useForm<FormInput>({
+    const form = useForm<Dish>({
         defaultValues: data,
     });
 
-    useEffect(() => {
-        // FIXME: don't use useEffect to changing data with setData
-        setData(form.getValues());
-    }, [form.getValues(), setData]);
+    function onSubmit(e: FormEvent): void {
+        e.preventDefault();
 
-    function onSubmit(values: FormInput): void {
-        setData(values);
         isUpdate
             ? patch(route('dishes.update', dish), {
                   preserveScroll: true,
@@ -74,60 +49,18 @@ export function DishInfosForm({
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
+            <form onSubmit={onSubmit} className='space-y-4'>
+                {formDatas.map((formData) => (
+                    <GenericFormField
+                        key={formData.name}
+                        form={form}
+                        data={data}
+                        setData={setData}
+                        errors={errors}
+                        formData={formData}
+                    />
+                ))}
                 <FormField
-                    control={form.control}
-                    name='name'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Name')}</FormLabel>
-                            <FormControl>
-                                <Input isFocused={true} {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.name}</FormMessage>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name='unit'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Unit')}</FormLabel>
-                            <FormControl>
-                                <Input {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.unit}</FormMessage>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name='client_price'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Client Price')}</FormLabel>
-                            <FormControl>
-                                <Input disabled={!data.is_consigned} {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.client_price}</FormMessage>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name='cost_price'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Cost Price')}</FormLabel>
-                            <FormControl>
-                                <Input {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.cost_price}</FormMessage>
-                        </FormItem>
-                    )}
-                />
-                <FormField // TODO: space between checkbox
                     control={form.control}
                     name='is_consigned'
                     render={({ field }) => (
@@ -135,8 +68,11 @@ export function DishInfosForm({
                             <FormLabel className='flex items-center'>
                                 <FormControl>
                                     <Checkbox
-                                        checked={field.value} // FIXME: checkbox icon
-                                        onCheckedChange={field.onChange}
+                                        defaultChecked={field.value} // FIXME: checkbox icon
+                                        onCheckedChange={(isChecked) => {
+                                            field.onChange(isChecked);
+                                            setData('is_consigned', isChecked);
+                                        }}
                                     />
                                 </FormControl>
                                 <span className='ml-2'>{t('Consigned')}</span>
@@ -152,8 +88,11 @@ export function DishInfosForm({
                             <FormLabel className='flex items-center'>
                                 <FormControl>
                                     <Checkbox
-                                        checked={field.value} // FIXME: checkbox icon
-                                        onCheckedChange={field.onChange}
+                                        defaultChecked={field.value} // FIXME: checkbox icon
+                                        onCheckedChange={(isChecked) => {
+                                            field.onChange(isChecked);
+                                            setData('is_SoldSeparately', isChecked);
+                                        }}
                                     />
                                 </FormControl>
                                 <span className='ml-2'>{t('Sold Separately')}</span>
