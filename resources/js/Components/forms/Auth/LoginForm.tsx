@@ -7,8 +7,8 @@ import { type Auth } from '@/Shared/Types/AuthTypes';
 import { Button } from '@/Components/ui/button/button';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
-import { GenericFormField } from '../Common/GenericFormField';
 import { Link, useForm as useFormInertia } from '@inertiajs/react';
+import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { defaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/LoginFormDatas';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/Components/ui/form/form';
 

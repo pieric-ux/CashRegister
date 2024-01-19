@@ -6,9 +6,9 @@ import { useTranslation } from 'react-i18next';
 import { Form } from '@/Components/ui/form/form';
 import { Button } from '@/Components/ui/button/button';
 import { useForm as useFormInertia } from '@inertiajs/react';
-import { GenericFormField } from '../../Common/GenericFormField';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
+import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/CategoryProductsInfosFormDatas';
 
 export function CategoryProductsInfosForm({

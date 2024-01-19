@@ -5,10 +5,10 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Form } from '@/Components/ui/form/form';
 import { type Auth } from '@/Shared/Types/AuthTypes';
-import { GenericFormField } from './GenericFormField';
 import { Button } from '@/Components/ui/button/button';
 import { useForm as useFormInertia } from '@inertiajs/react';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
+import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { defaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/ConfirmDeleteFormDatas';
 
 export function ConfirmDeleteForm({ route, closeDialog, ariaLabel, buttonTiltle }): JSX.Element {

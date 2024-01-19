@@ -8,7 +8,7 @@ import { type Auth } from '@/Shared/Types/AuthTypes';
 import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
 import { useForm as useFormInertia } from '@inertiajs/react';
-import { GenericFormField } from '../Common/GenericFormField';
+import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/ResetPasswordFormDatas';
 
 export function ResetPasswordForm({ token, email }: { token: string; email: string }): JSX.Element {

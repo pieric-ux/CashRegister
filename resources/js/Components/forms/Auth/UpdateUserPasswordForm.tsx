@@ -6,10 +6,10 @@ import { Transition } from '@headlessui/react';
 import { useTranslation } from 'react-i18next';
 import { Form } from '@/Components/ui/form/form';
 import { type Auth } from '@/Shared/Types/AuthTypes';
-import { GenericFormField } from './GenericFormField';
 import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
 import { useForm as useFormInertia } from '@inertiajs/react';
+import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { defaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/UserPasswordFormDatas';
 
 export function UpdateUserPasswordForm(): JSX.Element {

@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 import { Form } from '@/Components/ui/form/form';
 import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
-import { GenericFormField } from '../Common/GenericFormField';
 import { Link, useForm as useFormInertia } from '@inertiajs/react';
+import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { formDatas, getDefaultValues } from '@/Shared/Datas/Forms/CustomerProfileFormDatas';
 import { type Customer, type CustomerProfileFormInput } from '@/Shared/Types/CustomerTypes';
 
