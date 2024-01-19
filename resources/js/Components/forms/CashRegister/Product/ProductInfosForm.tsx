@@ -85,7 +85,10 @@ export function ProductInfosForm({
                                     <FormLabel>{t('Category')}</FormLabel>
                                     <Select
                                         defaultValue={field.value}
-                                        onValueChange={field.onChange}
+                                        onValueChange={(value) => {
+                                            field.onChange(value);
+                                            setData('category', value);
+                                        }}
                                     >
                                         <FormControl>
                                             <SelectTrigger>
@@ -115,7 +118,10 @@ export function ProductInfosForm({
                                     <FormLabel>{t('Dish')}</FormLabel>
                                     <Select
                                         defaultValue={field.value}
-                                        onValueChange={field.onChange}
+                                        onValueChange={(value) => {
+                                            field.onChange(value);
+                                            setData('dish', value);
+                                        }}
                                     >
                                         <FormControl>
                                             <SelectTrigger>
