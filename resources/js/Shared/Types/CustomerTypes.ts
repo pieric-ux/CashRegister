@@ -10,6 +10,8 @@ export interface Customer {
     email: string;
     email_verified_at: string;
     password: string;
+    created_at?: string;
+    updated_at?: string;
 }
 
 export interface CustomerProfileFormInput extends Partial<Customer> {
