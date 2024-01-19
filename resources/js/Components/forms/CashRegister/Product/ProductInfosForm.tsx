@@ -1,12 +1,15 @@
 'use client';
 
-import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Input } from '@/Components/ui/input/input';
+import { useContext, type FormEvent } from 'react';
 import { Button } from '@/Components/ui/button/button';
+import { type Product } from '@/Shared/Types/ProductTypes';
 import { useForm as useFormInertia } from '@inertiajs/react';
+import { ProductsTableContext } from '@/Context/ProductsTableContext';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
+import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
+import { formDatas, getDefaultValues } from '@/Shared/Datas/Forms/ProductInfoFormData';
 import {
     Form,
     FormControl,
@@ -22,16 +25,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/Components/ui/select/select';
-import { ProductsTableContext } from '@/Context/ProductsTableContext';
-
-interface FormInput {
-    name: string;
-    unit: string;
-    client_price: string;
-    cost_price: string;
-    category: string;
-    dish: string;
-}
 
 export function ProductInfosForm({
     application,
@@ -48,28 +41,17 @@ export function ProductInfosForm({
 
     const { categories, dishes } = useContext(ProductsTableContext);
 
-    const defaultValues: FormInput = {
-        name: isUpdate ? product.name : '',
-        unit: isUpdate ? product.unit : '',
-        client_price: isUpdate ? product.client_price : '',
-        cost_price: isUpdate ? product.cost_price : '',
-        category: isUpdate ? product.fk_categories_products_id : '',
-        dish: isUpdate ? product.fk_dishes_id : '',
-    };
+    const defaultValues = getDefaultValues(product, isUpdate);
 
     const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
 
-    const form = useForm<FormInput>({
+    const form = useForm<Product>({
         defaultValues: data,
     });
 
-    useEffect(() => {
-        // FIXME: don't use useEffect to changing data with setData
-        setData(form.getValues());
-    }, [form.getValues(), setData]);
+    function onSubmit(e: FormEvent): void {
+        e.preventDefault();
 
-    function onSubmit(values: FormInput): void {
-        setData(values);
         isUpdate
             ? patch(route('products.update', product), {
                   preserveScroll: true,
@@ -83,59 +65,16 @@ export function ProductInfosForm({
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormField
-                    control={form.control}
-                    name='name'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Name')}</FormLabel>
-                            <FormControl>
-                                <Input isFocused={true} {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.name}</FormMessage>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name='unit'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Unit')}</FormLabel>
-                            <FormControl>
-                                <Input {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.unit}</FormMessage>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name='client_price'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Client Price')}</FormLabel>
-                            <FormControl>
-                                <Input {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.client_price}</FormMessage>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name='cost_price'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Cost Price')}</FormLabel>
-                            <FormControl>
-                                <Input {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.cost_price}</FormMessage>
-                        </FormItem>
-                    )}
-                />
+            <form onSubmit={onSubmit}>
+                {formDatas.map((formData) => (
+                    <GenericFormField
+                        key={formData.name}
+                        form={form}
+                        setData={setData}
+                        errors={errors}
+                        formData={formData}
+                    />
+                ))}
                 {isUpdate && (
                     <>
                         <FormField
@@ -158,7 +97,7 @@ export function ProductInfosForm({
                                             {categories.map((category) => (
                                                 <SelectItem key={category.id} value={category.id}>
                                                     {category.name === 'No category'
-                                                        ? t('No Category')
+                                                        ? t('No category')
                                                         : category.name}
                                                 </SelectItem>
                                             ))}
