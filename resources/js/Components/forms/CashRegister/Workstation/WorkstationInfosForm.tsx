@@ -1,24 +1,15 @@
 'use client';
-// TODO: Maybe refactor with CategoryProductsInfosForm
-import { useEffect } from 'react';
+
+import { type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Input } from '@/Components/ui/input/input';
+import { Form } from '@/Components/ui/form/form';
 import { Button } from '@/Components/ui/button/button';
 import { useForm as useFormInertia } from '@inertiajs/react';
+import { type Workstation } from '@/Shared/Types/WorkstationTypes';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/Components/ui/form/form';
-
-interface FormInput {
-    name: string;
-}
+import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
+import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/WorkstationInfosFormDatas';
 
 export function WorkstationInfosForm({
     application,
@@ -33,23 +24,17 @@ export function WorkstationInfosForm({
 }): JSX.Element {
     const { t } = useTranslation();
 
-    const defaultValues: FormInput = {
-        name: isUpdate ? workstation.name : '',
-    };
+    const defaultValues = getDefaultValues(workstation, isUpdate);
 
     const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
 
-    const form = useForm<FormInput>({
+    const form = useForm<Workstation>({
         defaultValues: data,
     });
 
-    useEffect(() => {
-        // FIXME: don't use useEffect to changing data with setData
-        setData(form.getValues());
-    }, [form.getValues(), setData]);
+    function onSubmit(e: FormEvent): void {
+        e.preventDefault();
 
-    function onSubmit(values: FormInput): void {
-        setData(values);
         isUpdate
             ? patch(route('workstations.update', workstation), {
                   preserveScroll: true,
@@ -63,19 +48,12 @@ export function WorkstationInfosForm({
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormField
-                    control={form.control}
-                    name='name'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Name')}</FormLabel>
-                            <FormControl>
-                                <Input isFocused={true} {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.name}</FormMessage>
-                        </FormItem>
-                    )}
+            <form onSubmit={onSubmit}>
+                <GenericFormField
+                    form={form}
+                    setData={setData}
+                    errors={errors}
+                    formData={formDatas}
                 />
 
                 <DialogFooter className='mt-6 flex justify-end'>
