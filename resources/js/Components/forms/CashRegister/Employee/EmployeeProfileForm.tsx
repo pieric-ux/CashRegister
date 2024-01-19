@@ -1,27 +1,15 @@
 'use client';
 
-import { useEffect } from 'react';
+import { type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Input } from '@/Components/ui/input/input';
+import { Form } from '@/Components/ui/form/form';
 import { Button } from '@/Components/ui/button/button';
 import { useForm as useFormInertia } from '@inertiajs/react';
+import { type Employee } from '@/Shared/Types/EmployeeTypes';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/Components/ui/form/form';
-
-interface FormInput {
-    first_name: string;
-    last_name: string;
-    phone: string;
-    email: string;
-}
+import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
+import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/EmployeeProfileFormData';
 
 export function EmployeeProfileForm({
     application,
@@ -36,26 +24,16 @@ export function EmployeeProfileForm({
 }): JSX.Element {
     const { t } = useTranslation();
 
-    const defaultValues: FormInput = {
-        first_name: isUpdate ? employee.first_name : '',
-        last_name: isUpdate ? employee.last_name : '',
-        phone: isUpdate ? employee.phone : '',
-        email: isUpdate ? employee.email : '',
-    };
+    const defaultValues = getDefaultValues(employee, isUpdate);
 
     const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
 
-    const form = useForm<FormInput>({
+    const form = useForm<Employee>({
         defaultValues: data,
     });
 
-    useEffect(() => {
-        // FIXME: don't use useEffect to changing data with setData
-        setData(form.getValues());
-    }, [form.getValues(), setData]);
-
-    function onSubmit(values: FormInput): void {
-        setData(values);
+    function onSubmit(e: FormEvent): void {
+        e.preventDefault();
 
         isUpdate
             ? patch(route('employees.update', employee), {
@@ -70,59 +48,17 @@ export function EmployeeProfileForm({
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormField
-                    control={form.control}
-                    name='first_name'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('First Name')}</FormLabel>
-                            <FormControl>
-                                <Input {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.first_name}</FormMessage>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name='last_name'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Last Name')}</FormLabel>
-                            <FormControl>
-                                <Input {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.last_name}</FormMessage>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name='phone'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Phone')}</FormLabel>
-                            <FormControl>
-                                <Input type='tel' {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.phone}</FormMessage>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name='email'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{t('Email')}</FormLabel>
-                            <FormControl>
-                                <Input type='email' {...field} />
-                            </FormControl>
-                            <FormMessage>{errors.email}</FormMessage>
-                        </FormItem>
-                    )}
-                />
+            <form onSubmit={onSubmit}>
+                {formDatas.map((formData) => (
+                    <GenericFormField
+                        key={formData.name}
+                        form={form}
+                        setData={setData}
+                        errors={errors}
+                        formData={formData}
+                    />
+                ))}
+
                 <DialogFooter className='mt-6 flex justify-end'>
                     <DialogClose asChild>
                         <Button variant={'secondary'} onClick={closeDialog}>
