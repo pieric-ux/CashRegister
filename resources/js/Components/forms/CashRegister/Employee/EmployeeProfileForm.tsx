@@ -9,7 +9,7 @@ import { useForm as useFormInertia } from '@inertiajs/react';
 import { type Employee } from '@/Shared/Types/EmployeeTypes';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
-import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/EmployeeProfileFormData';
+import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/EmployeeProfileFormDatas';
 
 export function EmployeeProfileForm({
     application,

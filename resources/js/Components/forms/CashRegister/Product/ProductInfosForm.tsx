@@ -9,7 +9,7 @@ import { useForm as useFormInertia } from '@inertiajs/react';
 import { ProductsTableContext } from '@/Context/ProductsTableContext';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
-import { formDatas, getDefaultValues } from '@/Shared/Datas/Forms/ProductInfoFormData';
+import { formDatas, getDefaultValues } from '@/Shared/Datas/Forms/ProductInfoFormDatas';
 import {
     Form,
     FormControl,
