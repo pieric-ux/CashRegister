@@ -2,7 +2,7 @@ import { Head } from '@inertiajs/react';
 import { Card, CardHeader } from '@/Components/ui/card/card';
 import CR_AppAdminLayout from '@/Components/layouts/Auth/Customer/CR_AppAdminLayout';
 
-export default function Dashboard({ customerAuth, application, localization }) {
+export default function Dashboard({ customerAuth, application, localization }): JSX.Element {
     return (
         <CR_AppAdminLayout
             auth={customerAuth}
