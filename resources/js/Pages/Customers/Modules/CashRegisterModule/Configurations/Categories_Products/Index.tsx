@@ -8,7 +8,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import CreateCategoriesProduct from './Components/CreateCategoriesProduct';
 import UpdateCategoriesProduct from './Components/UpdateCategoriesProduct';
 import DeleteCategoriesProduct from './Components/DeleteCategoriesProduct';
-import CR_AppAdminLayout from '@/Components/layouts/Auth/Customer/CR_AppAdminLayout';
+import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
 export default function Index({
     customerAuth,
@@ -56,7 +56,7 @@ export default function Index({
     };
 
     return (
-        <CR_AppAdminLayout
+        <CashRegisterConfigurationsLayout
             auth={customerAuth}
             application={application}
             localization={localization}
@@ -123,6 +123,6 @@ export default function Index({
                     </Card>
                 )}
             </div>
-        </CR_AppAdminLayout>
+        </CashRegisterConfigurationsLayout>
     );
 }

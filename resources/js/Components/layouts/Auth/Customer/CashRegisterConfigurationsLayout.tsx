@@ -8,7 +8,12 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import Sidebar from '@/Components/layouts/Auth/Customer/CustomerSidebar';
 import SideBarLink from '@/Components/layouts/Auth/Customer/CustomerSidebarLink';
 
-export default function CR_AppAdminLayout({ auth, application, children, localization }) {
+export default function CashRegisterConfigurationsLayout({
+    auth,
+    application,
+    children,
+    localization,
+}) {
     const { t } = useTranslation();
 
     const [sideBarOpen, setSideBarOpen] = useLocalStorage('sideBarOpen', false);

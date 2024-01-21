@@ -9,7 +9,7 @@ import DeleteWorkstation from './Components/DeleteWorkstation';
 import { Separator } from '@/Components/ui/separator/separator';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card/card';
-import CR_AppAdminLayout from '@/Components/layouts/Auth/Customer/CR_AppAdminLayout';
+import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
 export default function Index({ customerAuth, application, workstations, localization }) {
     const { t } = useTranslation();
@@ -90,7 +90,7 @@ export default function Index({ customerAuth, application, workstations, localiz
     };
 
     return (
-        <CR_AppAdminLayout
+        <CashRegisterConfigurationsLayout
             auth={customerAuth}
             application={application}
             localization={localization}
@@ -446,6 +446,6 @@ export default function Index({ customerAuth, application, workstations, localiz
                     </Card>
                 )}
             </div>
-        </CR_AppAdminLayout>
+        </CashRegisterConfigurationsLayout>
     );
 }

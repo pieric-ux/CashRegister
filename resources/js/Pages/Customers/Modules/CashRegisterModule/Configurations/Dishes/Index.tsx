@@ -4,7 +4,7 @@ import CreateDish from './Components/CreateDish';
 import { columns } from './Components/DishesTableColumn';
 import { Card, CardHeader } from '@/Components/ui/card/card';
 import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
-import CR_AppAdminLayout from '@/Components/layouts/Auth/Customer/CR_AppAdminLayout';
+import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
 export default function Index({ customerAuth, application, dishes, localization }): JSX.Element {
     const { t } = useTranslation();
@@ -12,7 +12,7 @@ export default function Index({ customerAuth, application, dishes, localization 
     const dishesFilter = dishes.filter((dish) => dish.name !== 'No dish');
 
     return (
-        <CR_AppAdminLayout
+        <CashRegisterConfigurationsLayout
             auth={customerAuth}
             application={application}
             localization={localization}
@@ -33,6 +33,6 @@ export default function Index({ customerAuth, application, dishes, localization 
                     </CardHeader>
                 </Card>
             </div>
-        </CR_AppAdminLayout>
+        </CashRegisterConfigurationsLayout>
     );
 }
