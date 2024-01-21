@@ -1,28 +1,29 @@
 'use client';
 
-import { type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Form } from '@/Components/ui/form/form';
+import { useContext, type FormEvent } from 'react';
 import { Button } from '@/Components/ui/button/button';
 import { useForm as useFormInertia } from '@inertiajs/react';
 import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
+import { ShowCashRegisterInfosContext } from '@/Context/CashRegisterModulesContext';
 import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/CashRegisterInfosFormDatas';
 
 export function CashRegisterInfosForm({
-    application,
     closeDialog,
     isUpdate = false,
 }: {
-    application?: any; // TODO: type application
     closeDialog: () => void;
     isUpdate?: boolean;
 }): JSX.Element {
     const { t } = useTranslation();
 
-    const defaultValues = getDefaultValues(application, isUpdate);
+    const { cashRegisterModule } = useContext(ShowCashRegisterInfosContext);
+
+    const defaultValues = getDefaultValues(cashRegisterModule, isUpdate);
 
     const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
 
@@ -34,7 +35,7 @@ export function CashRegisterInfosForm({
         e.preventDefault();
 
         isUpdate
-            ? patch(route('cashregisters.update', application.slug), {
+            ? patch(route('cashregisters.update', cashRegisterModule.slug), {
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               })

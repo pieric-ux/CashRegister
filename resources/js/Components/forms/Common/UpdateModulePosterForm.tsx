@@ -1,11 +1,12 @@
 'use client';
 
+import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { Input } from '@/Components/ui/input/input';
-import { useEffect } from 'react';
 import { useForm as useFormInertia } from '@inertiajs/react';
 import { Avatar, AvatarImage } from '@/Components/ui/avatar/avatar';
+import { ShowCashRegisterInfosContext } from '@/Context/CashRegisterModulesContext';
 import {
     Form,
     FormControl,
@@ -16,13 +17,15 @@ import {
 } from '@/Components/ui/form/form';
 
 interface FormInput {
-    appId: string;
+    moduleId?: number;
     poster: File | undefined;
 }
 
-export function UpdateModulePosterForm({ application }): JSX.Element {
+export function UpdateModulePosterForm(): JSX.Element {
+    const { cashRegisterModule, posterPath } = useContext(ShowCashRegisterInfosContext);
+
     const defaultValues: FormInput = {
-        appId: application.id,
+        moduleId: cashRegisterModule.id,
         poster: undefined,
     };
 
@@ -40,7 +43,7 @@ export function UpdateModulePosterForm({ application }): JSX.Element {
     function onSubmit(): void {
         if (data.poster !== undefined) {
             const formData = new FormData();
-            formData.append('appId', data.appId);
+            formData.append('moduleId', data.moduleId);
             formData.append('poster', data.poster);
 
             post(route('poster.upload'), formData);
@@ -57,7 +60,7 @@ export function UpdateModulePosterForm({ application }): JSX.Element {
                         <FormItem className='relative z-30 mx-auto h-36 w-36 backdrop-blur-md transition duration-300 ease-linear'>
                             <div className='relative h-full w-full drop-shadow-md'>
                                 <Avatar variant={'square'} size={'poster'}>
-                                    <AvatarImage src={application.posterPath} alt='poster' />
+                                    <AvatarImage src={posterPath} alt='poster' />
                                 </Avatar>
                                 <FormLabel className='absolute -bottom-4 -right-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-ring hover:bg-opacity-90'>
                                     <Svg variant={'destructive'} type={'addPicture'} />

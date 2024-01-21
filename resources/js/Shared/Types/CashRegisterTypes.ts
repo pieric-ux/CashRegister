@@ -12,6 +12,11 @@ export interface CashRegister {
     updated_at?: string;
 }
 
+export interface CashRegisterModulesContextDatas {
+    cashRegisterModule: CashRegister;
+    posterPath: string;
+}
+
 export interface CashRegisterInfosFormDatas {
     name: 'name' | 'description' | 'start_date' | 'end_date' | 'location' | 'website';
     label: string;

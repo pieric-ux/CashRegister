@@ -35,7 +35,7 @@ class MediaController extends Controller
      */
     public function uploadPoster(UploadPosterRequest $request, CR_Module $module): RedirectResponse
     {
-        $module = $module::find($request->appId);
+        $module = $module::find($request->moduleId);
 
         if ($request->hasFile('poster')) {
             $poster = $request->file('poster');

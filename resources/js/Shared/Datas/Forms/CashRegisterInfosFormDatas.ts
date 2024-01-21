@@ -3,14 +3,17 @@ import {
     type CashRegisterInfosFormDatas,
 } from '@/Shared/Types/CashRegisterTypes';
 
-export const getDefaultValues = (application: CashRegister, isUpdate: boolean): CashRegister => {
+export const getDefaultValues = (
+    cashRegisterModule: CashRegister,
+    isUpdate: boolean,
+): CashRegister => {
     return {
-        name: isUpdate ? application?.name : '',
-        description: isUpdate ? application?.description : '',
-        start_date: isUpdate ? application?.start_date : '',
-        end_date: isUpdate ? application?.end_date : '',
-        location: isUpdate ? application?.location : '',
-        website: isUpdate ? application?.website : '',
+        name: isUpdate ? cashRegisterModule?.name : '',
+        description: isUpdate ? cashRegisterModule?.description ?? '' : '',
+        start_date: isUpdate ? cashRegisterModule?.start_date ?? '' : '',
+        end_date: isUpdate ? cashRegisterModule?.end_date ?? '' : '',
+        location: isUpdate ? cashRegisterModule?.location ?? '' : '',
+        website: isUpdate ? cashRegisterModule?.website ?? '' : '',
     };
 };
 

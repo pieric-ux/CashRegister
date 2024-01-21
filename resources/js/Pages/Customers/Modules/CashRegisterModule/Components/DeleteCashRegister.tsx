@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
+import { ShowCashRegisterInfosContext } from '@/Context/CashRegisterModulesContext';
 import {
     Dialog,
     DialogContent,
@@ -12,8 +13,10 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function DeleteCashRegister({ application }): JSX.Element {
+export default function DeleteCashRegister(): JSX.Element {
     const { t } = useTranslation();
+
+    const { cashRegisterModule } = useContext(ShowCashRegisterInfosContext);
 
     const [open, setOpen] = useState(false);
 
@@ -39,7 +42,7 @@ export default function DeleteCashRegister({ application }): JSX.Element {
                         </DialogDescription>
                     </DialogHeader>
                     <ConfirmDeleteForm
-                        route={route('cashregisters.destroy', application.slug)}
+                        route={route('cashregisters.destroy', cashRegisterModule.slug)}
                         closeDialog={closeDialog}
                         ariaLabel={t('Delete your app')}
                         buttonTiltle={t('Delete App')}

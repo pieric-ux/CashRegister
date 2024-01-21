@@ -12,7 +12,7 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function UpdateCashRegister({ application }): JSX.Element {
+export default function UpdateCashRegister(): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);
@@ -38,11 +38,7 @@ export default function UpdateCashRegister({ application }): JSX.Element {
                             )}
                         </DialogDescription>
                     </DialogHeader>
-                    <CashRegisterInfosForm
-                        application={application}
-                        isUpdate={true}
-                        closeDialog={closeDialog}
-                    />
+                    <CashRegisterInfosForm isUpdate={true} closeDialog={closeDialog} />
                 </DialogContent>
             </Dialog>
         </section>

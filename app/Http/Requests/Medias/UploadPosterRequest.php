@@ -13,7 +13,7 @@ class UploadPosterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $moduleId = $this->input('appId');
+        $moduleId = $this->input('moduleId');
 
         $module = CR_Module::find($moduleId);
 
