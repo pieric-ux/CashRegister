@@ -46,6 +46,10 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'customerAuth' => $customerAuth,
             'employeeAuth' => $employeeAuth,
+            'localization' => [
+                'locale' => app()->getLocale(),
+                'locales' => config('app.locales'),
+            ],
             'ziggy' => fn() => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),

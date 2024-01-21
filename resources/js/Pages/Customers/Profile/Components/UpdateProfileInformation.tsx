@@ -1,7 +1,6 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
-import { type Customer } from '@/Shared/Types/CustomerTypes';
 import { Alert, AlertDescription } from '@/Components/ui/alert/alert';
 import { CustomerProfileForm } from '@/Components/forms/Customer/CustomerProfileForm';
 import {
@@ -13,15 +12,15 @@ import {
 } from '@/Components/ui/card/card';
 
 export default function UpdateProfileInformation({
-    customer,
     mustVerifyEmail,
     status,
 }: {
-    customer: Customer;
     mustVerifyEmail: boolean;
     status?: string;
 }): JSX.Element {
     const { t } = useTranslation();
+
+    const { customerAuth } = usePage().props;
 
     return (
         <section>
@@ -33,7 +32,7 @@ export default function UpdateProfileInformation({
                     </CardDescription>
                 </CardHeader>
                 <CardContent size={'xl'}>
-                    {mustVerifyEmail && customer.email_verified_at === null && (
+                    {mustVerifyEmail && customerAuth.customer.email_verified_at === null && (
                         <Alert>
                             <AlertDescription>
                                 {t('Your email address is unverified.')}
@@ -52,7 +51,7 @@ export default function UpdateProfileInformation({
                             </Alert>
                         </>
                     )}
-                    <CustomerProfileForm customer={customer} isUpdate={true} />
+                    <CustomerProfileForm isUpdate={true} />
                 </CardContent>
             </Card>
         </section>

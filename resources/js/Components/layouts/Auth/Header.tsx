@@ -4,18 +4,12 @@ import { useState } from 'react';
 import DropdownMenu from '@/Components/features/dropdown-menu/DropdownMenu';
 import ThemeSwitcher from '@/Components/features/theme-switcher/ThemeSwitcher';
 import LanguageSwitcher from '@/Components/features/language-switcher/LanguageSwitcher';
+import { usePage } from '@inertiajs/react';
 
-export default function Header({
-    user,
-    title,
-    avatarPath,
-    RespNavLink,
-    dropdownLinks,
-    sideBarOpen,
-    setSideBarOpen,
-    localization,
-}) {
+export default function Header({ title, RespNavLink, dropdownLinks, sideBarOpen, setSideBarOpen }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+
+    const { customerAuth } = usePage().props;
 
     return (
         <header
@@ -68,14 +62,10 @@ export default function Header({
                     </h1>
                 </div>
                 <div className='flex items-center gap-2'>
-                    <LanguageSwitcher localization={localization} />
+                    <LanguageSwitcher />
                     <ThemeSwitcher />
                     <div className='hidden sm:flex'>
-                        <DropdownMenu
-                            user={user}
-                            avatarPath={avatarPath}
-                            dropdownLinks={dropdownLinks}
-                        />
+                        <DropdownMenu dropdownLinks={dropdownLinks} />
                     </div>
 
                     <div className='-mr-2 flex sm:hidden'>
@@ -128,9 +118,11 @@ export default function Header({
                 <div className='border-t border-gray-200 pb-1 pt-4 dark:border-gray-600'>
                     <div className='px-4'>
                         <div className='text-base font-medium text-gray-800 dark:text-gray-200'>
-                            {user.first_name}
+                            {customerAuth.customer.first_name}
                         </div>
-                        <div className='text-sm font-medium text-gray-500'>{user.email}</div>
+                        <div className='text-sm font-medium text-gray-500'>
+                            {customerAuth.customer.email}
+                        </div>
                     </div>
 
                     <div className='mt-3 space-y-1'>{RespNavLink}</div>

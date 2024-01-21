@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState, type FC } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 import {
@@ -10,18 +10,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/Components/ui/select/select';
+import { usePage } from '@inertiajs/react';
 
-interface LaravelLocalization {
-    locale: string;
-    locales: string[];
-}
-
-interface LanguageSwitcherProps {
-    localization: LaravelLocalization;
-}
-
-const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ localization }) => {
+const LanguageSwitcher = (): JSX.Element => {
     const { i18n } = useTranslation();
+
+    const { localization } = usePage().props;
 
     const [language, setLanguage] = useState(i18n.language);
 

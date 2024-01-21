@@ -1,10 +1,9 @@
-import { type FC } from 'react';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import useColorMode from '@/Hooks/useColorMode';
 import { Switch, SwitchThumb } from '@/Components/ui/switch/switch';
 
-const ThemeSwitcher: FC = () => {
+const ThemeSwitcher = (): JSX.Element => {
     const { t } = useTranslation();
 
     const [colorMode, setColorMode] = useColorMode(); // FIXME: state of switch isn't stable after new render

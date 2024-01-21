@@ -7,21 +7,17 @@ import { useTranslation } from 'react-i18next';
 import { Form } from '@/Components/ui/form/form';
 import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
-import { Link, useForm as useFormInertia } from '@inertiajs/react';
+import { Link, useForm as useFormInertia, usePage } from '@inertiajs/react';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { formDatas, getDefaultValues } from '@/Shared/Datas/Forms/CustomerProfileFormDatas';
-import { type Customer, type CustomerProfileFormInput } from '@/Shared/Types/CustomerTypes';
+import { type CustomerProfileFormInput } from '@/Shared/Types/CustomerTypes';
 
-export function CustomerProfileForm({
-    customer,
-    isUpdate = false,
-}: {
-    customer?: Customer;
-    isUpdate?: boolean;
-}): JSX.Element {
+export function CustomerProfileForm({ isUpdate = false }: { isUpdate?: boolean }): JSX.Element {
     const { t } = useTranslation();
 
-    const defaultValues = getDefaultValues(customer, isUpdate);
+    const { customerAuth } = usePage().props;
+
+    const defaultValues = getDefaultValues(customerAuth.customer, isUpdate);
 
     const { data, setData, post, patch, processing, errors, reset, recentlySuccessful } =
         useFormInertia(defaultValues);

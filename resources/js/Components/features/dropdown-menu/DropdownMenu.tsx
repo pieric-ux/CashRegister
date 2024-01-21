@@ -7,25 +7,23 @@ import {
     DropdownItem,
     DropdownTrigger,
 } from '@/Components/ui/dropdown/dropdown';
+import { usePage } from '@inertiajs/react';
 
 interface DropdownMenuProps {
-    user: {
-        first_name: string;
-        last_name: string;
-    };
-    avatarPath: string;
     dropdownLinks: ReactElement[];
 }
 
-const DropdownMenu: FC<DropdownMenuProps> = ({ user, avatarPath, dropdownLinks }) => {
+const DropdownMenu: FC<DropdownMenuProps> = ({ dropdownLinks }) => {
+    const { customerAuth } = usePage().props;
     return (
         <Dropdown>
             <DropdownTrigger className='flex items-center justify-center text-sm font-medium leading-4'>
-                {user.first_name}
+                {customerAuth.customer.first_name}
                 <Avatar className='ml-2'>
-                    <AvatarImage src={avatarPath} alt='avatar' />
+                    <AvatarImage src={customerAuth.avatarPath} alt='avatar' />
                     <AvatarFallback>
-                        {user.first_name.charAt(0) + user.last_name.charAt(0)}
+                        {customerAuth.customer.first_name.charAt(0) +
+                            customerAuth.customer.last_name.charAt(0)}
                     </AvatarFallback>
                 </Avatar>
                 <ChevronDownIcon className='-mr-0.5 ml-1 h-4 w-4' />

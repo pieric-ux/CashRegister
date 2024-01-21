@@ -8,7 +8,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import Sidebar from '@/Components/layouts/Auth/Customer/CustomerSidebar';
 import SideBarLink from '@/Components/layouts/Auth/Customer/CustomerSidebarLink';
 
-export default function CustomerLayout({ auth, children, localization }) {
+export default function CustomerLayout({ children }) {
     const { t } = useTranslation();
 
     const [sideBarOpen, setSideBarOpen] = useLocalStorage('sideBarOpen', false);
@@ -79,13 +79,10 @@ export default function CustomerLayout({ auth, children, localization }) {
 
                 <div className='relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden'>
                     <Header
-                        user={auth.customer}
-                        avatarPath={auth.avatarPath}
                         RespNavLink={RespNavLink}
                         dropdownLinks={dropdownLinks}
                         sideBarOpen={sideBarOpen}
                         setSideBarOpen={setSideBarOpen}
-                        localization={localization}
                     />
                     <main>
                         <div className='mx-auto max-w-7xl py-12'>{children}</div>

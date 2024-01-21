@@ -7,15 +7,16 @@ import {
     CardHeader,
     CardTitle,
 } from '@/Components/ui/card/card';
+import { usePage } from '@inertiajs/react';
 
 export default function UpdateUserAvatar({
-    avatarPath,
     isEmployee = false,
 }: {
-    avatarPath: string;
     isEmployee?: boolean;
 }): JSX.Element {
     const { t } = useTranslation();
+
+    const { customerAuth } = usePage().props;
 
     return (
         <section>
@@ -25,7 +26,10 @@ export default function UpdateUserAvatar({
                     <CardDescription>{t("Update your avatar's profile.")}</CardDescription>
                 </CardHeader>
                 <CardContent size={'xl'}>
-                    <UpdateUserAvatarForm avatarPath={avatarPath} isEmployee={isEmployee} />
+                    <UpdateUserAvatarForm
+                        avatarPath={customerAuth.avatarPath}
+                        isEmployee={isEmployee}
+                    />
                 </CardContent>
             </Card>
         </section>
