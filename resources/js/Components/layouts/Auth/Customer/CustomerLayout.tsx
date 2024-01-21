@@ -25,8 +25,8 @@ export default function CustomerLayout({ auth, children, localization }) {
                 {t('Profile')}
             </ResponsiveNavLink>
             <ResponsiveNavLink
-                href={route('applications.index')}
-                active={route().current('applications.index')}
+                href={route('cashregisters.index')}
+                active={route().current('cashregisters.index')}
             >
                 {t('Applications')}
             </ResponsiveNavLink>
@@ -66,10 +66,10 @@ export default function CustomerLayout({ auth, children, localization }) {
                     </SideBarLink>
 
                     <SideBarLink
-                        href={route('applications.index')}
+                        href={route('cashregisters.index')}
                         active={
-                            route().current('applications.index') ||
-                            route().current('applications.create')
+                            route().current('cashregisters.index') ||
+                            route().current('cashregisters.create')
                         }
                         svg={<Svg type={'applications'} variant={'sideBar'} />}
                     >

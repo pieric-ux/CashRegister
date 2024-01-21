@@ -20,9 +20,9 @@ class UpdateDragAndDropCategorieProductRequest extends FormRequest
         foreach ($categories as $categoryData) {
             $category = CR_Categories_Products::find($categoryData['id']);
 
-            $app = $category->cr_apps;
+            $module = $category->cr_modules;
 
-            if (!$app->isOwnedBy(Auth::user())) {
+            if (!$module->isOwnedBy(Auth::user())) {
                 $ownedByUser = false;
                 break;
             }
@@ -42,7 +42,7 @@ class UpdateDragAndDropCategorieProductRequest extends FormRequest
             'categories.*.id' => 'required|exists:cr_categories_products,id',
             'categories.*.name' => 'required|string',
             'categories.*.order' => 'required|integer',
-            'categories.*.fk_apps_id' => 'required|exists:cr_apps,id',
+            'categories.*.fk_cr_modules_id' => 'required|exists:cr_modules,id',
         ];
     }
 }

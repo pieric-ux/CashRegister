@@ -6,7 +6,7 @@ use App\Http\Requests\Employees\DeleteEmployeeRequest;
 use App\Http\Requests\Employees\IndexEmployeesRequest;
 use App\Http\Requests\Employees\UpdateDragAndDropEmployeesRequest;
 use App\Http\Requests\Employees\UpdateEmployeeRequest;
-use App\Models\CR_App;
+use App\Models\CR_Module;
 use App\Models\CR_Employees;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
@@ -18,16 +18,16 @@ class EmployeesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexEmployeesRequest $request, CR_App $app): Response
+    public function index(IndexEmployeesRequest $request, CR_Module $module): Response
     {
-        $workstations = $app->cr_workstations()->with('cr_employees')->get();
+        $workstations = $module->cr_workstations()->with('cr_employees')->get();
 
         $employees = $workstations->flatMap(function ($workstation) {
             return $workstation->cr_employees;
         });
 
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Employees/Index', [
-            'application' => $app,
+            'application' => $module,
             'employees' => $employees,
         ]);
     }
@@ -43,7 +43,7 @@ class EmployeesController extends Controller
         $employee->email = $request->input('email');
         $employee->save();
 
-        return Redirect::route('employees.index', $employee->cr_workstations->cr_apps);
+        return Redirect::route('employees.index', $employee->cr_workstations->cr_modules);
     }
 
     /**
@@ -84,6 +84,6 @@ class EmployeesController extends Controller
 
         $employee->delete();
 
-        return Redirect::route('employees.index', $employee->cr_workstations->cr_apps);
+        return Redirect::route('employees.index', $employee->cr_workstations->cr_modules);
     }
 }

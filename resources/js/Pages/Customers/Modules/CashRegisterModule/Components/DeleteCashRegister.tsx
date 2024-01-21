@@ -39,7 +39,7 @@ export default function DeleteCashRegister({ application }): JSX.Element {
                         </DialogDescription>
                     </DialogHeader>
                     <ConfirmDeleteForm
-                        route={route('applications.destroy', application.slug)}
+                        route={route('cashregisters.destroy', application.slug)}
                         closeDialog={closeDialog}
                         ariaLabel={t('Delete your app')}
                         buttonTiltle={t('Delete App')}

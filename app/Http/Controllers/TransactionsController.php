@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Transactions\DeleteTransactionRequest;
 use App\Http\Requests\Transactions\IndexTransactionsRequest;
-use App\Models\CR_App;
+use App\Models\CR_Module;
 use App\Models\CR_Transactions;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
@@ -16,9 +16,9 @@ class TransactionsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexTransactionsRequest $request, CR_App $app): Response
+    public function index(IndexTransactionsRequest $request, CR_Module $module): Response
     {
-        $paymentMethods = $app->cr_payment_methods()
+        $paymentMethods = $module->cr_payment_methods()
             ->with('cr_transactions', 'cr_transactions.cr_payment_methods', 'cr_transactions.cr_details_transactions')
             ->get();
 
@@ -27,7 +27,7 @@ class TransactionsController extends Controller
         });
 
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Transactions/Index', [
-            'application' => $app,
+            'application' => $module,
             'transactions' => $transactions,
         ]);
     }
@@ -43,6 +43,6 @@ class TransactionsController extends Controller
 
         $transaction->delete();
 
-        return Redirect::route('transactions.index', $transaction->cr_payment_methods->cr_apps);
+        return Redirect::route('transactions.index', $transaction->cr_payment_methods->cr_modules);
     }
 }

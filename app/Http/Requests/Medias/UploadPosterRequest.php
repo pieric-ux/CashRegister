@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Medias;
 
-use App\Models\CR_App;
+use App\Models\CR_Module;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,11 +13,11 @@ class UploadPosterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $appId = $this->input('appId');
+        $moduleId = $this->input('appId');
 
-        $app = CR_App::find($appId);
+        $module = CR_Module::find($moduleId);
 
-        return $app->isOwnedBy(Auth::user());
+        return $module->isOwnedBy(Auth::user());
     }
 
     /**

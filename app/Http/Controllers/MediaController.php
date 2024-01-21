@@ -6,7 +6,7 @@ use App\Http\Requests\Medias\UploadAvatarRequest;
 use App\Http\Requests\Medias\UploadDishPictureRequest;
 use App\Http\Requests\Medias\UploadPosterRequest;
 use App\Http\Requests\Medias\UploadProductPictureRequest;
-use App\Models\CR_App;
+use App\Models\CR_Module;
 use App\Models\CR_Dishes;
 use App\Models\CR_Employees;
 use App\Models\CR_Products;
@@ -33,13 +33,13 @@ class MediaController extends Controller
     /**
      * Upload an application's poster.
      */
-    public function uploadPoster(UploadPosterRequest $request, CR_App $app): RedirectResponse
+    public function uploadPoster(UploadPosterRequest $request, CR_Module $module): RedirectResponse
     {
-        $app = $app::find($request->appId);
+        $module = $module::find($request->appId);
 
         if ($request->hasFile('poster')) {
             $poster = $request->file('poster');
-            $app->uploadPoster($poster);
+            $module->uploadPoster($poster);
         }
 
         return redirect()->back();

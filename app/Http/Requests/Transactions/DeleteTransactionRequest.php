@@ -14,9 +14,9 @@ class DeleteTransactionRequest extends FormRequest
     {
         $transaction = $this->route('transaction');
 
-        $app = $transaction->cr_payment_methods->cr_apps;
+        $module = $transaction->cr_payment_methods->cr_modules;
 
-        return $app->isOwnedBy(Auth::user());
+        return $module->isOwnedBy(Auth::user());
     }
 
     /**

@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Requests\Applications;
+namespace App\Http\Requests\CashRegisterModules;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class ShowApplicationRequest extends FormRequest
+class DeleteCashRegisterModulesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        $app = $this->route('app');
+        $module = $this->route('module');
 
-        return $app->isOwnedBy(Auth::user());
+        return $module->isOwnedBy(Auth::user());
     }
 
     /**

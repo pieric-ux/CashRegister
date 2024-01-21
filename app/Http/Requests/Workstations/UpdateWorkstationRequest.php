@@ -15,9 +15,9 @@ class UpdateWorkstationRequest extends FormRequest
     {
         $workstation = $this->route('workstation');
 
-        $app = $workstation->cr_apps;
+        $module = $workstation->cr_modules;
 
-        return $app->isOwnedBy(Auth::user());
+        return $module->isOwnedBy(Auth::user());
     }
 
     /**
@@ -38,7 +38,7 @@ class UpdateWorkstationRequest extends FormRequest
     public function rules(): array
     {
         $workstation = $this->route('workstation');
-        $app = $workstation->cr_apps;
+        $module = $workstation->cr_modules;
 
         return [
             'name' => [
@@ -46,8 +46,8 @@ class UpdateWorkstationRequest extends FormRequest
                 'string',
                 'max:45',
                 Rule::unique('cr_workstations')
-                    ->where(function ($query) use ($app) {
-                        return $query->where('fk_apps_id', $app->id);
+                    ->where(function ($query) use ($module) {
+                        return $query->where('fk_cr_modules_id', $module->id);
                     })
                     ->ignoreModel($this->route('workstation')),
             ],

@@ -17,9 +17,9 @@ class UploadDishPictureRequest extends FormRequest
 
         $dish = CR_Dishes::find($dishId);
 
-        $app = $dish->cr_apps;
+        $module = $dish->cr_modules;
 
-        return $app->isOwnedBy(Auth::user());
+        return $module->isOwnedBy(Auth::user());
     }
 
     /**

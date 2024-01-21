@@ -19,7 +19,7 @@ class SendEmailPasswordlessNotification
     {
         if ($event->user instanceof CR_Employees) {
             $loginRoute = 'employees.login';
-            $applicationSlug = $event->user->cr_workstations->cr_apps->slug;
+            $applicationSlug = $event->user->cr_workstations->cr_modules->slug;
 
             Notification::send($event->user, new EmployeePasswordlessNotification($event->user->passwordless, $loginRoute, $applicationSlug));
         }

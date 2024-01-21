@@ -54,9 +54,9 @@ class Customer extends Authenticatable implements HasMedia, MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function cr_apps()
+    public function cr_modules()
     {
-        return $this->hasMany(CR_App::class, 'fk_customer_id');
+        return $this->hasMany(CR_Module::class, 'fk_customer_id');
     }
 
     public function registerMediaConversions(Media $media = null): void // FIXME: format png without transparency

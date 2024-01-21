@@ -14,9 +14,9 @@ class DeleteCategorieProductRequest extends FormRequest
     {
         $category = $this->route('category');
 
-        $app = $category->cr_apps;
+        $module = $category->cr_modules;
 
-        return $app->isOwnedBy(Auth::user());
+        return $module->isOwnedBy(Auth::user());
     }
 
     /**

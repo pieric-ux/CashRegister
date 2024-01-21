@@ -7,7 +7,7 @@ use App\Http\Requests\Products\IndexProductsRequest;
 use App\Http\Requests\Products\StoreProductRequeset;
 use App\Http\Requests\Products\UpdateDragAndDropProductsRequest;
 use App\Http\Requests\Products\UpdateProductRequest;
-use App\Models\CR_App;
+use App\Models\CR_Module;
 use App\Models\CR_Products;
 use App\Models\CR_Workstations;
 use Illuminate\Http\RedirectResponse;
@@ -20,9 +20,9 @@ class ProductsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexProductsRequest $request, CR_App $app): Response
+    public function index(IndexProductsRequest $request, CR_Module $module): Response
     {
-        $categories = $app->cr_categories_products()->with('cr_products.cr_categories_products', 'cr_products.cr_dishes')->get();
+        $categories = $module->cr_categories_products()->with('cr_products.cr_categories_products', 'cr_products.cr_dishes')->get();
 
         $products = $categories->flatMap(function ($category) {
             return $category->cr_products->map(function ($product) {
@@ -31,10 +31,10 @@ class ProductsController extends Controller
             });
         });
 
-        $dishes = $app->cr_dishes;
+        $dishes = $module->cr_dishes;
 
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Products/Index', [
-            'application' => $app,
+            'application' => $module,
             'products' => $products,
             'categories' => $categories,
             'dishes' => $dishes,
@@ -44,10 +44,10 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequeset $request, CR_App $app): RedirectResponse
+    public function store(StoreProductRequeset $request, CR_Module $module): RedirectResponse
     {
-        $category = $app->cr_categories_products->first();
-        $dish = $app->cr_dishes->first();
+        $category = $module->cr_categories_products->first();
+        $dish = $module->cr_dishes->first();
 
         $category->cr_products()->create([
             'name' => ucfirst($request->input('name')),
@@ -57,7 +57,7 @@ class ProductsController extends Controller
             'fk_dishes_id' => $dish->id,
         ]);
 
-        return Redirect::route('products.index', $app);
+        return Redirect::route('products.index', $module);
     }
 
     /**
@@ -73,7 +73,7 @@ class ProductsController extends Controller
         $product->fk_dishes_id = $request->input('dish');
         $product->save();
 
-        return Redirect::route('products.index', $product->cr_categories_products->cr_apps);
+        return Redirect::route('products.index', $product->cr_categories_products->cr_modules);
     }
 
     /**
@@ -108,6 +108,6 @@ class ProductsController extends Controller
 
         $product->delete();
 
-        return Redirect::route('products.index', $product->cr_categories_products->cr_apps);
+        return Redirect::route('products.index', $product->cr_categories_products->cr_modules);
     }
 }

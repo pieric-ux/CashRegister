@@ -6,7 +6,7 @@ export interface Dish {
     cost_price: number;
     is_consigned: boolean;
     is_SoldSeparately: boolean;
-    fk_apps_id?: number;
+    fk_cr_modules_id?: number;
     created_at?: string;
     updated_at?: string;
 }

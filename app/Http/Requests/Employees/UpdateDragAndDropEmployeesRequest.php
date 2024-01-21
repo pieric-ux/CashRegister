@@ -21,9 +21,9 @@ class UpdateDragAndDropEmployeesRequest extends FormRequest
         foreach ($workstations as $workstationData) {
             $workstation = CR_Workstations::find($workstationData['id']);
 
-            $app = $workstation->cr_apps;
+            $module = $workstation->cr_modules;
 
-            if (!$app->isOwnedBy(Auth::user())) {
+            if (!$module->isOwnedBy(Auth::user())) {
                 $ownedByUser = false;
                 break;
             }
@@ -33,8 +33,8 @@ class UpdateDragAndDropEmployeesRequest extends FormRequest
             foreach ($employees as $employeeData) {
                 $employee = CR_Employees::find($employeeData['id']);
 
-                $app = $employee->cr_workstations->cr_apps;
-                if (!$app->isOwnedBy(Auth::user())) {
+                $module = $employee->cr_workstations->cr_modules;
+                if (!$module->isOwnedBy(Auth::user())) {
                     $ownedByUser = false;
                     break 2;
                 }
@@ -56,7 +56,7 @@ class UpdateDragAndDropEmployeesRequest extends FormRequest
             'workstations' => 'required|array',
             'workstations.*.id' => 'required|exists:cr_workstations,id',
             'workstations.*.name' => 'required|string',
-            'workstations.*.fk_apps_id' => 'required|exists:cr_apps,id',
+            'workstations.*.fk_cr_modules_id' => 'required|exists:cr_modules,id',
             'workstations.*.cr_employees' => 'nullable|array',
             'workstations.*.cr_employees.*.id' => 'nullable|exists:cr_employees,id',
             'workstations.*.cr_employees.*.first_name' => 'nullable|string',

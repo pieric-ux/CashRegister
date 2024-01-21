@@ -14,9 +14,9 @@ class UpdateDishRequest extends FormRequest
     {
         $dish = $this->route('dish');
 
-        $app = $dish->cr_apps;
+        $module = $dish->cr_modules;
 
-        return $app->isOwnedBy(Auth::user());
+        return $module->isOwnedBy(Auth::user());
     }
 
     /**

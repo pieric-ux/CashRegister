@@ -6,8 +6,8 @@ use App\Http\Controllers\EmployeeAuth\EmployeeRegisterController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('/apps/{app}/login/{code?}', [EmployeeLoginController::class, 'create'])->name('employees.login');
-    Route::post('/apps/{app}/login', [EmployeeLoginController::class, 'store']);
+    Route::get('/apps/{module}/login/{code?}', [EmployeeLoginController::class, 'create'])->name('employees.login');
+    Route::post('/apps/{module}/login', [EmployeeLoginController::class, 'store']);
 });
 
 Route::middleware('auth:employee')->group(function () {
@@ -15,6 +15,6 @@ Route::middleware('auth:employee')->group(function () {
 });
 
 Route::middleware(['auth:customer', 'verified'])->group(function () {
-    Route::post('/apps/{app}/employees', [EmployeeRegisterController::class, 'store'])->name('employees.register');
+    Route::post('/apps/{module}/employees', [EmployeeRegisterController::class, 'store'])->name('employees.register');
     Route::patch('/regenerate-passwordless/{employee}', [EmployeeRegenerateActivationController::class, 'update'])->name('employees.regenerate');
 });

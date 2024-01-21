@@ -18,12 +18,12 @@ class CR_Workstations extends Model
      */
     protected $fillable = [
         'name',
-        'fk_apps_id',
+        'fk_cr_modules_id',
     ];
 
-    public function cr_apps()
+    public function cr_modules()
     {
-        return $this->belongsTo(CR_App::class, 'fk_apps_id');
+        return $this->belongsTo(CR_Module::class, 'fk_cr_modules_id');
     }
 
     public function cr_employees()

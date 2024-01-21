@@ -1,17 +1,21 @@
 <?php
 
-namespace App\Http\Requests\Applications;
+namespace App\Http\Requests\CashRegisterModules;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
-class StoreApplicationRequest extends FormRequest
+class UpdateCashRegisterModulesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        $module = $this->route('module');
+
+        return $module->isOwnedBy(Auth::user());
     }
 
     /**
@@ -31,8 +35,17 @@ class StoreApplicationRequest extends FormRequest
      */
     public function rules(): array
     {
+        $module = $this->route('module');
+        $nameRules = ['required', 'string', 'max:45'];
+
+        if ($module) {
+            $nameRules[] = Rule::unique('cr_modules')->ignore($module->id);
+        } else {
+            $nameRules[] = Rule::unique('cr_modules');
+        }
+
         return [
-            'name' => ['required', 'string', 'max:45', 'unique:cr_apps'],
+            'name' => $nameRules,
             'description' => ['nullable', 'string', 'max:255'],
             'start_date' => ['nullable', 'date', 'after:yesterday'],
             'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],

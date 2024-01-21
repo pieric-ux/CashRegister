@@ -34,11 +34,11 @@ export function CashRegisterInfosForm({
         e.preventDefault();
 
         isUpdate
-            ? patch(route('applications.update', application.slug), {
+            ? patch(route('cashregisters.update', application.slug), {
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               })
-            : post(route('applications.store'), {
+            : post(route('cashregisters.store'), {
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               });

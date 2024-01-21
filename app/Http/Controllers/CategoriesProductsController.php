@@ -7,7 +7,7 @@ use App\Http\Requests\Categories_Products\IndexCategoriesProductsRequest;
 use App\Http\Requests\Categories_Products\StoreCategorieProductRequest;
 use App\Http\Requests\Categories_Products\UpdateCategorieProductRequest;
 use App\Http\Requests\Categories_Products\UpdateDragAndDropCategorieProductRequest;
-use App\Models\CR_App;
+use App\Models\CR_Module;
 use App\Models\CR_Categories_Products;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
@@ -19,12 +19,12 @@ class CategoriesProductsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexCategoriesProductsRequest $request, CR_App $app): Response
+    public function index(IndexCategoriesProductsRequest $request, CR_Module $module): Response
     {
-        $categories = $app->cr_categories_products;
+        $categories = $module->cr_categories_products;
 
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Categories_Products/Index', [
-            'application' => $app,
+            'application' => $module,
             'categories' => $categories,
         ]);
     }
@@ -32,14 +32,14 @@ class CategoriesProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategorieProductRequest $request, CR_App $app): RedirectResponse
+    public function store(StoreCategorieProductRequest $request, CR_Module $module): RedirectResponse
     {
-        $app->cr_categories_products()->create([
+        $module->cr_categories_products()->create([
             'name' => ucfirst($request->input('name')),
-            'order' => $app->cr_categories_products()->count(),
+            'order' => $module->cr_categories_products()->count(),
         ]);
 
-        return Redirect::route('categories.index', $app);
+        return Redirect::route('categories.index', $module);
     }
 
     /**
@@ -50,7 +50,7 @@ class CategoriesProductsController extends Controller
         $category->name = ucfirst($request->input('name'));
         $category->save();
 
-        return Redirect::route('categories.index', $category->cr_apps);
+        return Redirect::route('categories.index', $category->cr_modules);
     }
 
     /**
@@ -80,7 +80,7 @@ class CategoriesProductsController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
-        $defaultCategory = $category->where('fk_apps_id', $category->fk_apps_id)->where('name', 'No category')->first();
+        $defaultCategory = $category->where('fk_cr_modules_id', $category->fk_cr_modules_id)->where('name', 'No category')->first();
         $products = $category->cr_products;
 
         if ($products) {
@@ -92,6 +92,6 @@ class CategoriesProductsController extends Controller
 
         $category->delete();
 
-        return Redirect::route('categories.index', $category->cr_apps);
+        return Redirect::route('categories.index', $category->cr_modules);
     }
 }

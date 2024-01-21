@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 45);
             $table->unsignedInteger('order');
-            $table->unsignedBigInteger('fk_apps_id');
-            $table->foreign('fk_apps_id')->references('id')->on('cr_apps')->onDelete('cascade');
+            $table->unsignedBigInteger('fk_cr_modules_id');
+            $table->foreign('fk_cr_modules_id')->references('id')->on('cr_modules')->onDelete('cascade');
             $table->timestamps();
         });
     }

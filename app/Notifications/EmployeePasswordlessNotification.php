@@ -42,7 +42,7 @@ class EmployeePasswordlessNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $loginUrl = route($this->loginRoute, [
-            'app' => $this->applicationSlug,
+            'module' => $this->applicationSlug,
             'code' => $this->passwordless,
         ]);
 

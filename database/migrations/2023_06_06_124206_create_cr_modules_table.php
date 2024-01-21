@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cr_apps', function (Blueprint $table) {
+        Schema::create('cr_modules', function (Blueprint $table) {
             $table->id();
             $table->string('name', 45)->unique();
             $table->string('slug', 45);
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cr_apps');
+        Schema::dropIfExists('cr_modules');
     }
 };

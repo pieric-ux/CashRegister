@@ -15,9 +15,9 @@ class UpdateCategorieProductRequest extends FormRequest
     {
         $category = $this->route('category');
 
-        $app = $category->cr_apps;
+        $module = $category->cr_modules;
 
-        return $app->isOwnedBy(Auth::user());
+        return $module->isOwnedBy(Auth::user());
     }
 
     /**
@@ -38,7 +38,7 @@ class UpdateCategorieProductRequest extends FormRequest
     public function rules(): array
     {
         $category = $this->route('category');
-        $app = $category->cr_apps;
+        $module = $category->cr_modules;
 
         return [
             'name' => [
@@ -46,8 +46,8 @@ class UpdateCategorieProductRequest extends FormRequest
                 'string',
                 'max:45',
                 Rule::unique('cr_categories_products')
-                    ->where(function ($query) use ($app) {
-                        return $query->where('fk_apps_id', $app->id);
+                    ->where(function ($query) use ($module) {
+                        return $query->where('fk_cr_modules_id', $module->id);
                     })
                     ->ignoreModel($this->route('category')),
             ],

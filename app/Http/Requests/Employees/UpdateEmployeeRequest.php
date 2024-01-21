@@ -16,9 +16,9 @@ class UpdateEmployeeRequest extends FormRequest
     {
         $employee = $this->route('employee');
 
-        $app = $employee->cr_workstations->cr_apps;
+        $module = $employee->cr_workstations->cr_modules;
 
-        return $app->isOwnedBy(Auth::user());
+        return $module->isOwnedBy(Auth::user());
     }
 
     /**

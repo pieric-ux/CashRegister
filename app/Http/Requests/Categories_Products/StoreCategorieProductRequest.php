@@ -13,9 +13,9 @@ class StoreCategorieProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $app = $this->route('app');
+        $module = $this->route('module');
 
-        return $app->isOwnedBy(Auth::user());
+        return $module->isOwnedBy(Auth::user());
     }
 
     /**
@@ -35,15 +35,15 @@ class StoreCategorieProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        $app = $this->route('app');
+        $module = $this->route('module');
 
         return [
             'name' => [
                 'required',
                 'string',
                 'max:45',
-                Rule::unique('cr_categories_products')->where(function ($query) use ($app) {
-                    return $query->where('fk_apps_id', $app->id);
+                Rule::unique('cr_categories_products')->where(function ($query) use ($module) {
+                    return $query->where('fk_cr_modules_id', $module->id);
                 }),
             ],
         ];

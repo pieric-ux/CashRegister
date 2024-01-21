@@ -17,9 +17,9 @@ class UploadProductPictureRequest extends FormRequest
 
         $product = CR_Products::find($productId);
 
-        $app = $product->cr_categories_products->cr_apps;
+        $module = $product->cr_categories_products->cr_modules;
 
-        return $app->isOwnedBy(Auth::user());
+        return $module->isOwnedBy(Auth::user());
     }
 
     /**

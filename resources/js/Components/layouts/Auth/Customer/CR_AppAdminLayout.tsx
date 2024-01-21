@@ -17,8 +17,8 @@ export default function CR_AppAdminLayout({ auth, application, children, localiz
         <>
             <ResponsiveNavLink href={route('dashboard')}>{t('Home')}</ResponsiveNavLink>
             <ResponsiveNavLink
-                href={route('applications.show', application.slug)}
-                active={route().current('applications.show', application.slug)}
+                href={route('cashregisters.show', application.slug)}
+                active={route().current('cashregisters.show', application.slug)}
             >
                 {t('App Dashboard')}
             </ResponsiveNavLink>
@@ -81,8 +81,8 @@ export default function CR_AppAdminLayout({ auth, application, children, localiz
             <div className='flex h-screen overflow-hidden'>
                 <Sidebar sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen}>
                     <SideBarLink
-                        href={route('applications.show', application.slug)}
-                        active={route().current('applications.show', application.slug)}
+                        href={route('cashregisters.show', application.slug)}
+                        active={route().current('cashregisters.show', application.slug)}
                         svg={<Svg type={'dashboard'} variant={'sideBar'} />}
                     >
                         {t('App Dashboard')}

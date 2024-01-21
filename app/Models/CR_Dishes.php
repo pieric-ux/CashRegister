@@ -27,12 +27,12 @@ class CR_Dishes extends Model implements HasMedia
         'cost_price',
         'is_consigned',
         'is_SoldSeparately',
-        'fk_apps_id',
+        'fk_cr_modules_id',
     ];
 
-    public function cr_apps()
+    public function cr_modules()
     {
-        return $this->belongsTo(CR_App::class, 'fk_apps_id');
+        return $this->belongsTo(CR_Module::class, 'fk_cr_modules_id');
     }
 
     public function cr_products()

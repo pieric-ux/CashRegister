@@ -21,9 +21,9 @@ class UpdateDragAndDropProductsRequest extends FormRequest
         foreach ($workstations as $workstationData) {
             $workstation = CR_Workstations::find($workstationData['id']);
 
-            $app = $workstation->cr_apps;
+            $module = $workstation->cr_modules;
 
-            if (!$app->isOwnedBy(Auth::user())) {
+            if (!$module->isOwnedBy(Auth::user())) {
                 $ownedByUser = false;
                 break;
             }
@@ -33,8 +33,8 @@ class UpdateDragAndDropProductsRequest extends FormRequest
             foreach ($products as $productData) {
                 $product = CR_Products::find($productData['id']);
 
-                $app = $product->cr_categories_products->cr_apps;
-                if (!$app->isOwnedBy(Auth::user())) {
+                $module = $product->cr_categories_products->cr_modules;
+                if (!$module->isOwnedBy(Auth::user())) {
                     $ownedByUser = false;
                     break 2;
                 }
@@ -54,7 +54,7 @@ class UpdateDragAndDropProductsRequest extends FormRequest
             'workstations' => 'required|array',
             'workstations.*.id' => 'required|exists:cr_workstations,id',
             'workstations.*.name' => 'required|string',
-            'workstations.*.fk_apps_id' => 'required|exists:cr_apps,id',
+            'workstations.*.fk_cr_modules_id' => 'required|exists:cr_modules,id',
             'workstations.*.cr_products' => 'nullable|array',
             'workstations.*.cr_products.*.id' => 'nullable|exists:cr_products,id',
             'workstations.*.cr_products.*.name' => 'nullable|string',

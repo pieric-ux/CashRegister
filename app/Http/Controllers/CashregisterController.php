@@ -20,8 +20,8 @@ class CashregisterController extends Controller
             'cr_workstations.cr_products.cr_categories_products',
             'cr_workstations.cr_products.cr_dishes.media',
             'cr_workstations.cr_products.media',
-            'cr_workstations.cr_apps.cr_dishes',
-            'cr_workstations.cr_apps.cr_payment_methods',
+            'cr_workstations.cr_modules.cr_dishes',
+            'cr_workstations.cr_modules.cr_payment_methods',
         ]);
 
         $workstation = $employee->cr_workstations;
@@ -40,12 +40,12 @@ class CashregisterController extends Controller
 
         $categories = $products->pluck('cr_categories_products')->unique('id')->sortBy('order')->values();
 
-        $dishes = $workstation->cr_apps->cr_dishes->map(function ($dish) {
+        $dishes = $workstation->cr_modules->cr_dishes->map(function ($dish) {
             $dish->picture_url = $dish->getPictureUrl('thumb');
             return $dish;
         });
 
-        $paymentMethods = $workstation->cr_apps->cr_payment_methods->map(function ($paymentMethod) {
+        $paymentMethods = $workstation->cr_modules->cr_payment_methods->map(function ($paymentMethod) {
             $paymentMethod->picture_url = $paymentMethod->getPictureUrl('thumb');
             return $paymentMethod;
         });

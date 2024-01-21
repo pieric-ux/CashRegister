@@ -21,7 +21,7 @@ class EmployeeRegenerateActivationController extends Controller
 
         $loginRoute = 'employees.login';
 
-        $applicationSlug = $employee->cr_workstations->cr_apps->slug;
+        $applicationSlug = $employee->cr_workstations->cr_modules->slug;
 
         $employee->update([
             'passwordless' => $passwordless,

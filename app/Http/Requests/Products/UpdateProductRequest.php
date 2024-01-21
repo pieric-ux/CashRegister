@@ -15,9 +15,9 @@ class UpdateProductRequest extends FormRequest
     {
         $product = $this->route('product');
 
-        $app = $product->cr_categories_products->cr_apps;
+        $module = $product->cr_categories_products->cr_modules;
 
-        return $app->isOwnedBy(Auth::user());
+        return $module->isOwnedBy(Auth::user());
     }
 
     /**
@@ -36,14 +36,14 @@ class UpdateProductRequest extends FormRequest
                 'required',
                 'integer',
                 Rule::exists('cr_categories_products', 'id')->where(function ($query) {
-                    $query->where('fk_apps_id', $this->product->cr_categories_products->fk_apps_id);
+                    $query->where('fk_cr_modules_id', $this->product->cr_categories_products->fk_cr_modules_id);
                 })
             ],
             'dish' => [
                 'required',
                 'integer',
                 Rule::exists('cr_dishes', 'id')->where(function ($query) {
-                    $query->where('fk_apps_id', $this->product->cr_dishes->fk_apps_id);
+                    $query->where('fk_cr_modules_id', $this->product->cr_dishes->fk_cr_modules_id);
                 })
             ],
         ];

@@ -9,11 +9,11 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class CR_App extends Model implements HasMedia
+class CR_Module extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $table = 'cr_apps';
+    protected $table = 'cr_modules';
 
     /**
      * The attributes that are mass assignable.
@@ -38,38 +38,38 @@ class CR_App extends Model implements HasMedia
 
     public function cr_workstations()
     {
-        return $this->hasMany(CR_Workstations::class, 'fk_apps_id');
+        return $this->hasMany(CR_Workstations::class, 'fk_cr_modules_id');
     }
 
     public function cr_categories_products()
     {
-        return $this->hasMany(CR_Categories_Products::class, 'fk_apps_id')->orderBy('order');
+        return $this->hasMany(CR_Categories_Products::class, 'fk_cr_modules_id')->orderBy('order');
     }
 
     public function cr_dishes()
     {
-        return $this->hasMany(CR_Dishes::class, 'fk_apps_id');
+        return $this->hasMany(CR_Dishes::class, 'fk_cr_modules_id');
     }
 
     public function cr_payment_methods()
     {
-        return $this->hasMany(CR_PaymentMethods::class, 'fk_apps_id');
+        return $this->hasMany(CR_PaymentMethods::class, 'fk_cr_modules_id');
     }
 
     public static function boot()
     {
         parent::boot();
 
-        static::created(function (CR_App $app) {
+        static::created(function (CR_Module $module) {
             $workstation = new CR_Workstations();
             $workstation->name = 'Pending assignement';
-            $workstation->fk_apps_id = $app->id;
+            $workstation->fk_cr_modules_id = $module->id;
             $workstation->save();
 
             $category = new CR_Categories_Products();
             $category->name = 'No category';
             $category->order = 0;
-            $category->fk_apps_id = $app->id;
+            $category->fk_cr_modules_id = $module->id;
             $category->save();
 
             $dish = new CR_Dishes();
@@ -77,7 +77,7 @@ class CR_App extends Model implements HasMedia
             $dish->unit = 'pce';
             $dish->is_consigned = false;
             $dish->is_SoldSeparately = false;
-            $dish->fk_apps_id = $app->id;
+            $dish->fk_cr_modules_id = $module->id;
             $dish->save();
 
             $paymentMethodsData = [
@@ -88,7 +88,7 @@ class CR_App extends Model implements HasMedia
             foreach ($paymentMethodsData as $paymentMethodName => $imagePath) {
                 $paymentMethod = new CR_PaymentMethods();
                 $paymentMethod->name = $paymentMethodName;
-                $paymentMethod->fk_apps_id = $app->id;
+                $paymentMethod->fk_cr_modules_id = $module->id;
                 $paymentMethod->save();
 
                 $paymentMethod->addMedia($imagePath)

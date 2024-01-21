@@ -17,7 +17,7 @@ export default function ShowCashRegisterInfos({ application }): JSX.Element {
                 <CardTitle>{application.name}</CardTitle>
 
                 <div className='absolute right-4 top-4 flex gap-2'>
-                    <Link href={route('applications.show', application.slug)}>
+                    <Link href={route('cashregisters.show', application.slug)}>
                         <Button size={'icon'} aria-label={t('Configure your app')}>
                             <Svg type={'configure'} />
                         </Button>

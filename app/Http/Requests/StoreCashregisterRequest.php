@@ -33,19 +33,19 @@ class StoreCashregisterRequest extends FormRequest
 
                 if (isset($item['cr_dishes'])) {
                     $dish = CR_Dishes::find($item['cr_dishes']['id']);
-                    if (!$dish || $dish->cr_apps->id != $workstation->cr_apps->id) {
+                    if (!$dish || $dish->cr_modules->id != $workstation->cr_modules->id) {
                         return false;
                     }
                 }
             } elseif (in_array($item['type'], ['return', 'dishes'])) {
                 $dish = CR_Dishes::find($item['id']);
-                if (!$dish || $dish->cr_apps->id != $workstation->cr_apps->id) {
+                if (!$dish || $dish->cr_modules->id != $workstation->cr_modules->id) {
                     return false;
                 }
             }
         }
 
-        if ($paymentMethod && $paymentMethod->cr_apps->id == $workstation->cr_apps->id) {
+        if ($paymentMethod && $paymentMethod->cr_modules->id == $workstation->cr_modules->id) {
             return true;
         }
 

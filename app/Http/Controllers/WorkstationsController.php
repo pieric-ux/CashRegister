@@ -6,7 +6,7 @@ use App\Http\Requests\Workstations\DeleteWorkstationRequest;
 use App\Http\Requests\Workstations\IndexWorkstationsRequest;
 use App\Http\Requests\Workstations\StoreWorkstationRequest;
 use App\Http\Requests\Workstations\UpdateWorkstationRequest;
-use App\Models\CR_App;
+use App\Models\CR_Module;
 use App\Models\CR_Workstations;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
@@ -18,11 +18,11 @@ class WorkstationsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexWorkstationsRequest $request, CR_App $app): Response
+    public function index(IndexWorkstationsRequest $request, CR_Module $module): Response
     {
-        $workstations = $app->cr_workstations->load('cr_employees', 'cr_products');
+        $workstations = $module->cr_workstations->load('cr_employees', 'cr_products');
 
-        $categories = $app->cr_categories_products()->with('cr_products')->get();
+        $categories = $module->cr_categories_products()->with('cr_products')->get();
 
         $generalProducts = $categories->flatMap(function ($category) {
             return $category->cr_products;
@@ -36,7 +36,7 @@ class WorkstationsController extends Controller
         }
 
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Workstations/Index', [
-            'application' => $app,
+            'application' => $module,
             'workstations' => $workstations,
         ]);
     }
@@ -44,13 +44,13 @@ class WorkstationsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreWorkstationRequest $request, CR_App $app): RedirectResponse
+    public function store(StoreWorkstationRequest $request, CR_Module $module): RedirectResponse
     {
-        $app->cr_workstations()->create([
+        $module->cr_workstations()->create([
             'name' => ucfirst($request->input('name')),
         ]);
 
-        return Redirect::route('workstations.index', $app);
+        return Redirect::route('workstations.index', $module);
     }
 
     /**
@@ -61,7 +61,7 @@ class WorkstationsController extends Controller
         $workstation->name = ucfirst($request->input('name'));
         $workstation->save();
 
-        return Redirect::route('workstations.index', $workstation->cr_apps);
+        return Redirect::route('workstations.index', $workstation->cr_modules);
     }
 
     /**
@@ -73,7 +73,7 @@ class WorkstationsController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
-        $defaultWorkstation = $workstation->where('fk_apps_id', $workstation->fk_apps_id)->where('name', 'Pending assignement')->first();
+        $defaultWorkstation = $workstation->where('fk_cr_modules_id', $workstation->fk_cr_modules_id)->where('name', 'Pending assignement')->first();
 
         $employees = $workstation->cr_employees;
 
@@ -86,6 +86,6 @@ class WorkstationsController extends Controller
 
         $workstation->delete();
 
-        return Redirect::route('workstations.index', $workstation->cr_apps);
+        return Redirect::route('workstations.index', $workstation->cr_modules);
     }
 }

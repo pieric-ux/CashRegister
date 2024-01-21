@@ -12,9 +12,9 @@ class IndexCategoriesProductsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $app = $this->route('app');
+        $module = $this->route('module');
 
-        return $app->isOwnedBy(Auth::user());
+        return $module->isOwnedBy(Auth::user());
     }
 
     /**

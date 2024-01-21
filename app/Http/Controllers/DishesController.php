@@ -6,7 +6,7 @@ use App\Http\Requests\Dishes\DeleteDishRequest;
 use App\Http\Requests\Dishes\IndexDishesRequest;
 use App\Http\Requests\Dishes\StoreDishRequest;
 use App\Http\Requests\Dishes\UpdateDishRequest;
-use App\Models\CR_App;
+use App\Models\CR_Module;
 use App\Models\CR_Dishes;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
@@ -18,15 +18,15 @@ class DishesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexDishesRequest $request, CR_App $app): Response
+    public function index(IndexDishesRequest $request, CR_Module $module): Response
     {
-        $dishes = $app->cr_dishes->map(function ($dish) {
+        $dishes = $module->cr_dishes->map(function ($dish) {
             $dish->picturePath = $dish->getPictureUrl('thumb');
             return $dish;
         });
 
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Dishes/Index', [
-            'application' => $app,
+            'application' => $module,
             'dishes' => $dishes,
         ]);
     }
@@ -34,9 +34,9 @@ class DishesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDishRequest $request, CR_App $app): RedirectResponse
+    public function store(StoreDishRequest $request, CR_Module $module): RedirectResponse
     {
-        $app->cr_dishes()->create([
+        $module->cr_dishes()->create([
             'name' => ucfirst($request->input('name')),
             'unit' => $request->input('unit'),
             'client_price' => $request->input('is_consigned') ? $request->input('client_price') : 0,
@@ -45,7 +45,7 @@ class DishesController extends Controller
             'is_SoldSeparately' => $request->input('is_SoldSeparately'),
         ]);
 
-        return Redirect::route('dishes.index', $app);
+        return Redirect::route('dishes.index', $module);
     }
 
     /**
@@ -61,7 +61,7 @@ class DishesController extends Controller
         $dish->is_SoldSeparately = $request->input('is_SoldSeparately');
         $dish->save();
 
-        return Redirect::route('dishes.index', $dish->cr_apps);
+        return Redirect::route('dishes.index', $dish->cr_modules);
     }
 
     /**
@@ -73,7 +73,7 @@ class DishesController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
-        $defaultDish = $dish->where('fk_apps_id', $dish->fk_apps_id)->where('name', 'No dish')->first();
+        $defaultDish = $dish->where('fk_cr_modules_id', $dish->fk_cr_modules_id)->where('name', 'No dish')->first();
         $products = $dish->cr_products;
 
         if ($products) {
@@ -85,6 +85,6 @@ class DishesController extends Controller
 
         $dish->delete();
 
-        return Redirect::route('dishes.index', $dish->cr_apps);
+        return Redirect::route('dishes.index', $dish->cr_modules);
     }
 }

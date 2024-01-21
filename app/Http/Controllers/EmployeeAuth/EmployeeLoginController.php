@@ -4,7 +4,7 @@ namespace App\Http\Controllers\EmployeeAuth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginEmployeeRequest;
-use App\Models\CR_App;
+use App\Models\CR_Module;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,13 +17,13 @@ class EmployeeLoginController extends Controller
     /**
      * Display the login view for employees.
      */
-    public function create(Request $request, CR_App $app, $code = null): Response
+    public function create(Request $request, CR_Module $module, $code = null): Response
     {
         
-        $app = $request->route('app');
+        $module = $request->route('module');
 
         return Inertia::render('Employees/Auth/Login', [
-            'application' => $app,
+            'application' => $module,
             'status' => session('status'),
             'code' => $code,
         ]);

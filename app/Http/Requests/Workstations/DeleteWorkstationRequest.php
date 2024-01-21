@@ -14,9 +14,9 @@ class DeleteWorkstationRequest extends FormRequest
     {
         $workstation = $this->route('workstation');
 
-        $app = $workstation->cr_apps;
+        $module = $workstation->cr_modules;
 
-        return $app->isOwnedBy(Auth::user());
+        return $module->isOwnedBy(Auth::user());
     }
 
     /**
