@@ -6,10 +6,10 @@ import { type ColumnDef } from '@tanstack/react-table';
 import DeleteTransaction from './DeleteTransaction';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import ShowDetailsTransaction from './ShowDetailsTransaction';
-import { type Transaction } from '@/Shared/Types/TransactionTypes';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
+import { type TransactionsTableColumnsDatas } from '@/Shared/Types/TransactionTypes';
 
-export const columns: ColumnDef<Transaction>[] = [
+export const columns: ColumnDef<TransactionsTableColumnsDatas>[] = [
     {
         id: 'Select',
         header: ({ table }) => (

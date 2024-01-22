@@ -11,8 +11,14 @@ export interface Transaction {
     fk_paymentMethods_id?: number;
     created_at?: string;
     updated_at?: string;
-    cr_details_transactions: DetailTransaction[];
+}
+
+export interface TransactionsTableColumnsDatas extends Transaction {
     cr_payment_methods?: PaymentMethod;
+}
+
+export interface ShowDetailsTransactionDatas extends Transaction {
+    cr_details_transactions?: DetailTransaction[];
 }
 
 export interface TransactionBkndDatas {

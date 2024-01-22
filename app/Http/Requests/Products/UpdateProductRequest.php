@@ -34,15 +34,15 @@ class UpdateProductRequest extends FormRequest
             'cost_price' => ['required', 'numeric', 'between:0,9999.99'],
             'category' => [
                 'required',
-                'integer',
-                Rule::exists('cr_categories_products', 'id')->where(function ($query) {
+                'string',
+                Rule::exists('cr_categories_products', 'name')->where(function ($query) {
                     $query->where('fk_cr_modules_id', $this->product->cr_categories_products->fk_cr_modules_id);
                 })
             ],
             'dish' => [
                 'required',
-                'integer',
-                Rule::exists('cr_dishes', 'id')->where(function ($query) {
+                'string',
+                Rule::exists('cr_dishes', 'name')->where(function ($query) {
                     $query->where('fk_cr_modules_id', $this->product->cr_dishes->fk_cr_modules_id);
                 })
             ],

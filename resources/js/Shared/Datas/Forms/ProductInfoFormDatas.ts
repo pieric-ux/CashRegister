@@ -1,13 +1,13 @@
-import { type Product, type ProductInfosFormDatas } from '@/Shared/Types/ProductTypes';
+import { type ProductInfoForm, type ProductInfosFormDatas } from '@/Shared/Types/ProductTypes';
 
-export const getDefaultValues = (product: Product, isUpdate: boolean): Product => {
+export const getDefaultValues = (product: ProductInfoForm, isUpdate: boolean): ProductInfoForm => {
     return {
         name: isUpdate ? product?.name : '',
         unit: isUpdate ? product?.unit : '',
         client_price: isUpdate ? product?.client_price : 0,
         cost_price: isUpdate ? product?.cost_price : 0,
-        category: isUpdate ? product?.fk_categories_products_id : '',
-        dish: isUpdate ? product?.fk_dishes_id : '',
+        category: isUpdate ? product?.cr_categories_products?.name : '',
+        dish: isUpdate ? product?.cr_dishes?.name : '',
     };
 };
 

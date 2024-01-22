@@ -7,6 +7,8 @@ use App\Http\Requests\Products\IndexProductsRequest;
 use App\Http\Requests\Products\StoreProductRequeset;
 use App\Http\Requests\Products\UpdateDragAndDropProductsRequest;
 use App\Http\Requests\Products\UpdateProductRequest;
+use App\Models\CR_Categories_Products;
+use App\Models\CR_Dishes;
 use App\Models\CR_Module;
 use App\Models\CR_Products;
 use App\Models\CR_Workstations;
@@ -68,12 +70,20 @@ class ProductsController extends Controller
      */
     public function update(UpdateProductRequest $request, CR_Products $product): RedirectResponse
     {
+        $categoryId = CR_Categories_Products::where('name', $request->input('category'))
+        ->where('fk_cr_modules_id', $product->cr_categories_products->fk_cr_modules_id)
+        ->value('id');
+
+        $dishId = CR_Dishes::where('name', $request->input('dish'))
+        ->where('fk_cr_modules_id', $product->cr_dishes->fk_cr_modules_id)
+        ->value('id');
+
         $product->name = ucfirst($request->input('name'));
         $product->unit = $request->input('unit');
         $product->client_price = $request->input('client_price');
         $product->cost_price = $request->input('cost_price');
-        $product->fk_categories_products_id = $request->input('category');
-        $product->fk_dishes_id = $request->input('dish');
+        $product->fk_categories_products_id = $categoryId;
+        $product->fk_dishes_id = $dishId;
         $product->save();
 
         return Redirect::route('products.index', $product->cr_categories_products->cr_modules);

@@ -93,8 +93,7 @@ export function ProductInfosForm({
                                     >
                                         <FormControl>
                                             <SelectTrigger>
-                                                {/* FIXME: don't display the textContext */}
-                                                <SelectValue />{' '}
+                                                <SelectValue />
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent position='popper'>
@@ -129,8 +128,7 @@ export function ProductInfosForm({
                                                 <SelectValue />
                                             </SelectTrigger>
                                         </FormControl>
-                                        <SelectContent>
-                                            {/* FIXME: don't display the textContext */}
+                                        <SelectContent position='popper'>
                                             {dishes?.map((dish) => (
                                                 <SelectItem key={dish.id} value={dish.name}>
                                                     {dish.name === 'No dish'

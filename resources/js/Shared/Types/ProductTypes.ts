@@ -16,7 +16,12 @@ export interface Product {
     fk_dishes_id?: string;
     created_at?: string;
     updated_at?: string;
-    media: Media[];
+    media?: Media[];
+}
+
+export interface ProductInfoForm extends Product {
+    cr_categories_products?: CategoryProducts;
+    cr_dishes?: Dish;
 }
 
 export interface ProductsBkndDatas {
