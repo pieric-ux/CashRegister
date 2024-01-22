@@ -4,16 +4,10 @@ import i18n from '@/Config/i18n';
 import UpdateEmployee from './UpdateEmployee';
 import DeleteEmployee from './DeleteEmployee';
 import { type ColumnDef } from '@tanstack/react-table';
+import { type Employee } from '@/Shared/Types/EmployeeTypes';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
 import RegenerateEmployeeForm from '@/Components/forms/CashRegister/Employee/RegenerateEmployeeForm';
-
-export interface Employee {
-    first_name: string;
-    last_name: string;
-    phone: string;
-    email: string;
-}
 
 export const columns: ColumnDef<Employee>[] = [
     {

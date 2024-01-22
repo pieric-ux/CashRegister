@@ -1,19 +1,23 @@
 //TODO: Refactor
+import { type ReactNode } from 'react';
 import { Link } from '@inertiajs/react';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import useLocalStorage from '@/Hooks/useLocalStorage';
 import Header from '@/Components/layouts/Auth/Header';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 import Sidebar from '@/Components/layouts/Auth/Customer/CustomerSidebar';
 import SideBarLink from '@/Components/layouts/Auth/Customer/CustomerSidebarLink';
+import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
 
 export default function CashRegisterConfigurationsLayout({
-    auth,
-    application,
+    cashRegisterModule,
     children,
-    localization,
-}) {
+}: {
+    cashRegisterModule: CashRegister;
+    children: ReactNode;
+}): JSX.Element {
     const { t } = useTranslation();
 
     const [sideBarOpen, setSideBarOpen] = useLocalStorage('sideBarOpen', false);
@@ -22,44 +26,44 @@ export default function CashRegisterConfigurationsLayout({
         <>
             <ResponsiveNavLink href={route('dashboard')}>{t('Home')}</ResponsiveNavLink>
             <ResponsiveNavLink
-                href={route('cashregisters.show', application.slug)}
-                active={route().current('cashregisters.show', application.slug)}
+                href={route('cashregisters.show', cashRegisterModule.slug)}
+                active={route().current('cashregisters.show', cashRegisterModule.slug)}
             >
                 {t('App Dashboard')}
             </ResponsiveNavLink>
             <ResponsiveNavLink
-                href={route('employees.index', application.slug)}
-                active={route().current('employees.index', application.slug)}
+                href={route('employees.index', cashRegisterModule.slug)}
+                active={route().current('employees.index', cashRegisterModule.slug)}
             >
                 {t('Employees')}
             </ResponsiveNavLink>
             <ResponsiveNavLink
-                href={route('workstations.index', application.slug)}
-                active={route().current('workstations.index', application.slug)}
+                href={route('workstations.index', cashRegisterModule.slug)}
+                active={route().current('workstations.index', cashRegisterModule.slug)}
             >
                 {t('Workstations')}
             </ResponsiveNavLink>
             <ResponsiveNavLink
-                href={route('categories.index', application.slug)}
-                active={route().current('categories.index', application.slug)}
+                href={route('categories.index', cashRegisterModule.slug)}
+                active={route().current('categories.index', cashRegisterModule.slug)}
             >
                 {t('Categories')}
             </ResponsiveNavLink>
             <ResponsiveNavLink
-                href={route('dishes.index', application.slug)}
-                active={route().current('dishes.index', application.slug)}
+                href={route('dishes.index', cashRegisterModule.slug)}
+                active={route().current('dishes.index', cashRegisterModule.slug)}
             >
                 {t('Dishes')}
             </ResponsiveNavLink>
             <ResponsiveNavLink
-                href={route('products.index', application.slug)}
-                active={route().current('products.index', application.slug)}
+                href={route('products.index', cashRegisterModule.slug)}
+                active={route().current('products.index', cashRegisterModule.slug)}
             >
                 {t('Products')}
             </ResponsiveNavLink>
             <ResponsiveNavLink
-                href={route('transactions.index', application.slug)}
-                active={route().current('transactions.index', application.slug)}
+                href={route('transactions.index', cashRegisterModule.slug)}
+                active={route().current('transactions.index', cashRegisterModule.slug)}
             >
                 {t('Transactions')}
             </ResponsiveNavLink>
@@ -82,83 +86,82 @@ export default function CashRegisterConfigurationsLayout({
     ];
 
     return (
-        <div className='bg-gray-100 transition duration-300 ease-linear dark:bg-gray-900'>
-            <div className='flex h-screen overflow-hidden'>
-                <Sidebar sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen}>
-                    <SideBarLink
-                        href={route('cashregisters.show', application.slug)}
-                        active={route().current('cashregisters.show', application.slug)}
-                        svg={<Svg type={'dashboard'} variant={'sideBar'} />}
-                    >
-                        {t('App Dashboard')}
-                    </SideBarLink>
+        <CashRegisterConfigurationsContext.Provider value={{ cashRegisterModule }}>
+            <div className='bg-gray-100 transition duration-300 ease-linear dark:bg-gray-900'>
+                <div className='flex h-screen overflow-hidden'>
+                    <Sidebar sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen}>
+                        <SideBarLink
+                            href={route('cashregisters.show', cashRegisterModule.slug)}
+                            active={route().current('cashregisters.show', cashRegisterModule.slug)}
+                            svg={<Svg type={'dashboard'} variant={'sideBar'} />}
+                        >
+                            {t('App Dashboard')}
+                        </SideBarLink>
 
-                    <SideBarLink
-                        href={route('employees.index', application.slug)}
-                        active={route().current('employees.index', application.slug)}
-                        svg={<Svg type={'employees'} variant={'sideBar'} />}
-                    >
-                        {t('Employees')}
-                    </SideBarLink>
+                        <SideBarLink
+                            href={route('employees.index', cashRegisterModule.slug)}
+                            active={route().current('employees.index', cashRegisterModule.slug)}
+                            svg={<Svg type={'employees'} variant={'sideBar'} />}
+                        >
+                            {t('Employees')}
+                        </SideBarLink>
 
-                    <SideBarLink
-                        href={route('workstations.index', application.slug)}
-                        active={route().current('workstations.index', application.slug)}
-                        svg={<Svg type={'workstations'} variant={'sideBar'} />}
-                    >
-                        {t('Workstations')}
-                    </SideBarLink>
+                        <SideBarLink
+                            href={route('workstations.index', cashRegisterModule.slug)}
+                            active={route().current('workstations.index', cashRegisterModule.slug)}
+                            svg={<Svg type={'workstations'} variant={'sideBar'} />}
+                        >
+                            {t('Workstations')}
+                        </SideBarLink>
 
-                    <SideBarLink
-                        href={route('categories.index', application.slug)}
-                        active={route().current('categories.index', application.slug)}
-                        svg={<Svg type={'categories'} variant={'sideBar'} />}
-                    >
-                        {t('Categories')}
-                    </SideBarLink>
+                        <SideBarLink
+                            href={route('categories.index', cashRegisterModule.slug)}
+                            active={route().current('categories.index', cashRegisterModule.slug)}
+                            svg={<Svg type={'categories'} variant={'sideBar'} />}
+                        >
+                            {t('Categories')}
+                        </SideBarLink>
 
-                    <SideBarLink
-                        href={route('dishes.index', application.slug)}
-                        active={route().current('dishes.index', application.slug)}
-                        svg={<Svg type={'dishes'} variant={'sideBar'} />}
-                    >
-                        {t('Dishes')}
-                    </SideBarLink>
+                        <SideBarLink
+                            href={route('dishes.index', cashRegisterModule.slug)}
+                            active={route().current('dishes.index', cashRegisterModule.slug)}
+                            svg={<Svg type={'dishes'} variant={'sideBar'} />}
+                        >
+                            {t('Dishes')}
+                        </SideBarLink>
 
-                    <SideBarLink
-                        href={route('products.index', application.slug)}
-                        active={route().current('products.index', application.slug)}
-                        svg={<Svg type={'products'} variant={'sideBar'} />}
-                    >
-                        {t('Products')}
-                    </SideBarLink>
+                        <SideBarLink
+                            href={route('products.index', cashRegisterModule.slug)}
+                            active={route().current('products.index', cashRegisterModule.slug)}
+                            svg={<Svg type={'products'} variant={'sideBar'} />}
+                        >
+                            {t('Products')}
+                        </SideBarLink>
 
-                    <SideBarLink
-                        href={route('transactions.index', application.slug)}
-                        active={route().current('transactions.index', application.slug)}
-                        svg={<Svg type={'transactions'} variant={'sideBar'} />}
-                    >
-                        {t('Transactions')}
-                    </SideBarLink>
-                </Sidebar>
+                        <SideBarLink
+                            href={route('transactions.index', cashRegisterModule.slug)}
+                            active={route().current('transactions.index', cashRegisterModule.slug)}
+                            svg={<Svg type={'transactions'} variant={'sideBar'} />}
+                        >
+                            {t('Transactions')}
+                        </SideBarLink>
+                    </Sidebar>
 
-                <div className='relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden'>
-                    <Header
-                        user={auth.customer}
-                        title={application.name}
-                        avatarPath={auth.avatarPath}
-                        RespNavLink={RespNavLink}
-                        dropdownLinks={dropdownLinks}
-                        sideBarOpen={sideBarOpen}
-                        setSideBarOpen={setSideBarOpen}
-                        localization={localization}
-                    />
+                    <div className='relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden'>
+                        <Header
+                            title={cashRegisterModule.name}
+                            RespNavLink={RespNavLink}
+                            dropdownLinks={dropdownLinks}
+                            sideBarOpen={sideBarOpen}
+                            setSideBarOpen={setSideBarOpen}
+                        />
 
-                    <main>
-                        <div className='mx-auto max-w-7xl py-12'>{children}</div>
-                    </main>
+                        <main>
+                            <div className='mx-auto max-w-7xl py-12'>{children}</div>
+                        </main>
+                    </div>
                 </div>
             </div>
-        </div>
+        </CashRegisterConfigurationsContext.Provider>
     );
 }

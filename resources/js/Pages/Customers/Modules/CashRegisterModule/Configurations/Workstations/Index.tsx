@@ -8,15 +8,20 @@ import UpdateWorkstation from './Components/UpdateWorkstation';
 import DeleteWorkstation from './Components/DeleteWorkstation';
 import { Separator } from '@/Components/ui/separator/separator';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { type WorkstationBkndDatas } from '@/Shared/Types/WorkstationTypes';
 import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card/card';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
-export default function Index({ customerAuth, application, workstations, localization }) {
+export default function Index({ bkndDatas }: { bkndDatas: WorkstationBkndDatas }): JSX.Element {
     const { t } = useTranslation();
 
-    const defaultWorkstationId = application.cr_workstations.find(
-        (workstation) => workstation.name === 'Pending assignement',
-    ).id;
+    const { cashRegisterModule } = bkndDatas;
+    const workstations = cashRegisterModule?.cr_workstations;
+
+    const defaultWorkstationId =
+        cashRegisterModule.cr_workstations.find(
+            (workstation) => workstation.name === 'Pending assignement',
+        )?.id ?? undefined;
 
     const [updatedWorkstations, setUpdatedWorkstations] = useState(workstations);
 
@@ -90,15 +95,11 @@ export default function Index({ customerAuth, application, workstations, localiz
     };
 
     return (
-        <CashRegisterConfigurationsLayout
-            auth={customerAuth}
-            application={application}
-            localization={localization}
-        >
-            <Head title={application.name} />
+        <CashRegisterConfigurationsLayout cashRegisterModule={cashRegisterModule}>
+            <Head title={cashRegisterModule.name} />
 
             <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <CreateWorkstation application={application} />
+                <CreateWorkstation />
 
                 {updatedWorkstations.length > 1 ? (
                     <div className='mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3'>

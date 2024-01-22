@@ -1,3 +1,5 @@
+import { type Media } from '@/Shared/Types/MediaTypes';
+
 export interface CashRegister {
     id?: number;
     name: string;
@@ -10,9 +12,14 @@ export interface CashRegister {
     fk_customer_id?: number;
     created_at?: string;
     updated_at?: string;
+    media?: Media[];
 }
 
-export interface CashRegisterModulesContextDatas {
+export interface CashRegisterConfigurationsBkndDatas {
+    cashRegisterModule: CashRegister;
+}
+
+export interface CashRegisterModulesBkndDatas {
     cashRegisterModule: CashRegister;
     posterPath: string;
 }

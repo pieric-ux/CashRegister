@@ -3,24 +3,29 @@ import { useTranslation } from 'react-i18next';
 import CreateDish from './Components/CreateDish';
 import { columns } from './Components/DishesTableColumn';
 import { Card, CardHeader } from '@/Components/ui/card/card';
+import { type DishesBkndDatas } from '@/Shared/Types/DishTypes';
 import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
-export default function Index({ customerAuth, application, dishes, localization }): JSX.Element {
+export default function Index({ bkndDatas }: { bkndDatas: DishesBkndDatas }): JSX.Element {
     const { t } = useTranslation();
 
-    const dishesFilter = dishes.filter((dish) => dish.name !== 'No dish');
+    const { cashRegisterModule } = bkndDatas;
+
+    const dishesFilter = cashRegisterModule.cr_dishes
+        .filter((dish) => dish.name !== 'No dish')
+        .map((dish) => ({
+            ...dish,
+            is_consigned: Boolean(dish.is_consigned),
+            is_soldSeparately: Boolean(dish.is_soldSeparately),
+        }));
 
     return (
-        <CashRegisterConfigurationsLayout
-            auth={customerAuth}
-            application={application}
-            localization={localization}
-        >
-            <Head title={application.name} />
+        <CashRegisterConfigurationsLayout cashRegisterModule={cashRegisterModule}>
+            <Head title={cashRegisterModule.name} />
 
             <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <CreateDish application={application} />
+                <CreateDish />
 
                 <Card>
                     <CardHeader>

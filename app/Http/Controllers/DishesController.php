@@ -20,14 +20,19 @@ class DishesController extends Controller
      */
     public function index(IndexDishesRequest $request, CR_Module $module): Response
     {
-        $dishes = $module->cr_dishes->map(function ($dish) {
-            $dish->picturePath = $dish->getPictureUrl('thumb');
-            return $dish;
+        $module->cr_dishes->map(function ($dish) {
+            return [
+                'dish' => $dish,
+                'picturePath' => $dish->getPictureUrl('thumb'),
+            ];
         });
-
+        
+        $datas = [
+            'cashRegisterModule' => $module,
+        ];
+        
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Dishes/Index', [
-            'application' => $module,
-            'dishes' => $dishes,
+            'bkndDatas' => $datas,
         ]);
     }
 
@@ -42,7 +47,7 @@ class DishesController extends Controller
             'client_price' => $request->input('is_consigned') ? $request->input('client_price') : 0,
             'cost_price' => $request->input('cost_price'),
             'is_consigned' => $request->input('is_consigned'),
-            'is_SoldSeparately' => $request->input('is_SoldSeparately'),
+            'is_soldSeparately' => $request->input('is_soldSeparately'),
         ]);
 
         return Redirect::route('dishes.index', $module);
@@ -58,7 +63,7 @@ class DishesController extends Controller
         $dish->client_price = $request->input('is_consigned') ? $request->input('client_price') : 0;
         $dish->cost_price = $request->input('cost_price');
         $dish->is_consigned = $request->input('is_consigned');
-        $dish->is_SoldSeparately = $request->input('is_SoldSeparately');
+        $dish->is_soldSeparately = $request->input('is_soldSeparately');
         $dish->save();
 
         return Redirect::route('dishes.index', $dish->cr_modules);

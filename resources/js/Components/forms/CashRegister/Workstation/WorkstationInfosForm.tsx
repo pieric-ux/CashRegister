@@ -1,6 +1,6 @@
 'use client';
 
-import { type FormEvent } from 'react';
+import { useContext, type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Form } from '@/Components/ui/form/form';
@@ -10,19 +10,20 @@ import { type Workstation } from '@/Shared/Types/WorkstationTypes';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/WorkstationInfosFormDatas';
+import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
 
 export function WorkstationInfosForm({
-    application,
     workstation,
     closeDialog,
     isUpdate = false,
 }: {
-    application?: any; // TODO: type application
-    workstation?: any; // TODO: type workstation
+    workstation?: Workstation;
     closeDialog: () => void;
     isUpdate?: boolean;
 }): JSX.Element {
     const { t } = useTranslation();
+
+    const { cashRegisterModule } = useContext(CashRegisterConfigurationsContext);
 
     const defaultValues = getDefaultValues(workstation, isUpdate);
 
@@ -40,7 +41,7 @@ export function WorkstationInfosForm({
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               })
-            : post(route('workstations.store', application.slug), {
+            : post(route('workstations.store', cashRegisterModule.slug), {
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               });

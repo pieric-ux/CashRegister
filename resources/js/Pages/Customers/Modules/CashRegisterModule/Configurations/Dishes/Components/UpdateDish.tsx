@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
+import { type Dish } from '@/Shared/Types/DishTypes';
 import { Button } from '@/Components/ui/button/button';
 import { DishInfosForm } from '@/Components/forms/CashRegister/Dish/DishInfosForm';
 import {
@@ -12,7 +13,7 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function UpdateDish({ dish }): JSX.Element {
+export default function UpdateDish({ dish }: { dish: Dish }): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);

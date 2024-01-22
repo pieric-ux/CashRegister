@@ -4,19 +4,11 @@ import i18n from '@/Config/i18n';
 import UpdateDish from './UpdateDish';
 import DeleteDish from './DeleteDish';
 import currencyCodes from 'currency-codes'; //TODO: change languagues with region for currency
+import { type Dish } from '@/Shared/Types/DishTypes';
 import { type ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
 import { UpdateItemsPictureForm } from '@/Components/forms/Common/UpdateItemsPictureForm';
-
-export interface Dish {
-    name: string;
-    unit: string;
-    client_price: number;
-    cost_price: number;
-    is_consigned: number;
-    is_SoldSeparately: number;
-}
 
 export const columns: ColumnDef<Dish>[] = [
     {
@@ -118,7 +110,7 @@ export const columns: ColumnDef<Dish>[] = [
             return (
                 <Checkbox
                     className='disabled:cursor-not-allowed disabled:opacity-50'
-                    checked={row.original.is_consigned === 1}
+                    checked={row.original.is_consigned}
                     disabled
                 />
             );
@@ -126,7 +118,7 @@ export const columns: ColumnDef<Dish>[] = [
     },
     {
         id: 'Sold Separately',
-        accessorKey: 'is_SoldSeparately',
+        accessorKey: 'is_soldSeparately',
         header: ({ column }) => {
             return <ColumnHeader column={column} title={i18n.t('Sold Separately')} />;
         },
@@ -134,7 +126,7 @@ export const columns: ColumnDef<Dish>[] = [
             return (
                 <Checkbox
                     className='disabled:cursor-not-allowed disabled:opacity-50'
-                    checked={row.original.is_SoldSeparately === 1}
+                    checked={row.original.is_soldSeparately}
                     disabled
                 />
             );

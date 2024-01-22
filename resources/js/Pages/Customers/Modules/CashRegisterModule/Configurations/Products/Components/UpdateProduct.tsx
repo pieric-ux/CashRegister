@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
+import { type Product } from '@/Shared/Types/ProductTypes';
 import { ProductInfosForm } from '@/Components/forms/CashRegister/Product/ProductInfosForm';
 import {
     Dialog,
@@ -12,7 +13,7 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function UpdateProduct({ product }): JSX.Element {
+export default function UpdateProduct({ product }: { product: Product }): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);

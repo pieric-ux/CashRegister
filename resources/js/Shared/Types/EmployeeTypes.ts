@@ -1,3 +1,6 @@
+import { type Media } from '@/Shared/Types/MediaTypes';
+import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
+
 export interface Employee {
     id?: number;
     first_name: string;
@@ -9,6 +12,11 @@ export interface Employee {
     fk_workstations_id?: number;
     created_at?: string;
     updated_at?: string;
+    media?: Media[];
+}
+
+export interface EmployeesBkndDatas {
+    cashRegisterModule: CashRegister & { cr_employees: Employee[] };
 }
 
 export interface EmployeeProfileFormDatas {

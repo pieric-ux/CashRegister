@@ -18,7 +18,7 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function CreateWorkstation({ application }): JSX.Element {
+export default function CreateWorkstation(): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);
@@ -52,10 +52,7 @@ export default function CreateWorkstation({ application }): JSX.Element {
                                     )}
                                 </DialogDescription>
                             </DialogHeader>
-                            <WorkstationInfosForm
-                                application={application}
-                                closeDialog={closeDialog}
-                            />
+                            <WorkstationInfosForm closeDialog={closeDialog} />
                         </DialogContent>
                     </Dialog>
                 </CardFooter>

@@ -3,15 +3,9 @@
 import i18n from '@/Config/i18n';
 import currencyCodes from 'currency-codes'; //TODO: change languagues with region for currency
 import { type ColumnDef } from '@tanstack/react-table';
+import { type DetailTransaction } from '@/Shared/Types/DetailTransactionTypes';
 
-export interface DetailsTransaction {
-    quantity: number;
-    item_name: string;
-    unit: string;
-    client_price: number;
-}
-
-export const columns: ColumnDef<DetailsTransaction>[] = [
+export const columns: ColumnDef<DetailTransaction>[] = [
     {
         id: 'QTY',
         accessorKey: 'quantity',

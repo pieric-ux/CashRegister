@@ -5,26 +5,10 @@ import currencyCodes from 'currency-codes'; //TODO: change languagues with regio
 import UpdateProduct from './UpdateProduct';
 import DeleteProduct from './DeleteProduct';
 import { type ColumnDef } from '@tanstack/react-table';
+import { type Product } from '@/Shared/Types/ProductTypes';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
 import { UpdateItemsPictureForm } from '@/Components/forms/Common/UpdateItemsPictureForm';
-
-export interface Product {
-    name: string;
-    unit: string;
-    client_price: number;
-    cost_price: number;
-    cr_categories_products: Category;
-    cr_dishes: Dish;
-}
-interface Category {
-    name: string;
-}
-
-interface Dish {
-    name: string;
-    unit: string;
-}
 
 export const columns: ColumnDef<Product>[] = [
     {

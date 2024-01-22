@@ -1,6 +1,6 @@
 'use client';
 
-import { type FormEvent } from 'react';
+import { useContext, type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { type Dish } from '@/Shared/Types/DishTypes';
@@ -11,19 +11,20 @@ import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/DishInfosFormDatas';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/Components/ui/form/form';
+import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
 
 export function DishInfosForm({
-    application,
     dish,
     closeDialog,
     isUpdate = false,
 }: {
-    application?: any; // TODO: type dish
-    dish?: any; // TODO: type dish
+    dish?: Dish;
     closeDialog: () => void;
     isUpdate?: boolean;
 }): JSX.Element {
     const { t } = useTranslation();
+
+    const { cashRegisterModule } = useContext(CashRegisterConfigurationsContext);
 
     const defaultValues = getDefaultValues(dish, isUpdate);
 
@@ -41,7 +42,7 @@ export function DishInfosForm({
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               })
-            : post(route('dishes.store', application.slug), {
+            : post(route('dishes.store', cashRegisterModule.slug), {
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               });
@@ -71,7 +72,7 @@ export function DishInfosForm({
                                         defaultChecked={field.value}
                                         onCheckedChange={(isChecked) => {
                                             field.onChange(isChecked);
-                                            setData('is_consigned', isChecked);
+                                            setData('is_consigned', isChecked as boolean);
                                         }}
                                     />
                                 </FormControl>
@@ -82,7 +83,7 @@ export function DishInfosForm({
                 />
                 <FormField
                     control={form.control}
-                    name='is_SoldSeparately'
+                    name='is_soldSeparately'
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel className='flex items-center'>
@@ -91,7 +92,7 @@ export function DishInfosForm({
                                         defaultChecked={field.value}
                                         onCheckedChange={(isChecked) => {
                                             field.onChange(isChecked);
-                                            setData('is_SoldSeparately', isChecked);
+                                            setData('is_soldSeparately', isChecked as boolean);
                                         }}
                                     />
                                 </FormControl>

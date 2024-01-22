@@ -56,11 +56,11 @@ export function UpdateItemsPictureForm({ item, route }: { item: any; route: stri
                     name='picture'
                     render={() => (
                         <FormItem className='flex w-3/4 items-center justify-center'>
-                            {item.picturePath ? (
+                            {item.media[0]?.original_url ? (
                                 <div className='relative z-30 mx-auto h-16 w-16 backdrop-blur-md transition duration-300 ease-linear'>
                                     <div className='relative h-full w-full drop-shadow-md'>
                                         <Avatar variant={'square'} size={'picture'}>
-                                            <AvatarImage src={item.picturePath} />
+                                            <AvatarImage src={item.media[0].original_url} />
                                         </Avatar>
                                         <FormLabel
                                             className={

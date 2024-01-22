@@ -1,4 +1,10 @@
+import { type Dish } from '@/Shared/Types/DishTypes';
+import { type Media } from '@/Shared/Types/MediaTypes';
+import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
+import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
+
 export interface Product {
+    // TODO: clean type Product
     id?: number;
     name: string;
     unit: string;
@@ -10,6 +16,15 @@ export interface Product {
     fk_dishes_id?: string;
     created_at?: string;
     updated_at?: string;
+    media: Media[];
+}
+
+export interface ProductsBkndDatas {
+    cashRegisterModule: CashRegister & {
+        cr_categories_products: CategoryProducts[];
+        cr_dishes: Dish[];
+        cr_products: Product[];
+    };
 }
 
 export interface ProductInfosFormDatas {

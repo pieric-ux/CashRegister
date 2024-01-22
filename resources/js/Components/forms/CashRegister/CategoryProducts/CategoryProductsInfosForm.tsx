@@ -1,6 +1,6 @@
 'use client';
 // TODO: Maybe refactor with WorkstationInfosForm
-import { type FormEvent } from 'react';
+import { useContext, type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Form } from '@/Components/ui/form/form';
@@ -9,20 +9,21 @@ import { useForm as useFormInertia } from '@inertiajs/react';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
+import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
 import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/CategoryProductsInfosFormDatas';
 
 export function CategoryProductsInfosForm({
-    application,
     category,
     closeDialog,
     isUpdate = false,
 }: {
-    application?: any; // TODO: type application
-    category?: any; // TODO: type category
+    category?: CategoryProducts; // TODO: type category
     closeDialog: () => void;
     isUpdate?: boolean;
 }): JSX.Element {
     const { t } = useTranslation();
+
+    const { cashRegisterModule } = useContext(CashRegisterConfigurationsContext);
 
     const defaultValues = getDefaultValues(category, isUpdate);
 
@@ -40,7 +41,7 @@ export function CategoryProductsInfosForm({
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               })
-            : post(route('categories.store', application.slug), {
+            : post(route('categories.store', cashRegisterModule.slug), {
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               });

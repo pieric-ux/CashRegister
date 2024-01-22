@@ -6,19 +6,8 @@ import { type ColumnDef } from '@tanstack/react-table';
 import DeleteTransaction from './DeleteTransaction';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import ShowDetailsTransaction from './ShowDetailsTransaction';
+import { type Transaction } from '@/Shared/Types/TransactionTypes';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
-
-export interface Transaction {
-    or_number: string;
-    employee: string;
-    workstation: string;
-    total: number;
-    cr_payment_methods: Payment;
-}
-
-interface Payment {
-    name: string;
-}
 
 export const columns: ColumnDef<Transaction>[] = [
     {

@@ -18,7 +18,7 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function CreateEmployee({ application }): JSX.Element {
+export default function CreateEmployee(): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);
@@ -52,10 +52,7 @@ export default function CreateEmployee({ application }): JSX.Element {
                                     )}
                                 </DialogDescription>
                             </DialogHeader>
-                            <EmployeeProfileForm
-                                application={application}
-                                closeDialog={closeDialog}
-                            />
+                            <EmployeeProfileForm closeDialog={closeDialog} />
                         </DialogContent>
                     </Dialog>
                 </CardFooter>

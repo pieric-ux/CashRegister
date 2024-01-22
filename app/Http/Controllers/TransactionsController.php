@@ -26,9 +26,14 @@ class TransactionsController extends Controller
             return $paymentMethod->cr_transactions;
         });
 
+        $module->cr_transactions = $transactions;
+
+        $datas = [
+            'cashRegisterModule' => $module,
+        ];
+
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Transactions/Index', [
-            'application' => $module,
-            'transactions' => $transactions,
+            'bkndDatas' => $datas,
         ]);
     }
 

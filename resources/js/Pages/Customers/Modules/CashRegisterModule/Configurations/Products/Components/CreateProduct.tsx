@@ -18,7 +18,7 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function CreateProduct({ application }): JSX.Element {
+export default function CreateProduct(): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);
@@ -52,7 +52,7 @@ export default function CreateProduct({ application }): JSX.Element {
                                     )}
                                 </DialogDescription>
                             </DialogHeader>
-                            <ProductInfosForm application={application} closeDialog={closeDialog} />
+                            <ProductInfosForm closeDialog={closeDialog} />
                         </DialogContent>
                     </Dialog>
                 </CardFooter>

@@ -21,11 +21,14 @@ class CategoriesProductsController extends Controller
      */
     public function index(IndexCategoriesProductsRequest $request, CR_Module $module): Response
     {
-        $categories = $module->cr_categories_products;
+        $module->cr_categories_products;
+
+        $datas = [
+            'cashRegisterModule' => $module,
+        ];
 
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Categories_Products/Index', [
-            'application' => $module,
-            'categories' => $categories,
+            'bkndDatas' => $datas,
         ]);
     }
 

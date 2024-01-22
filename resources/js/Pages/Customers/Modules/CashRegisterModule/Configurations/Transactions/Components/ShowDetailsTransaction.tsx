@@ -3,6 +3,7 @@ import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import { columns } from './DetailsTransactionsTableColumns';
+import { type Transaction } from '@/Shared/Types/TransactionTypes';
 import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 import {
     Dialog,
@@ -12,7 +13,11 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function ShowDetailsTransaction({ transaction }): JSX.Element {
+export default function ShowDetailsTransaction({
+    transaction,
+}: {
+    transaction: Transaction;
+}): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
+import { type Dish } from '@/Shared/Types/DishTypes';
 import { Button } from '@/Components/ui/button/button';
 import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
 import {
@@ -12,7 +13,7 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function DeleteDish({ dish }): JSX.Element {
+export default function DeleteDish({ dish }: { dish: Dish }): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);

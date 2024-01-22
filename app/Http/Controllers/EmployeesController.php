@@ -26,9 +26,14 @@ class EmployeesController extends Controller
             return $workstation->cr_employees;
         });
 
+        $module->cr_employees = $employees;
+
+        $datas = [
+            'cashRegisterModule' => $module,
+        ];
+
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Employees/Index', [
-            'application' => $module,
-            'employees' => $employees,
+            'bkndDatas' => $datas,
         ]);
     }
 

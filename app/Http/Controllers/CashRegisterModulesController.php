@@ -60,8 +60,9 @@ class CashRegisterModulesController extends Controller
      */
     public function show(ShowCashRegisterModulesRequest $request, CR_Module $module): Response
     {
+        $datas = ['cashRegisterModule' => $module];
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Dashboard', [
-            'application' => $module,
+            'bkndDatas' => $datas,
         ]);
     }
 

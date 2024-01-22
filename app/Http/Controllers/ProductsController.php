@@ -31,13 +31,16 @@ class ProductsController extends Controller
             });
         });
 
-        $dishes = $module->cr_dishes;
+        $module->cr_categories_products = $categories;
+        $module->cr_products = $products;
+        $module->cr_dishes;
+
+        $datas = [
+            'cashRegisterModule' => $module,
+        ];
 
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Products/Index', [
-            'application' => $module,
-            'products' => $products,
-            'categories' => $categories,
-            'dishes' => $dishes,
+            'bkndDatas' => $datas,
         ]);
     }
 

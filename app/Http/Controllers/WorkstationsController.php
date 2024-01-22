@@ -35,9 +35,12 @@ class WorkstationsController extends Controller
             })->values()->toArray();
         }
 
+       $datas = [
+        'cashRegisterModule' => $module,
+       ];
+
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Workstations/Index', [
-            'application' => $module,
-            'workstations' => $workstations,
+            'bkndDatas' => $datas,
         ]);
     }
 

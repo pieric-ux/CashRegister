@@ -1,6 +1,6 @@
 'use client';
 
-import { type FormEvent } from 'react';
+import { useContext, type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Form } from '@/Components/ui/form/form';
@@ -9,20 +9,21 @@ import { useForm as useFormInertia } from '@inertiajs/react';
 import { type Employee } from '@/Shared/Types/EmployeeTypes';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
+import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
 import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/EmployeeProfileFormDatas';
 
 export function EmployeeProfileForm({
-    application,
     employee,
     closeDialog,
     isUpdate = false,
 }: {
-    application?: any; // TODO: type application
-    employee?: any; // TODO: type employee
+    employee?: Employee;
     closeDialog: () => void;
     isUpdate?: boolean;
 }): JSX.Element {
     const { t } = useTranslation();
+
+    const { cashRegisterModule } = useContext(CashRegisterConfigurationsContext);
 
     const defaultValues = getDefaultValues(employee, isUpdate);
 
@@ -40,7 +41,7 @@ export function EmployeeProfileForm({
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               })
-            : post(route('employees.register', application.slug), {
+            : post(route('employees.register', cashRegisterModule.slug), {
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               });

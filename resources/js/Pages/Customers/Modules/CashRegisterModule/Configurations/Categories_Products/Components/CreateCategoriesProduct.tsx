@@ -18,7 +18,7 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function CreateCategoriesProduct({ application }): JSX.Element {
+export default function CreateCategoriesProduct(): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);
@@ -54,10 +54,7 @@ export default function CreateCategoriesProduct({ application }): JSX.Element {
                                     )}
                                 </DialogDescription>
                             </DialogHeader>
-                            <CategoryProductsInfosForm
-                                application={application}
-                                closeDialog={closeDialog}
-                            />
+                            <CategoryProductsInfosForm closeDialog={closeDialog} />
                         </DialogContent>
                     </Dialog>
                 </CardFooter>

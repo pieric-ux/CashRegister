@@ -6,10 +6,10 @@ import { useContext, type FormEvent } from 'react';
 import { Button } from '@/Components/ui/button/button';
 import { type Product } from '@/Shared/Types/ProductTypes';
 import { useForm as useFormInertia } from '@inertiajs/react';
-import { ProductsTableContext } from '@/Context/ProductsTableContext';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { formDatas, getDefaultValues } from '@/Shared/Datas/Forms/ProductInfoFormDatas';
+import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
 import {
     Form,
     FormControl,
@@ -27,19 +27,20 @@ import {
 } from '@/Components/ui/select/select';
 
 export function ProductInfosForm({
-    application,
     product,
     closeDialog,
     isUpdate = false,
 }: {
-    application?: any; // TODO: type application
-    product?: any; // TODO: type product
+    product?: Product;
     closeDialog: () => void;
     isUpdate?: boolean;
 }): JSX.Element {
     const { t } = useTranslation();
 
-    const { categories, dishes } = useContext(ProductsTableContext);
+    const { cashRegisterModule } = useContext(CashRegisterConfigurationsContext);
+
+    const categories = cashRegisterModule.cr_categories_products;
+    const dishes = cashRegisterModule.cr_dishes;
 
     const defaultValues = getDefaultValues(product, isUpdate);
 
@@ -57,7 +58,7 @@ export function ProductInfosForm({
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               })
-            : post(route('products.store', application.slug), {
+            : post(route('products.store', cashRegisterModule.slug), {
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               });
@@ -97,8 +98,8 @@ export function ProductInfosForm({
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent position='popper'>
-                                            {categories.map((category) => (
-                                                <SelectItem key={category.id} value={category.id}>
+                                            {categories?.map((category) => (
+                                                <SelectItem key={category.id} value={category.name}>
                                                     {category.name === 'No category'
                                                         ? t('No category')
                                                         : category.name}
@@ -130,8 +131,8 @@ export function ProductInfosForm({
                                         </FormControl>
                                         <SelectContent>
                                             {/* FIXME: don't display the textContext */}
-                                            {dishes.map((dish) => (
-                                                <SelectItem key={dish.id} value={dish.id}>
+                                            {dishes?.map((dish) => (
+                                                <SelectItem key={dish.id} value={dish.name}>
                                                     {dish.name === 'No dish'
                                                         ? t('No dish')
                                                         : `${dish.name} ${dish.unit}`}

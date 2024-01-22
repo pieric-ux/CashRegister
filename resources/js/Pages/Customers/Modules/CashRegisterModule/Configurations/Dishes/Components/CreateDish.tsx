@@ -18,7 +18,7 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function CreateDish({ application }): JSX.Element {
+export default function CreateDish(): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);
@@ -52,7 +52,7 @@ export default function CreateDish({ application }): JSX.Element {
                                     )}
                                 </DialogDescription>
                             </DialogHeader>
-                            <DishInfosForm application={application} closeDialog={closeDialog} />
+                            <DishInfosForm closeDialog={closeDialog} />
                         </DialogContent>
                     </Dialog>
                 </CardFooter>

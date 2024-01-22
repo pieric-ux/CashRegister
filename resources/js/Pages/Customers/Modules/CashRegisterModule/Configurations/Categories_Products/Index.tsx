@@ -4,25 +4,28 @@ import { Head } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardHeader, CardTitle } from '@/Components/ui/card/card';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import CreateCategoriesProduct from './Components/CreateCategoriesProduct';
 import UpdateCategoriesProduct from './Components/UpdateCategoriesProduct';
 import DeleteCategoriesProduct from './Components/DeleteCategoriesProduct';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { type CategoriesProductsBkndDatas } from '@/Shared/Types/CategoryProductsTypes';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
 export default function Index({
-    customerAuth,
-    application,
-    categories,
-    localization,
+    bkndDatas,
+}: {
+    bkndDatas: CategoriesProductsBkndDatas;
 }): JSX.Element {
     const { t } = useTranslation();
 
-    const [updatedCategories, setUpdatedCategories] = useState(categories);
+    const { cashRegisterModule } = bkndDatas;
+    const categoriesProducts = cashRegisterModule.cr_categories_products;
+
+    const [updatedCategories, setUpdatedCategories] = useState(categoriesProducts);
 
     useEffect(() => {
-        setUpdatedCategories(categories);
-    }, [categories]);
+        setUpdatedCategories(categoriesProducts);
+    }, [categoriesProducts]);
 
     const onDragEnd = async (result) => {
         const { destination, source } = result;
@@ -56,15 +59,11 @@ export default function Index({
     };
 
     return (
-        <CashRegisterConfigurationsLayout
-            auth={customerAuth}
-            application={application}
-            localization={localization}
-        >
-            <Head title={application.name} />
+        <CashRegisterConfigurationsLayout cashRegisterModule={cashRegisterModule}>
+            <Head title={cashRegisterModule.name} />
 
             <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <CreateCategoriesProduct application={application} />
+                <CreateCategoriesProduct />
 
                 {updatedCategories.length > 1 ? (
                     // TODO: Refactor dnd component

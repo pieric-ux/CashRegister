@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
+import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
 import {
     Dialog,
@@ -12,7 +13,11 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-export default function DeleteCategoriesProduct({ category }): JSX.Element {
+export default function DeleteCategoriesProduct({
+    category,
+}: {
+    category: CategoryProducts;
+}): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);
