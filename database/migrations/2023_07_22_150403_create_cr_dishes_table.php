@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('client_price', 6, 2)->default(0.00);
             $table->decimal('cost_price', 6, 2)->default(0.00);
             $table->boolean('is_consigned')->nullable()->default(true);
-            $table->boolean('is_SoldSeparately')->nullable()->default(true);
+            $table->boolean('is_soldSeparately')->nullable()->default(true);
             $table->unsignedBigInteger('fk_cr_modules_id');
             $table->foreign('fk_cr_modules_id')->references('id')->on('cr_modules')->onDelete('cascade');
             $table->timestamps();

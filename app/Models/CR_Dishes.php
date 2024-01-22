@@ -26,7 +26,7 @@ class CR_Dishes extends Model implements HasMedia
         'client_price',
         'cost_price',
         'is_consigned',
-        'is_SoldSeparately',
+        'is_soldSeparately',
         'fk_cr_modules_id',
     ];
 

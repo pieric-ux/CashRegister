@@ -12,7 +12,7 @@ export default function Items({ isCartVisible, cart, setCart, categories, dishes
     const [isDragging, setIsDragging] = useState(false);
 
     const soldSeparatelydDishesMap = new Map(
-        dishes.filter((dish) => dish.is_SoldSeparately).map((dish) => [dish.id, dish]),
+        dishes.filter((dish) => dish.is_soldSeparately).map((dish) => [dish.id, dish]),
     );
     const productsDishesMap = products.reduce((dishes, product) => {
         if (product.cr_dishes && product.cr_dishes.name !== 'No dish') {

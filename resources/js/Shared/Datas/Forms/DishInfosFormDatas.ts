@@ -7,7 +7,7 @@ export const getDefaultValues = (dish: Dish, isUpdate: boolean): Dish => {
         client_price: isUpdate ? dish?.client_price : 0,
         cost_price: isUpdate ? dish?.cost_price : 0,
         is_consigned: isUpdate ? Boolean(dish?.is_consigned) : true,
-        is_SoldSeparately: isUpdate ? Boolean(dish?.is_SoldSeparately) : false,
+        is_soldSeparately: isUpdate ? Boolean(dish?.is_soldSeparately) : false,
     };
 };
 

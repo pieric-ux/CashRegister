@@ -76,7 +76,7 @@ class CR_Module extends Model implements HasMedia
             $dish->name = 'No dish';
             $dish->unit = 'pce';
             $dish->is_consigned = false;
-            $dish->is_SoldSeparately = false;
+            $dish->is_soldSeparately = false;
             $dish->fk_cr_modules_id = $module->id;
             $dish->save();
 
