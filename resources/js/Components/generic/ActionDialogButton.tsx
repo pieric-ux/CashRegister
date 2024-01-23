@@ -17,7 +17,7 @@ interface Datas {
     dialogDescription: string;
 }
 
-export default function UpdateDeleteEntityComponent({
+export default function ActionDialogButton({
     datas,
     open,
     setOpen,

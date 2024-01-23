@@ -1,4 +1,5 @@
 export const deleteEmployeeDatas = {
+    buttonTitle: 'Delete Employee',
     buttonAriaLabel: 'Delete your employee',
     dialogTitle: 'Are you sure you want to delete your employee?',
     dialogDescription:

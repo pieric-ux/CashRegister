@@ -1,13 +1,10 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { type Dish } from '@/Shared/Types/DishTypes';
+import ActionDialogButton from '@/Components/generic/ActionDialogButton';
 import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
 import { deleteDishDatas } from '@/Shared/Datas/Configs/Dishes/DeleteDishDatas';
-import UpdateDeleteEntityComponent from '@/Components/generic/UpdateDeleteEntityComponent';
 
 export default function DeleteDish({ dish }: { dish: Dish }): JSX.Element {
-    const { t } = useTranslation();
-
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {
@@ -16,14 +13,13 @@ export default function DeleteDish({ dish }: { dish: Dish }): JSX.Element {
 
     return (
         <section>
-            <UpdateDeleteEntityComponent datas={deleteDishDatas} open={open} setOpen={setOpen}>
+            <ActionDialogButton datas={deleteDishDatas} open={open} setOpen={setOpen}>
                 <ConfirmDeleteForm
+                    datas={deleteDishDatas}
                     route={route('dishes.destroy', dish)}
                     closeDialog={closeDialog}
-                    ariaLabel={t('Delete the dish')}
-                    buttonTiltle={t('Delete Dish')}
                 />
-            </UpdateDeleteEntityComponent>
+            </ActionDialogButton>
         </section>
     );
 }

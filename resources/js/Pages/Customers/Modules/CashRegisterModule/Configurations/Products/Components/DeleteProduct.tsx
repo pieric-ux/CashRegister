@@ -1,13 +1,10 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { type Product } from '@/Shared/Types/ProductTypes';
+import ActionDialogButton from '@/Components/generic/ActionDialogButton';
 import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
 import { deleteProductDatas } from '@/Shared/Datas/Configs/Products/DeleteProductDatas';
-import UpdateDeleteEntityComponent from '@/Components/generic/UpdateDeleteEntityComponent';
 
 export default function DeleteProduct({ product }: { product: Product }): JSX.Element {
-    const { t } = useTranslation();
-
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {
@@ -16,14 +13,13 @@ export default function DeleteProduct({ product }: { product: Product }): JSX.El
 
     return (
         <section>
-            <UpdateDeleteEntityComponent datas={deleteProductDatas} open={open} setOpen={setOpen}>
+            <ActionDialogButton datas={deleteProductDatas} open={open} setOpen={setOpen}>
                 <ConfirmDeleteForm
+                    datas={deleteProductDatas}
                     route={route('products.destroy', product)}
                     closeDialog={closeDialog}
-                    ariaLabel={t('Delete the product')}
-                    buttonTiltle={t('Delete Product')}
                 />
-            </UpdateDeleteEntityComponent>
+            </ActionDialogButton>
         </section>
     );
 }

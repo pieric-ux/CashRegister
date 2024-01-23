@@ -11,8 +11,23 @@ import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { defaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/ConfirmDeleteFormDatas';
 
-export function ConfirmDeleteForm({ route, closeDialog, ariaLabel, buttonTiltle }): JSX.Element {
+interface Datas {
+    buttonTitle: string;
+    buttonAriaLabel: string;
+}
+
+export function ConfirmDeleteForm({
+    route,
+    closeDialog,
+    datas,
+}: {
+    route: string;
+    closeDialog: () => void;
+    datas: Datas;
+}): JSX.Element {
     const { t } = useTranslation();
+
+    const { buttonTitle, buttonAriaLabel } = datas;
 
     const {
         data,
@@ -61,9 +76,9 @@ export function ConfirmDeleteForm({ route, closeDialog, ariaLabel, buttonTiltle 
                         className='ml-3'
                         variant={'destructive'}
                         disabled={processing}
-                        aria-label={ariaLabel}
+                        aria-label={t(buttonAriaLabel)}
                     >
-                        {buttonTiltle}
+                        {t(buttonTitle)}
                     </Button>
                 </DialogFooter>
             </form>

@@ -1,4 +1,5 @@
 export const deleteDishDatas = {
+    buttonTitle: 'Delete Dish',
     buttonAriaLabel: 'Delete the dish',
     dialogTitle: 'Are you sure you want to delete your dish?',
     dialogDescription:

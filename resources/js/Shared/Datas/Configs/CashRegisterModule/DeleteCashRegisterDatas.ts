@@ -1,4 +1,5 @@
 export const deleteCashRegisterDatas = {
+    buttonTitle: 'Delete App',
     buttonAriaLabel: 'Delete your app',
     dialogTitle: 'Are you sure you want to delete your app?',
     dialogDescription:

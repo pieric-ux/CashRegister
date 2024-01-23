@@ -1,4 +1,5 @@
 export const deleteWorkstationDatas = {
+    buttonTitle: 'Delete Workstation',
     buttonAriaLabel: 'Delete the workstation',
     dialogTitle: 'Are you sure you want to delete your workstation?',
     dialogDescription:

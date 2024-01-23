@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import ActionDialogButton from '@/Components/generic/ActionDialogButton';
 import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
-import { CategoryProductsInfosForm } from '@/Components/forms/CashRegister/CategoryProducts/CategoryProductsInfosForm';
-import UpdateDeleteEntityComponent from '@/Components/generic/UpdateDeleteEntityComponent';
 import { updateCategoriesProductDatas } from '@/Shared/Datas/Configs/CategoriesProduct/UpdateCategoriesProductDatas';
+import { CategoryProductsInfosForm } from '@/Components/forms/CashRegister/CategoryProducts/CategoryProductsInfosForm';
 
 export default function UpdateCategoriesProduct({
     category,
@@ -17,7 +17,7 @@ export default function UpdateCategoriesProduct({
 
     return (
         <section>
-            <UpdateDeleteEntityComponent
+            <ActionDialogButton
                 datas={updateCategoriesProductDatas}
                 open={open}
                 setOpen={setOpen}
@@ -28,7 +28,7 @@ export default function UpdateCategoriesProduct({
                     closeDialog={closeDialog}
                     isUpdate={true}
                 />
-            </UpdateDeleteEntityComponent>
+            </ActionDialogButton>
         </section>
     );
 }

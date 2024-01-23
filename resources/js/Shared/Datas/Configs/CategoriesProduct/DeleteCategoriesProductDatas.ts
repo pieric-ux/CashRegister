@@ -1,4 +1,5 @@
 export const deleteCategoriesProductDatas = {
+    buttonTitle: 'Delete Category',
     buttonAriaLabel: 'Delete the category of product',
     dialogTitle: 'Are you sure you want to delete your category of product?',
     dialogDescription:

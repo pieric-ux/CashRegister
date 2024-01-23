@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import UpdateDeleteEntityComponent from '@/Components/generic/UpdateDeleteEntityComponent';
+import ActionDialogButton from '@/Components/generic/ActionDialogButton';
 import { CashRegisterInfosForm } from '@/Components/forms/CashRegister/CashRegisterInfosForm';
 import { updateCashRegisterDatas } from '@/Shared/Datas/Configs/CashRegisterModule/UpdateCashRegisterDatas';
 
@@ -12,14 +12,14 @@ export default function UpdateCashRegister(): JSX.Element {
 
     return (
         <section>
-            <UpdateDeleteEntityComponent
+            <ActionDialogButton
                 datas={updateCashRegisterDatas}
                 open={open}
                 setOpen={setOpen}
                 isUpdate={true}
             >
                 <CashRegisterInfosForm isUpdate={true} closeDialog={closeDialog} />
-            </UpdateDeleteEntityComponent>
+            </ActionDialogButton>
         </section>
     );
 }

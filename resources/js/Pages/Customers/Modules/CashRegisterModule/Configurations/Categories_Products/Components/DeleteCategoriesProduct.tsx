@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import ActionDialogButton from '@/Components/generic/ActionDialogButton';
 import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
-import UpdateDeleteEntityComponent from '@/Components/generic/UpdateDeleteEntityComponent';
 import { deleteCategoriesProductDatas } from '@/Shared/Datas/Configs/CategoriesProduct/DeleteCategoriesProductDatas';
 
 export default function DeleteCategoriesProduct({
@@ -10,8 +9,6 @@ export default function DeleteCategoriesProduct({
 }: {
     category: CategoryProducts;
 }): JSX.Element {
-    const { t } = useTranslation();
-
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {
@@ -20,18 +17,13 @@ export default function DeleteCategoriesProduct({
 
     return (
         <section>
-            <UpdateDeleteEntityComponent
-                datas={deleteCategoriesProductDatas}
-                open={open}
-                setOpen={setOpen}
-            >
+            <ActionDialogButton datas={deleteCategoriesProductDatas} open={open} setOpen={setOpen}>
                 <ConfirmDeleteForm
+                    datas={deleteCategoriesProductDatas}
                     route={route('categories.destroy', category)}
                     closeDialog={closeDialog}
-                    ariaLabel={t('Delete the category of product')}
-                    buttonTiltle={t('Delete Category')}
                 />
-            </UpdateDeleteEntityComponent>
+            </ActionDialogButton>
         </section>
     );
 }

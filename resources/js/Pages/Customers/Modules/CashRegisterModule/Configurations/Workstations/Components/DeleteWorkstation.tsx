@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { type Workstation } from '@/Shared/Types/WorkstationTypes';
+import ActionDialogButton from '@/Components/generic/ActionDialogButton';
 import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
-import UpdateDeleteEntityComponent from '@/Components/generic/UpdateDeleteEntityComponent';
 import { deleteWorkstationDatas } from '@/Shared/Datas/Configs/Workstations/DeleteWorkstationDatas';
 
 export default function DeleteWorkstation({
@@ -10,8 +9,6 @@ export default function DeleteWorkstation({
 }: {
     workstation: Workstation;
 }): JSX.Element {
-    const { t } = useTranslation();
-
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {
@@ -20,18 +17,13 @@ export default function DeleteWorkstation({
 
     return (
         <section>
-            <UpdateDeleteEntityComponent
-                datas={deleteWorkstationDatas}
-                open={open}
-                setOpen={setOpen}
-            >
+            <ActionDialogButton datas={deleteWorkstationDatas} open={open} setOpen={setOpen}>
                 <ConfirmDeleteForm
+                    datas={deleteWorkstationDatas}
                     route={route('workstations.destroy', workstation)}
                     closeDialog={closeDialog}
-                    ariaLabel={t('Delete the workstation')}
-                    buttonTiltle={t('Delete Workstation')}
                 />
-            </UpdateDeleteEntityComponent>
+            </ActionDialogButton>
         </section>
     );
 }
