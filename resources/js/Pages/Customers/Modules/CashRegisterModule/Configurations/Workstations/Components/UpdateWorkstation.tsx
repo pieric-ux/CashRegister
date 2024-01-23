@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { type Workstation } from '@/Shared/Types/WorkstationTypes';
 import ActionDialogButton from '@/Components/generic/ActionDialogButton';
-import { updateWorkstationDatas } from '@/Shared/Datas/Configs/Workstations/UpdateWorkstationsDatas';
+import { updateWorkstationDatas } from '@/Shared/Datas/Configs/Workstations/UpdateWorkstationDatas';
 import { WorkstationInfosForm } from '@/Components/forms/CashRegister/Workstation/WorkstationInfosForm';
 
 export default function UpdateWorkstation({
