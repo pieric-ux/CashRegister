@@ -73,7 +73,6 @@ export function ConfirmDeleteForm({
                     </DialogClose>
 
                     <Button
-                        className='ml-3'
                         variant={'destructive'}
                         disabled={processing}
                         aria-label={t(buttonAriaLabel)}

@@ -1,17 +1,16 @@
 'use client';
 
-import { useContext, type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useContext, type FormEvent } from 'react';
 import { type Dish } from '@/Shared/Types/DishTypes';
-import { Button } from '@/Components/ui/button/button';
 import { useForm as useFormInertia } from '@inertiajs/react';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
-import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
+import DialogFormFooter from '@/Components/forms/Common/DialogFormFooter';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/DishInfosFormDatas';
-import { Form, FormControl, FormField, FormItem, FormLabel } from '@/Components/ui/form/form';
 import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/Components/ui/form/form';
 
 export function DishInfosForm({
     dish,
@@ -102,21 +101,12 @@ export function DishInfosForm({
                     )}
                 />
 
-                <DialogFooter className='mt-6 flex justify-end'>
-                    <DialogClose asChild>
-                        <Button variant={'secondary'} onClick={closeDialog}>
-                            {t('Cancel')}
-                        </Button>
-                    </DialogClose>
-
-                    <Button
-                        className='ml-3'
-                        disabled={processing}
-                        aria-label={isUpdate ? t('Edit the dish') : t('Create your dish')}
-                    >
-                        {isUpdate ? t('Save') : t('Create')}
-                    </Button>
-                </DialogFooter>
+                <DialogFormFooter
+                    closeDialog={closeDialog}
+                    processing={processing}
+                    buttonAriaLabel={isUpdate ? t('Edit the dish') : t('Create your dish')}
+                    isUpdate={isUpdate}
+                />
             </form>
         </Form>
     );

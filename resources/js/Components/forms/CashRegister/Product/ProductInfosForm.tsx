@@ -3,10 +3,9 @@
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useContext, type FormEvent } from 'react';
-import { Button } from '@/Components/ui/button/button';
 import { type Product } from '@/Shared/Types/ProductTypes';
 import { useForm as useFormInertia } from '@inertiajs/react';
-import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
+import DialogFormFooter from '@/Components/forms/Common/DialogFormFooter';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { formDatas, getDefaultValues } from '@/Shared/Datas/Forms/ProductInfoFormDatas';
 import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
@@ -66,7 +65,7 @@ export function ProductInfosForm({
 
     return (
         <Form {...form}>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className='space-y-4'>
                 {formDatas.map((formData) => (
                     <GenericFormField
                         key={formData.name}
@@ -145,21 +144,12 @@ export function ProductInfosForm({
                     </>
                 )}
 
-                <DialogFooter className='mt-6 flex justify-end'>
-                    <DialogClose asChild>
-                        <Button variant={'secondary'} onClick={closeDialog}>
-                            {t('Cancel')}
-                        </Button>
-                    </DialogClose>
-
-                    <Button
-                        className='ml-3'
-                        disabled={processing}
-                        aria-label={isUpdate ? t('Edit the product') : t('Create your product')}
-                    >
-                        {isUpdate ? t('Save') : t('Create')}
-                    </Button>
-                </DialogFooter>
+                <DialogFormFooter
+                    closeDialog={closeDialog}
+                    processing={processing}
+                    buttonAriaLabel={isUpdate ? t('Edit the product') : t('Create your product')}
+                    isUpdate={isUpdate}
+                />
             </form>
         </Form>
     );

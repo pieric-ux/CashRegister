@@ -41,7 +41,7 @@ export function CustomerProfileForm({ isUpdate = false }: { isUpdate?: boolean }
 
     return (
         <Form {...form}>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className='space-y-4'>
                 {formDatas.base.map((formData) => (
                     <GenericFormField
                         key={formData.name}

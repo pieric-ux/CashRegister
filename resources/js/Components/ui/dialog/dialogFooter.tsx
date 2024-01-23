@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 const dialogFooterVariants = cva('', {
     variants: {
         variant: {
-            default: 'flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2',
+            default: 'flex flex-col-reverse justify-end gap-3 sm:flex-row',
             'flex-row': 'flex flex-row',
             'flex-col': 'flex flex-col',
             grid: 'grid',

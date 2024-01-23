@@ -1,13 +1,12 @@
 'use client';
 
-import { useContext, type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Form } from '@/Components/ui/form/form';
-import { Button } from '@/Components/ui/button/button';
+import { useContext, type FormEvent } from 'react';
 import { useForm as useFormInertia } from '@inertiajs/react';
+import DialogFormFooter from '../../Common/DialogFormFooter';
 import { type Workstation } from '@/Shared/Types/WorkstationTypes';
-import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/WorkstationInfosFormDatas';
 import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
@@ -49,7 +48,7 @@ export function WorkstationInfosForm({
 
     return (
         <Form {...form}>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className='space-y-4'>
                 <GenericFormField
                     form={form}
                     setData={setData}
@@ -57,23 +56,14 @@ export function WorkstationInfosForm({
                     formData={formDatas}
                 />
 
-                <DialogFooter className='mt-6 flex justify-end'>
-                    <DialogClose asChild>
-                        <Button variant={'secondary'} onClick={closeDialog}>
-                            {t('Cancel')}
-                        </Button>
-                    </DialogClose>
-
-                    <Button
-                        className='ml-3'
-                        disabled={processing}
-                        aria-label={
-                            isUpdate ? t('Edit the workstation') : t('Create a Workstation')
-                        }
-                    >
-                        {isUpdate ? t('Save') : t('Create')}
-                    </Button>
-                </DialogFooter>
+                <DialogFormFooter
+                    closeDialog={closeDialog}
+                    processing={processing}
+                    buttonAriaLabel={
+                        isUpdate ? t('Edit the workstation') : t('Create a Workstation')
+                    }
+                    isUpdate={isUpdate}
+                />
             </form>
         </Form>
     );

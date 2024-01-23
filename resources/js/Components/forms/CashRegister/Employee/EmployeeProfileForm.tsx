@@ -1,13 +1,12 @@
 'use client';
 
-import { useContext, type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Form } from '@/Components/ui/form/form';
-import { Button } from '@/Components/ui/button/button';
+import { useContext, type FormEvent } from 'react';
 import { useForm as useFormInertia } from '@inertiajs/react';
 import { type Employee } from '@/Shared/Types/EmployeeTypes';
-import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
+import DialogFormFooter from '@/Components/forms/Common/DialogFormFooter';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
 import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/EmployeeProfileFormDatas';
@@ -49,7 +48,7 @@ export function EmployeeProfileForm({
 
     return (
         <Form {...form}>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className='space-y-4'>
                 {formDatas.map((formData) => (
                     <GenericFormField
                         key={formData.name}
@@ -60,21 +59,12 @@ export function EmployeeProfileForm({
                     />
                 ))}
 
-                <DialogFooter className='mt-6 flex justify-end'>
-                    <DialogClose asChild>
-                        <Button variant={'secondary'} onClick={closeDialog}>
-                            {t('Cancel')}
-                        </Button>
-                    </DialogClose>
-
-                    <Button
-                        className='ml-3'
-                        disabled={processing}
-                        aria-label={isUpdate ? t('Edit your employee') : t('Create your employee')}
-                    >
-                        {isUpdate ? t('Save') : t('Create')}
-                    </Button>
-                </DialogFooter>
+                <DialogFormFooter
+                    closeDialog={closeDialog}
+                    processing={processing}
+                    buttonAriaLabel={isUpdate ? t('Edit your employee') : t('Create your employee')}
+                    isUpdate={isUpdate}
+                />
             </form>
         </Form>
     );
