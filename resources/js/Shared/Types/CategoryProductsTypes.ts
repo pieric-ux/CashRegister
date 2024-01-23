@@ -14,5 +14,6 @@ export interface CategoriesProductsBkndDatas {
 }
 
 export interface CategoryProductsFormDatas {
-    name: string;
+    name: 'name';
+    label: string;
 }
