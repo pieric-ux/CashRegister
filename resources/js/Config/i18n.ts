@@ -1,9 +1,10 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import HttpBackend, { HttpBackendOptions } from 'i18next-http-backend';
+import HttpBackend, { type HttpBackendOptions } from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-i18n.use(HttpBackend)
+void i18n
+    .use(HttpBackend)
     .use(LanguageDetector)
     .use(initReactI18next)
     .init<HttpBackendOptions>({
@@ -16,8 +17,6 @@ i18n.use(HttpBackend)
         interpolation: {
             escapeValue: false,
         },
-
-        load: 'languageOnly',
 
         detection: {
             order: [
@@ -44,8 +43,6 @@ i18n.use(HttpBackend)
                 secure: false,
                 sameSite: 'strict',
             },
-
-            convertDetectedLanguage: (lng) => lng.split('-')[0],
         },
     });
 
