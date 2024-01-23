@@ -44,7 +44,7 @@ export const formDatas: CashRegisterInfosFormDatas[] = [
     {
         name: 'website',
         label: 'Website',
-        placeholder: 'https://',
+        placeholder: 'https',
         pattern: 'https://.*',
     },
 ];
