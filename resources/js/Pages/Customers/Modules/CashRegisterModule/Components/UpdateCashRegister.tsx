@@ -1,20 +1,9 @@
 import { useState } from 'react';
-import { Svg } from '@/Components/ui/svg/Svg';
-import { useTranslation } from 'react-i18next';
-import { Button } from '@/Components/ui/button/button';
+import UpdateDeleteEntityComponent from '@/Components/generic/UpdateDeleteEntityComponent';
 import { CashRegisterInfosForm } from '@/Components/forms/CashRegister/CashRegisterInfosForm';
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/Components/ui/dialog/dialog';
+import { updateCashRegisterDatas } from '@/Shared/Datas/Configs/CashRegisterModule/UpdateCashRegisterDatas';
 
 export default function UpdateCashRegister(): JSX.Element {
-    const { t } = useTranslation();
-
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {
@@ -23,24 +12,14 @@ export default function UpdateCashRegister(): JSX.Element {
 
     return (
         <section>
-            <Dialog open={open} onOpenChange={setOpen}>
-                <DialogTrigger asChild>
-                    <Button size={'icon'} aria-label={t('Edit your app')}>
-                        <Svg type={'edit'} />
-                    </Button>
-                </DialogTrigger>
-                <DialogContent size={'2xl'}>
-                    <DialogHeader>
-                        <DialogTitle>{t('Edit App')}</DialogTitle>
-                        <DialogDescription>
-                            {t(
-                                "Ready to update the application? Fill out the form below with the required details and click the 'Save' button to apply the changes.",
-                            )}
-                        </DialogDescription>
-                    </DialogHeader>
-                    <CashRegisterInfosForm isUpdate={true} closeDialog={closeDialog} />
-                </DialogContent>
-            </Dialog>
+            <UpdateDeleteEntityComponent
+                datas={updateCashRegisterDatas}
+                open={open}
+                setOpen={setOpen}
+                isUpdate={true}
+            >
+                <CashRegisterInfosForm isUpdate={true} closeDialog={closeDialog} />
+            </UpdateDeleteEntityComponent>
         </section>
     );
 }

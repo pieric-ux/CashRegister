@@ -1,17 +1,9 @@
 import { useState } from 'react';
-import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/Components/ui/button/button';
 import { type Workstation } from '@/Shared/Types/WorkstationTypes';
 import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/Components/ui/dialog/dialog';
+import UpdateDeleteEntityComponent from '@/Components/generic/UpdateDeleteEntityComponent';
+import { deleteWorkstationDatas } from '@/Shared/Datas/Configs/Workstations/DeleteWorkstationDatas';
 
 export default function DeleteWorkstation({
     workstation,
@@ -28,35 +20,18 @@ export default function DeleteWorkstation({
 
     return (
         <section>
-            <Dialog open={open} onOpenChange={setOpen}>
-                <DialogTrigger asChild>
-                    <Button
-                        variant={'destructive'}
-                        size={'icon'}
-                        aria-label={t('Delete the workstation')}
-                    >
-                        <Svg type={'delete'} variant={'destructive'} />
-                    </Button>
-                </DialogTrigger>
-                <DialogContent size={'2xl'}>
-                    <DialogHeader>
-                        <DialogTitle>
-                            {t('Are you sure you want to delete your workstation?')}
-                        </DialogTitle>
-                        <DialogDescription>
-                            {t(
-                                'Once your workstation is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your workstation.',
-                            )}
-                        </DialogDescription>
-                    </DialogHeader>
-                    <ConfirmDeleteForm
-                        route={route('workstations.destroy', workstation)}
-                        closeDialog={closeDialog}
-                        ariaLabel={t('Delete the workstation')}
-                        buttonTiltle={t('Delete Workstation')}
-                    />
-                </DialogContent>
-            </Dialog>
+            <UpdateDeleteEntityComponent
+                datas={deleteWorkstationDatas}
+                open={open}
+                setOpen={setOpen}
+            >
+                <ConfirmDeleteForm
+                    route={route('workstations.destroy', workstation)}
+                    closeDialog={closeDialog}
+                    ariaLabel={t('Delete the workstation')}
+                    buttonTiltle={t('Delete Workstation')}
+                />
+            </UpdateDeleteEntityComponent>
         </section>
     );
 }
