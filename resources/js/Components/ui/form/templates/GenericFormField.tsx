@@ -41,7 +41,7 @@ export const GenericFormField = ({
                             disabled={formData?.canBeDisabled && !data.is_consigned}
                             isFocused={formData.isFocused}
                             autoComplete={formData?.autoComplete}
-                            placeholder={formData?.placeholder}
+                            placeholder={t(formData?.placeholder)}
                             pattern={formData?.pattern}
                             {...field}
                             onChange={(e) => {
