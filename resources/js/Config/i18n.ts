@@ -11,7 +11,9 @@ void i18n
         backend: {
             loadPath: '/storage/locales/{{lng}}/{{ns}}.json',
         },
-        fallbackLng: 'en',
+        fallbackLng: {
+            default: ['en'],
+        },
         debug: false,
 
         interpolation: {
