@@ -1,6 +1,6 @@
-import DraggableCategory from './DraggableCategory';
 import { type DroppableProvided } from 'react-beautiful-dnd';
 import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
+import DraggableCategory from '@/Components/features/dnd-CategoriesProducts/DraggableCategory';
 
 export default function CategoriesList({
     categories,

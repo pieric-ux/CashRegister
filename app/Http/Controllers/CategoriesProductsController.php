@@ -68,10 +68,6 @@ class CategoriesProductsController extends Controller
             $category->order = $categoryData['order'];
             $category->save();
         }
-
-        return response()->json([
-            'categories' => $categories,
-        ]);
     }
 
     /**

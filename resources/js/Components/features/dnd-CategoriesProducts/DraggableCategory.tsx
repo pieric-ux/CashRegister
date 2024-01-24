@@ -1,8 +1,8 @@
 import { Draggable } from 'react-beautiful-dnd';
-import UpdateCategoriesProduct from './UpdateCategoriesProduct';
-import DeleteCategoriesProduct from './DeleteCategoriesProduct';
 import { Card, CardHeader, CardTitle } from '@/Components/ui/card/card';
 import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
+import UpdateCategoriesProduct from '@/Pages/Customers/Modules/CashRegisterModule/Configurations/Categories_Products/Components/UpdateCategoriesProduct';
+import DeleteCategoriesProduct from '@/Pages/Customers/Modules/CashRegisterModule/Configurations/Categories_Products/Components/DeleteCategoriesProduct';
 
 export default function DraggableCategory({
     category,
@@ -12,7 +12,7 @@ export default function DraggableCategory({
     index: number;
 }): JSX.Element {
     return (
-        <Draggable key={category.id} draggableId={category.name} index={index + 1}>
+        <Draggable draggableId={category.name} index={index + 1}>
             {(provided) => (
                 <Card
                     ref={provided.innerRef}
