@@ -6,7 +6,8 @@ import { Switch, SwitchThumb } from '@/Components/ui/switch/switch';
 const ThemeSwitcher = (): JSX.Element => {
     const { t } = useTranslation();
 
-    const [colorMode, setColorMode] = useColorMode(); // FIXME: state of switch isn't stable after new render
+    const [colorMode, setColorMode] = useColorMode();
+    console.log(colorMode);
 
     const handleThemeChange = (): void => {
         const newTheme = colorMode === 'light' ? 'dark' : 'light';
@@ -16,6 +17,7 @@ const ThemeSwitcher = (): JSX.Element => {
     return (
         <Switch
             onClick={handleThemeChange}
+            checked={colorMode === 'dark'}
             size={'theme'}
             aria-label={t('Toggle between light and dark themes')}
             asChild
