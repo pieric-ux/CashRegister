@@ -1,11 +1,11 @@
 'use client';
 
 import i18n from '@/Config/i18n';
-import currencyCodes from 'currency-codes'; //TODO: change languagues with region for currency
 import { type ColumnDef } from '@tanstack/react-table';
 import DeleteTransaction from './DeleteTransaction';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import ShowDetailsTransaction from './ShowDetailsTransaction';
+import useCurrencyFormatter from '@/Hooks/useCurrencyFormatter';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
 import { type TransactionsTableColumnsDatas } from '@/Shared/Types/TransactionTypes';
 
@@ -62,14 +62,7 @@ export const columns: ColumnDef<TransactionsTableColumnsDatas>[] = [
         cell: ({ row }) => {
             const total = row.original.total;
 
-            const locale = document.documentElement.lang;
-
-            // const currencyCode = currencyCodes.code(userLang);
-
-            const formatted = new Intl.NumberFormat(locale, {
-                style: 'currency',
-                currency: 'USD',
-            }).format(total);
+            const formatted = useCurrencyFormatter(total);
 
             return <div className='text-left font-medium'>{formatted}</div>;
         },

@@ -3,10 +3,10 @@
 import i18n from '@/Config/i18n';
 import UpdateDish from './UpdateDish';
 import DeleteDish from './DeleteDish';
-import currencyCodes from 'currency-codes'; //TODO: change languagues with region for currency
 import { type Dish } from '@/Shared/Types/DishTypes';
 import { type ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
+import useCurrencyFormatter from '@/Hooks/useCurrencyFormatter';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
 import { UpdateItemsPictureForm } from '@/Components/forms/Common/UpdateItemsPictureForm';
 
@@ -67,14 +67,7 @@ export const columns: ColumnDef<Dish>[] = [
         cell: ({ row }) => {
             const price = row.original.client_price;
 
-            const locale = document.documentElement.lang;
-
-            // const currencyCode = currencyCodes.code(userLang);
-
-            const formatted = new Intl.NumberFormat(locale, {
-                style: 'currency',
-                currency: 'USD',
-            }).format(price);
+            const formatted = useCurrencyFormatter(price);
 
             return <div className='text-left font-medium'>{formatted}</div>;
         },
@@ -88,14 +81,7 @@ export const columns: ColumnDef<Dish>[] = [
         cell: ({ row }) => {
             const price = row.original.cost_price;
 
-            const locale = document.documentElement.lang;
-
-            // const currencyCode = currencyCodes.code(userLang);
-
-            const formatted = new Intl.NumberFormat(locale, {
-                style: 'currency',
-                currency: 'USD',
-            }).format(price);
+            const formatted = useCurrencyFormatter(price);
 
             return <div className='text-left font-medium'>{formatted}</div>;
         },
