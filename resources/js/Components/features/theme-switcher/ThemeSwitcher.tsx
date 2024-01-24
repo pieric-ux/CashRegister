@@ -7,7 +7,6 @@ const ThemeSwitcher = (): JSX.Element => {
     const { t } = useTranslation();
 
     const [colorMode, setColorMode] = useColorMode();
-    console.log(colorMode);
 
     const handleThemeChange = (): void => {
         const newTheme = colorMode === 'light' ? 'dark' : 'light';
