@@ -1,5 +1,5 @@
 'use client';
-
+// TODO: Type cr_categories_products cr_dishes
 import i18n from '@/Config/i18n';
 import UpdateProduct from './UpdateProduct';
 import DeleteProduct from './DeleteProduct';
