@@ -24,20 +24,18 @@ export default function Index({ bkndDatas }: { bkndDatas: DishesBkndDatas }): JS
         <CashRegisterConfigurationsLayout cashRegisterModule={cashRegisterModule}>
             <Head title={cashRegisterModule.name} />
 
-            <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <CreateDish />
+            <CreateDish />
 
-                <Card>
-                    <CardHeader>
-                        <DataTable
-                            columns={columns}
-                            data={dishesFilter}
-                            filterPlaceholder={t('Search dishes')}
-                            textNoData={t('No dishes found.')}
-                        />
-                    </CardHeader>
-                </Card>
-            </div>
+            <Card>
+                <CardHeader>
+                    <DataTable
+                        columns={columns}
+                        data={dishesFilter}
+                        filterPlaceholder={t('Search dishes')}
+                        textNoData={t('No dishes found.')}
+                    />
+                </CardHeader>
+            </Card>
         </CashRegisterConfigurationsLayout>
     );
 }

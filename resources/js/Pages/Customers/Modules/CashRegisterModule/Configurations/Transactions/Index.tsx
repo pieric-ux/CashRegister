@@ -15,18 +15,16 @@ export default function Index({ bkndDatas }: { bkndDatas: TransactionBkndDatas }
     return (
         <CashRegisterConfigurationsLayout cashRegisterModule={cashRegisterModule}>
             <Head title={cashRegisterModule.name} />
-            <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <Card>
-                    <CardHeader>
-                        <DataTable
-                            columns={columns}
-                            data={transactions}
-                            filterPlaceholder={t('Search transactions')}
-                            textNoData={t('No transactions found.')}
-                        />
-                    </CardHeader>
-                </Card>
-            </div>
+            <Card>
+                <CardHeader>
+                    <DataTable
+                        columns={columns}
+                        data={transactions}
+                        filterPlaceholder={t('Search transactions')}
+                        textNoData={t('No transactions found.')}
+                    />
+                </CardHeader>
+            </Card>
         </CashRegisterConfigurationsLayout>
     );
 }

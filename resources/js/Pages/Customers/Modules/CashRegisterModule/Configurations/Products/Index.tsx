@@ -17,20 +17,18 @@ export default function Index({ bkndDatas }: { bkndDatas: ProductsBkndDatas }): 
         <CashRegisterConfigurationsLayout cashRegisterModule={cashRegisterModule}>
             <Head title={cashRegisterModule.name} />
 
-            <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <CreateProduct />
+            <CreateProduct />
 
-                <Card>
-                    <CardHeader>
-                        <DataTable
-                            columns={columns}
-                            data={products}
-                            filterPlaceholder={t('Search products')}
-                            textNoData={t('No products found.')}
-                        />
-                    </CardHeader>
-                </Card>
-            </div>
+            <Card>
+                <CardHeader>
+                    <DataTable
+                        columns={columns}
+                        data={products}
+                        filterPlaceholder={t('Search products')}
+                        textNoData={t('No products found.')}
+                    />
+                </CardHeader>
+            </Card>
         </CashRegisterConfigurationsLayout>
     );
 }

@@ -20,19 +20,17 @@ export default function Index({
         <CashRegisterConfigurationsLayout cashRegisterModule={cashRegisterModule}>
             <Head title={cashRegisterModule.name} />
 
-            <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <CreateCategoriesProduct />
+            <CreateCategoriesProduct />
 
-                {categoriesProducts.length > 1 ? (
-                    <DragDropCategoriesProduct categoriesProducts={categoriesProducts} />
-                ) : (
-                    <Card>
-                        <CardHeader size={'xl'} className='items-center'>
-                            {t('No categories of products found.')}
-                        </CardHeader>
-                    </Card>
-                )}
-            </div>
+            {categoriesProducts.length > 1 ? (
+                <DragDropCategoriesProduct categoriesProducts={categoriesProducts} />
+            ) : (
+                <Card>
+                    <CardHeader size={'xl'} className='items-center'>
+                        {t('No categories of products found.')}
+                    </CardHeader>
+                </Card>
+            )}
         </CashRegisterConfigurationsLayout>
     );
 }

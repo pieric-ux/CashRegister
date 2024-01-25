@@ -85,7 +85,11 @@ export default function CustomerLayout({ children }) {
                         setSideBarOpen={setSideBarOpen}
                     />
                     <main>
-                        <div className='mx-auto max-w-7xl py-12'>{children}</div>
+                        <div className='mx-auto max-w-7xl py-12'>
+                            <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
+                                {children}
+                            </div>
+                        </div>
                     </main>
                 </div>
             </div>

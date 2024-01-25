@@ -17,12 +17,10 @@ export default function Index({
         <CustomerLayout>
             <Head title={t('Applications')} />
 
-            <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <CashRegisterModulesContext.Provider value={{ bkndDatas }}>
-                    <CreateCashRegister />
-                    <ShowCashRegisters />
-                </CashRegisterModulesContext.Provider>
-            </div>
+            <CashRegisterModulesContext.Provider value={{ bkndDatas }}>
+                <CreateCashRegister />
+                <ShowCashRegisters />
+            </CashRegisterModulesContext.Provider>
         </CustomerLayout>
     );
 }

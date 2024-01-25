@@ -19,15 +19,13 @@ export default function Edit({
         <CustomerLayout>
             <Head title={t('Profile')} />
 
-            <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <UpdateUserAvatar />
+            <UpdateUserAvatar />
 
-                <UpdateProfileInformation mustVerifyEmail={mustVerifyEmail} status={status} />
+            <UpdateProfileInformation mustVerifyEmail={mustVerifyEmail} status={status} />
 
-                <UpdatePassword />
+            <UpdatePassword />
 
-                <DeleteUser />
-            </div>
+            <DeleteUser />
         </CustomerLayout>
     );
 }

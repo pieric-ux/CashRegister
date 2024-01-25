@@ -14,11 +14,9 @@ export default function Dashboard({
         <CashRegisterConfigurationsLayout cashRegisterModule={cashRegisterModule}>
             <Head title={cashRegisterModule.name} />
 
-            <div className='mx-auto max-w-7xl sm:px-6 lg:px-8'>
-                <Card>
-                    <CardHeader>{cashRegisterModule.name}</CardHeader>
-                </Card>
-            </div>
+            <Card>
+                <CardHeader>{cashRegisterModule.name}</CardHeader>
+            </Card>
         </CashRegisterConfigurationsLayout>
     );
 }
