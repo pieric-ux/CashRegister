@@ -8,6 +8,7 @@ export interface Workstation {
     fk_cr_modules_id?: number;
     created_at?: string;
     updated_at?: string;
+    cr_employees: Employee[];
 }
 
 export interface WorkstationBkndDatas {

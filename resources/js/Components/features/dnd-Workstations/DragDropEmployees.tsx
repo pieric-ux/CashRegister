@@ -36,10 +36,10 @@ export default function DragDropEmployees({
             (workstation) => workstation.id === destinationId,
         );
 
-        const movedEmployee = sourceWorkstation?.cr_employees[source.index];
+        const movedEmployee = sourceWorkstation?.cr_employees?.[source.index];
 
-        sourceWorkstation?.cr_employees.splice(source.index, 1);
-        destinationWorkstation?.cr_employees.splice(destination.index, 0, movedEmployee);
+        sourceWorkstation?.cr_employees?.splice(source.index, 1);
+        destinationWorkstation?.cr_employees?.splice(destination.index, 0, movedEmployee);
 
         await axios.patch(route('employees.updateDragAndDrop'), {
             workstations,
@@ -64,7 +64,7 @@ export default function DragDropEmployees({
                 <div className='border-r border-gray-300 dark:border-gray-700'></div>
 
                 <DroppableGeneric
-                    droppableId={`workstation-${defaultWorkstation.id}-employees`}
+                    droppableId={`workstation-${defaultWorkstation?.id}-employees`}
                     droppableTitle='Employee Free'
                     datas={defaultWorkstation.cr_employees}
                 >
