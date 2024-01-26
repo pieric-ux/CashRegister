@@ -2,9 +2,9 @@ import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import DeleteUser from './Components/DeleteUser';
 import UpdatePassword from './Components/UpdatePassword';
+import UpdateUserAvatar from './Components/UpdateUserAvatar';
 import UpdateProfileInformation from './Components/UpdateProfileInformation';
 import CustomerLayout from '@/Components/layouts/Auth/Customer/CustomerLayout';
-import UpdateUserAvatar from '@/Components/features/update-user-avatar/UpdateUserAvatar';
 
 export default function Edit({
     mustVerifyEmail,
