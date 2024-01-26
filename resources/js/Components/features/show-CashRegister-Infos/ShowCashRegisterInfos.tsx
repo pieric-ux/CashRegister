@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card/c
 import { UpdateModulePosterForm } from '@/Components/forms/Common/UpdateModulePosterForm';
 import UpdateCashRegister from '@/Pages/Customers/Modules/CashRegisterModule/Components/UpdateCashRegister';
 import DeleteCashRegister from '@/Pages/Customers/Modules/CashRegisterModule/Components/DeleteCashRegister';
-
+// TODO: Maybe change directory, not really a features
 export default function ShowCashRegisterInfos(): JSX.Element {
     const { t } = useTranslation();
 
