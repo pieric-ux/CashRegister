@@ -1,6 +1,8 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import ReactCountryFlag from 'react-country-flag';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 import {
     Select,
@@ -10,7 +12,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/Components/ui/select/select';
-import { usePage } from '@inertiajs/react';
 
 const LanguageSwitcher = (): JSX.Element => {
     const { i18n } = useTranslation();
@@ -19,23 +20,20 @@ const LanguageSwitcher = (): JSX.Element => {
 
     const [language, setLanguage] = useState(i18n.language);
 
-    useEffect(() => {
-        const fetchData = async (): Promise<void> => {
-            try {
-                await axios.get(`/language-switch/${language}`);
-                await i18n.changeLanguage(language);
-                document.documentElement.lang = language;
-            } catch {}
-        };
-
-        void fetchData();
-    }, [language]);
+    const onSubmit = async (value: string): Promise<void> => {
+        setLanguage(value);
+        await axios.get(`/language-switch/${value}`);
+        await i18n.changeLanguage(value);
+        document.documentElement.lang = value;
+    };
 
     return (
         <div>
-            <Select value={language} onValueChange={setLanguage}>
+            <Select value={language} onValueChange={onSubmit}>
                 <SelectTrigger>
-                    <SelectValue aria-label={language}>{language}</SelectValue>
+                    <SelectValue aria-label={language}>
+                        <ReactCountryFlag countryCode={language.split('-')[1]} />
+                    </SelectValue>
                     <SelectIcon asChild>
                         <ChevronDownIcon />
                     </SelectIcon>
@@ -43,7 +41,7 @@ const LanguageSwitcher = (): JSX.Element => {
                 <SelectContent position={'popper'}>
                     {localization.locales.map((locale) => (
                         <SelectItem key={locale} value={locale}>
-                            {locale}
+                            <ReactCountryFlag countryCode={locale.split('-')[1]} />
                         </SelectItem>
                     ))}
                 </SelectContent>
