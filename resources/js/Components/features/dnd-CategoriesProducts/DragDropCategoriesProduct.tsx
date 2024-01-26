@@ -1,7 +1,7 @@
 import axios from 'axios';
+import DroppableCategories from './DroppableCategories';
+import { DragDropContext, type DropResult } from 'react-beautiful-dnd';
 import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
-import { DragDropContext, Droppable, type DropResult } from 'react-beautiful-dnd';
-import CategoriesList from '@/Components/features/dnd-CategoriesProducts/CategoriesList';
 
 export default function DragDropCategoriesProduct({
     categoriesProducts,
@@ -37,11 +37,7 @@ export default function DragDropCategoriesProduct({
 
     return (
         <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId='categories'>
-                {(provided) => (
-                    <CategoriesList categories={categoriesProducts} provided={provided} />
-                )}
-            </Droppable>
+            <DroppableCategories categories={categoriesProducts} />
         </DragDropContext>
     );
 }
