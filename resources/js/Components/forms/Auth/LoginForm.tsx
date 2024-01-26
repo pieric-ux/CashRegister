@@ -54,7 +54,10 @@ export function LoginForm({ canResetPassword }: { canResetPassword: boolean }): 
                                 <FormControl>
                                     <Checkbox
                                         checked={field.value}
-                                        onCheckedChange={field.onChange}
+                                        onCheckedChange={(isChecked) => {
+                                            field.onChange(isChecked);
+                                            setData('remember', isChecked as boolean);
+                                        }}
                                     />
                                 </FormControl>
                                 <span className='ml-2'>{t('Remember me')}</span>
