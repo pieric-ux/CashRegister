@@ -7,7 +7,11 @@ import { type ProductsBkndDatas } from '@/Shared/Types/ProductTypes';
 import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
-export default function Index({ bkndDatas }: { bkndDatas: ProductsBkndDatas }): JSX.Element {
+interface IndexProductsProps {
+    bkndDatas: ProductsBkndDatas;
+}
+
+export default function Index({ bkndDatas }: IndexProductsProps): JSX.Element {
     const { t } = useTranslation();
 
     const { cashRegisterModule } = bkndDatas;

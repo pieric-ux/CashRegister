@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { type Workstation } from '@/Shared/Types/WorkstationTypes';
 import ActionDialogButton from '@/Components/generic/ActionDialogButton';
-import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
+import ConfirmDeleteForm from '@/Components/forms/Auth/ConfirmDeleteForm';
 import { deleteWorkstationDatas } from '@/Shared/Datas/Configs/Workstations/DeleteWorkstationDatas';
 
-export default function DeleteWorkstation({
-    workstation,
-}: {
+interface DeleteWorkstationProps {
     workstation: Workstation;
-}): JSX.Element {
+}
+
+export default function DeleteWorkstation({ workstation }: DeleteWorkstationProps): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {

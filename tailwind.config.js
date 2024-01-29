@@ -26,7 +26,6 @@ export default {
             colors: {
                 border: 'hsl(var(--border))',
                 input: 'hsl(var(--input))',
-                ring: 'hsl(var(--ring))',
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
                 primary: {
@@ -60,6 +59,14 @@ export default {
                 card: {
                     DEFAULT: 'hsl(var(--card))',
                     foreground: 'hsl(var(--card-foreground))',
+                },
+                sidebar: {
+                    DEFAULT: 'hsl(var(--sidebar))',
+                    foreground: 'hsl(var(--sidebar-foreground))',
+                },
+                ring: {
+                    DEFAULT: 'hsl(var(--ring))',
+                    foreground: 'hsl(var(--ring-foreground))',
                 },
             },
             borderRadius: {

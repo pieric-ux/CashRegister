@@ -2,9 +2,12 @@ import { useState } from 'react';
 import { type Dish } from '@/Shared/Types/DishTypes';
 import ActionDialogButton from '@/Components/generic/ActionDialogButton';
 import { updateDishDatas } from '@/Shared/Datas/Configs/Dishes/UpdateDishDatas';
-import { DishInfosForm } from '@/Components/forms/CashRegister/Dish/DishInfosForm';
+import DishInfosForm from '@/Components/forms/CashRegister/Dish/DishInfosForm';
 
-export default function UpdateDish({ dish }: { dish: Dish }): JSX.Element {
+interface UpdateDishProps {
+    dish: Dish;
+}
+export default function UpdateDish({ dish }: UpdateDishProps): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {

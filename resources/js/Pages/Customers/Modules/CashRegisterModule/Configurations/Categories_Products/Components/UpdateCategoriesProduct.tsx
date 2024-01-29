@@ -2,13 +2,14 @@ import { useState } from 'react';
 import ActionDialogButton from '@/Components/generic/ActionDialogButton';
 import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 import { updateCategoriesProductDatas } from '@/Shared/Datas/Configs/CategoriesProduct/UpdateCategoriesProductDatas';
-import { CategoryProductsInfosForm } from '@/Components/forms/CashRegister/CategoryProducts/CategoryProductsInfosForm';
+import CategoryProductsInfosForm from '@/Components/forms/CashRegister/CategoryProducts/CategoryProductsInfosForm';
 
+interface UpdateCategoriesProductProps {
+    category: CategoryProducts;
+}
 export default function UpdateCategoriesProduct({
     category,
-}: {
-    category: CategoryProducts;
-}): JSX.Element {
+}: UpdateCategoriesProductProps): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {

@@ -1,11 +1,15 @@
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import GuestLayout from '@/Components/layouts/Guest/GuestLayout';
+import VerifyEmailForm from '@/Components/forms/Auth/VerifyEmailForm';
 import { Alert, AlertDescription } from '@/Components/ui/alert/alert';
 import { CardContent, CardDescription } from '@/Components/ui/card/card';
-import { VerifyEmailForm } from '@/Components/forms/Auth/VerifyEmailForm';
 
-export default function VerifyEmail({ status }: { status: string }): JSX.Element {
+interface VerifyEmailProps {
+    status: string;
+}
+
+export default function VerifyEmail({ status }: VerifyEmailProps): JSX.Element {
     const { t } = useTranslation();
 
     return (

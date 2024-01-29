@@ -36,4 +36,4 @@ const DialogOverlay = forwardRef<HTMLDivElement, DialogOverlayProps>(
 );
 DialogOverlay.displayName = Overlay.displayName;
 
-export { DialogOverlay };
+export { DialogOverlay, dialogOverlayVariants };

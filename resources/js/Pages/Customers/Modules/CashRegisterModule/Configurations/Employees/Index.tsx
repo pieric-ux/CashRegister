@@ -7,7 +7,11 @@ import { type EmployeesBkndDatas } from '@/Shared/Types/EmployeeTypes';
 import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
-export default function Index({ bkndDatas }: { bkndDatas: EmployeesBkndDatas }): JSX.Element {
+interface IndexEmployeesProps {
+    bkndDatas: EmployeesBkndDatas;
+}
+
+export default function Index({ bkndDatas }: IndexEmployeesProps): JSX.Element {
     const { t } = useTranslation();
 
     const { cashRegisterModule } = bkndDatas;

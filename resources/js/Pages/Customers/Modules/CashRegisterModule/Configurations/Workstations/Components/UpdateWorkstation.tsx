@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { type Workstation } from '@/Shared/Types/WorkstationTypes';
 import ActionDialogButton from '@/Components/generic/ActionDialogButton';
 import { updateWorkstationDatas } from '@/Shared/Datas/Configs/Workstations/UpdateWorkstationDatas';
-import { WorkstationInfosForm } from '@/Components/forms/CashRegister/Workstation/WorkstationInfosForm';
+import WorkstationInfosForm from '@/Components/forms/CashRegister/Workstation/WorkstationInfosForm';
 
-export default function UpdateWorkstation({
-    workstation,
-}: {
+interface UpdateWorkstationProps {
     workstation: Workstation;
-}): JSX.Element {
+}
+
+export default function UpdateWorkstation({ workstation }: UpdateWorkstationProps): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {

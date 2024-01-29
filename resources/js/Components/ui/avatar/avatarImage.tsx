@@ -6,7 +6,7 @@ import { Image, type AvatarImageProps as RadixAvatarImageProps } from '@radix-ui
 const avatarImageVariants = cva('aspect-square h-full w-full', {
     variants: {
         variant: {
-            default: 'backdrop-blur-md',
+            default: '',
         },
     },
     defaultVariants: {

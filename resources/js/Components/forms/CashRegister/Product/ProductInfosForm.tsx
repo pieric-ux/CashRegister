@@ -25,15 +25,17 @@ import {
     SelectValue,
 } from '@/Components/ui/select/select';
 
-export function ProductInfosForm({
-    product,
-    closeDialog,
-    isUpdate = false,
-}: {
+interface ProductInfoFormProps {
     product?: Product;
     closeDialog: () => void;
     isUpdate?: boolean;
-}): JSX.Element {
+}
+
+export default function ProductInfosForm({
+    product,
+    closeDialog,
+    isUpdate = false,
+}: ProductInfoFormProps): JSX.Element {
     const { t } = useTranslation();
 
     const { cashRegisterModule } = useContext(CashRegisterConfigurationsContext);

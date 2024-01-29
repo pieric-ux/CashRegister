@@ -1,4 +1,9 @@
-export default function InfoBlock({ label, value }: { label: string; value: string }): JSX.Element {
+interface InfoBlockProps {
+    label: string;
+    value: string;
+}
+
+export default function InfoBlock({ label, value }: InfoBlockProps): JSX.Element {
     return (
         <div>
             <p>{`${label} :`}</p>

@@ -4,7 +4,7 @@ import { Link, useForm } from '@inertiajs/react';
 import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
 
-export function VerifyEmailForm(): JSX.Element {
+export default function VerifyEmailForm(): JSX.Element {
     const { t } = useTranslation();
 
     const { post, processing } = useForm({});

@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import ActionDialogButton from '@/Components/generic/ActionDialogButton';
-import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
+import ConfirmDeleteForm from '@/Components/forms/Auth/ConfirmDeleteForm';
 import { ShowCashRegisterInfosContext } from '@/Context/CashRegisterModulesContext';
 import { deleteCashRegisterDatas } from '@/Shared/Datas/Configs/CashRegisterModule/DeleteCashRegisterDatas';
 

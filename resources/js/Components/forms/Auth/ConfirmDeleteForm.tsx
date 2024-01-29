@@ -16,15 +16,17 @@ interface Datas {
     buttonAriaLabel: string;
 }
 
-export function ConfirmDeleteForm({
-    route,
-    closeDialog,
-    datas,
-}: {
+interface ConfirmDeleteFormProps {
     route: string;
     closeDialog: () => void;
     datas: Datas;
-}): JSX.Element {
+}
+
+export default function ConfirmDeleteForm({
+    route,
+    closeDialog,
+    datas,
+}: ConfirmDeleteFormProps): JSX.Element {
     const { t } = useTranslation();
 
     const { buttonTitle, buttonAriaLabel } = datas;

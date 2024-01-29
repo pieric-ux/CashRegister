@@ -12,7 +12,13 @@ import { GenericFormField } from '@/Components/ui/form/templates/GenericFormFiel
 import { formDatas, getDefaultValues } from '@/Shared/Datas/Forms/CustomerProfileFormDatas';
 import { type CustomerProfileFormInput } from '@/Shared/Types/CustomerTypes';
 
-export function CustomerProfileForm({ isUpdate = false }: { isUpdate?: boolean }): JSX.Element {
+interface CustomerProfileFormProps {
+    isUpdate?: boolean;
+}
+
+export default function CustomerProfileForm({
+    isUpdate = false,
+}: CustomerProfileFormProps): JSX.Element {
     const { t } = useTranslation();
 
     const { customerAuth } = usePage().props;

@@ -6,11 +6,11 @@ import { type CashRegisterModulesBkndDatas } from '@/Shared/Types/CashRegisterTy
 import CreateCashRegister from '@/Pages/Customers/Modules/CashRegisterModule/Components/CreateCashRegister';
 import ShowCashRegisters from '@/Pages/Customers/Modules/CashRegisterModule/Components/ShowCashRegisters';
 
-export default function Index({
-    bkndDatas,
-}: {
+interface IndexCashRegisterModuleProps {
     bkndDatas: CashRegisterModulesBkndDatas[];
-}): JSX.Element {
+}
+
+export default function Index({ bkndDatas }: IndexCashRegisterModuleProps): JSX.Element {
     const { t } = useTranslation();
 
     return (

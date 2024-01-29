@@ -2,9 +2,13 @@ import { useState } from 'react';
 import { type Product } from '@/Shared/Types/ProductTypes';
 import ActionDialogButton from '@/Components/generic/ActionDialogButton';
 import { updateProductDatas } from '@/Shared/Datas/Configs/Products/UpdateProductDatas';
-import { ProductInfosForm } from '@/Components/forms/CashRegister/Product/ProductInfosForm';
+import ProductInfosForm from '@/Components/forms/CashRegister/Product/ProductInfosForm';
 
-export default function UpdateProduct({ product }: { product: Product }): JSX.Element {
+interface UpdateProductProps {
+    product: Product;
+}
+
+export default function UpdateProduct({ product }: UpdateProductProps): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {

@@ -20,7 +20,7 @@ export interface DialogHeaderProps
     extends HTMLAttributes<HTMLDivElement>,
         VariantProps<typeof dialogHeaderVariants> {}
 
-const DialogHeader = ({ className, variant, ...props }: DialogHeaderProps) => (
+const DialogHeader = ({ className, variant, ...props }: DialogHeaderProps): JSX.Element => (
     <div className={cn(dialogHeaderVariants({ variant, className }))} {...props} />
 );
 DialogHeader.displayName = 'DialogHeader';

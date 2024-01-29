@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { type Employee } from '@/Shared/Types/EmployeeTypes';
 import ActionDialogButton from '@/Components/generic/ActionDialogButton';
-import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
+import ConfirmDeleteForm from '@/Components/forms/Auth/ConfirmDeleteForm';
 import { deleteEmployeeDatas } from '@/Shared/Datas/Configs/Employees/DeleteEmployeeDatas';
 
-export default function DeleteEmployee({ employee }: { employee: Employee }): JSX.Element {
+interface DeleteEmployeeProps {
+    employee: Employee;
+}
+
+export default function DeleteEmployee({ employee }: DeleteEmployeeProps): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {

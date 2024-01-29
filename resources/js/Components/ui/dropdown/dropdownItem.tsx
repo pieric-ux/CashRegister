@@ -11,8 +11,7 @@ const dropdownItemVariants = cva(
     {
         variants: {
             variant: {
-                default:
-                    'items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground',
+                default: 'items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent',
             },
             size: {
                 default: '',

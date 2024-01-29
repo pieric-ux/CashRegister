@@ -21,7 +21,7 @@ interface FormInput {
     poster: File | undefined;
 }
 
-export function UpdateModulePosterForm(): JSX.Element {
+export default function UpdateModulePosterForm(): JSX.Element {
     const { cashRegisterModule, posterPath } = useContext(ShowCashRegisterInfosContext);
 
     const defaultValues: FormInput = {

@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { type Dish } from '@/Shared/Types/DishTypes';
 import ActionDialogButton from '@/Components/generic/ActionDialogButton';
-import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
+import ConfirmDeleteForm from '@/Components/forms/Auth/ConfirmDeleteForm';
 import { deleteDishDatas } from '@/Shared/Datas/Configs/Dishes/DeleteDishDatas';
 
-export default function DeleteDish({ dish }: { dish: Dish }): JSX.Element {
+interface DeleteDishProps {
+    dish: Dish;
+}
+
+export default function DeleteDish({ dish }: DeleteDishProps): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {

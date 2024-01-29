@@ -11,7 +11,7 @@ import { useForm as useFormInertia } from '@inertiajs/react';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { defaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/ForgotPasswordFormDatas';
 
-export function ForgotPasswordForm(): JSX.Element {
+export default function ForgotPasswordForm(): JSX.Element {
     const { t } = useTranslation();
 
     const { data, setData, post, processing, errors } = useFormInertia(defaultValues);

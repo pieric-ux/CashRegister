@@ -20,7 +20,7 @@ export interface DialogFooterProps
     extends HTMLAttributes<HTMLDivElement>,
         VariantProps<typeof dialogFooterVariants> {}
 
-const DialogFooter = ({ className, variant, ...props }: DialogFooterProps) => (
+const DialogFooter = ({ className, variant, ...props }: DialogFooterProps): JSX.Element => (
     <div className={cn(dialogFooterVariants({ variant, className }))} {...props} />
 );
 DialogFooter.displayName = 'DialogFooter';

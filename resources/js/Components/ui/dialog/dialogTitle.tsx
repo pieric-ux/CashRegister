@@ -26,4 +26,4 @@ const DialogTitle = forwardRef<HTMLHeadingElement, DialogTitleProps>(
 );
 DialogTitle.displayName = Title.displayName;
 
-export { DialogTitle };
+export { DialogTitle, dialogTitleVariants };

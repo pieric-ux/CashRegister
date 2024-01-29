@@ -12,7 +12,7 @@ const selectTriggerVariants = cva(
         variants: {
             variant: {
                 default:
-                    'items-center justify-between rounded-md border border-input bg-popover px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring',
+                    'items-center justify-between rounded-md border border-input bg-popover px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
             },
             size: {
                 default: 'h-9 w-full',

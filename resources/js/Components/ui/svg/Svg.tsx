@@ -9,7 +9,7 @@ const svgVariants = cva('', {
             default: 'text-background',
             secondary: 'text-foreground',
             destructive: 'text-background dark:text-foreground',
-            sideBar: 'text-foreground/70',
+            sideBar: 'text-sidebar-foreground/70',
         },
         size: {
             default: 'h-5 w-5',

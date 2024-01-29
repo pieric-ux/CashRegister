@@ -6,7 +6,7 @@ import { Button } from '@/Components/ui/button/button';
 import InfoBlock from '@/Components/features/show-CashRegister-Infos/InfoBlock';
 import { ShowCashRegisterInfosContext } from '@/Context/CashRegisterModulesContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card/card';
-import { UpdateModulePosterForm } from '@/Components/forms/Common/UpdateModulePosterForm';
+import UpdateModulePosterForm from '@/Components/forms/Common/UpdateModulePosterForm';
 import UpdateCashRegister from '@/Pages/Customers/Modules/CashRegisterModule/Components/UpdateCashRegister';
 import DeleteCashRegister from '@/Pages/Customers/Modules/CashRegisterModule/Components/DeleteCashRegister';
 // TODO: Maybe change directory, not really a features

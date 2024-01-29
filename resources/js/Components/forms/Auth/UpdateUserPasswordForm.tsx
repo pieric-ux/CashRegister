@@ -12,7 +12,7 @@ import { useForm as useFormInertia } from '@inertiajs/react';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { defaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/UserPasswordFormDatas';
 
-export function UpdateUserPasswordForm(): JSX.Element {
+export default function UpdateUserPasswordForm(): JSX.Element {
     const { t } = useTranslation();
 
     const { data, setData, put, processing, errors, reset, recentlySuccessful } =

@@ -3,11 +3,11 @@ import { Card, CardHeader } from '@/Components/ui/card/card';
 import { type CashRegisterConfigurationsBkndDatas } from '@/Shared/Types/CashRegisterTypes';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
-export default function Dashboard({
-    bkndDatas,
-}: {
+interface DashboardProps {
     bkndDatas: CashRegisterConfigurationsBkndDatas;
-}): JSX.Element {
+}
+
+export default function Dashboard({ bkndDatas }: DashboardProps): JSX.Element {
     const { cashRegisterModule } = bkndDatas;
 
     return (

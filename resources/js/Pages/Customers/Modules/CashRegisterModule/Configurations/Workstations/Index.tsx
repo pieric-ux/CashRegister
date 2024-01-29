@@ -10,7 +10,11 @@ import DragDropProducts from '@/Components/features/dnd-Workstations/DragDropPro
 import DragDropEmployees from '@/Components/features/dnd-Workstations/DragDropEmployees';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
-export default function Index({ bkndDatas }: { bkndDatas: WorkstationBkndDatas }): JSX.Element {
+interface IndexWorksationsProps {
+    bkndDatas: WorkstationBkndDatas;
+}
+
+export default function Index({ bkndDatas }: IndexWorksationsProps): JSX.Element {
     const { t } = useTranslation();
 
     const { cashRegisterModule } = bkndDatas;

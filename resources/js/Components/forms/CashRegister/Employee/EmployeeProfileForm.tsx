@@ -11,15 +11,17 @@ import { GenericFormField } from '@/Components/ui/form/templates/GenericFormFiel
 import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
 import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/EmployeeProfileFormDatas';
 
-export function EmployeeProfileForm({
-    employee,
-    closeDialog,
-    isUpdate = false,
-}: {
+interface EmployeeProfileFormProps {
     employee?: Employee;
     closeDialog: () => void;
     isUpdate?: boolean;
-}): JSX.Element {
+}
+
+export default function EmployeeProfileForm({
+    employee,
+    closeDialog,
+    isUpdate = false,
+}: EmployeeProfileFormProps): JSX.Element {
     const { t } = useTranslation();
 
     const { cashRegisterModule } = useContext(CashRegisterConfigurationsContext);

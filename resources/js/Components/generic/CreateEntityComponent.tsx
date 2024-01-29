@@ -25,17 +25,19 @@ interface Datas {
     dialogDescription: string;
 }
 
+interface CreateEntityComponentProps {
+    datas: Datas;
+    open: boolean;
+    setOpen: Dispatch<SetStateAction<boolean>>;
+    children: ReactNode;
+}
+
 export default function CreateEntityComponent({
     datas,
     open,
     setOpen,
     children,
-}: {
-    datas: Datas;
-    open: boolean;
-    setOpen: Dispatch<SetStateAction<boolean>>;
-    children: ReactNode;
-}): JSX.Element {
+}: CreateEntityComponentProps): JSX.Element {
     const { t } = useTranslation();
 
     const { cardTitle, cardDescription, buttonAriaLabel, dialogTitle, dialogDescription } = datas;

@@ -17,19 +17,21 @@ interface Datas {
     dialogDescription: string;
 }
 
+interface ActionDialogButtonProps {
+    datas: Datas;
+    open: boolean;
+    setOpen: Dispatch<SetStateAction<boolean>>;
+    isUpdate?: boolean;
+    children: ReactNode;
+}
+
 export default function ActionDialogButton({
     datas,
     open,
     setOpen,
     isUpdate,
     children,
-}: {
-    datas: Datas;
-    open: boolean;
-    setOpen: Dispatch<SetStateAction<boolean>>;
-    isUpdate?: boolean;
-    children: ReactNode;
-}): JSX.Element {
+}: ActionDialogButtonProps): JSX.Element {
     const { t } = useTranslation();
 
     const { buttonAriaLabel, dialogTitle, dialogDescription } = datas;

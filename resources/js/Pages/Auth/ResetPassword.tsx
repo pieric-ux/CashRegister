@@ -2,15 +2,14 @@ import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { CardContent } from '@/Components/ui/card/card';
 import GuestLayout from '@/Components/layouts/Guest/GuestLayout';
-import { ResetPasswordForm } from '@/Components/forms/Auth/ResetPasswordForm';
+import ResetPasswordForm from '@/Components/forms/Auth/ResetPasswordForm';
 
-export default function ResetPassword({
-    token,
-    email,
-}: {
+interface ResetPasswordProps {
     token: string;
     email: string;
-}): JSX.Element {
+}
+
+export default function ResetPassword({ token, email }: ResetPasswordProps): JSX.Element {
     const { t } = useTranslation();
 
     return (

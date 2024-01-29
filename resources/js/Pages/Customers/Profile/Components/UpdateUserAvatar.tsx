@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { UpdateUserAvatarForm } from '@/Components/forms/Common/UpdateUserAvatarForm';
+import UpdateUserAvatarForm from '@/Components/forms/Common/UpdateUserAvatarForm';
 import {
     Card,
     CardContent,
@@ -9,11 +9,13 @@ import {
 } from '@/Components/ui/card/card';
 import { usePage } from '@inertiajs/react';
 
+interface UpdateUserAvatarProps {
+    isEmployee?: boolean;
+}
+
 export default function UpdateUserAvatar({
     isEmployee = false,
-}: {
-    isEmployee?: boolean;
-}): JSX.Element {
+}: UpdateUserAvatarProps): JSX.Element {
     const { t } = useTranslation();
 
     const { customerAuth } = usePage().props;

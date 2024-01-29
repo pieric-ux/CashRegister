@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { type Transaction } from '@/Shared/Types/TransactionTypes';
 import ActionDialogButton from '@/Components/generic/ActionDialogButton';
-import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
+import ConfirmDeleteForm from '@/Components/forms/Auth/ConfirmDeleteForm';
 import { deleteTransactionDatas } from '@/Shared/Datas/Configs/Transactions/DeleteTransactionDatas';
 
-export default function DeleteTransaction({
-    transaction,
-}: {
+interface DeleteTransactionProps {
     transaction: Transaction;
-}): JSX.Element {
+}
+
+export default function DeleteTransaction({ transaction }: DeleteTransactionProps): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {

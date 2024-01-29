@@ -6,11 +6,11 @@ import { type Workstation } from '@/Shared/Types/WorkstationTypes';
 import { DragDropContext, type DropResult } from 'react-beautiful-dnd';
 import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
 
-export default function DragDropProducts({
-    workstation,
-}: {
+interface DragDropProductsProps {
     workstation: Workstation;
-}): JSX.Element {
+}
+
+export default function DragDropProducts({ workstation }: DragDropProductsProps): JSX.Element {
     const { cashRegisterModule } = useContext(CashRegisterConfigurationsContext);
     const workstations = cashRegisterModule?.cr_workstations;
 

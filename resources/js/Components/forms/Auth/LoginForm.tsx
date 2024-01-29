@@ -12,7 +12,11 @@ import { GenericFormField } from '@/Components/ui/form/templates/GenericFormFiel
 import { defaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/LoginFormDatas';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/Components/ui/form/form';
 
-export function LoginForm({ canResetPassword }: { canResetPassword: boolean }): JSX.Element {
+interface LoginFormProps {
+    canResetPassword: boolean;
+}
+
+export default function LoginForm({ canResetPassword }: LoginFormProps): JSX.Element {
     const { t } = useTranslation();
 
     const { data, setData, post, processing, errors, reset } = useFormInertia(defaultValues);

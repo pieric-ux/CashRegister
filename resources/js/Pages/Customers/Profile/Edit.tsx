@@ -6,13 +6,12 @@ import UpdateUserAvatar from './Components/UpdateUserAvatar';
 import UpdateProfileInformation from './Components/UpdateProfileInformation';
 import CustomerLayout from '@/Components/layouts/Auth/Customer/CustomerLayout';
 
-export default function Edit({
-    mustVerifyEmail,
-    status,
-}: {
+interface EditProfileProps {
     mustVerifyEmail: boolean;
     status: string;
-}): JSX.Element {
+}
+
+export default function Edit({ mustVerifyEmail, status }: EditProfileProps): JSX.Element {
     const { t } = useTranslation();
 
     return (

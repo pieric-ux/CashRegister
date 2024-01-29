@@ -13,7 +13,7 @@ import {
     SelectValue,
 } from '@/Components/ui/select/select';
 
-const LanguageSwitcher = (): JSX.Element => {
+export default function LanguageSwitcher(): JSX.Element {
     const { i18n } = useTranslation();
 
     const { localization } = usePage().props;
@@ -48,6 +48,4 @@ const LanguageSwitcher = (): JSX.Element => {
             </Select>
         </div>
     );
-};
-
-export default LanguageSwitcher;
+}

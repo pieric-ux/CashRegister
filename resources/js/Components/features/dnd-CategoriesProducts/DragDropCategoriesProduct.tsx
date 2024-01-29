@@ -3,11 +3,13 @@ import DroppableCategories from './DroppableCategories';
 import { DragDropContext, type DropResult } from 'react-beautiful-dnd';
 import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 
+interface DragDropCategoriesProductProps {
+    categoriesProducts: CategoryProducts[];
+}
+
 export default function DragDropCategoriesProduct({
     categoriesProducts,
-}: {
-    categoriesProducts: CategoryProducts[];
-}): JSX.Element {
+}: DragDropCategoriesProductProps): JSX.Element {
     const onDragEnd = async (result: DropResult): Promise<void> => {
         const { destination, source } = result;
         const categories = categoriesProducts;

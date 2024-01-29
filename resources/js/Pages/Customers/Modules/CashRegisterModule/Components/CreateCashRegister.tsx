@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import CreateEntityComponent from '@/Components/generic/CreateEntityComponent';
-import { CashRegisterInfosForm } from '@/Components/forms/CashRegister/CashRegisterInfosForm';
+import CashRegisterInfosForm from '@/Components/forms/CashRegister/CashRegisterInfosForm';
 import { createCashRegisterDatas } from '@/Shared/Datas/Configs/CashRegisterModule/CreateCashRegisterDatas';
 
 export default function CreateCashRegister(): JSX.Element {

@@ -6,11 +6,11 @@ import { type CategoriesProductsBkndDatas } from '@/Shared/Types/CategoryProduct
 import DragDropCategoriesProduct from '@/Components/features/dnd-CategoriesProducts/DragDropCategoriesProduct';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
-export default function Index({
-    bkndDatas,
-}: {
+interface IndexCategoriesProductsProps {
     bkndDatas: CategoriesProductsBkndDatas;
-}): JSX.Element {
+}
+
+export default function Index({ bkndDatas }: IndexCategoriesProductsProps): JSX.Element {
     const { t } = useTranslation();
 
     const { cashRegisterModule } = bkndDatas;

@@ -12,15 +12,17 @@ import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/DishInfosFormD
 import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/Components/ui/form/form';
 
-export function DishInfosForm({
-    dish,
-    closeDialog,
-    isUpdate = false,
-}: {
+interface DishInfosFormProps {
     dish?: Dish;
     closeDialog: () => void;
     isUpdate?: boolean;
-}): JSX.Element {
+}
+
+export default function DishInfosForm({
+    dish,
+    closeDialog,
+    isUpdate = false,
+}: DishInfosFormProps): JSX.Element {
     const { t } = useTranslation();
 
     const { cashRegisterModule } = useContext(CashRegisterConfigurationsContext);

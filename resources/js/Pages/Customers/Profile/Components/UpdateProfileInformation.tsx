@@ -2,7 +2,7 @@ import { Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import { Alert, AlertDescription } from '@/Components/ui/alert/alert';
-import { CustomerProfileForm } from '@/Components/forms/Customer/CustomerProfileForm';
+import CustomerProfileForm from '@/Components/forms/Customer/CustomerProfileForm';
 import {
     Card,
     CardContent,
@@ -11,13 +11,15 @@ import {
     CardTitle,
 } from '@/Components/ui/card/card';
 
+interface UpdateProfileInformationProps {
+    mustVerifyEmail: boolean;
+    status?: string;
+}
+
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
-}: {
-    mustVerifyEmail: boolean;
-    status?: string;
-}): JSX.Element {
+}: UpdateProfileInformationProps): JSX.Element {
     const { t } = useTranslation();
 
     const { customerAuth } = usePage().props;

@@ -2,18 +2,21 @@ import { cn } from '@/lib/utils';
 import { forwardRef, type InputHTMLAttributes } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-const inputVariants = cva('', {
-    variants: {
-        variant: {
-            default:
-                'flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
-            file: '',
+const inputVariants = cva(
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+    {
+        variants: {
+            variant: {
+                default:
+                    'flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
+                file: 'file:border-0 file:bg-transparent file:text-sm file:font-medium',
+            },
+        },
+        defaultVariants: {
+            variant: 'default',
         },
     },
-    defaultVariants: {
-        variant: 'default',
-    },
-});
+);
 
 export interface InputProps
     extends InputHTMLAttributes<HTMLInputElement>,

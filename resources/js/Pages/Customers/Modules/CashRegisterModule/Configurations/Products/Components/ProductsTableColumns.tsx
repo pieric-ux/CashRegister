@@ -8,7 +8,7 @@ import { type Product } from '@/Shared/Types/ProductTypes';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import useCurrencyFormatter from '@/Hooks/useCurrencyFormatter';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
-import { UpdateItemsPictureForm } from '@/Components/forms/Common/UpdateItemsPictureForm';
+import UpdateItemsPictureForm from '@/Components/forms/Common/UpdateItemsPictureForm';
 
 export const columns: ColumnDef<Product>[] = [
     {

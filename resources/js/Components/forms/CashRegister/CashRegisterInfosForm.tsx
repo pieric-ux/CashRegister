@@ -11,13 +11,15 @@ import { GenericFormField } from '@/Components/ui/form/templates/GenericFormFiel
 import { ShowCashRegisterInfosContext } from '@/Context/CashRegisterModulesContext';
 import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/CashRegisterInfosFormDatas';
 
-export function CashRegisterInfosForm({
-    closeDialog,
-    isUpdate = false,
-}: {
+interface CashRegisterInfosFormProps {
     closeDialog: () => void;
     isUpdate?: boolean;
-}): JSX.Element {
+}
+
+export default function CashRegisterInfosForm({
+    closeDialog,
+    isUpdate = false,
+}: CashRegisterInfosFormProps): JSX.Element {
     const { t } = useTranslation();
 
     const { cashRegisterModule } = useContext(ShowCashRegisterInfosContext);

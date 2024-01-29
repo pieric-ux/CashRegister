@@ -13,11 +13,12 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
+interface ShowDetailsTransactionProps {
+    transaction: ShowDetailsTransactionDatas;
+}
 export default function ShowDetailsTransaction({
     transaction,
-}: {
-    transaction: ShowDetailsTransactionDatas;
-}): JSX.Element {
+}: ShowDetailsTransactionProps): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);

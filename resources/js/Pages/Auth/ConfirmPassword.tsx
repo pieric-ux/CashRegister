@@ -2,7 +2,7 @@ import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import GuestLayout from '@/Components/layouts/Guest/GuestLayout';
 import { CardContent, CardDescription } from '@/Components/ui/card/card';
-import { ConfirmPasswordForm } from '@/Components/forms/Auth/ConfirmPasswordForm';
+import ConfirmPasswordForm from '@/Components/forms/Auth/ConfirmPasswordForm';
 
 export default function ConfirmPassword(): JSX.Element {
     const { t } = useTranslation();

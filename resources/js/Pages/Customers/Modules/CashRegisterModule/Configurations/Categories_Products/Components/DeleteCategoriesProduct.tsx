@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import ActionDialogButton from '@/Components/generic/ActionDialogButton';
 import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
-import { ConfirmDeleteForm } from '@/Components/forms/Auth/ConfirmDeleteForm';
+import ConfirmDeleteForm from '@/Components/forms/Auth/ConfirmDeleteForm';
 import { deleteCategoriesProductDatas } from '@/Shared/Datas/Configs/CategoriesProduct/DeleteCategoriesProductDatas';
 
+interface DeleteCategoriesProductProps {
+    category: CategoryProducts;
+}
 export default function DeleteCategoriesProduct({
     category,
-}: {
-    category: CategoryProducts;
-}): JSX.Element {
+}: DeleteCategoriesProductProps): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {

@@ -2,11 +2,11 @@ import { Droppable } from 'react-beautiful-dnd';
 import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 import DraggableCategory from '@/Components/features/dnd-CategoriesProducts/DraggableCategory';
 
-export default function DroppableCategories({
-    categories,
-}: {
+interface DroppableCategoriesProps {
     categories: CategoryProducts[];
-}): JSX.Element {
+}
+
+export default function DroppableCategories({ categories }: DroppableCategoriesProps): JSX.Element {
     return (
         <Droppable droppableId='categories'>
             {(provided) => (

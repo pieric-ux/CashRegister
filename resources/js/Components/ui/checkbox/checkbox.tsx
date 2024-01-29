@@ -11,12 +11,12 @@ import {
 } from '@radix-ui/react-checkbox';
 
 const CheckboxVariants = cva(
-    'peer shrink-0 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
+    'peer shrink-0 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-ring data-[state=checked]:text-primary-foreground',
     {
         variants: {
             variant: {
                 default:
-                    'rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+                    'rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
             },
             size: {
                 default: 'h-4 w-4',

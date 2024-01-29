@@ -3,9 +3,13 @@ import { useTranslation } from 'react-i18next';
 import GuestLayout from '@/Components/layouts/Guest/GuestLayout';
 import { Alert, AlertDescription } from '@/Components/ui/alert/alert';
 import { CardContent, CardDescription } from '@/Components/ui/card/card';
-import { ForgotPasswordForm } from '@/Components/forms/Auth/ForgotPasswordForm';
+import ForgotPasswordForm from '@/Components/forms/Auth/ForgotPasswordForm';
 
-export default function ForgotPassword({ status }: { status: string }): JSX.Element {
+interface ForgotPasswordProps {
+    status: string;
+}
+
+export default function ForgotPassword({ status }: ForgotPasswordProps): JSX.Element {
     const { t } = useTranslation();
 
     return (

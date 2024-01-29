@@ -31,7 +31,7 @@
         "swiper": "^11.0.5",
         "tailwind-merge": "^2.2.0",
         "tailwindcss-animate": "^1.0.7",
-        "zod": "^3.22.4"
+        "vaul": "^0.8.9"
     },
     "devDependencies": {
         "@headlessui/react": "^1.7.17",

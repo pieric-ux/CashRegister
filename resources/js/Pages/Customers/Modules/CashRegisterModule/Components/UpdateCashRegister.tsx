@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ActionDialogButton from '@/Components/generic/ActionDialogButton';
-import { CashRegisterInfosForm } from '@/Components/forms/CashRegister/CashRegisterInfosForm';
+import CashRegisterInfosForm from '@/Components/forms/CashRegister/CashRegisterInfosForm';
 import { updateCashRegisterDatas } from '@/Shared/Datas/Configs/CashRegisterModule/UpdateCashRegisterDatas';
 
 export default function UpdateCashRegister(): JSX.Element {

@@ -2,17 +2,19 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 
+interface DialogFormFooterProps {
+    closeDialog: () => void;
+    processing: boolean;
+    buttonAriaLabel: string;
+    isUpdate: boolean;
+}
+
 export default function DialogFormFooter({
     closeDialog,
     processing,
     buttonAriaLabel,
     isUpdate,
-}: {
-    closeDialog: () => void;
-    processing: boolean;
-    buttonAriaLabel: string;
-    isUpdate: boolean;
-}): JSX.Element {
+}: DialogFormFooterProps): JSX.Element {
     const { t } = useTranslation();
 
     return (

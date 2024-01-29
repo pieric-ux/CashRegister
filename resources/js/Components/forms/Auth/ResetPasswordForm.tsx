@@ -11,7 +11,12 @@ import { useForm as useFormInertia } from '@inertiajs/react';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/ResetPasswordFormDatas';
 
-export function ResetPasswordForm({ token, email }: { token: string; email: string }): JSX.Element {
+interface ResetPasswordFormProps {
+    token: string;
+    email: string;
+}
+
+export default function ResetPasswordForm({ token, email }: ResetPasswordFormProps): JSX.Element {
     const { t } = useTranslation();
 
     const defaultValues = getDefaultValues({ token, email });

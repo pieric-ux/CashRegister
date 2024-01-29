@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import useColorMode from '@/Hooks/useColorMode';
 import { Switch, SwitchThumb } from '@/Components/ui/switch/switch';
 
-const ThemeSwitcher = (): JSX.Element => {
+export default function ThemeSwitcher(): JSX.Element {
     const { t } = useTranslation();
 
     const [colorMode, setColorMode] = useColorMode();
@@ -30,6 +30,4 @@ const ThemeSwitcher = (): JSX.Element => {
             </SwitchThumb>
         </Switch>
     );
-};
-
-export default ThemeSwitcher;
+}

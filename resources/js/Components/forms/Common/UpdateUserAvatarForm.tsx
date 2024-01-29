@@ -19,17 +19,19 @@ interface FormInput {
     avatar: File | undefined;
 }
 
+interface UpdateUserAvatarFormProps {
+    avatarPath: string;
+    isEmployee?: boolean;
+}
+
 const defaultValues: FormInput = {
     avatar: undefined,
 };
 
-export function UpdateUserAvatarForm({
+export default function UpdateUserAvatarForm({
     avatarPath,
     isEmployee = false,
-}: {
-    avatarPath: string;
-    isEmployee?: boolean;
-}): JSX.Element {
+}: UpdateUserAvatarFormProps): JSX.Element {
     const { data, setData, post, errors } = useFormInertia(defaultValues);
 
     const form = useForm<FormInput>({
