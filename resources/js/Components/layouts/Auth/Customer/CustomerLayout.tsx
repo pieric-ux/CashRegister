@@ -14,6 +14,7 @@ interface CustomerLayoutProps {
 export default function CustomerLayout({ children }: CustomerLayoutProps): JSX.Element {
     const { customerAuth } = usePage().props;
     const { customer, avatarPath } = customerAuth;
+
     return (
         <div className='bg-background transition duration-300 ease-linear'>
             <div className='h-screen flex-col'>

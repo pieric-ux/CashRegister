@@ -17,6 +17,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
+import { deleteCustomerDatas } from '@/Shared/Datas/deleteCustomerDatas';
 
 export default function DeleteUser(): JSX.Element {
     const { t } = useTranslation();
@@ -31,34 +32,28 @@ export default function DeleteUser(): JSX.Element {
         <section>
             <Card>
                 <CardHeader size={'xl'}>
-                    <CardTitle>{t('Delete Account')}</CardTitle>
-                    <CardDescription>
-                        {t(
-                            'Once your account is deleted, all of its resources and data will be permanently deleted.',
-                        )}
-                    </CardDescription>
+                    <CardTitle>{t(deleteCustomerDatas.buttonTitle)}</CardTitle>
+                    <CardDescription>{t(deleteCustomerDatas.cardDescription)}</CardDescription>
                 </CardHeader>
                 <CardFooter size={'xl'}>
                     <Dialog open={open} onOpenChange={setOpen}>
                         <DialogTrigger asChild>
-                            <Button variant={'destructive'} aria-label={t('Delete your account')}>
-                                {t('Delete Account')}
+                            <Button
+                                variant={'destructive'}
+                                aria-label={t(deleteCustomerDatas.buttonAriaLabel)}
+                            >
+                                {t(deleteCustomerDatas.buttonTitle)}
                             </Button>
                         </DialogTrigger>
                         <DialogContent size={'2xl'}>
                             <DialogHeader>
-                                <DialogTitle>
-                                    {t('Are you sure you want to delete your account?')}
-                                </DialogTitle>
+                                <DialogTitle>{t(deleteCustomerDatas.dialogTitle)}</DialogTitle>
                                 <DialogDescription>
-                                    {t(
-                                        'Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.',
-                                    )}
+                                    {t(deleteCustomerDatas.dialogDescription)}
                                 </DialogDescription>
                             </DialogHeader>
                             <ConfirmDeleteForm
-                                ariaLabel={t('Delete your account')}
-                                buttonTiltle={t('Delete Account')}
+                                datas={deleteCustomerDatas}
                                 closeDialog={closeDialog}
                                 route={route('profile.destroy')}
                             />

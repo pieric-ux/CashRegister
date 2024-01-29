@@ -20,6 +20,7 @@ export default function CashRegisterConfigurationsLayout({
 }: CashRegisterConfigurationsProps): JSX.Element {
     const { customerAuth } = usePage().props;
     const { customer, avatarPath } = customerAuth;
+
     return (
         <CashRegisterConfigurationsContext.Provider value={{ cashRegisterModule }}>
             <div className='bg-background transition duration-300 ease-linear'>

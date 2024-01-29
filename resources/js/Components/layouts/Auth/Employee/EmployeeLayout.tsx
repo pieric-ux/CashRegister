@@ -11,6 +11,7 @@ interface EmployeeLayoutProps {
 export default function EmployeeLayout({ children }: EmployeeLayoutProps): JSX.Element {
     const { employeeAuth } = usePage().props;
     const { employee, avatarPath } = employeeAuth;
+
     return (
         <div className='bg-background transition duration-300 ease-linear'>
             <div className='h-screen flex-col'>
