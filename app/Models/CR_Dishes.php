@@ -40,7 +40,7 @@ class CR_Dishes extends Model implements HasMedia
         return $this->hasMany(CR_Products::class, 'fk_dishes_id');
     }
 
-    public function registerMediaConversions(Media $media = null): void // FIXME: format png without transparency
+    public function registerMediaConversions(Media $media = null): void
     {
         $this
             ->addMediaConversion('thumb')

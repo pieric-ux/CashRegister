@@ -59,7 +59,7 @@ class CR_Employees extends Authenticatable implements HasMedia
         return null;
     }
 
-    public function registerMediaConversions(Media $media = null): void // FIXME: format png without transparency
+    public function registerMediaConversions(Media $media = null): void
     {
         $this
             ->addMediaConversion('thumb')
