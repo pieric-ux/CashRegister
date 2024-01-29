@@ -61,7 +61,7 @@ export default function SideBar({ children }: SideBarProps): JSX.Element {
                     <Link
                         href='/'
                         className={
-                            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background'
+                            'rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background'
                         }
                         aria-label='Welcome Page'
                     >
