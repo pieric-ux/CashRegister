@@ -1,3 +1,4 @@
+import { useWindowSize } from 'usehooks-ts';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import { type Dispatch, type SetStateAction, type ReactNode } from 'react';
@@ -16,6 +17,14 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
+import {
+    Drawer,
+    DrawerContent,
+    DrawerDescription,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+} from '@/Components/ui/drawer/drawer';
 
 interface Datas {
     cardTitle: string;
@@ -39,6 +48,7 @@ export default function CreateEntityComponent({
     children,
 }: CreateEntityComponentProps): JSX.Element {
     const { t } = useTranslation();
+    const { width } = useWindowSize();
 
     const { cardTitle, cardDescription, buttonAriaLabel, dialogTitle, dialogDescription } = datas;
 
@@ -50,18 +60,33 @@ export default function CreateEntityComponent({
                     <CardDescription>{t(cardDescription)}</CardDescription>
                 </CardHeader>
                 <CardFooter size={'xl'}>
-                    <Dialog open={open} onOpenChange={setOpen}>
-                        <DialogTrigger asChild>
-                            <Button aria-label={t(buttonAriaLabel)}>{t('Create')}</Button>
-                        </DialogTrigger>
-                        <DialogContent size={'2xl'}>
-                            <DialogHeader>
-                                <DialogTitle>{t(dialogTitle)}</DialogTitle>
-                                <DialogDescription>{t(dialogDescription)}</DialogDescription>
-                            </DialogHeader>
-                            {children}
-                        </DialogContent>
-                    </Dialog>
+                    {width < 640 ? (
+                        <Drawer open={open} onOpenChange={setOpen}>
+                            <DrawerTrigger asChild>
+                                <Button aria-label={t(buttonAriaLabel)}>{t('Create')}</Button>
+                            </DrawerTrigger>
+                            <DrawerContent>
+                                <DrawerHeader>
+                                    <DrawerTitle>{t(dialogTitle)}</DrawerTitle>
+                                    <DrawerDescription>{t(dialogDescription)}</DrawerDescription>
+                                </DrawerHeader>
+                                {children}
+                            </DrawerContent>
+                        </Drawer>
+                    ) : (
+                        <Dialog open={open} onOpenChange={setOpen}>
+                            <DialogTrigger asChild>
+                                <Button aria-label={t(buttonAriaLabel)}>{t('Create')}</Button>
+                            </DialogTrigger>
+                            <DialogContent size={'2xl'}>
+                                <DialogHeader>
+                                    <DialogTitle>{t(dialogTitle)}</DialogTitle>
+                                    <DialogDescription>{t(dialogDescription)}</DialogDescription>
+                                </DialogHeader>
+                                {children}
+                            </DialogContent>
+                        </Dialog>
+                    )}
                 </CardFooter>
             </Card>
         </section>

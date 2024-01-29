@@ -1,6 +1,9 @@
+import { useWindowSize } from 'usehooks-ts';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
+import { DrawerFooter } from '@/Components/ui/drawer/drawerFooter';
+import { DrawerClose } from '@/Components/ui/drawer/drawer';
 
 interface DialogFormFooterProps {
     closeDialog: () => void;
@@ -16,18 +19,35 @@ export default function DialogFormFooter({
     isUpdate,
 }: DialogFormFooterProps): JSX.Element {
     const { t } = useTranslation();
+    const { width } = useWindowSize();
 
     return (
-        <DialogFooter>
-            <DialogClose asChild>
-                <Button variant={'secondary'} onClick={closeDialog}>
-                    {t('Cancel')}
-                </Button>
-            </DialogClose>
+        <>
+            {width < 640 ? (
+                <DrawerFooter>
+                    <DrawerClose asChild>
+                        <Button variant={'secondary'} onClick={closeDialog}>
+                            {t('Cancel')}
+                        </Button>
+                    </DrawerClose>
 
-            <Button disabled={processing} aria-label={buttonAriaLabel}>
-                {isUpdate ? t('Save') : t('Create')}
-            </Button>
-        </DialogFooter>
+                    <Button disabled={processing} aria-label={buttonAriaLabel}>
+                        {isUpdate ? t('Save') : t('Create')}
+                    </Button>
+                </DrawerFooter>
+            ) : (
+                <DialogFooter>
+                    <DialogClose asChild>
+                        <Button variant={'secondary'} onClick={closeDialog}>
+                            {t('Cancel')}
+                        </Button>
+                    </DialogClose>
+
+                    <Button disabled={processing} aria-label={buttonAriaLabel}>
+                        {isUpdate ? t('Save') : t('Create')}
+                    </Button>
+                </DialogFooter>
+            )}
+        </>
     );
 }

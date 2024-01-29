@@ -22,7 +22,7 @@ export function ViewOptions<TData>({ table }: TableOptionsProps<TData>): JSX.Ele
     return (
         <Dropdown>
             <DropdownTrigger asChild>
-                <Button variant='outline' size='sm' className='ml-auto hidden h-8 lg:flex'>
+                <Button variant='outline' size='sm' className='ml-auto flex h-8'>
                     <MixerHorizontalIcon className='mr-2 h-4 w-4' />
                     {t('View')}
                 </Button>

@@ -9,7 +9,7 @@ const drawerContentVariants = cva('z-50 focus:outline-none', {
     variants: {
         variant: {
             default:
-                'fixed inset-x-0 bottom-0 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background',
+                'fixed inset-x-0 bottom-0 mt-24 flex max-h-[96%] flex-col gap-4 rounded-t-[10px] border bg-background p-4',
         },
     },
     defaultVariants: {
@@ -24,7 +24,7 @@ export interface DrawerContentProps
 const DrawerContent = forwardRef<HTMLDivElement, DrawerContentProps>(
     ({ className, variant, children, ...props }, ref) => (
         <DrawerPortal>
-            <DrawerOverlay variant={variant} />
+            <DrawerOverlay />
             <DrawerPrimitive.Content
                 ref={ref}
                 className={cn(drawerContentVariants({ variant, className }))}

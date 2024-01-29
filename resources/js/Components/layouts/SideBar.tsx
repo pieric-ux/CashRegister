@@ -1,11 +1,11 @@
 import clsx from 'clsx';
+import { type ReactNode } from 'react';
 import { Link } from '@inertiajs/react';
 import { Svg } from '@/Components/ui/svg/Svg';
-import { type ReactNode, useState } from 'react';
-import useLocalStorage from '@/Hooks/useLocalStorage';
 import { Button } from '@/Components/ui/button/button';
 import ApplicationLogo from '@/Components/logos/ApplicationLogo';
 import ApplicationLogoDark from '@/Components/logos/ApplicationLogoDark';
+import { useWindowSize, useEventListener, useLocalStorage } from 'usehooks-ts';
 import {
     Sidebar,
     SidebarClose,
@@ -21,18 +21,17 @@ interface SideBarProps {
 
 export default function SideBar({ children }: SideBarProps): JSX.Element {
     const [open, setOpen] = useLocalStorage('sideBarOpen', true);
-    const [isModal, setIsModal] = useState(
-        () => window.matchMedia('(min-width: 640px) and (max-width: 1535px)').matches,
-    );
+    const { width } = useWindowSize();
+
+    const isModal = width > 639 && width < 1536;
 
     const handleResize = (): void => {
-        setIsModal(window.matchMedia('(min-width: 640px) and (max-width: 1535px)').matches);
-        setOpen(window.matchMedia('(min-width: 1536px').matches);
+        setOpen(width > 1535);
     };
-    window.addEventListener('resize', handleResize);
+    useEventListener('resize', handleResize);
 
     const handleClose = (): void => {
-        if (window.matchMedia('(min-width: 640px) and (max-width: 1535px)').matches) {
+        if (width > 639 && width < 1536) {
             setOpen(false);
         }
     };

@@ -1,3 +1,4 @@
+import { useWindowSize } from 'usehooks-ts';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
@@ -10,6 +11,14 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
+import {
+    Drawer,
+    DrawerContent,
+    DrawerDescription,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+} from '@/Components/ui/drawer/drawer';
 
 interface Datas {
     buttonAriaLabel: string;
@@ -33,35 +42,63 @@ export default function ActionDialogButton({
     children,
 }: ActionDialogButtonProps): JSX.Element {
     const { t } = useTranslation();
+    const { width } = useWindowSize();
 
     const { buttonAriaLabel, dialogTitle, dialogDescription } = datas;
 
     return (
         <section>
-            <Dialog open={open} onOpenChange={setOpen}>
-                <DialogTrigger asChild>
-                    {isUpdate !== null && isUpdate !== undefined ? (
-                        <Button size={'icon'} aria-label={t(buttonAriaLabel)}>
-                            <Svg type={'edit'} />
-                        </Button>
-                    ) : (
-                        <Button
-                            variant={'destructive'}
-                            size={'icon'}
-                            aria-label={t(buttonAriaLabel)}
-                        >
-                            <Svg type={'delete'} variant={'destructive'} />
-                        </Button>
-                    )}
-                </DialogTrigger>
-                <DialogContent size={'2xl'}>
-                    <DialogHeader>
-                        <DialogTitle>{t(dialogTitle)}</DialogTitle>
-                        <DialogDescription>{t(dialogDescription)}</DialogDescription>
-                    </DialogHeader>
-                    {children}
-                </DialogContent>
-            </Dialog>
+            {width < 640 ? (
+                <Drawer open={open} onOpenChange={setOpen}>
+                    <DrawerTrigger asChild>
+                        {isUpdate !== null && isUpdate !== undefined ? (
+                            <Button size={'icon'} aria-label={t(buttonAriaLabel)}>
+                                <Svg type={'edit'} />
+                            </Button>
+                        ) : (
+                            <Button
+                                variant={'destructive'}
+                                size={'icon'}
+                                aria-label={t(buttonAriaLabel)}
+                            >
+                                <Svg type={'delete'} variant={'destructive'} />
+                            </Button>
+                        )}
+                    </DrawerTrigger>
+                    <DrawerContent>
+                        <DrawerHeader>
+                            <DrawerTitle>{t(dialogTitle)}</DrawerTitle>
+                            <DrawerDescription>{t(dialogDescription)}</DrawerDescription>
+                        </DrawerHeader>
+                        {children}
+                    </DrawerContent>
+                </Drawer>
+            ) : (
+                <Dialog open={open} onOpenChange={setOpen}>
+                    <DialogTrigger asChild>
+                        {isUpdate !== null && isUpdate !== undefined ? (
+                            <Button size={'icon'} aria-label={t(buttonAriaLabel)}>
+                                <Svg type={'edit'} />
+                            </Button>
+                        ) : (
+                            <Button
+                                variant={'destructive'}
+                                size={'icon'}
+                                aria-label={t(buttonAriaLabel)}
+                            >
+                                <Svg type={'delete'} variant={'destructive'} />
+                            </Button>
+                        )}
+                    </DialogTrigger>
+                    <DialogContent size={'2xl'}>
+                        <DialogHeader>
+                            <DialogTitle>{t(dialogTitle)}</DialogTitle>
+                            <DialogDescription>{t(dialogDescription)}</DialogDescription>
+                        </DialogHeader>
+                        {children}
+                    </DialogContent>
+                </Dialog>
+            )}
         </section>
     );
 }

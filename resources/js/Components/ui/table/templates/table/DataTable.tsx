@@ -75,7 +75,7 @@ export function DataTable<TData, TValue>({
     return (
         <div className={clsx('space-y-6', className)}>
             {withFilter && (
-                <div className='flex items-center'>
+                <div className='flex items-center gap-2'>
                     <Input
                         value={globalFilter ?? ''}
                         onChange={(event) => setGlobalFilter(event.target.value)}

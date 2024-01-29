@@ -1,5 +1,6 @@
-import { useState, type ReactNode } from 'react';
+import { useWindowSize } from 'usehooks-ts';
 import { Svg } from '@/Components/ui/svg/Svg';
+import { useState, type ReactNode } from 'react';
 import { Button } from '@/Components/ui/button/button';
 import {
     Drawer,
@@ -19,11 +20,9 @@ interface DrawerMenuProps<T> {
 
 export default function DrawerMenu<T>({ user, children }: DrawerMenuProps<T>): JSX.Element {
     const [open, setOpen] = useState(false);
+    const { width } = useWindowSize();
 
-    const handleResize = (): void => {
-        open && window.matchMedia('(min-width: 640px)').matches && setOpen(false);
-    };
-    window.addEventListener('resize', handleResize);
+    open && width > 639 && setOpen(false);
 
     return (
         <Drawer open={open} onOpenChange={setOpen}>
