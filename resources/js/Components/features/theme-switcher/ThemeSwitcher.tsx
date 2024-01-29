@@ -1,32 +1,26 @@
+import { useDarkMode } from 'usehooks-ts';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
-import useColorMode from '@/Hooks/useColorMode';
 import { Switch, SwitchThumb } from '@/Components/ui/switch/switch';
 
 export default function ThemeSwitcher(): JSX.Element {
     const { t } = useTranslation();
+    const { isDarkMode, toggle } = useDarkMode();
 
-    const [colorMode, setColorMode] = useColorMode();
-
-    const handleThemeChange = (): void => {
-        const newTheme = colorMode === 'light' ? 'dark' : 'light';
-        setColorMode(newTheme);
-    };
+    isDarkMode
+        ? document.documentElement.classList.add('dark')
+        : document.documentElement.classList.remove('dark');
 
     return (
         <Switch
-            onClick={handleThemeChange}
-            checked={colorMode === 'dark'}
+            onClick={toggle}
+            checked={isDarkMode}
             size={'theme'}
             aria-label={t('Toggle between light and dark themes')}
             asChild
         >
             <SwitchThumb size={'theme'}>
-                {colorMode === 'light' ? (
-                    <Svg type='light' size={'sm'} />
-                ) : (
-                    <Svg type='dark' size={'sm'} />
-                )}
+                {isDarkMode ? <Svg type='dark' size={'sm'} /> : <Svg type='light' size={'sm'} />}
             </SwitchThumb>
         </Switch>
     );
