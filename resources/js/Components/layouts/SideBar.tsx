@@ -42,7 +42,7 @@ export default function SideBar({ children }: SideBarProps): JSX.Element {
             <SidebarTrigger
                 asChild
                 className={clsx(
-                    'absolute left-5 top-5 hidden',
+                    'fixed left-5 top-5 z-50 hidden',
                     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
                     { 'sm:flex': !open },
                 )}
