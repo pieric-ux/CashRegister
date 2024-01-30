@@ -4,6 +4,7 @@ import { CardContent } from '@/Components/ui/card/card';
 import LoginForm from '@/Components/forms/Auth/LoginForm';
 import GuestLayout from '@/Components/layouts/Guest/GuestLayout';
 import { Alert, AlertDescription } from '@/Components/ui/alert/alert';
+import { defaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/LoginFormDatas';
 
 interface LoginProps {
     status: string;
@@ -24,7 +25,11 @@ export default function Login({ status, canResetPassword }: LoginProps): JSX.Ele
                         </Alert>
                     </>
                 )}
-                <LoginForm canResetPassword={canResetPassword} />
+                <LoginForm
+                    defaultValues={defaultValues}
+                    formDatas={formDatas}
+                    canResetPassword={canResetPassword}
+                />
             </CardContent>
         </GuestLayout>
     );

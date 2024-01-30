@@ -21,14 +21,14 @@ class EmployeeRegenerateActivationController extends Controller
 
         $loginRoute = 'employees.login';
 
-        $applicationSlug = $employee->cr_workstations->cr_modules->slug;
+        $moduleSlug = $employee->cr_workstations->cr_modules->slug;
 
         $employee->update([
             'passwordless' => $passwordless,
             'logout' => true,
         ]);
 
-        Notification::send($employee, new EmployeePasswordlessNotification($passwordless, $loginRoute, $applicationSlug));
+        Notification::send($employee, new EmployeePasswordlessNotification($passwordless, $loginRoute, $moduleSlug));
 
         return redirect()->back();
     }

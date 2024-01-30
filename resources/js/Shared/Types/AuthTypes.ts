@@ -5,6 +5,7 @@ export interface Auth {
     password_confirmation?: string;
     remember?: boolean;
     token?: string;
+    passwordless?: string;
 }
 
 export interface ConfirmDeleteFormDatas {
@@ -32,11 +33,11 @@ export interface ForgotPasswordFormDatas {
 }
 
 export interface LoginFormDatas {
-    name: 'email' | 'password';
+    name: 'email' | 'password' | 'passwordless';
     label: string;
-    type: string;
+    type?: string;
     isFocused?: true;
-    autoComplete: string;
+    autoComplete?: string;
 }
 
 export interface ResetPasswordFormDatas {

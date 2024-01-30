@@ -1,67 +1,46 @@
-// TODO: Refactor
-import Checkbox from '@/Components/Checkbox';
-import TextInput from '@/Components/TextInput';
+import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import { Head, useForm } from '@inertiajs/react';
-import { Button } from '@/Components/ui/button/button';
+import { CardContent } from '@/Components/ui/card/card';
+import LoginForm from '@/Components/forms/Auth/LoginForm';
 import GuestLayout from '@/Components/layouts/Guest/GuestLayout';
+import { Alert, AlertDescription } from '@/Components/ui/alert/alert';
+import { employeeFormDatas } from '@/Shared/Datas/Forms/Auth/LoginFormDatas';
+import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 
-export default function Login({ status, application, code }) {
+interface LoginProps {
+    status: string;
+    cashRegisterModule: CashRegister;
+    passwordless: string;
+}
+export default function Login({
+    status,
+    cashRegisterModule,
+    passwordless,
+}: LoginProps): JSX.Element {
     const { t } = useTranslation();
-    const { data, setData, post, processing, errors } = useForm({
-        passwordless: code ?? '',
-        remember: false,
-    });
-
-    const submit = (e) => {
-        e.preventDefault();
-
-        post(route('employees.login', application.slug));
+    const defaultValues = {
+        passwordless,
     };
-
     return (
         <GuestLayout>
             <Head title={t('Log in')} />
 
-            {status && <div className='mb-4 text-sm font-medium text-green-600'>{status}</div>}
-
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor='passwordless' value={t('Activation Code')} />
-
-                    <TextInput
-                        id='passwordless'
-                        name='passwordless'
-                        value={data.passwordless}
-                        className='mt-1 block w-full'
-                        isFocused={true}
-                        onChange={(e) => setData('passwordless', e.target.value)}
-                    />
-
-                    <InputError message={errors.passwordless} className='mt-2' />
-                </div>
-
-                <div className='mt-4 block'>
-                    <label className='flex items-center'>
-                        <Checkbox
-                            name='remember'
-                            checked={data.remember}
-                            onChange={(e) => setData('remember', e.target.checked)}
-                        />
-                        <span className='ml-2 text-sm text-gray-600 dark:text-gray-400'>
-                            {t('Remember me')}
-                        </span>
-                    </label>
-                </div>
-
-                <div className='mt-4 flex items-center justify-end'>
-                    <Button className='ml-4' disabled={processing}>
-                        {t('Log in')}
-                    </Button>
-                </div>
-            </form>
+            <CardContent>
+                {status != null && (
+                    <>
+                        <Alert className='mb-4' variant={'success'}>
+                            <AlertDescription>{t(status)}</AlertDescription>
+                        </Alert>
+                    </>
+                )}
+                <LoginForm
+                    defaultValues={defaultValues}
+                    formDatas={employeeFormDatas}
+                    cashRegisterModule={cashRegisterModule}
+                    passwordless={passwordless}
+                    isEmployee={true}
+                />
+            </CardContent>
         </GuestLayout>
     );
 }

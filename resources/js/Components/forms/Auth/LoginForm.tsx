@@ -3,20 +3,32 @@
 import { type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { type Auth } from '@/Shared/Types/AuthTypes';
 import { Button } from '@/Components/ui/button/button';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
 import { Link, useForm as useFormInertia } from '@inertiajs/react';
+import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
+import { type LoginFormDatas, type Auth } from '@/Shared/Types/AuthTypes';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
-import { defaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/LoginFormDatas';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/Components/ui/form/form';
 
 interface LoginFormProps {
-    canResetPassword: boolean;
+    defaultValues: Auth;
+    formDatas: LoginFormDatas[];
+    canResetPassword?: boolean;
+    passwordless?: string;
+    cashRegisterModule?: CashRegister;
+    isEmployee?: boolean;
 }
 
-export default function LoginForm({ canResetPassword }: LoginFormProps): JSX.Element {
+export default function LoginForm({
+    defaultValues,
+    formDatas,
+    canResetPassword,
+    cashRegisterModule,
+    passwordless,
+    isEmployee,
+}: LoginFormProps): JSX.Element {
     const { t } = useTranslation();
 
     const { data, setData, post, processing, errors, reset } = useFormInertia(defaultValues);
@@ -28,13 +40,21 @@ export default function LoginForm({ canResetPassword }: LoginFormProps): JSX.Ele
     function onSubmit(e: FormEvent): void {
         e.preventDefault();
 
-        post(route('customers.login'), {
-            preserveScroll: true,
-            onSuccess: () => {
-                reset('password');
-                form.reset({ password: '' });
-            },
-        });
+        isEmployee !== null && isEmployee !== undefined
+            ? post(route('employees.login', cashRegisterModule?.slug), {
+                  preserveScroll: true,
+                  onSuccess: () => {
+                      reset('passwordless');
+                      form.reset({ passwordless: '' });
+                  },
+              })
+            : post(route('customers.login'), {
+                  preserveScroll: true,
+                  onSuccess: () => {
+                      reset('password');
+                      form.reset({ password: '' });
+                  },
+              });
     }
 
     return (
@@ -70,7 +90,7 @@ export default function LoginForm({ canResetPassword }: LoginFormProps): JSX.Ele
                     )}
                 />
                 <CardFooter className='mt-4 flex items-center justify-end space-x-4 p-0'>
-                    {canResetPassword && (
+                    {canResetPassword !== null && isEmployee != null && !isEmployee && (
                         <Button variant={'link'} asChild>
                             <Link href={route('password.request')}>
                                 {t('Forgot your password?')}

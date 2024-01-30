@@ -21,3 +21,10 @@ export const formDatas: LoginFormDatas[] = [
         autoComplete: 'current-password',
     },
 ];
+
+export const employeeFormDatas: LoginFormDatas[] = [
+    {
+        name: 'passwordless',
+        label: 'Activation Code',
+    },
+];

@@ -14,16 +14,16 @@ class EmployeePasswordlessNotification extends Notification
 
     protected $passwordless;
     protected $loginRoute;
-    protected $applicationSlug;
+    protected $moduleSlug;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($passwordless, $loginRoute, $applicationSlug)
+    public function __construct($passwordless, $loginRoute, $moduleSlug)
     {
         $this->passwordless = $passwordless;
         $this->loginRoute = $loginRoute;
-        $this->applicationSlug = $applicationSlug;
+        $this->moduleSlug = $moduleSlug;
     }
 
     /**
@@ -42,7 +42,7 @@ class EmployeePasswordlessNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $loginUrl = route($this->loginRoute, [
-            'module' => $this->applicationSlug,
+            'module' => $this->moduleSlug,
             'code' => $this->passwordless,
         ]);
 
