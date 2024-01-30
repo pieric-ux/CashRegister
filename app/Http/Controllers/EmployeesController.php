@@ -73,9 +73,6 @@ class EmployeesController extends Controller
                     $employee->update($updates[$employee->id]);
                 });
         }
-        return response()->json([
-            'workstations' => $workstations,
-        ]);
     }
 
     /**

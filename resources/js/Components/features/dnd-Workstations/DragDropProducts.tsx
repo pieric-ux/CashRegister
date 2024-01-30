@@ -11,8 +11,11 @@ interface DragDropProductsProps {
 }
 
 export default function DragDropProducts({ workstation }: DragDropProductsProps): JSX.Element {
-    const { cashRegisterModule } = useContext(CashRegisterConfigurationsContext);
+    const { cashRegisterModule, setCashRegisterModule } = useContext(
+        CashRegisterConfigurationsContext,
+    );
     const workstations = cashRegisterModule?.cr_workstations;
+    const updatedWorkstations = [...workstations];
 
     const onDragEnd = async (result: DropResult): Promise<void> => {
         const { destination, source } = result;
@@ -27,8 +30,10 @@ export default function DragDropProducts({ workstation }: DragDropProductsProps)
         const sourceId = parseInt(source.droppableId.split('-')[1]);
         const destinationId = parseInt(destination.droppableId.split('-')[1]);
 
-        const sourceWorkstation = workstations?.find((workstation) => workstation.id === sourceId);
-        const destinationWorkstation = workstations?.find(
+        const sourceWorkstation = updatedWorkstations?.find(
+            (workstation) => workstation.id === sourceId,
+        );
+        const destinationWorkstation = updatedWorkstations?.find(
             (workstation) => workstation.id === destinationId,
         );
 
@@ -47,8 +52,13 @@ export default function DragDropProducts({ workstation }: DragDropProductsProps)
             sourceWorkstation?.cr_products.splice(source.index, 1);
         }
 
+        setCashRegisterModule({
+            ...cashRegisterModule,
+            cr_workstations: updatedWorkstations,
+        });
+
         await axios.patch(route('products.updateDragAndDrop'), {
-            workstations,
+            workstations: updatedWorkstations,
         });
     };
     return (

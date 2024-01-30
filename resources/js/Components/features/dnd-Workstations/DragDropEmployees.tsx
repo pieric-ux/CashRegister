@@ -11,8 +11,11 @@ interface DragDropEmployeesProps {
 }
 
 export default function DragDropEmployees({ workstation }: DragDropEmployeesProps): JSX.Element {
-    const { cashRegisterModule } = useContext(CashRegisterConfigurationsContext);
+    const { cashRegisterModule, setCashRegisterModule } = useContext(
+        CashRegisterConfigurationsContext,
+    );
     const workstations = cashRegisterModule?.cr_workstations;
+    const updatedWorkstations = [...workstations];
 
     const defaultWorkstation = workstations?.find(
         (workstation) => workstation.name === 'Pending assignement',
@@ -28,11 +31,14 @@ export default function DragDropEmployees({ workstation }: DragDropEmployeesProp
         ) {
             return;
         }
+
         const sourceId = parseInt(source.droppableId.split('-')[1]);
         const destinationId = parseInt(destination.droppableId.split('-')[1]);
 
-        const sourceWorkstation = workstations?.find((workstation) => workstation.id === sourceId);
-        const destinationWorkstation = workstations?.find(
+        const sourceWorkstation = updatedWorkstations?.find(
+            (workstation) => workstation.id === sourceId,
+        );
+        const destinationWorkstation = updatedWorkstations?.find(
             (workstation) => workstation.id === destinationId,
         );
 
@@ -41,8 +47,13 @@ export default function DragDropEmployees({ workstation }: DragDropEmployeesProp
         sourceWorkstation?.cr_employees?.splice(source.index, 1);
         destinationWorkstation?.cr_employees?.splice(destination.index, 0, movedEmployee);
 
+        setCashRegisterModule({
+            ...cashRegisterModule,
+            cr_workstations: updatedWorkstations,
+        });
+
         await axios.patch(route('employees.updateDragAndDrop'), {
-            workstations,
+            workstations: updatedWorkstations,
         });
     };
     return (

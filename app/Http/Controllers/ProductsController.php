@@ -103,10 +103,6 @@ class ProductsController extends Controller
 
             $workstation->cr_products()->sync($productIds);
         }
-
-        return response()->json([
-            'workstations' => $workstations,
-        ]);
     }
 
 
