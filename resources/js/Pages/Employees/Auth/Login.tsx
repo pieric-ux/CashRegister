@@ -4,8 +4,8 @@ import { CardContent } from '@/Components/ui/card/card';
 import LoginForm from '@/Components/forms/Auth/LoginForm';
 import GuestLayout from '@/Components/layouts/Guest/GuestLayout';
 import { Alert, AlertDescription } from '@/Components/ui/alert/alert';
-import { employeeFormDatas } from '@/Shared/Datas/Forms/Auth/LoginFormDatas';
 import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
+import { employeeFormDatas } from '@/Shared/Datas/Forms/Auth/LoginFormDatas';
 
 interface LoginProps {
     status: string;
