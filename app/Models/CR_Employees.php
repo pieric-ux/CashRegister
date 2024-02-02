@@ -63,7 +63,7 @@ class CR_Employees extends Authenticatable implements HasMedia
     {
         $this
             ->addMediaConversion('thumb')
-            ->fit(Fit::Crop, 300, 300)
+            ->fit(Fit::Contain, 300, 300)
             ->format('png')
             ->nonQueued();
     }

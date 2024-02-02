@@ -44,7 +44,7 @@ class CR_Dishes extends Model implements HasMedia
     {
         $this
             ->addMediaConversion('thumb')
-            ->fit(Fit::Crop, 150, 150)
+            ->fit(Fit::Contain, 150, 150)
             ->format('png')
             ->nonQueued();
     }

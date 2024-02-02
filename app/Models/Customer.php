@@ -63,7 +63,7 @@ class Customer extends Authenticatable implements HasMedia, MustVerifyEmail
     {
         $this
             ->addMediaConversion('thumb')
-            ->fit(Fit::Crop, 48, 48)
+            ->fit(Fit::Contain, 48, 48)
             ->format('png')
             ->nonQueued();
     }
