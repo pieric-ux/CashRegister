@@ -16,11 +16,22 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = $_COOKIE['i18next'] ?? config('app.fallback_locale');
-
-        if (in_array($locale, config('app.locales'))) {
+        $locale = $_COOKIE['i18next'] ?? null;
+    
+        if ($locale && in_array($locale, config('app.locales'))) {
             App::setLocale($locale);
-        }
+        } else {
+            $acceptLanguageHeader = $request->header(('Accept-Language'));
+            
+            $preferredLanguage = \Locale::acceptFromHttp($acceptLanguageHeader);
+
+            if($preferredLanguage) {
+                App::setLocale($preferredLanguage);
+            } else {
+                App::setLocale(config('app.fallback_locale'));
+            }
+        } 
+        
         return $next($request);
     }
 }
