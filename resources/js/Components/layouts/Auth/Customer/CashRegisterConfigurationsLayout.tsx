@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { usePage } from '@inertiajs/react';
 import Header from '@/Components/layouts/Header';
 import SideBar from '@/Components/layouts/SideBar';
@@ -22,6 +22,11 @@ export default function CashRegisterConfigurationsLayout({
     const { customer, avatarPath } = customerAuth;
     const [cashRegisterState, setCashRegisterState] = useState(cashRegisterModule);
 
+    useEffect(() => {
+        // FIXME: Check with Flavien
+        setCashRegisterState(cashRegisterModule);
+    }, [cashRegisterModule]);
+
     return (
         <CashRegisterConfigurationsContext.Provider
             value={{
@@ -30,7 +35,7 @@ export default function CashRegisterConfigurationsLayout({
             }}
         >
             <div className='bg-background transition duration-300 ease-linear'>
-                <div className='h-screen flex-col'>
+                <div className='min-h-screen flex-col'>
                     <Header
                         user={customer}
                         avatarPath={avatarPath}

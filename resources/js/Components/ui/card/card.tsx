@@ -8,10 +8,11 @@ import { CardDescription } from '@/Components/ui/card/cardDescription';
 
 import { cn } from '@/lib/utils';
 
-const cardVariants = cva('bg-card text-card-foreground transition duration-300 ease-linear', {
+const cardVariants = cva('transition duration-300 ease-linear', {
     variants: {
         variant: {
-            default: 'shadow-md',
+            default: 'bg-card text-card-foreground shadow-md',
+            secondary: 'bg-background text-foreground shadow-md',
         },
         size: {
             default: 'rounded-lg',

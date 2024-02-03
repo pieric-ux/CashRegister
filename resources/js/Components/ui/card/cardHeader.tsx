@@ -2,14 +2,13 @@ import { cn } from '@/lib/utils';
 import { forwardRef, type HTMLAttributes } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-const cardHeaderVariants = cva('', {
+const cardHeaderVariants = cva('p-6', {
     variants: {
         variant: {
-            default: 'flex flex-col space-y-1.5 p-6',
-            'flex-row': 'flex flex-row p-6',
-            'flex-col': 'flex flex-col p-6',
-            grid: 'grid p-6',
-            cart: '',
+            default: 'flex flex-col space-y-1.5 ',
+            'flex-row': 'flex flex-row',
+            'flex-col': 'flex flex-col',
+            grid: 'grid',
         },
         size: {
             default: '',

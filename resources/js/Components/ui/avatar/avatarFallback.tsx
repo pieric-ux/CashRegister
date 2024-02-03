@@ -6,7 +6,7 @@ import {
     type AvatarFallbackProps as RadixAvatarFallbackProps,
 } from '@radix-ui/react-avatar';
 
-const avatarFallbackVariants = cva('flex h-full w-full items-center justify-center rounded-full', {
+const avatarFallbackVariants = cva('flex h-full w-full items-center justify-center', {
     variants: {
         variant: {
             default: 'bg-muted',

@@ -9,6 +9,7 @@
     },
     "dependencies": {
         "@hookform/resolvers": "^3.3.4",
+        "@radix-ui/react-accordion": "^1.1.2",
         "@radix-ui/react-avatar": "^1.0.4",
         "@radix-ui/react-checkbox": "^1.0.4",
         "@radix-ui/react-dialog": "^1.0.5",
@@ -19,6 +20,7 @@
         "@radix-ui/react-separator": "^1.0.3",
         "@radix-ui/react-slot": "^1.0.2",
         "@radix-ui/react-switch": "^1.0.3",
+        "@radix-ui/react-tabs": "^1.0.4",
         "@tanstack/react-table": "^8.11.3",
         "country-to-currency": "^1.1.1",
         "i18next": "^23.7.12",

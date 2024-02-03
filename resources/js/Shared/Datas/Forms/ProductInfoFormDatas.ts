@@ -1,6 +1,6 @@
-import { type ProductInfoForm, type ProductInfosFormDatas } from '@/Shared/Types/ProductTypes';
+import { type Product, type ProductInfosFormDatas } from '@/Shared/Types/ProductTypes';
 
-export const getDefaultValues = (product: ProductInfoForm, isUpdate: boolean): ProductInfoForm => {
+export const getDefaultValues = (product: Product, isUpdate: boolean): Product => {
     return {
         name: isUpdate ? product?.name : '',
         unit: isUpdate ? product?.unit : '',

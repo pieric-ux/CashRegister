@@ -1,4 +1,5 @@
 import { type Media } from '@/Shared/Types/MediaTypes';
+import { type Workstation } from '@/Shared/Types/WorkstationTypes';
 import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 
 export interface Employee {
@@ -12,6 +13,7 @@ export interface Employee {
     fk_workstations_id?: number;
     created_at?: string;
     updated_at?: string;
+    cr_workstations?: Workstation;
     media?: Media[];
 }
 

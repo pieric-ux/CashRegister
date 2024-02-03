@@ -14,10 +14,12 @@ export default function DragDropEmployees({ workstation }: DragDropEmployeesProp
     const { cashRegisterModule, setCashRegisterModule } = useContext(
         CashRegisterConfigurationsContext,
     );
+
     const workstations = cashRegisterModule?.cr_workstations;
+
     const updatedWorkstations = [...workstations];
 
-    const defaultWorkstation = workstations?.find(
+    const defaultWorkstation = updatedWorkstations?.find(
         (workstation) => workstation.name === 'Pending assignement',
     );
 

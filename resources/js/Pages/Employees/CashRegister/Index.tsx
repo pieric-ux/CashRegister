@@ -1,130 +1,79 @@
-// TODO: Refactor
+import { useState } from 'react';
 import { Head } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { type Dish } from '@/Shared/Types/DishTypes';
+import { type Product } from '@/Shared/Types/ProductTypes';
+import { type Employee } from '@/Shared/Types/EmployeeTypes';
 import { Card, CardHeader } from '@/Components/ui/card/card';
-import Cart from '@/Pages/Employees/CashRegister/Partials/Cart';
-import Total from '@/Pages/Employees/CashRegister/Partials/Total';
-import Items from '@/Pages/Employees/CashRegister/Partials/Items';
-import Payment from '@/Pages/Employees/CashRegister/Partials/Payment';
-import Buttons from '@/Pages/Employees/CashRegister/Partials/Buttons';
+import Cart from '@/Pages/Employees/CashRegister/Components/Cart';
+import Total from '@/Pages/Employees/CashRegister/Components/Total';
+import Items from '@/Pages/Employees/CashRegister/Components/Items';
+import { CashRegisterContext } from '@/Context/CashRegisterContext';
+import Payment from '@/Pages/Employees/CashRegister/Components/Payment';
+import { type PaymentMethod } from '@/Shared/Types/PaymentMethodsTypes';
+import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 import EmployeeLayout from '@/Components/layouts/Auth/Employee/EmployeeLayout';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/Components/ui/tabs/tabs';
+
+export const emptyCartItem = { id: null, name: '', quantity: 0, client_price: 0 };
+export const emptyCart = { items: Array(5).fill(emptyCartItem), total: 0 };
+
+interface EmployeeAuth {
+    employee: Employee;
+    avatarPath: string;
+}
+
+interface CashRegisterProps {
+    employeeAuth: EmployeeAuth;
+    categories: CategoryProducts[];
+    dishes: Dish[];
+    products: Product[];
+    paymentMethods: PaymentMethod[];
+}
 
 export default function CashRegister({
     employeeAuth,
-    localization,
     categories,
     dishes,
     products,
     paymentMethods,
-}) {
+}: CashRegisterProps): JSX.Element {
     const { t } = useTranslation();
 
-    const emptyCartItem = { id: null, name: '', quantity: 0, client_price: 0 };
-    const [cart, setCart] = useState(Array(5).fill(emptyCartItem));
-    const isCartEmpty = cart.every((item) => item.id === null || item.quantity === 0);
-    const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
-    const [total, setTotal] = useState(0);
-    const [isCartVisible, setIsCartVisible] = useState(true);
-    const [serverErrors, setServerErrors] = useState({});
-
-    useEffect(() => {
-        if (selectedPaymentMethod) {
-            handlePayment();
-        }
-    }, [selectedPaymentMethod]);
-
-    useEffect(() => {
-        const newTotal = calculateTotal();
-        setTotal(newTotal);
-    }, [cart]);
-
-    const removeFromCart = (index) => {
-        const newCart = [...cart];
-        newCart.splice(index, 1);
-        newCart.push({
-            id: null,
-            name: '',
-            quantity: 0,
-            client_price: 0,
-        });
-        setCart(newCart);
-    };
-
-    const calculateTotal = () => {
-        return cart.reduce((subtotal, item) => {
-            return subtotal + item.quantity * item.client_price;
-        }, 0);
-    };
-
-    const handlePayment = async () => {
-        const filteredCart = cart.filter((item) => item.id !== null);
-
-        await axios
-            .post(route('cashregister.store'), {
-                cart: filteredCart,
-                paymentMethod: selectedPaymentMethod,
-            })
-            .then((response) => {
-                setCart(Array(5).fill(emptyCartItem));
-                setSelectedPaymentMethod(null);
-                setServerErrors({});
-            })
-            .catch((error) => {
-                if (error.response && error.response.data && error.response.data.errors) {
-                    setServerErrors(error.response.data.errors);
-                }
-            });
-    };
+    const [cart, setCart] = useState(emptyCart);
+    const isCartEmpty = cart.items.every((item) => item.id === null || item.quantity === 0);
 
     return (
-        <EmployeeLayout auth={employeeAuth} localization={localization}>
-            <Head title={t(`${employeeAuth.employee.cr_workstations.name}`)} />
-            {serverErrors && Object.keys(serverErrors).length > 0 && (
-                <div
-                    className='relative mx-auto mb-4 max-w-7xl rounded border border-red-400 bg-red-100 px-2 py-3 text-red-700 sm:px-6 lg:px-8'
-                    role='alert'
-                >
-                    <strong className='font-bold'>{t('Errors')}</strong>
-                    <ul className='mt-2'>
-                        {Object.values(serverErrors).map((error, index) => (
-                            <li key={index} className='ml-4'>
-                                {error[0]}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
+        <EmployeeLayout>
+            <Head title={t(`${employeeAuth?.employee?.cr_workstations?.name}`)} />
 
-            <div className='mx-auto max-w-7xl space-y-6 px-2 sm:px-6 lg:px-8'>
-                <Card>
-                    <CardHeader>
-                        <Cart
-                            isCartVisible={isCartVisible}
-                            cart={cart}
-                            removeFromCart={removeFromCart}
-                        />
-                        <Total total={total} />
-                        <Payment
-                            paymentMethods={paymentMethods}
-                            isCartEmpty={isCartEmpty}
-                            setSelectedPaymentMethod={setSelectedPaymentMethod}
-                        />
-                        <Buttons
-                            isCartVisible={isCartVisible}
-                            setIsCartVisible={setIsCartVisible}
-                        />
-                        <Items
-                            isCartVisible={isCartVisible}
-                            cart={cart}
-                            setCart={setCart}
-                            categories={categories}
-                            dishes={dishes}
-                            products={products}
-                        />
-                    </CardHeader>
-                </Card>
-            </div>
+            <Card className='h-full'>
+                <CardHeader className='h-full'>
+                    <CashRegisterContext.Provider
+                        value={{ categories, dishes, products, cart, setCart }}
+                    >
+                        <Tabs defaultValue='Cart' className='relative h-full space-y-6'>
+                            <TabsContent value='Cart' className='h-full space-y-6'>
+                                <Cart />
+                                <div className='flex items-center justify-end'>
+                                    <Total />
+                                </div>
+                                <Payment
+                                    paymentMethods={paymentMethods}
+                                    isCartEmpty={isCartEmpty}
+                                />
+                            </TabsContent>
+                            <TabsContent value='Products' className='space-y-6'>
+                                <Items />
+                            </TabsContent>
+                            <TabsList className='absolute bottom-0 grid w-full grid-cols-2'>
+                                <TabsTrigger value='Cart'>{t('Cart')}</TabsTrigger>
+                                <TabsTrigger value='Products'>{t('Products')}</TabsTrigger>
+                            </TabsList>
+                        </Tabs>
+                    </CashRegisterContext.Provider>
+                </CardHeader>
+            </Card>
         </EmployeeLayout>
     );
 }

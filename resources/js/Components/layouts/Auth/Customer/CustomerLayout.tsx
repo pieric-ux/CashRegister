@@ -17,7 +17,7 @@ export default function CustomerLayout({ children }: CustomerLayoutProps): JSX.E
 
     return (
         <div className='bg-background transition duration-300 ease-linear'>
-            <div className='h-screen flex-col'>
+            <div className='min-h-screen flex-col'>
                 <Header
                     user={customer}
                     avatarPath={avatarPath}
