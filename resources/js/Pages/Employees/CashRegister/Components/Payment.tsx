@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { emptyCart } from '../Index';
 import { useWindowSize } from 'usehooks-ts';
 import { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import { CashRegisterContext } from '@/Context/CashRegisterContext';
+import { Avatar, AvatarImage } from '@/Components/ui/avatar/avatar';
 import { type PaymentMethod } from '@/Shared/Types/PaymentMethodsTypes';
 import {
     Dialog,
@@ -22,12 +22,14 @@ import {
     DrawerHeader,
     DrawerTrigger,
 } from '@/Components/ui/drawer/drawer';
-import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar/avatar';
 
 interface PaymentProps {
     paymentMethods: PaymentMethod[];
     isCartEmpty: boolean;
 }
+
+const emptyCartItem = { id: null, name: '', quantity: 0, client_price: 0 };
+const emptyCart = { items: Array(5).fill(emptyCartItem), total: 0 };
 
 export default function Payment({ paymentMethods, isCartEmpty }: PaymentProps): JSX.Element {
     const { t } = useTranslation();
@@ -115,7 +117,8 @@ export default function Payment({ paymentMethods, isCartEmpty }: PaymentProps): 
                                         key={paymentMethod.id}
                                         onClick={() => handlePayment(paymentMethod.id)}
                                     >
-                                        {paymentMethod.picture_url ? (
+                                        {paymentMethod.picture_url !== null &&
+                                        paymentMethod.picture_url !== undefined ? (
                                             <div>
                                                 <img
                                                     className='mx-auto'
