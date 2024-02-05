@@ -75,7 +75,9 @@ export const columns: ColumnDef<TransactionsTableColumnsDatas>[] = [
         },
         cell: ({ row }) => {
             return (
-                <div className='text-left font-medium'>{row.original.cr_payment_methods?.name}</div>
+                <div className='text-left font-medium'>
+                    {i18n.t(row.original.cr_payment_methods?.name)}
+                </div>
             );
         },
     },
