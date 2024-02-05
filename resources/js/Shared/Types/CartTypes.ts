@@ -1,3 +1,5 @@
+import { type Dish } from './DishTypes';
+
 export interface CartItem {
     id: number | null;
     quantity: number;
@@ -6,6 +8,7 @@ export interface CartItem {
     client_price: number;
     picture_url?: string;
     type?: string;
+    cr_dishes?: Dish;
 }
 
 export interface Cart {

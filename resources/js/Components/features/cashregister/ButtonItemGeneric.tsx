@@ -1,6 +1,7 @@
 import { useContext } from 'react';
-import { Button } from '@/Components/ui/button/button';
 import { Badge } from '@/Components/ui/badge/badge';
+import { Button } from '@/Components/ui/button/button';
+import { type CartItem } from '@/Shared/Types/CartTypes';
 import { CashRegisterContext } from '@/Context/CashRegisterContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar/avatar';
 
@@ -17,23 +18,27 @@ export default function ButtonItemGeneric({
 }: ButtonItemGenericProps): JSX.Element {
     const { cart, setCart } = useContext(CashRegisterContext);
 
-    const addToCart = (item, itemType) => {
-        let newCart = { ...cart };
-        let price = parseFloat(item.client_price);
+    const addToCart = (item: CartItem, itemType: string): void => {
+        const newCart = { ...cart };
+        let price = item.client_price;
 
         if (itemType === 'return') {
             price *= -1;
         }
 
-        if (item.cr_dishes && item.cr_dishes.is_consigned) {
-            price += parseFloat(item.cr_dishes.client_price);
+        if (
+            item.cr_dishes !== undefined &&
+            item.cr_dishes !== null &&
+            item.cr_dishes.is_consigned
+        ) {
+            price += item.cr_dishes.client_price;
         }
 
-        let foundItem = newCart.items.find(
+        const foundItem = newCart.items.find(
             (cartItem) => cartItem.id === item.id && cartItem.type === itemType,
         );
 
-        if (foundItem) {
+        if (foundItem !== null && foundItem !== undefined) {
             foundItem.quantity += 1;
         } else {
             const emptyIndex = newCart.items.findIndex((cartItem) => cartItem.id === null);
@@ -57,7 +62,7 @@ export default function ButtonItemGeneric({
         setCart(newCart);
     };
 
-    const getQuantityInCart = () => {
+    const getQuantityInCart = (): number | null => {
         const cartItem = cart.items.find(
             (cartItem) => cartItem.id === data.id && cartItem.type === itemType,
         );
