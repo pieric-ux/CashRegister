@@ -37,7 +37,6 @@ export default function Login({
                     defaultValues={defaultValues}
                     formDatas={employeeFormDatas}
                     cashRegisterModule={cashRegisterModule}
-                    passwordless={passwordless}
                     isEmployee={true}
                 />
             </CardContent>

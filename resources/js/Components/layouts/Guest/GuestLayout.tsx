@@ -4,7 +4,7 @@ import { Card, CardHeader } from '@/Components/ui/card/card';
 import { Link } from '@inertiajs/react';
 import { type ReactNode } from 'react';
 
-export default function Guest({ children }: { children: ReactNode }): JSX.Element {
+export default function GuestLayout({ children }: { children: ReactNode }): JSX.Element {
     return (
         <div className='flex min-h-screen flex-col items-center justify-center bg-background'>
             <Card className='w-full sm:max-w-md'>

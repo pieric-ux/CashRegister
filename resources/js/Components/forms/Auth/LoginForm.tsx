@@ -16,7 +16,6 @@ interface LoginFormProps {
     defaultValues: Auth;
     formDatas: LoginFormDatas[];
     canResetPassword?: boolean;
-    passwordless?: string;
     cashRegisterModule?: CashRegister;
     isEmployee?: boolean;
 }
@@ -26,8 +25,7 @@ export default function LoginForm({
     formDatas,
     canResetPassword,
     cashRegisterModule,
-    passwordless,
-    isEmployee,
+    isEmployee = false,
 }: LoginFormProps): JSX.Element {
     const { t } = useTranslation();
 
@@ -40,7 +38,7 @@ export default function LoginForm({
     function onSubmit(e: FormEvent): void {
         e.preventDefault();
 
-        isEmployee !== null && isEmployee !== undefined
+        isEmployee !== null && isEmployee !== undefined && isEmployee
             ? post(route('employees.login', cashRegisterModule?.slug), {
                   preserveScroll: true,
                   onSuccess: () => {
