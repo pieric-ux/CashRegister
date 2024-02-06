@@ -12,7 +12,7 @@ interface LoginProps {
     cashRegisterModule: CashRegister;
     passwordless: string;
 }
-export default function Login({
+export default function LoginEmployee({
     status,
     cashRegisterModule,
     passwordless,

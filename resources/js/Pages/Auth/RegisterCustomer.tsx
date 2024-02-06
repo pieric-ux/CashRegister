@@ -1,19 +1,14 @@
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import { CardContent } from '@/Components/ui/card/card';
-import GuestLayout from '@/Components/layouts/Guest/GuestLayout';
 import CustomerProfileForm from '@/Components/forms/Customer/CustomerProfileForm';
 
-export default function Register(): JSX.Element {
+export default function RegisterCustomer(): JSX.Element {
     const { t } = useTranslation();
 
     return (
-        <GuestLayout>
+        <>
             <Head title={t('Register')} />
-
-            <CardContent>
-                <CustomerProfileForm />
-            </CardContent>
-        </GuestLayout>
+            <CustomerProfileForm />
+        </>
     );
 }

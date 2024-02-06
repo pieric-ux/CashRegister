@@ -15,17 +15,6 @@ use Inertia\Response;
 class CustomerLoginController extends Controller
 {
     /**
-     * Display the login view.
-     */
-    public function create(): Response
-    {
-        return Inertia::render('Auth/Login', [
-            'canResetPassword' => Route::has('password.request'),
-            'status' => session('status'),
-        ]);
-    }
-
-    /**
      * Handle an incoming authentication request.
      */
     public function store(LoginCustomerRequest $request): RedirectResponse
