@@ -15,7 +15,7 @@ export default function LoginCustomer({ status, canResetPassword }: LoginProps):
         <>
             <Head title={t('Log in')} />
 
-            {status != null && (
+            {status !== null && status !== undefined && (
                 <>
                     <Alert className='mb-4' variant={'success'}>
                         <AlertDescription>{t(status)}</AlertDescription>
