@@ -6,12 +6,7 @@ import UpdateUserAvatar from '@/Components/generic/UpdateUserAvatar';
 import UpdateProfileInformation from './Components/UpdateProfileInformation';
 import CustomerLayout from '@/Components/layouts/Auth/Customer/CustomerLayout';
 
-interface EditProfileProps {
-    mustVerifyEmail: boolean;
-    status: string;
-}
-
-export default function Edit({ mustVerifyEmail, status }: EditProfileProps): JSX.Element {
+export default function Edit(): JSX.Element {
     const { t } = useTranslation();
     const { customer } = usePage<InertiaPageProps>().props;
     const avatarPath = customer.media.find(
@@ -25,7 +20,7 @@ export default function Edit({ mustVerifyEmail, status }: EditProfileProps): JSX
 
             <UpdateUserAvatar avatarPath={avatarPath} />
 
-            <UpdateProfileInformation mustVerifyEmail={mustVerifyEmail} status={status} />
+            <UpdateProfileInformation />
 
             <UpdatePassword />
 

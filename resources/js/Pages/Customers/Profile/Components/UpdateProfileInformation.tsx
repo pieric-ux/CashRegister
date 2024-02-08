@@ -1,5 +1,5 @@
-import { Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { Link, usePage } from '@inertiajs/react';
 import { Button } from '@/Components/ui/button/button';
 import { Alert, AlertDescription } from '@/Components/ui/alert/alert';
 import CustomerProfileForm from '@/Components/forms/Customer/CustomerProfileForm';
@@ -11,18 +11,15 @@ import {
     CardTitle,
 } from '@/Components/ui/card/card';
 
-interface UpdateProfileInformationProps {
+interface PageProps extends InertiaPageProps {
     mustVerifyEmail: boolean;
-    status?: string;
+    status: string;
 }
 
-export default function UpdateProfileInformation({
-    mustVerifyEmail,
-    status,
-}: UpdateProfileInformationProps): JSX.Element {
+export default function UpdateProfileInformation(): JSX.Element {
     const { t } = useTranslation();
 
-    const { customer } = usePage<InertiaPageProps>().props;
+    const { customer, mustVerifyEmail, status } = usePage<PageProps>().props;
 
     return (
         <section>
@@ -46,7 +43,7 @@ export default function UpdateProfileInformation({
                             </Button>
                         </Alert>
                     )}
-                    {status != null && (
+                    {status !== null && status !== undefined && (
                         <>
                             <Alert variant={'success'}>
                                 <AlertDescription>{t(status)}</AlertDescription>
