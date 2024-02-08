@@ -1,7 +1,8 @@
-import { useWindowSize } from 'usehooks-ts';
+import { type ReactNode } from 'react';
 import { Svg } from '@/Components/ui/svg/Svg';
-import { useState, type ReactNode } from 'react';
 import { Button } from '@/Components/ui/button/button';
+import { type Customer } from '@/Shared/Types/CustomerTypes';
+import { type Employee } from '@/Shared/Types/EmployeeTypes';
 import {
     Drawer,
     DrawerClose,
@@ -13,22 +14,17 @@ import {
     DrawerTrigger,
 } from '@/Components/ui/drawer/drawer';
 
-interface DrawerMenuProps<T> {
-    user: T;
+interface DrawerMenuProps {
+    user: Customer | Employee;
     children: ReactNode;
 }
 
-export default function DrawerMenu<T>({ user, children }: DrawerMenuProps<T>): JSX.Element {
-    const [open, setOpen] = useState(false);
-    const { width } = useWindowSize();
-
-    open && width > 639 && setOpen(false);
-
+export default function DrawerMenu({ user, children }: DrawerMenuProps): JSX.Element {
     return (
-        <Drawer open={open} onOpenChange={setOpen}>
+        <Drawer>
             <DrawerTrigger
                 asChild
-                className='focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:hidden'
+                className='focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background'
             >
                 <Button variant={'outline'} size={'icon'}>
                     <Svg variant={'sideBar'} type={'hamburger'} />
