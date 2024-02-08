@@ -1,3 +1,5 @@
+import { type Media } from './MediaTypes';
+
 export interface Customer {
     id?: number;
     company_name: string;
@@ -12,6 +14,7 @@ export interface Customer {
     password: string;
     created_at?: string;
     updated_at?: string;
+    media: Media[];
 }
 
 export interface CustomerProfileFormInput extends Partial<Customer> {

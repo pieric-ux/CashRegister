@@ -15,6 +15,8 @@ export interface Media {
     generated_conversions: Record<string, any>;
     responsive_images: Record<string, any>;
     order_column: number | null;
+    original_url: string;
+    preview_url: string;
     created_at: string;
     updated_at: string | null;
 }

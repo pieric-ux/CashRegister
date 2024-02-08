@@ -22,7 +22,7 @@ export default function UpdateProfileInformation({
 }: UpdateProfileInformationProps): JSX.Element {
     const { t } = useTranslation();
 
-    const { customerAuth } = usePage().props;
+    const { customer } = usePage<InertiaPageProps>().props;
 
     return (
         <section>
@@ -34,7 +34,7 @@ export default function UpdateProfileInformation({
                     </CardDescription>
                 </CardHeader>
                 <CardContent size={'xl'}>
-                    {mustVerifyEmail && customerAuth.customer.email_verified_at === null && (
+                    {mustVerifyEmail && customer.email_verified_at === null && (
                         <Alert>
                             <AlertDescription>
                                 {t('Your email address is unverified.')}

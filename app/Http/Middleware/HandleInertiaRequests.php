@@ -30,22 +30,8 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $customer = $request->user('customer');
-        $customerAuth = [
-            'customer' => $customer,
-            'avatarPath' => optional($customer)->getAvatarUrl(),
-        ];
-
-        $employee = $request->user('employee');
-        $employeeAuth = [
-            'employee' => $employee,
-            'avatarPath' => optional($employee)->getAvatarUrl(),
-        ];
-
-        return [
+        $sharedProps = [
             ...parent::share($request),
-            'customerAuth' => $customerAuth,
-            'employeeAuth' => $employeeAuth,
             'localization' => [
                 'locale' => app()->getLocale(),
                 'locales' => config('app.locales'),
@@ -55,5 +41,21 @@ class HandleInertiaRequests extends Middleware
                 'location' => $request->url(),
             ],
         ];
+
+        $customer = $request->user('customer');
+        if($customer) {
+            $customer->getAvatarUrl();
+            $sharedProps['customer'] = $customer;
+        }
+
+        $employee = $request->user('employee');
+        if($employee) {
+            $sharedProps['employeeAuth'] = [
+                'employee' => $employee,
+                'avatarPath' => optional($employee)->getAvatarUrl(),
+            ];
+        }
+
+        return $sharedProps;
     }
 }

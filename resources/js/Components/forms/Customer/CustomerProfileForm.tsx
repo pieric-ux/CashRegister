@@ -21,9 +21,9 @@ export default function CustomerProfileForm({
 }: CustomerProfileFormProps): JSX.Element {
     const { t } = useTranslation();
 
-    const { customerAuth } = usePage().props;
+    const { customer } = usePage<InertiaPageProps>().props;
 
-    const defaultValues = getDefaultValues(customerAuth.customer, isUpdate);
+    const defaultValues = getDefaultValues(customer, isUpdate);
 
     const { data, setData, post, patch, processing, errors, reset, recentlySuccessful } =
         useFormInertia(defaultValues);

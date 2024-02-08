@@ -13,13 +13,13 @@ interface LoginProps {
 }
 export default function Welcome({ status, canResetPassword }: LoginProps): JSX.Element {
     const { t } = useTranslation();
-    const { customerAuth } = usePage().props;
+    const { customer } = usePage<InertiaPageProps>().props;
 
     return (
         <GuestLayout>
             <Head title='Welcome' />
             <div className='p-6 text-right sm:fixed sm:right-0 sm:top-0'>
-                {customerAuth.customer && (
+                {customer !== undefined && customer !== null && (
                     <Link
                         href={route('dashboard')}
                         className='font-semibold text-muted-foreground hover:text-muted focus:rounded-sm focus:outline focus:outline-2 focus:outline-ring'

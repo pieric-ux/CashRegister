@@ -9,7 +9,7 @@ import {
 } from '@/Components/ui/card/card';
 
 interface UpdateUserAvatarProps {
-    avatarPath: string;
+    avatarPath?: string;
     isEmployee?: boolean;
 }
 

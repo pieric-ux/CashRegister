@@ -20,7 +20,7 @@ interface FormInput {
 }
 
 interface UpdateUserAvatarFormProps {
-    avatarPath: string;
+    avatarPath?: string;
     isEmployee?: boolean;
 }
 

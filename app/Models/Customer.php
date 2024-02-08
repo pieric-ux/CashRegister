@@ -59,6 +59,19 @@ class Customer extends Authenticatable implements HasMedia, MustVerifyEmail
         return $this->hasMany(CR_Module::class, 'fk_customer_id');
     }
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function (Customer $customer) {
+            $defaultAvatarPath = storage_path('/app/public/medias/avatars/default-avatar.png');
+            $customer->addMedia($defaultAvatarPath)
+                ->usingFileName(basename($defaultAvatarPath))
+                ->preservingOriginal()
+                ->toMediaCollection('avatars');
+        });
+    }
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this
@@ -70,13 +83,7 @@ class Customer extends Authenticatable implements HasMedia, MustVerifyEmail
 
     public function getAvatarUrl($conversion = '')
     {
-        $avatar = $this->getFirstMediaUrl('avatars', $conversion);
-
-        if ($avatar) {
-            return $avatar;
-        }
-
-        return '/storage/medias/avatars/default-avatar.png';
+        return $this->getFirstMediaUrl('avatars', $conversion);
     }
     
     public function uploadAvatar($avatar)

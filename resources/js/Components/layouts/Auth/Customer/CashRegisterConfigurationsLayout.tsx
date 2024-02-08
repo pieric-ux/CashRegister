@@ -18,8 +18,12 @@ export default function CashRegisterConfigurationsLayout({
     cashRegisterModule,
     children,
 }: CashRegisterConfigurationsProps): JSX.Element {
-    const { customerAuth } = usePage().props;
-    const { customer, avatarPath } = customerAuth;
+    const { customer } = usePage<InertiaPageProps>().props;
+    const avatarPath = customer.media.find(
+        /* eslint-disable @typescript-eslint/naming-convention */
+        ({ collection_name }) => collection_name === 'avatars',
+    )?.original_url;
+
     const [cashRegisterState, setCashRegisterState] = useState(cashRegisterModule);
 
     useEffect(() => {

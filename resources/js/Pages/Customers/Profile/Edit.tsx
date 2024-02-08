@@ -1,5 +1,5 @@
-import { Head, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { Head, usePage } from '@inertiajs/react';
 import DeleteUser from './Components/DeleteUser';
 import UpdatePassword from './Components/UpdatePassword';
 import UpdateUserAvatar from '@/Components/generic/UpdateUserAvatar';
@@ -13,13 +13,17 @@ interface EditProfileProps {
 
 export default function Edit({ mustVerifyEmail, status }: EditProfileProps): JSX.Element {
     const { t } = useTranslation();
-    const { customerAuth } = usePage().props;
+    const { customer } = usePage<InertiaPageProps>().props;
+    const avatarPath = customer.media.find(
+        /* eslint-disable @typescript-eslint/naming-convention */
+        ({ collection_name }) => collection_name === 'avatars',
+    )?.original_url;
 
     return (
         <CustomerLayout>
             <Head title={t('Profile')} />
 
-            <UpdateUserAvatar avatarPath={customerAuth.avatarPath} />
+            <UpdateUserAvatar avatarPath={avatarPath} />
 
             <UpdateProfileInformation mustVerifyEmail={mustVerifyEmail} status={status} />
 

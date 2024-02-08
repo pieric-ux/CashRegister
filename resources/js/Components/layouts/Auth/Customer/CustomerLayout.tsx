@@ -1,19 +1,22 @@
 import { type ReactNode } from 'react';
+import { usePage } from '@inertiajs/react';
 import Header from '@/Components/layouts/Header';
 import SideBar from '@/Components/layouts/SideBar';
 import SideBarLinks from '@/Components/layouts/SideBarLinks';
-import { SideBarNavCustomerLayoutDatas } from '@/Shared/Datas/Navigation/SideBarNavDatas';
-import { usePage } from '@inertiajs/react';
-import { DropDownNavCustomerLayoutDatas } from '@/Shared/Datas/Navigation/DropdownNavDatas';
 import { DrawerNavCustomerLayoutDatas } from '@/Shared/Datas/Navigation/DrawerNavDatas';
+import { SideBarNavCustomerLayoutDatas } from '@/Shared/Datas/Navigation/SideBarNavDatas';
+import { DropDownNavCustomerLayoutDatas } from '@/Shared/Datas/Navigation/DropdownNavDatas';
 
 interface CustomerLayoutProps {
     children: ReactNode;
 }
 
 export default function CustomerLayout({ children }: CustomerLayoutProps): JSX.Element {
-    const { customerAuth } = usePage().props;
-    const { customer, avatarPath } = customerAuth;
+    const { customer } = usePage<InertiaPageProps>().props;
+    const avatarPath = customer.media.find(
+        /* eslint-disable @typescript-eslint/naming-convention */
+        ({ collection_name }) => collection_name === 'avatars',
+    )?.original_url;
 
     return (
         <div className='bg-background transition duration-300 ease-linear'>
