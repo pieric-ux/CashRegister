@@ -1,15 +1,15 @@
-import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { Head, usePage } from '@inertiajs/react';
 import LoginForm from '@/Components/forms/Auth/LoginForm';
 import { Alert, AlertDescription } from '@/Components/ui/alert/alert';
 import { defaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/LoginFormDatas';
 
-interface LoginProps {
+interface PageProps extends InertiaPageProps {
     status: string;
-    canResetPassword: boolean;
 }
-export default function LoginCustomer({ status, canResetPassword }: LoginProps): JSX.Element {
+export default function LoginCustomer(): JSX.Element {
     const { t } = useTranslation();
+    const { status } = usePage<PageProps>().props;
 
     return (
         <>
@@ -22,11 +22,7 @@ export default function LoginCustomer({ status, canResetPassword }: LoginProps):
                     </Alert>
                 </>
             )}
-            <LoginForm
-                defaultValues={defaultValues}
-                formDatas={formDatas}
-                canResetPassword={canResetPassword}
-            />
+            <LoginForm defaultValues={defaultValues} formDatas={formDatas} />
         </>
     );
 }

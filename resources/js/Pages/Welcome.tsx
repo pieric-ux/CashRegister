@@ -7,11 +7,7 @@ import { TabsContent } from '@/Components/ui/tabs/tabsContent';
 import GuestLayout from '@/Components/layouts/Guest/GuestLayout';
 import { Tabs, TabsList, TabsTrigger } from '@/Components/ui/tabs/tabs';
 
-interface LoginProps {
-    status: string;
-    canResetPassword: boolean;
-}
-export default function Welcome({ status, canResetPassword }: LoginProps): JSX.Element {
+export default function Welcome(): JSX.Element {
     const { t } = useTranslation();
     const { customer } = usePage<InertiaPageProps>().props;
 
@@ -35,7 +31,7 @@ export default function Welcome({ status, canResetPassword }: LoginProps): JSX.E
                         <TabsTrigger value='register'>{t('Register')}</TabsTrigger>
                     </TabsList>
                     <TabsContent value='login'>
-                        <LoginCustomer status={status} canResetPassword={canResetPassword} />
+                        <LoginCustomer />
                     </TabsContent>
                     <TabsContent value='register'>
                         <RegisterCustomer />

@@ -6,16 +6,19 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
-import { Link, useForm as useFormInertia } from '@inertiajs/react';
 import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 import { type LoginFormDatas, type Auth } from '@/Shared/Types/AuthTypes';
+import { Link, useForm as useFormInertia, usePage } from '@inertiajs/react';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/Components/ui/form/form';
+
+interface PageProps extends InertiaPageProps {
+    canResetPassword: boolean;
+}
 
 interface LoginFormProps {
     defaultValues: Auth;
     formDatas: LoginFormDatas[];
-    canResetPassword?: boolean;
     cashRegisterModule?: CashRegister;
     isEmployee?: boolean;
 }
@@ -23,11 +26,11 @@ interface LoginFormProps {
 export default function LoginForm({
     defaultValues,
     formDatas,
-    canResetPassword,
     cashRegisterModule,
     isEmployee = false,
 }: LoginFormProps): JSX.Element {
     const { t } = useTranslation();
+    const { canResetPassword } = usePage<PageProps>().props;
 
     const { data, setData, post, processing, errors, reset } = useFormInertia(defaultValues);
 
