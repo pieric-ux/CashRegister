@@ -91,7 +91,7 @@ export default function LoginForm({
                     )}
                 />
                 <CardFooter className='mt-4 flex items-center justify-end space-x-4 p-0'>
-                    {canResetPassword !== null && isEmployee != null && !isEmployee && (
+                    {canResetPassword !== null && isEmployee !== null && !isEmployee && (
                         <Button variant={'link'} asChild>
                             <Link href={route('password.request')}>
                                 {t('Forgot your password?')}

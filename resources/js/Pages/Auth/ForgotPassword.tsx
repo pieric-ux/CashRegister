@@ -17,7 +17,7 @@ export default function ForgotPassword({ status }: ForgotPasswordProps): JSX.Ele
             <Head title={t('Forgot Password')} />
 
             <CardContent>
-                {status != null && (
+                {status !== null && status !== undefined && (
                     <>
                         <Alert className='mb-4' variant={'success'}>
                             <AlertDescription>{t(status)}</AlertDescription>

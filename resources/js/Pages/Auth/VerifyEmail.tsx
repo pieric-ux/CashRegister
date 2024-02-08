@@ -17,7 +17,7 @@ export default function VerifyEmail({ status }: VerifyEmailProps): JSX.Element {
             <Head title={t('Email Verification')} />
 
             <CardContent>
-                {status != null && (
+                {status !== null && status !== undefined && (
                     <>
                         <Alert className='mb-4' variant={'success'}>
                             <AlertDescription>{t(status)}</AlertDescription>

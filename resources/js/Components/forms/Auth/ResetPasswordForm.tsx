@@ -7,17 +7,18 @@ import { Form } from '@/Components/ui/form/form';
 import { type Auth } from '@/Shared/Types/AuthTypes';
 import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
-import { useForm as useFormInertia } from '@inertiajs/react';
+import { useForm as useFormInertia, usePage } from '@inertiajs/react';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/ResetPasswordFormDatas';
 
-interface ResetPasswordFormProps {
+interface PageProps extends InertiaPageProps {
     token: string;
     email: string;
 }
 
-export default function ResetPasswordForm({ token, email }: ResetPasswordFormProps): JSX.Element {
+export default function ResetPasswordForm(): JSX.Element {
     const { t } = useTranslation();
+    const { token, email } = usePage<PageProps>().props;
 
     const defaultValues = getDefaultValues({ token, email });
 

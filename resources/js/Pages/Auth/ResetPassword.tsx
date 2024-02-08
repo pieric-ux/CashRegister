@@ -4,12 +4,7 @@ import { CardContent } from '@/Components/ui/card/card';
 import GuestLayout from '@/Components/layouts/Guest/GuestLayout';
 import ResetPasswordForm from '@/Components/forms/Auth/ResetPasswordForm';
 
-interface ResetPasswordProps {
-    token: string;
-    email: string;
-}
-
-export default function ResetPassword({ token, email }: ResetPasswordProps): JSX.Element {
+export default function ResetPassword(): JSX.Element {
     const { t } = useTranslation();
 
     return (
@@ -17,7 +12,7 @@ export default function ResetPassword({ token, email }: ResetPasswordProps): JSX
             <Head title={t('Reset Password')} />
 
             <CardContent>
-                <ResetPasswordForm token={token} email={email} />
+                <ResetPasswordForm />
             </CardContent>
         </GuestLayout>
     );
