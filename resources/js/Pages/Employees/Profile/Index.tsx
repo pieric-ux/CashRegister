@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/Components/ui/input/input';
@@ -15,20 +15,20 @@ import {
     CardTitle,
 } from '@/Components/ui/card/card';
 
-interface EmployeeAuth {
-    employee: Employee;
-    avatarPath: string;
-}
-
-export default function Index({ employeeAuth }: { employeeAuth: EmployeeAuth }): JSX.Element {
+export default function Index(): JSX.Element {
     const { t } = useTranslation();
+    const { employee } = usePage<InertiaPageProps>().props;
+    const avatarPath = employee.media.find(
+        /* eslint-disable @typescript-eslint/naming-convention */
+        ({ collection_name }) => collection_name === 'avatars-employees',
+    )?.original_url;
 
     const form = useForm<Employee>({
         defaultValues: {
-            first_name: employeeAuth.employee.first_name ?? '',
-            last_name: employeeAuth.employee.last_name ?? '',
-            phone: employeeAuth.employee.phone ?? '',
-            email: employeeAuth.employee.email ?? '',
+            first_name: employee.first_name ?? '',
+            last_name: employee.last_name ?? '',
+            phone: employee.phone ?? '',
+            email: employee.email ?? '',
         },
     });
 
@@ -36,7 +36,7 @@ export default function Index({ employeeAuth }: { employeeAuth: EmployeeAuth }):
         <EmployeeLayout>
             <Head title={t('Profile')} />
 
-            <UpdateUserAvatar isEmployee={true} avatarPath={employeeAuth.avatarPath} />
+            <UpdateUserAvatar isEmployee={true} avatarPath={avatarPath} />
 
             <section>
                 <Card>

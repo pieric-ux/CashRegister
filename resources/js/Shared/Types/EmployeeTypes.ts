@@ -14,7 +14,7 @@ export interface Employee {
     created_at?: string;
     updated_at?: string;
     cr_workstations?: Workstation;
-    media?: Media[];
+    media: Media[];
 }
 
 export interface EmployeesBkndDatas {

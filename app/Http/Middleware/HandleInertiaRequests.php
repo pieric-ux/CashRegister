@@ -50,10 +50,8 @@ class HandleInertiaRequests extends Middleware
 
         $employee = $request->user('employee');
         if($employee) {
-            $sharedProps['employeeAuth'] = [
-                'employee' => $employee,
-                'avatarPath' => optional($employee)->getAvatarUrl(),
-            ];
+            $employee->getAvatarUrl();
+            $sharedProps['employee'] = $employee;
         }
 
         return $sharedProps;

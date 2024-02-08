@@ -48,6 +48,19 @@ class CR_Employees extends Authenticatable implements HasMedia
         return $this->belongsTo(CR_Workstations::class, 'fk_workstations_id');
     }
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function (CR_Employees $employee) {
+            $defaultAvatarPath = storage_path('/app/public/medias/avatars/default-avatar.png');
+            $employee->addMedia($defaultAvatarPath)
+                ->usingFileName(basename($defaultAvatarPath))
+                ->preservingOriginal()
+                ->toMediaCollection('avatars-employees');
+        });
+    }
+
     public static function attemptByPasswordless($passwordless)
     {
         $user = static::where('passwordless', $passwordless)->first();
@@ -70,13 +83,7 @@ class CR_Employees extends Authenticatable implements HasMedia
 
     public function getAvatarUrl($conversion = '')
     {
-        $avatar = $this->getFirstMediaUrl('avatars-employees', $conversion);
-
-        if ($avatar) {
-            return $avatar;
-        }
-
-        return '/storage/medias/avatars/default-avatar.png';
+        return $this->getFirstMediaUrl('avatars-employees', $conversion);
     }
 
     public function uploadAvatar($avatar)

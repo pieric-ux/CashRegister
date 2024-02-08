@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { Head, usePage } from '@inertiajs/react';
 import { type Dish } from '@/Shared/Types/DishTypes';
 import { type Product } from '@/Shared/Types/ProductTypes';
-import { type Employee } from '@/Shared/Types/EmployeeTypes';
 import { Card, CardHeader } from '@/Components/ui/card/card';
 import Cart from '@/Pages/Employees/CashRegister/Components/Cart';
 import Total from '@/Pages/Employees/CashRegister/Components/Total';
@@ -18,13 +17,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/Components/ui/tabs/t
 export const emptyCartItem = { id: null, name: '', quantity: 0, client_price: 0 };
 const emptyCart = { items: Array(5).fill(emptyCartItem), total: 0 };
 
-interface EmployeeAuth {
-    employee: Employee;
-    avatarPath: string;
-}
-
 interface CashRegisterProps {
-    employeeAuth: EmployeeAuth;
     categories: CategoryProducts[];
     dishes: Dish[];
     products: Product[];
@@ -32,20 +25,20 @@ interface CashRegisterProps {
 }
 
 export default function CashRegister({
-    employeeAuth,
     categories,
     dishes,
     products,
     paymentMethods,
 }: CashRegisterProps): JSX.Element {
     const { t } = useTranslation();
+    const { employee } = usePage<InertiaPageProps>().props;
 
     const [cart, setCart] = useState(emptyCart);
     const isCartEmpty = cart.items.every((item) => item.id === null || item.quantity === 0);
 
     return (
         <EmployeeLayout>
-            <Head title={t(`${employeeAuth?.employee?.cr_workstations?.name}`)} />
+            <Head title={t(`${employee?.cr_workstations?.name}`)} />
 
             <Card className='h-full'>
                 <CardHeader className='h-full'>

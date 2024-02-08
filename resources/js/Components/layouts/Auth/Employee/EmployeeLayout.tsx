@@ -1,16 +1,19 @@
 import { type ReactNode } from 'react';
 import { usePage } from '@inertiajs/react';
 import Header from '@/Components/layouts/Header';
-import { DropDownNavEmployeeLayoutDatas } from '@/Shared/Datas/Navigation/DropdownNavDatas';
 import { DrawerNavEmployeeLayoutDatas } from '@/Shared/Datas/Navigation/DrawerNavDatas';
+import { DropDownNavEmployeeLayoutDatas } from '@/Shared/Datas/Navigation/DropdownNavDatas';
 
 interface EmployeeLayoutProps {
     children: ReactNode;
 }
 
 export default function EmployeeLayout({ children }: EmployeeLayoutProps): JSX.Element {
-    const { employeeAuth } = usePage().props;
-    const { employee, avatarPath } = employeeAuth;
+    const { employee } = usePage<InertiaPageProps>().props;
+    const avatarPath = employee.media.find(
+        /* eslint-disable @typescript-eslint/naming-convention */
+        ({ collection_name }) => collection_name === 'avatars-employees',
+    )?.original_url;
 
     return (
         <div className='bg-background transition duration-300 ease-linear'>
@@ -18,7 +21,7 @@ export default function EmployeeLayout({ children }: EmployeeLayoutProps): JSX.E
                 <Header
                     user={employee}
                     avatarPath={avatarPath}
-                    title={employee.cr_workstations.name}
+                    title={employee?.cr_workstations?.name}
                     dropdownMenuDatas={DropDownNavEmployeeLayoutDatas}
                     drawerMenuDatas={DrawerNavEmployeeLayoutDatas}
                 />
