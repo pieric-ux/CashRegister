@@ -16,11 +16,12 @@ import {
 export default function LanguageSwitcher(): JSX.Element {
     const { i18n } = useTranslation();
 
-    const { localization } = usePage().props;
+    const { localization } = usePage<InertiaPageProps>().props;
 
     const [language, setLanguage] = useState(i18n.language);
 
     const onSubmit = async (value: string): Promise<void> => {
+        // FIXME: check type with Flavien
         setLanguage(value);
         await axios.get(`/language-switch/${value}`);
         await i18n.changeLanguage(value);

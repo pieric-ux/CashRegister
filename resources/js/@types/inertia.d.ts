@@ -8,7 +8,10 @@ declare global {
         errors: Errors & ErrorBag;
         customer: Customer;
         employee: Employee;
-        localization: string;
+        localization: {
+            locale: string;
+            locales: string[];
+        };
         ziggy: typeof ziggyRoute;
         [key: string]: unknown;
     }
