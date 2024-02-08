@@ -23,7 +23,7 @@ export default function SideBarLinks({ datas, slug }: SideBarLinksProps): JSX.El
                               ? route().current(item.route) || route().current(item.active)
                               : route().current(item.route)
                     }
-                    svg={<Svg type={item.typeSvg} variant={'sideBar'} />}
+                    svg={<Svg type={item.typeSvg} variant={'sideBar'} />} // FIXME: check type with Flavien
                 >
                     {t(item.label)}
                 </SidebarLink>
