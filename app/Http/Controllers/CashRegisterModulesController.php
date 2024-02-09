@@ -23,15 +23,13 @@ class CashRegisterModulesController extends Controller
     {
         $customer = Auth::user();
 
-        $datas = $customer->cr_modules->map(function ($module) {
-            return [
-                'cashRegisterModule' => $module,
-                'posterPath' => $module->getPosterUrl(), // TODO: work directly with cr_medias
-            ];
+        $cashRegisterModules = $customer->cr_modules->map(function ($module) {
+            $module->getPosterUrl();
+            return $module;
         });
 
         return Inertia::render('Customers/Modules/CashRegisterModule/Index', [
-            'bkndDatas' => $datas,
+            'cashRegisterModules' => $cashRegisterModules,
         ]);
     }
 

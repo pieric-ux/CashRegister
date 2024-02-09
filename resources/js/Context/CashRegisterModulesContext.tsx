@@ -3,18 +3,9 @@ import { type Product } from '@/Shared/Types/ProductTypes';
 import { type Employee } from '@/Shared/Types/EmployeeTypes';
 import { type Workstation } from '@/Shared/Types/WorkstationTypes';
 import { type Transaction } from '@/Shared/Types/TransactionTypes';
+import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 import { createContext, type Dispatch, type SetStateAction } from 'react';
 import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
-import {
-    type CashRegister,
-    type CashRegisterModulesBkndDatas,
-} from '@/Shared/Types/CashRegisterTypes';
-
-export const CashRegisterModulesContext = createContext<{
-    bkndDatas: CashRegisterModulesBkndDatas[];
-}>({
-    bkndDatas: [],
-});
 
 export const CashRegisterConfigurationsContext = createContext<{
     cashRegisterModule: CashRegister & {
@@ -38,14 +29,12 @@ export const CashRegisterConfigurationsContext = createContext<{
         >
     >;
 }>({
-    cashRegisterModule: {} as CashRegister,
+    cashRegisterModule: {} as CashRegister, // FIXME: check type with Flavien
     setCashRegisterModule: () => {},
 });
 
 export const ShowCashRegisterInfosContext = createContext<{
     cashRegisterModule: CashRegister;
-    posterPath: string;
 }>({
     cashRegisterModule: {} as CashRegister,
-    posterPath: '',
 });

@@ -12,16 +12,7 @@ export interface CashRegister {
     fk_customer_id?: number;
     created_at?: string;
     updated_at?: string;
-    media?: Media[];
-}
-
-export interface CashRegisterConfigurationsBkndDatas {
-    cashRegisterModule: CashRegister;
-}
-
-export interface CashRegisterModulesBkndDatas {
-    cashRegisterModule: CashRegister;
-    posterPath: string;
+    media: Media[];
 }
 
 export interface CashRegisterInfosFormDatas {
@@ -31,4 +22,8 @@ export interface CashRegisterInfosFormDatas {
     type?: string;
     placeholder?: string;
     pattern?: string;
+}
+
+export interface CashRegisterConfigurationsBkndDatas {
+    cashRegisterModule: CashRegister;
 }

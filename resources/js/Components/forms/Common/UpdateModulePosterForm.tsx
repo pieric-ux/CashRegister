@@ -22,7 +22,11 @@ interface FormInput {
 }
 
 export default function UpdateModulePosterForm(): JSX.Element {
-    const { cashRegisterModule, posterPath } = useContext(ShowCashRegisterInfosContext);
+    const { cashRegisterModule } = useContext(ShowCashRegisterInfosContext);
+    const posterPath = cashRegisterModule.media.find(
+        /* eslint-disable @typescript-eslint/naming-convention */
+        ({ collection_name }) => collection_name === 'posters',
+    )?.original_url;
 
     const defaultValues: FormInput = {
         moduleId: cashRegisterModule.id,

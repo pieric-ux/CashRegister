@@ -61,6 +61,12 @@ class CR_Module extends Model implements HasMedia
         parent::boot();
 
         static::created(function (CR_Module $module) {
+            $defaultPosterPath = storage_path('/app/public/medias/posters/default-poster.png');
+            $module->addMedia($defaultPosterPath)
+                ->usingFileName(basename($defaultPosterPath))
+                ->preservingOriginal()
+                ->toMediaCollection('posters');
+
             $workstation = new CR_Workstations();
             $workstation->name = 'Pending assignement';
             $workstation->fk_cr_modules_id = $module->id;
@@ -120,13 +126,7 @@ class CR_Module extends Model implements HasMedia
 
     public function getPosterUrl($conversion = '')
     {
-        $poster = $this->getFirstMediaUrl('posters', $conversion);
-
-        if ($poster) {
-            return $poster;
-        }
-
-        return '/storage/medias/posters/default-poster.png';
+        return $this->getFirstMediaUrl('posters', $conversion);
     }
 
     public function uploadPoster($poster)
