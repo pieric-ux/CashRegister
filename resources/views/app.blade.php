@@ -19,9 +19,6 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" nonce="{{ Vite::cspNonce() }}" />
 
         <!-- Scripts -->
-        @if (app()->environment('local'))
-        <script src="http://localhost:8097"></script>
-        @endif
         @routes(nonce: Vite::cspNonce())
         @viteReactRefresh
         @vite(['resources/js/app.tsx', "resources/js/Pages/{$page['component']}.tsx"])
