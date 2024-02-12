@@ -1,25 +1,43 @@
 import axios from 'axios';
-import { useContext } from 'react';
+import { usePage } from '@inertiajs/react';
 import DroppableGeneric from './DroppableGeneric';
 import { DraggableGeneric } from './DraggableGeneric';
+import { type Product } from '@/Shared/Types/ProductTypes';
+import { type Employee } from '@/Shared/Types/EmployeeTypes';
 import { type Workstation } from '@/Shared/Types/WorkstationTypes';
+import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 import { DragDropContext, type DropResult } from 'react-beautiful-dnd';
-import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
+
+interface PageProps extends InertiaPageProps {
+    cashRegisterModule: CashRegister & {
+        cr_workstations: Workstation[] & {
+            cr_employees: Employee[];
+            cr_products: Product[];
+            generalProducts: Product[];
+        };
+    };
+}
 
 interface DragDropEmployeesProps {
-    workstation: Workstation;
+    workstation: Workstation & {
+        cr_employees: Employee[];
+        cr_products: Product[];
+        generalProducts: Product[];
+    };
 }
 
 export default function DragDropEmployees({ workstation }: DragDropEmployeesProps): JSX.Element {
-    const { cashRegisterModule, setCashRegisterModule } = useContext(
-        CashRegisterConfigurationsContext,
-    );
+    const { cashRegisterModule } = usePage<PageProps>().props;
 
-    const workstations = cashRegisterModule?.cr_workstations;
+    const workstations = cashRegisterModule.cr_workstations;
 
-    const updatedWorkstations = [...workstations];
+    const updatedWorkstations = workstations.map((ws) => ({ ...ws })) as (Workstation & {
+        cr_employees: Employee[];
+        cr_products: Product[];
+        generalProducts: Product[];
+    })[];
 
-    const defaultWorkstation = updatedWorkstations?.find(
+    const defaultWorkstation = updatedWorkstations.find(
         (workstation) => workstation.name === 'Pending assignement',
     );
 
@@ -37,27 +55,26 @@ export default function DragDropEmployees({ workstation }: DragDropEmployeesProp
         const sourceId = parseInt(source.droppableId.split('-')[1]);
         const destinationId = parseInt(destination.droppableId.split('-')[1]);
 
-        const sourceWorkstation = updatedWorkstations?.find(
+        const sourceWorkstation = updatedWorkstations.find(
             (workstation) => workstation.id === sourceId,
         );
-        const destinationWorkstation = updatedWorkstations?.find(
+        const destinationWorkstation = updatedWorkstations.find(
             (workstation) => workstation.id === destinationId,
         );
 
-        const movedEmployee = sourceWorkstation?.cr_employees?.[source.index];
+        const movedEmployee = sourceWorkstation?.cr_employees[source.index];
 
-        sourceWorkstation?.cr_employees?.splice(source.index, 1);
-        destinationWorkstation?.cr_employees?.splice(destination.index, 0, movedEmployee);
-
-        setCashRegisterModule({
-            ...cashRegisterModule,
-            cr_workstations: updatedWorkstations,
-        });
-
+        if (movedEmployee !== undefined && movedEmployee !== null) {
+            sourceWorkstation?.cr_employees.splice(source.index, 1);
+            destinationWorkstation?.cr_employees.splice(destination.index, 0, movedEmployee);
+        }
+        // FIXME: state of updatedWorkstations after request
         await axios.patch(route('employees.updateDragAndDrop'), {
             workstations: updatedWorkstations,
         });
     };
+
+    // FIXME: check type with Flavien
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <div className='mt-4 flex gap-2'>
@@ -68,26 +85,28 @@ export default function DragDropEmployees({ workstation }: DragDropEmployeesProp
                 >
                     {(data, index) => (
                         <DraggableGeneric key={data.id} data={data} index={index}>
-                            <p>{data.first_name}</p>
-                            <p>{data.last_name.charAt(0)}.</p>
+                            <p>{(data as Employee).first_name}</p>
+                            <p>{(data as Employee).last_name.charAt(0)}.</p>
                         </DraggableGeneric>
                     )}
                 </DroppableGeneric>
 
                 <div className='border-r border-gray-300 dark:border-gray-700'></div>
 
-                <DroppableGeneric
-                    droppableId={`workstation-${defaultWorkstation?.id}-employees`}
-                    droppableTitle='Employee Free'
-                    datas={defaultWorkstation.cr_employees}
-                >
-                    {(data, index) => (
-                        <DraggableGeneric key={data.id} data={data} index={index}>
-                            <p>{data.first_name}</p>
-                            <p>{data.last_name.charAt(0)}.</p>
-                        </DraggableGeneric>
-                    )}
-                </DroppableGeneric>
+                {defaultWorkstation !== null && defaultWorkstation !== undefined && (
+                    <DroppableGeneric
+                        droppableId={`workstation-${defaultWorkstation.id}-employees`}
+                        droppableTitle='Employee Free'
+                        datas={defaultWorkstation.cr_employees}
+                    >
+                        {(data, index) => (
+                            <DraggableGeneric key={data.id} data={data} index={index}>
+                                <p>{(data as Employee).first_name}</p>
+                                <p>{(data as Employee).last_name.charAt(0)}.</p>
+                            </DraggableGeneric>
+                        )}
+                    </DroppableGeneric>
+                )}
             </div>
         </DragDropContext>
     );

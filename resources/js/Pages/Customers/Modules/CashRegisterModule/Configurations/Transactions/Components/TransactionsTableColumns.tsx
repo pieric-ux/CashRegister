@@ -1,31 +1,38 @@
 'use client';
 
 import i18n from '@/Config/i18n';
-import { type ColumnDef } from '@tanstack/react-table';
 import DeleteTransaction from './DeleteTransaction';
+import { type ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import ShowDetailsTransaction from './ShowDetailsTransaction';
 import useCurrencyFormatter from '@/Hooks/useCurrencyFormatter';
+import { type Transaction } from '@/Shared/Types/TransactionTypes';
+import { type PaymentMethod } from '@/Shared/Types/PaymentMethodsTypes';
+import { type DetailTransaction } from '@/Shared/Types/DetailTransactionTypes';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
-import { type TransactionsTableColumnsDatas } from '@/Shared/Types/TransactionTypes';
 
-export const columns: ColumnDef<TransactionsTableColumnsDatas>[] = [
+interface TransactionWithType extends Transaction {
+    cr_payment_methods: PaymentMethod;
+    cr_details_transactions: DetailTransaction[];
+}
+
+export const columns: ColumnDef<Transaction>[] = [
     {
         id: 'Select',
         header: ({ table }) => (
             <Checkbox
                 checked={
                     table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && 'indeterminate')
+                    (table.getIsSomePageRowsSelected() ? 'indeterminate' : false)
                 }
-                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                onCheckedChange={(checked) => table.toggleAllPageRowsSelected(checked === true)}
                 aria-label={i18n.t('Select all')}
             />
         ),
         cell: ({ row }) => (
             <Checkbox
                 checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
+                onCheckedChange={(checked) => row.toggleSelected(checked === true)}
                 aria-label={i18n.t('Select row')}
             />
         ),
@@ -74,9 +81,10 @@ export const columns: ColumnDef<TransactionsTableColumnsDatas>[] = [
             return <ColumnHeader column={column} title={i18n.t('Payment Method')} />;
         },
         cell: ({ row }) => {
+            const transaction = row.original as TransactionWithType;
             return (
                 <div className='text-left font-medium'>
-                    {i18n.t(row.original.cr_payment_methods?.name)}
+                    {i18n.t(transaction.cr_payment_methods?.name)}
                 </div>
             );
         },
@@ -85,7 +93,7 @@ export const columns: ColumnDef<TransactionsTableColumnsDatas>[] = [
         id: 'Actions',
         header: i18n.t('Actions'),
         cell: ({ row }) => {
-            const transaction = row.original;
+            const transaction = row.original as TransactionWithType;
 
             return (
                 <div className='flex items-center justify-center gap-2'>

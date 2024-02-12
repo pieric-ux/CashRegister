@@ -14,7 +14,7 @@ export default function DeleteEmployee({ employee }: DeleteEmployeeProps): JSX.E
     const closeDialog = (): void => {
         setOpen(false);
     };
-
+    // FIXME: check type with Flavien
     return (
         <section>
             <ActionDialogButton datas={deleteEmployeeDatas} open={open} setOpen={setOpen}>

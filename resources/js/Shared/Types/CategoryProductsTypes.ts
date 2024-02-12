@@ -1,5 +1,3 @@
-import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
-
 export interface CategoryProducts {
     id?: number;
     name: string;
@@ -9,11 +7,8 @@ export interface CategoryProducts {
     updated_at?: string;
 }
 
-export interface CategoriesProductsBkndDatas {
-    cashRegisterModule: CashRegister & { cr_categories_products: CategoryProducts[] };
-}
-
 export interface CategoryProductsFormDatas {
     name: 'name';
     label: string;
+    isFocused: boolean;
 }

@@ -51,9 +51,7 @@ class CR_Dishes extends Model implements HasMedia
 
     public function getPictureUrl($conversion = '')
     {
-        $picture = $this->getFirstMediaUrl('dishes-pictures', $conversion);
-
-        return $picture;
+        return $this->getFirstMediaUrl('dishes-pictures', $conversion);
     }
 
     public function uploadDishPicture($picture)

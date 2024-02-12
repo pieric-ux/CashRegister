@@ -1,15 +1,27 @@
 'use client';
 
+import { type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Form } from '@/Components/ui/form/form';
-import { useContext, type FormEvent } from 'react';
-import { useForm as useFormInertia } from '@inertiajs/react';
+import { type Product } from '@/Shared/Types/ProductTypes';
 import DialogFormFooter from '../../Common/DialogFormFooter';
+import { type Employee } from '@/Shared/Types/EmployeeTypes';
 import { type Workstation } from '@/Shared/Types/WorkstationTypes';
+import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
+import { useForm as useFormInertia, usePage } from '@inertiajs/react';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { getDefaultValues, formDatas } from '@/Shared/Datas/Forms/WorkstationInfosFormDatas';
-import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
+
+interface PageProps extends InertiaPageProps {
+    cashRegisterModule: CashRegister & {
+        cr_workstations: Workstation[] & {
+            cr_employees: Employee[];
+            cr_products: Product[];
+            generalProducts: Product[];
+        };
+    };
+}
 
 interface WorkstationInfosFormProps {
     workstation?: Workstation;
@@ -23,10 +35,9 @@ export default function WorkstationInfosForm({
     isUpdate = false,
 }: WorkstationInfosFormProps): JSX.Element {
     const { t } = useTranslation();
+    const { cashRegisterModule } = usePage<PageProps>().props;
 
-    const { cashRegisterModule } = useContext(CashRegisterConfigurationsContext);
-
-    const defaultValues = getDefaultValues(workstation, isUpdate);
+    const defaultValues = getDefaultValues(workstation, isUpdate); // FIXME: check type with Flavien
 
     const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
 

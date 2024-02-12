@@ -1,24 +1,27 @@
-import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { Head, usePage } from '@inertiajs/react';
 import CreateEmployee from './Components/CreateEmployee';
 import { columns } from './Components/EmployeesTableColumn';
 import { Card, CardHeader } from '@/Components/ui/card/card';
-import { type EmployeesBkndDatas } from '@/Shared/Types/EmployeeTypes';
+import { type Employee } from '@/Shared/Types/EmployeeTypes';
+import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
-interface IndexEmployeesProps {
-    bkndDatas: EmployeesBkndDatas;
+interface PageProps extends InertiaPageProps {
+    cashRegisterModule: CashRegister & {
+        cr_employees: Employee[];
+    };
 }
 
-export default function Index({ bkndDatas }: IndexEmployeesProps): JSX.Element {
+export default function Index(): JSX.Element {
     const { t } = useTranslation();
-
-    const { cashRegisterModule } = bkndDatas;
+    const { cashRegisterModule } = usePage<PageProps>().props;
 
     const employees = cashRegisterModule.cr_employees;
+
     return (
-        <CashRegisterConfigurationsLayout cashRegisterModule={cashRegisterModule}>
+        <CashRegisterConfigurationsLayout>
             <Head title={cashRegisterModule.name} />
 
             <CreateEmployee />

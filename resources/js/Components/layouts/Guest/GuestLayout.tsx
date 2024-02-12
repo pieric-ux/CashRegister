@@ -1,8 +1,8 @@
+import { type ReactNode } from 'react';
+import { Link } from '@inertiajs/react';
+import { Card, CardHeader } from '@/Components/ui/card/card';
 import ApplicationLogo from '@/Components/logos/ApplicationLogo';
 import ApplicationLogoDark from '@/Components/logos/ApplicationLogoDark';
-import { Card, CardHeader } from '@/Components/ui/card/card';
-import { Link } from '@inertiajs/react';
-import { type ReactNode } from 'react';
 
 export default function GuestLayout({ children }: { children: ReactNode }): JSX.Element {
     return (

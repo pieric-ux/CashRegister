@@ -1,9 +1,11 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { Input } from '@/Components/ui/input/input';
-import { useEffect } from 'react';
+import { type Dish } from '@/Shared/Types/DishTypes';
+import { type Product } from '@/Shared/Types/ProductTypes';
 import { useForm as useFormInertia } from '@inertiajs/react';
 import { Avatar, AvatarImage } from '@/Components/ui/avatar/avatar';
 import {
@@ -16,23 +18,25 @@ import {
 } from '@/Components/ui/form/form';
 
 interface FormInput {
-    itemId: string;
+    itemId?: number;
     picture: File | undefined;
 }
 
-interface UpdateItemsPictureFormProps<T> {
-    item: T;
+interface UpdateItemsPictureFormProps {
+    item: Product | Dish;
     route: string;
 }
 
-export default function UpdateItemsPictureForm<T>({
+export default function UpdateItemsPictureForm({
     item,
     route,
-}: UpdateItemsPictureFormProps<T>): JSX.Element {
+}: UpdateItemsPictureFormProps): JSX.Element {
     const defaultValues: FormInput = {
         itemId: item.id,
         picture: undefined,
     };
+
+    const picturePath = item?.media?.[0]?.original_url;
 
     const { data, setData, post, errors } = useFormInertia(defaultValues);
 
@@ -63,11 +67,11 @@ export default function UpdateItemsPictureForm<T>({
                     name='picture'
                     render={() => (
                         <FormItem className='flex w-3/4 items-center justify-center'>
-                            {item.media[0]?.original_url ? (
+                            {picturePath !== undefined && picturePath !== null ? (
                                 <div className='relative z-30 mx-auto h-16 w-16 backdrop-blur-md transition duration-300 ease-linear'>
                                     <div className='relative h-full w-full drop-shadow-md'>
                                         <Avatar variant={'square'} size={'picture'}>
-                                            <AvatarImage src={item.media[0].original_url} />
+                                            <AvatarImage src={picturePath} />
                                         </Avatar>
                                         <FormLabel
                                             className={

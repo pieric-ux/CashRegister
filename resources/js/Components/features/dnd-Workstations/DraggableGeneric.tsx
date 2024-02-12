@@ -1,18 +1,16 @@
 import clsx from 'clsx';
 import { type ReactNode } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import { type Product } from '@/Shared/Types/ProductTypes';
+import { type Employee } from '@/Shared/Types/EmployeeTypes';
 
-interface DraggableGenericProps<T> {
-    data: T;
+interface DraggableGenericProps {
+    data: Product | Employee;
     index: number;
     children: ReactNode;
 }
 
-export function DraggableGeneric<T>({
-    data,
-    index,
-    children,
-}: DraggableGenericProps<T>): JSX.Element {
+export function DraggableGeneric({ data, index, children }: DraggableGenericProps): JSX.Element {
     return (
         <Draggable draggableId={`${data.id}`} index={index}>
             {(provided, snapshot) => (

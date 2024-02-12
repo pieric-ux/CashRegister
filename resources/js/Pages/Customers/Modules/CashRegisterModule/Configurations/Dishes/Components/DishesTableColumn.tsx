@@ -17,16 +17,16 @@ export const columns: ColumnDef<Dish>[] = [
             <Checkbox
                 checked={
                     table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && 'indeterminate')
+                    (table.getIsSomePageRowsSelected() ? 'indeterminate' : false)
                 }
-                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                onCheckedChange={(checked) => table.toggleAllPageRowsSelected(checked === true)}
                 aria-label={i18n.t('Select all')}
             />
         ),
         cell: ({ row }) => (
             <Checkbox
                 checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
+                onCheckedChange={(checked) => row.toggleSelected(checked === true)}
                 aria-label={i18n.t('Select row')}
             />
         ),

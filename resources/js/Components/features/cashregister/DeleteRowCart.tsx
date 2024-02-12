@@ -1,15 +1,21 @@
 import { useContext } from 'react';
 import { Svg } from '@/Components/ui/svg/Svg';
+import { type Row } from '@tanstack/react-table';
 import { Button } from '@/Components/ui/button/button';
+import { type CartItem } from '@/Shared/Types/CartTypes';
 import { CashRegisterContext } from '@/Context/CashRegisterContext';
 import { emptyCartItem } from '@/Pages/Employees/CashRegister/Index';
 
-export default function DeleteRowCart({ row }): JSX.Element {
+interface RowProps {
+    row: Row<CartItem>;
+}
+
+export default function DeleteRowCart({ row }: RowProps): JSX.Element {
     const { cart, setCart } = useContext(CashRegisterContext);
 
-    const removeFromCart = (row): void => {
+    const removeFromCart = (): void => {
         const newCart = { ...cart };
-        newCart.items = newCart.items.filter((item, index) => index !== row.index);
+        newCart.items = newCart.items.filter((_, index) => index !== row.index);
         newCart.items.push(emptyCartItem);
 
         newCart.total = newCart.items.reduce(
@@ -21,7 +27,7 @@ export default function DeleteRowCart({ row }): JSX.Element {
     };
 
     return (
-        <Button variant={'destructive'} size={'sm_icon'} onClick={() => removeFromCart(row)}>
+        <Button variant={'destructive'} size={'sm_icon'} onClick={removeFromCart}>
             <Svg type={'delete'} variant={'destructive'} size={'sm'} />
         </Button>
     );

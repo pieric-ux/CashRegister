@@ -1,23 +1,26 @@
-import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { Head, usePage } from '@inertiajs/react';
 import { Card, CardHeader } from '@/Components/ui/card/card';
+import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 import CreateCategoriesProduct from './Components/CreateCategoriesProduct';
-import { type CategoriesProductsBkndDatas } from '@/Shared/Types/CategoryProductsTypes';
+import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 import DragDropCategoriesProduct from '@/Components/features/dnd-CategoriesProducts/DragDropCategoriesProduct';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
-interface IndexCategoriesProductsProps {
-    bkndDatas: CategoriesProductsBkndDatas;
+interface PageProps extends InertiaPageProps {
+    cashRegisterModule: CashRegister & {
+        cr_categories_products: CategoryProducts[];
+    };
 }
 
-export default function Index({ bkndDatas }: IndexCategoriesProductsProps): JSX.Element {
+export default function Index(): JSX.Element {
     const { t } = useTranslation();
 
-    const { cashRegisterModule } = bkndDatas;
+    const { cashRegisterModule } = usePage<PageProps>().props;
     const categoriesProducts = cashRegisterModule.cr_categories_products;
 
     return (
-        <CashRegisterConfigurationsLayout cashRegisterModule={cashRegisterModule}>
+        <CashRegisterConfigurationsLayout>
             <Head title={cashRegisterModule.name} />
 
             <CreateCategoriesProduct />

@@ -2,10 +2,16 @@ import axios from 'axios';
 import { useWindowSize } from 'usehooks-ts';
 import { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { type Dish } from '@/Shared/Types/DishTypes';
 import { Button } from '@/Components/ui/button/button';
+import { type Product } from '@/Shared/Types/ProductTypes';
+import { type Employee } from '@/Shared/Types/EmployeeTypes';
+import { type Workstation } from '@/Shared/Types/WorkstationTypes';
 import { CashRegisterContext } from '@/Context/CashRegisterContext';
 import { Avatar, AvatarImage } from '@/Components/ui/avatar/avatar';
+import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 import { type PaymentMethod } from '@/Shared/Types/PaymentMethodsTypes';
+import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 import {
     Dialog,
     DialogClose,
@@ -22,18 +28,37 @@ import {
     DrawerHeader,
     DrawerTrigger,
 } from '@/Components/ui/drawer/drawer';
+import { usePage } from '@inertiajs/react';
+
+interface PageProps extends InertiaPageProps {
+    employee: Employee & {
+        cr_workstations: Workstation & {
+            cr_modules: CashRegister & {
+                cr_dishes: Dish[];
+                cr_payment_methods: PaymentMethod[];
+            };
+            cr_products: Product &
+                {
+                    cr_categories_products: CategoryProducts;
+                    cr_dishes: Dish;
+                }[];
+        };
+    };
+}
 
 interface PaymentProps {
-    paymentMethods: PaymentMethod[];
     isCartEmpty: boolean;
 }
 
-const emptyCartItem = { id: null, name: '', quantity: 0, client_price: 0 };
-const emptyCart = { items: Array(5).fill(emptyCartItem), total: 0 };
+export default function Payment({ isCartEmpty }: PaymentProps): JSX.Element {
+    const emptyCartItem = { id: null, name: '', quantity: 0, client_price: 0 };
+    const emptyCart = { items: Array(5).fill(emptyCartItem), total: 0 };
 
-export default function Payment({ paymentMethods, isCartEmpty }: PaymentProps): JSX.Element {
     const { t } = useTranslation();
     const { width } = useWindowSize();
+    const { employee } = usePage<PageProps>().props;
+
+    const paymentMethods = employee.cr_workstations.cr_modules.cr_payment_methods;
 
     const { cart, setCart } = useContext(CashRegisterContext);
 
@@ -43,17 +68,20 @@ export default function Payment({ paymentMethods, isCartEmpty }: PaymentProps): 
         setOpen(false);
     };
 
-    const handlePayment = async (selectedPaymentMethod: PaymentMethod): Promise<void> => {
+    const handlePayment = (selectedPaymentMethod: PaymentMethod): void => {
         const filteredCart = cart.items.filter((item) => item.id !== null);
 
-        await axios
+        axios
             .post(route('cashregister.store'), {
                 cart: filteredCart,
-                paymentMethod: selectedPaymentMethod,
+                paymentMethod: selectedPaymentMethod.id,
             })
             .then(() => {
                 closeDialog();
                 setCart(emptyCart);
+            })
+            .catch((error) => {
+                console.error(error); // TODO: Alert dialog with message
             });
     };
 
@@ -74,11 +102,11 @@ export default function Payment({ paymentMethods, isCartEmpty }: PaymentProps): 
                                         className='flex-col gap-2'
                                         size={'touch'}
                                         key={paymentMethod.id}
-                                        onClick={() => handlePayment(paymentMethod.id)}
+                                        onClick={() => handlePayment(paymentMethod)}
                                     >
                                         <Avatar variant={'square'}>
                                             <AvatarImage
-                                                src={paymentMethod.picture_url}
+                                                src={paymentMethod.media[0].original_url}
                                                 alt={paymentMethod.name}
                                             />
                                         </Avatar>
@@ -115,23 +143,15 @@ export default function Payment({ paymentMethods, isCartEmpty }: PaymentProps): 
                                     <Button
                                         size={'touch'}
                                         key={paymentMethod.id}
-                                        onClick={() => handlePayment(paymentMethod.id)}
+                                        onClick={() => handlePayment(paymentMethod)}
                                     >
-                                        {paymentMethod.picture_url !== null &&
-                                        paymentMethod.picture_url !== undefined ? (
-                                            <div>
-                                                <img
-                                                    className='mx-auto'
-                                                    src={paymentMethod.picture_url}
-                                                    alt={paymentMethod.name}
-                                                    width={50}
-                                                    height={50}
-                                                />
-                                                <p>{t(`${paymentMethod.name}`)}</p>
-                                            </div>
-                                        ) : (
-                                            <p>{t(`${paymentMethod.name}`)}</p>
-                                        )}
+                                        <Avatar variant={'square'}>
+                                            <AvatarImage
+                                                src={paymentMethod.media[0].original_url}
+                                                alt={paymentMethod.name}
+                                            />
+                                        </Avatar>
+                                        <p>{t(`${paymentMethod.name}`)}</p>
                                     </Button>
                                 );
                             })}

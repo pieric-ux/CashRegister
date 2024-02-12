@@ -1,20 +1,23 @@
-import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { Head, usePage } from '@inertiajs/react';
 import CreateDish from './Components/CreateDish';
+import { type Dish } from '@/Shared/Types/DishTypes';
 import { columns } from './Components/DishesTableColumn';
 import { Card, CardHeader } from '@/Components/ui/card/card';
-import { type DishesBkndDatas } from '@/Shared/Types/DishTypes';
+import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
-interface IndexDishesProps {
-    bkndDatas: DishesBkndDatas;
+interface PageProps extends InertiaPageProps {
+    cashRegisterModule: CashRegister & {
+        cr_dishes: Dish[];
+    };
 }
 
-export default function Index({ bkndDatas }: IndexDishesProps): JSX.Element {
+export default function Index(): JSX.Element {
     const { t } = useTranslation();
 
-    const { cashRegisterModule } = bkndDatas;
+    const { cashRegisterModule } = usePage<PageProps>().props;
 
     const dishesFilter = cashRegisterModule.cr_dishes
         .filter((dish) => dish.name !== 'No dish')
@@ -25,7 +28,7 @@ export default function Index({ bkndDatas }: IndexDishesProps): JSX.Element {
         }));
 
     return (
-        <CashRegisterConfigurationsLayout cashRegisterModule={cashRegisterModule}>
+        <CashRegisterConfigurationsLayout>
             <Head title={cashRegisterModule.name} />
 
             <CreateDish />

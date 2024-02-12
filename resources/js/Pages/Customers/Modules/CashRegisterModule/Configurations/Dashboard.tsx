@@ -1,17 +1,17 @@
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import { Card, CardHeader } from '@/Components/ui/card/card';
-import { type CashRegisterConfigurationsBkndDatas } from '@/Shared/Types/CashRegisterTypes';
+import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
-interface DashboardProps {
-    bkndDatas: CashRegisterConfigurationsBkndDatas;
+interface PageProps extends InertiaPageProps {
+    cashRegisterModule: CashRegister;
 }
 
-export default function Dashboard({ bkndDatas }: DashboardProps): JSX.Element {
-    const { cashRegisterModule } = bkndDatas;
+export default function Dashboard(): JSX.Element {
+    const { cashRegisterModule } = usePage<PageProps>().props;
 
     return (
-        <CashRegisterConfigurationsLayout cashRegisterModule={cashRegisterModule}>
+        <CashRegisterConfigurationsLayout>
             <Head title={cashRegisterModule.name} />
 
             <Card>

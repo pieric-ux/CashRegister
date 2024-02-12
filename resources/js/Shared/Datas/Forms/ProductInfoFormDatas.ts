@@ -1,6 +1,13 @@
+import { type Dish } from '@/Shared/Types/DishTypes';
+import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 import { type Product, type ProductInfosFormDatas } from '@/Shared/Types/ProductTypes';
 
-export const getDefaultValues = (product: Product, isUpdate: boolean): Product => {
+interface ProductWithType extends Product {
+    cr_categories_products: CategoryProducts;
+    cr_dishes: Dish;
+}
+
+export const getDefaultValues = (product: ProductWithType, isUpdate: boolean): Product => {
     return {
         name: isUpdate ? product?.name : '',
         unit: isUpdate ? product?.unit : '',

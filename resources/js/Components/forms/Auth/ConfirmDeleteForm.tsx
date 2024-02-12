@@ -8,10 +8,10 @@ import { Form } from '@/Components/ui/form/form';
 import { type Auth } from '@/Shared/Types/AuthTypes';
 import { Button } from '@/Components/ui/button/button';
 import { useForm as useFormInertia } from '@inertiajs/react';
+import { DrawerFooter } from '@/Components/ui/drawer/drawerFooter';
 import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { defaultValues, formDatas } from '@/Shared/Datas/Forms/Auth/ConfirmDeleteFormDatas';
-import { DrawerFooter } from '@/Components/ui/drawer/drawerFooter';
 
 interface Datas {
     buttonTitle: string;

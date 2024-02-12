@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { swiperSetting } from '@/Config/swiperConfig';
 import ButtonItemGeneric from './ButtonItemGeneric';
+import { type Dish } from '@/Shared/Types/DishTypes';
+import { swiperSetting } from '@/Config/swiperConfig';
+import { type Product } from '@/Shared/Types/ProductTypes';
 
-interface SwiperItemProps<T> {
-    datas: T[] | Map<number | undefined, T>;
+interface SwiperItemProps {
+    datas: Product[] | Dish[];
     itemType: string;
 }
 
-export default function SwiperItemGeneric<T>({ datas, itemType }: SwiperItemProps<T>): JSX.Element {
+export default function SwiperItemGeneric({ datas, itemType }: SwiperItemProps): JSX.Element {
     const [isDragging, setIsDragging] = useState(false);
 
     const settings = {

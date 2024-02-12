@@ -8,9 +8,9 @@ import { Form } from '@/Components/ui/form/form';
 import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
 import { Link, useForm as useFormInertia, usePage } from '@inertiajs/react';
+import { type CustomerProfileFormInput } from '@/Shared/Types/CustomerTypes';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { formDatas, getDefaultValues } from '@/Shared/Datas/Forms/CustomerProfileFormDatas';
-import { type CustomerProfileFormInput } from '@/Shared/Types/CustomerTypes';
 
 interface CustomerProfileFormProps {
     isUpdate?: boolean;

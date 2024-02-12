@@ -23,7 +23,3 @@ export interface CashRegisterInfosFormDatas {
     placeholder?: string;
     pattern?: string;
 }
-
-export interface CashRegisterConfigurationsBkndDatas {
-    cashRegisterModule: CashRegister;
-}

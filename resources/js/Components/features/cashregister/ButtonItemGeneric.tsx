@@ -1,12 +1,14 @@
 import { useContext } from 'react';
+import { type Dish } from '@/Shared/Types/DishTypes';
 import { Badge } from '@/Components/ui/badge/badge';
 import { Button } from '@/Components/ui/button/button';
 import { type CartItem } from '@/Shared/Types/CartTypes';
+import { type Product } from '@/Shared/Types/ProductTypes';
 import { CashRegisterContext } from '@/Context/CashRegisterContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar/avatar';
 
 interface ButtonItemGenericProps {
-    data: any;
+    data: Product | Dish;
     isDragging: boolean;
     itemType: string;
 }
@@ -20,7 +22,7 @@ export default function ButtonItemGeneric({
 
     const addToCart = (item: CartItem, itemType: string): void => {
         const newCart = { ...cart };
-        let price = item.client_price;
+        let price = item.client_price * 1;
 
         if (itemType === 'return') {
             price *= -1;
@@ -31,7 +33,7 @@ export default function ButtonItemGeneric({
             item.cr_dishes !== null &&
             item.cr_dishes.is_consigned
         ) {
-            price += item.cr_dishes.client_price;
+            price += item.cr_dishes.client_price * 1;
         }
 
         const foundItem = newCart.items.find(
@@ -77,15 +79,17 @@ export default function ButtonItemGeneric({
             disabled={isDragging}
             onClick={() => {
                 if (!isDragging) {
-                    addToCart(data, itemType);
+                    addToCart(data, itemType); // FIXME: check with Flavien
                 }
             }}
         >
             <Avatar variant={'square'}>
-                <AvatarImage src={data.picture_url} />
+                <AvatarImage src={data?.media?.[0].original_url} />
                 <AvatarFallback>{data.name}</AvatarFallback>
             </Avatar>
+
             <p>{data.unit}</p>
+
             {getQuantityInCart() !== null && (
                 <Badge variant={'rounded'} size={'rounded'}>
                     {getQuantityInCart()}

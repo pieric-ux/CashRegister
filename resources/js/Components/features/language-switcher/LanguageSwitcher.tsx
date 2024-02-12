@@ -21,13 +21,13 @@ export default function LanguageSwitcher(): JSX.Element {
     const [language, setLanguage] = useState(i18n.language);
 
     const onSubmit = async (value: string): Promise<void> => {
-        // FIXME: check type with Flavien
         setLanguage(value);
         await axios.get(`/language-switch/${value}`);
         await i18n.changeLanguage(value);
         document.documentElement.lang = value;
     };
 
+    // FIXME: check type with Flavien
     return (
         <div>
             <Select value={language} onValueChange={onSubmit}>

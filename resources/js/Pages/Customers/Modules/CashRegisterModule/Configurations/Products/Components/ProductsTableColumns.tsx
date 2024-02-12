@@ -1,14 +1,21 @@
 'use client';
-// TODO: Type cr_categories_products cr_dishes
+
 import i18n from '@/Config/i18n';
 import UpdateProduct from './UpdateProduct';
 import DeleteProduct from './DeleteProduct';
+import { type Dish } from '@/Shared/Types/DishTypes';
 import { type ColumnDef } from '@tanstack/react-table';
 import { type Product } from '@/Shared/Types/ProductTypes';
 import { Checkbox } from '@/Components/ui/checkbox/checkbox';
 import useCurrencyFormatter from '@/Hooks/useCurrencyFormatter';
+import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 import { ColumnHeader } from '@/Components/ui/table/templates/column/columnHeader';
 import UpdateItemsPictureForm from '@/Components/forms/Common/UpdateItemsPictureForm';
+
+interface ProductWithType extends Product {
+    cr_categories_products: CategoryProducts;
+    cr_dishes: Dish;
+}
 
 export const columns: ColumnDef<Product>[] = [
     {
@@ -17,16 +24,16 @@ export const columns: ColumnDef<Product>[] = [
             <Checkbox
                 checked={
                     table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && 'indeterminate')
+                    (table.getIsSomePageRowsSelected() ? 'indeterminate' : false)
                 }
-                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                onCheckedChange={(checked) => table.toggleAllPageRowsSelected(checked === true)}
                 aria-label={i18n.t('Select all')}
             />
         ),
         cell: ({ row }) => (
             <Checkbox
                 checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
+                onCheckedChange={(checked) => row.toggleSelected(checked === true)}
                 aria-label={i18n.t('Select row')}
             />
         ),
@@ -95,11 +102,12 @@ export const columns: ColumnDef<Product>[] = [
             return <ColumnHeader column={column} title={i18n.t('Category')} />;
         },
         cell: ({ row }) => {
+            const product = row.original as ProductWithType;
             return (
                 <div className='text-left font-medium'>
-                    {row.original.cr_categories_products?.name === 'No category'
+                    {product.cr_categories_products?.name === 'No category'
                         ? ''
-                        : row.original.cr_categories_products?.name}
+                        : product.cr_categories_products?.name}
                 </div>
             );
         },
@@ -111,11 +119,12 @@ export const columns: ColumnDef<Product>[] = [
             return <ColumnHeader column={column} title={i18n.t('Dish')} />;
         },
         cell: ({ row }) => {
+            const dish = row.original as ProductWithType;
             return (
                 <div className='text-left font-medium'>
-                    {row.original.cr_dishes?.name === 'No dish'
+                    {dish.cr_dishes?.name === 'No dish'
                         ? ''
-                        : `${row.original.cr_dishes?.name} ${row.original.cr_dishes?.unit}`}
+                        : `${dish.cr_dishes?.name} ${dish.cr_dishes?.unit}`}
                 </div>
             );
         },

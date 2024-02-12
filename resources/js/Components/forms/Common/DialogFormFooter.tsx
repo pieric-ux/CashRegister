@@ -1,9 +1,9 @@
 import { useWindowSize } from 'usehooks-ts';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
-import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
-import { DrawerFooter } from '@/Components/ui/drawer/drawerFooter';
 import { DrawerClose } from '@/Components/ui/drawer/drawer';
+import { DrawerFooter } from '@/Components/ui/drawer/drawerFooter';
+import { DialogClose, DialogFooter } from '@/Components/ui/dialog/dialog';
 
 interface DialogFormFooterProps {
     closeDialog: () => void;

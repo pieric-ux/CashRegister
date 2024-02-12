@@ -28,12 +28,8 @@ class TransactionsController extends Controller
 
         $module->cr_transactions = $transactions;
 
-        $datas = [
-            'cashRegisterModule' => $module,
-        ];
-
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Transactions/Index', [
-            'bkndDatas' => $datas,
+            'cashRegisterModule' => $module,
         ]);
     }
 

@@ -15,4 +15,5 @@ export const getDefaultValues = (
 export const formDatas: CategoryProductsFormDatas = {
     name: 'name',
     label: 'Category',
+    isFocused: true,
 };

@@ -23,12 +23,8 @@ class CategoriesProductsController extends Controller
     {
         $module->cr_categories_products;
 
-        $datas = [
-            'cashRegisterModule' => $module,
-        ];
-
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Categories_Products/Index', [
-            'bkndDatas' => $datas,
+            'cashRegisterModule' => $module,
         ]);
     }
 

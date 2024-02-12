@@ -21,18 +21,13 @@ class DishesController extends Controller
     public function index(IndexDishesRequest $request, CR_Module $module): Response
     {
         $module->cr_dishes->map(function ($dish) {
-            return [
-                'dish' => $dish,
-                'picturePath' => $dish->getPictureUrl('thumb'),
-            ];
+            $dish->getPictureUrl('thumb');
+            
+            return $dish;
         });
         
-        $datas = [
-            'cashRegisterModule' => $module,
-        ];
-        
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Dishes/Index', [
-            'bkndDatas' => $datas,
+            'cashRegisterModule' => $module,
         ]);
     }
 

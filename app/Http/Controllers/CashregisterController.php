@@ -16,46 +16,15 @@ class CashregisterController extends Controller
      */
     public function index(Request $request): Response
     {
-        $employee = $request->user('employee')->load([
-            'cr_workstations.cr_products.cr_categories_products',
-            'cr_workstations.cr_products.cr_dishes.media',
+        $request->user('employee')->load([
             'cr_workstations.cr_products.media',
-            'cr_workstations.cr_modules.cr_dishes',
-            'cr_workstations.cr_modules.cr_payment_methods',
+            'cr_workstations.cr_products.cr_dishes.media',
+            'cr_workstations.cr_products.cr_categories_products',
+            'cr_workstations.cr_modules.cr_dishes.media',
+            'cr_workstations.cr_modules.cr_payment_methods.media',
         ]);
 
-        $workstation = $employee->cr_workstations;
-
-        $products = $workstation->cr_products->map(function ($product) {
-            $product->picture_url = $product->getPictureUrl('thumb');
-            return $product;
-        });
-
-        $products->pluck('cr_dishes')->unique('id')->map(function ($dish) {
-            if ($dish) {
-                $dish->picture_url = $dish->getPictureUrl('thumb');
-            }
-            return $dish;
-        });
-
-        $categories = $products->pluck('cr_categories_products')->unique('id')->sortBy('order')->values();
-
-        $dishes = $workstation->cr_modules->cr_dishes->map(function ($dish) {
-            $dish->picture_url = $dish->getPictureUrl('thumb');
-            return $dish;
-        });
-
-        $paymentMethods = $workstation->cr_modules->cr_payment_methods->map(function ($paymentMethod) {
-            $paymentMethod->picture_url = $paymentMethod->getPictureUrl('thumb');
-            return $paymentMethod;
-        });
-
-        return Inertia::render('Employees/CashRegister/Index', [
-            'products' => $products,
-            'categories' => $categories,
-            'dishes' => $dishes,
-            'paymentMethods' => $paymentMethods,
-        ]);
+        return Inertia::render('Employees/CashRegister/Index');
     }
 
     /**

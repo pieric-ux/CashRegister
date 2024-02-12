@@ -1,5 +1,4 @@
 import { type Media } from '@/Shared/Types/MediaTypes';
-import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 
 export interface Dish {
     id?: number;
@@ -13,10 +12,6 @@ export interface Dish {
     created_at?: string;
     updated_at?: string;
     media?: Media[];
-}
-
-export interface DishesBkndDatas {
-    cashRegisterModule: CashRegister & { cr_dishes: Dish[] };
 }
 
 export interface DishInfosFormDatas {

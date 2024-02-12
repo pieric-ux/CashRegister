@@ -6,7 +6,7 @@ import {
 export const getDefaultValues = (
     cashRegisterModule: CashRegister,
     isUpdate: boolean,
-): CashRegister => {
+): Partial<CashRegister> => {
     return {
         name: isUpdate ? cashRegisterModule?.name : '',
         description: isUpdate ? cashRegisterModule?.description ?? '' : '',

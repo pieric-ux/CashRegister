@@ -3,8 +3,10 @@ import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
 import { columns } from './DetailsTransactionsTableColumns';
-import { type ShowDetailsTransactionDatas } from '@/Shared/Types/TransactionTypes';
+import { type Transaction } from '@/Shared/Types/TransactionTypes';
+import { type PaymentMethod } from '@/Shared/Types/PaymentMethodsTypes';
 import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
+import { type DetailTransaction } from '@/Shared/Types/DetailTransactionTypes';
 import {
     Dialog,
     DialogClose,
@@ -13,12 +15,14 @@ import {
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
 
-interface ShowDetailsTransactionProps {
-    transaction: ShowDetailsTransactionDatas;
+interface TransactionWithType {
+    transaction: Transaction & {
+        cr_payment_methods: PaymentMethod;
+        cr_details_transactions: DetailTransaction[];
+    };
 }
-export default function ShowDetailsTransaction({
-    transaction,
-}: ShowDetailsTransactionProps): JSX.Element {
+
+export default function ShowDetailsTransaction({ transaction }: TransactionWithType): JSX.Element {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);

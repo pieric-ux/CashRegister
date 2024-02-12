@@ -1,14 +1,16 @@
 'use client';
 
+import { type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useContext, type FormEvent } from 'react';
+import { type Dish } from '@/Shared/Types/DishTypes';
 import { type Product } from '@/Shared/Types/ProductTypes';
-import { useForm as useFormInertia } from '@inertiajs/react';
+import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
+import { useForm as useFormInertia, usePage } from '@inertiajs/react';
 import DialogFormFooter from '@/Components/forms/Common/DialogFormFooter';
+import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { formDatas, getDefaultValues } from '@/Shared/Datas/Forms/ProductInfoFormDatas';
-import { CashRegisterConfigurationsContext } from '@/Context/CashRegisterModulesContext';
 import {
     Form,
     FormControl,
@@ -25,6 +27,14 @@ import {
     SelectValue,
 } from '@/Components/ui/select/select';
 
+interface PageProps extends InertiaPageProps {
+    cashRegisterModule: CashRegister & {
+        cr_categories_products: CategoryProducts[];
+        cr_dishes: Dish[];
+        cr_products: Product[];
+    };
+}
+
 interface ProductInfoFormProps {
     product?: Product;
     closeDialog: () => void;
@@ -38,12 +48,12 @@ export default function ProductInfosForm({
 }: ProductInfoFormProps): JSX.Element {
     const { t } = useTranslation();
 
-    const { cashRegisterModule } = useContext(CashRegisterConfigurationsContext);
+    const { cashRegisterModule } = usePage<PageProps>().props;
 
     const categories = cashRegisterModule.cr_categories_products;
     const dishes = cashRegisterModule.cr_dishes;
 
-    const defaultValues = getDefaultValues(product, isUpdate);
+    const defaultValues = getDefaultValues(product, isUpdate); // FIXME: check type with Flavien
 
     const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
 

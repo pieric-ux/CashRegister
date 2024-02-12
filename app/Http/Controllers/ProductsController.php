@@ -37,12 +37,8 @@ class ProductsController extends Controller
         $module->cr_products = $products;
         $module->cr_dishes;
 
-        $datas = [
-            'cashRegisterModule' => $module,
-        ];
-
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Products/Index', [
-            'bkndDatas' => $datas,
+            'cashRegisterModule' => $module,
         ]);
     }
 

@@ -1,4 +1,6 @@
-export default function ApplicationLogoDark(props) {
+import { type SVGProps } from 'react';
+
+export default function ApplicationLogoDark(props: SVGProps<SVGSVGElement>): JSX.Element {
     return (
         <svg
             {...props}
