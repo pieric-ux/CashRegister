@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CR_App>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CR_Module>
  */
-class CR_AppFactory extends Factory
+class CR_ModuleFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,7 @@ class CR_AppFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->name();
+        $name = 'Trilogie';
 
         return [
             'name' => $name,

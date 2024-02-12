@@ -18,16 +18,16 @@ class CustomerFactory extends Factory
     public function definition(): array
     {
         return [
-            'company_name' => fake()->name(),
-            'first_name' => fake()->name(),
-            'last_name' => fake()->name(),
+            'company_name' => '',
+            'first_name' => 'Roux',
+            'last_name' => 'Jean',
             'address' => fake()->address(),
             'npa' => fake()->postcode(),
             'city' => fake()->city(),
             'phone' => fake()->phoneNumber(),
-            'email' => fake()->unique()->safeEmail(),
+            'email' => 'test@test.ch',
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+            'password' => '$2y$12$vt7GKEEiRjlZRRVaa1NNoOqryOgtRYcPbNB5OxGzWzvaGuHKM0e86',
             'remember_token' => Str::random(10),
         ];
     }

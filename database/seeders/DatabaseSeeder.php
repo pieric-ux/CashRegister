@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\CR_App;
-use App\Models\Customer;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,28 +13,36 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $existingCustomer = Customer::first();
+        $customer = \App\Models\Customer::factory()->create();
 
-        if ($existingCustomer) {
-            \App\Models\CR_App::factory()->create([
-                'fk_customer_id' => $existingCustomer->id,
-            ]);
-        }
+        $module = \App\Models\CR_Module::factory()->create([
+            'fk_customer_id' => $customer->id,
+        ]);
 
-        $customers = \App\Models\Customer::factory(9)->create();
+        $dishes = \App\Models\CR_Dishes::factory()->create([
+            'fk_cr_modules_id' => $module->id,
+        ]);
 
-        foreach ($customers as $customer) {
-            \App\Models\CR_App::factory()->create([
-                'fk_customer_id' => $customer->id,
-            ]);
-        }
+        $categoriesProducts = \App\Models\CR_Categories_Products::factory()->create([
+            'fk_cr_modules_id' => $module->id,
+        ]);
+        
+        $workstation = \App\Models\CR_Workstations::factory()->create([
+            'fk_cr_modules_id' => $module->id,
+        ]);
 
-        $apps = CR_App::all();
+        $employee = \App\Models\CR_Employees::factory()->create([
+            'fk_workstations_id' => $workstation->id,
+        ]);
 
-        foreach ($apps as $app) {
-            \App\Models\CR_Workstations::factory()->create([
-                'fk_apps_id' => $app->id,
-            ]);
-        }
+        $product = \App\Models\CR_Products::factory()->create([
+            'fk_categories_products_id' => $categoriesProducts->id,
+            'fk_dishes_id' => $dishes->id,
+        ]);
+
+        $workstations_products = \App\Models\CR_Workstations_Products::factory()->create([
+            'fk_workstations_id' => $workstation->id,
+            'fk_products_id' => $product->id,
+        ]);
     }
 }

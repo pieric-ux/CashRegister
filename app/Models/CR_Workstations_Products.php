@@ -20,4 +20,11 @@ class CR_Workstations_Products extends Model
         'fk_workstations_id',
         'fk_products_id',
     ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

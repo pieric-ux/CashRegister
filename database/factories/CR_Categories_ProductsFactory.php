@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CR_Workstations>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CR_Categories_Products>
  */
-class CR_WorkstationsFactory extends Factory
+class CR_Categories_ProductsFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,8 @@ class CR_WorkstationsFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Bar 1',
+            'name' => 'Minérale',
+            'order' => 1,
             'fk_cr_modules_id' => function () {
                 return \App\Models\CR_Module::factory()->create()->id;
             },
