@@ -21,7 +21,7 @@ class CR_EmployeesFactory extends Factory
             'last_name' => 'Charles',
             'phone' => fake()->phoneNumber(),
             'email' => '123@123.ch',
-            'passwordless' => 'eac4a89f-7707-4027-a581-47fa35c7a153',
+            'passwordless' => '28ac6542-a754-4302-a5ca-2d214feb435b',
             'logout' => false,
             'fk_workstations_id' => function () {
                 return \App\Models\CR_Workstations::factory()->create()->id;
