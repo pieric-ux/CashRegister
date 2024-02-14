@@ -26,9 +26,9 @@ return [
      */
 
     'aliases' => [
-         Locale::English->value => 'en-US',
-         Locale::English->value => 'en-GB',
-         Locale::French->value => 'fr-CH',
-         Locale::French->value => 'fr-FR',
+        Locale::English->value => 'en-GB',
+        Locale::English->value => 'en-US',
+        Locale::French->value => 'fr-FR',
+        Locale::French->value => 'fr-CH',
     ],
 ];
