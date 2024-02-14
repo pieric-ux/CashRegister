@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { useContext, useEffect } from 'react';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { Input } from '@/Components/ui/input/input';
-import { useForm as useFormInertia } from '@inertiajs/react';
 import { Avatar, AvatarImage } from '@/Components/ui/avatar/avatar';
+import { useForm as useFormInertia, router } from '@inertiajs/react';
 import { ShowCashRegisterInfosContext } from '@/Context/CashRegisterModulesContext';
 import {
     Form,
@@ -24,7 +24,6 @@ interface FormInput {
 export default function UpdateModulePosterForm(): JSX.Element {
     const { cashRegisterModule } = useContext(ShowCashRegisterInfosContext);
     const posterPath = cashRegisterModule.media.find(
-        /* eslint-disable @typescript-eslint/naming-convention */
         ({ collection_name }) => collection_name === 'posters',
     )?.original_url;
 
@@ -33,24 +32,24 @@ export default function UpdateModulePosterForm(): JSX.Element {
         poster: undefined,
     };
 
-    const { data, setData, post, errors } = useFormInertia(defaultValues);
+    const { data, setData, errors } = useFormInertia(defaultValues);
 
     const form = useForm<FormInput>({
         defaultValues: data,
     });
 
     useEffect(() => {
-        // FIXME: Check with Flavien how i can do without useEffect and without submit button
         onSubmit();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data.poster]);
 
     function onSubmit(): void {
-        if (data.poster !== undefined) {
+        if (data.moduleId && data.poster) {
             const formData = new FormData();
-            formData.append('moduleId', data.moduleId);
+            formData.append('moduleId', data.moduleId.toString());
             formData.append('poster', data.poster);
 
-            post(route('poster.upload'), formData);
+            router.post(route('poster.upload'), formData);
         }
     }
 

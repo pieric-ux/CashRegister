@@ -7,14 +7,14 @@ interface ProductWithType extends Product {
     cr_dishes: Dish;
 }
 
-export const getDefaultValues = (product: ProductWithType, isUpdate: boolean): Product => {
+export const getDefaultValues = (product?: ProductWithType): Product => {
     return {
-        name: isUpdate ? product?.name : '',
-        unit: isUpdate ? product?.unit : '',
-        client_price: isUpdate ? product?.client_price : 0,
-        cost_price: isUpdate ? product?.cost_price : 0,
-        category: isUpdate ? product?.cr_categories_products?.name : '',
-        dish: isUpdate ? product?.cr_dishes?.name : '',
+        name: product?.name || '',
+        unit: product?.unit || '',
+        client_price: product?.client_price || 0,
+        cost_price: product?.cost_price || 0,
+        category: product?.cr_categories_products?.name || '',
+        dish: product?.cr_dishes?.name || '',
     };
 };
 

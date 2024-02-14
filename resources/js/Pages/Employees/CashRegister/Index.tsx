@@ -17,7 +17,7 @@ import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 import EmployeeLayout from '@/Components/layouts/Auth/Employee/EmployeeLayout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/Components/ui/tabs/tabs';
 
-export const emptyCartItem = { id: null, name: '', quantity: 0, client_price: 0 };
+const emptyCartItem = { id: null, name: '', quantity: 0, client_price: 0 };
 const emptyCart = { items: Array(5).fill(emptyCartItem), total: 0 };
 
 interface PageProps extends InertiaPageProps {

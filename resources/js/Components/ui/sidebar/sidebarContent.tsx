@@ -13,7 +13,7 @@ const sidebarContentVariants = cva(
     {
         variants: {
             variant: {
-                default: 'bg-sidebar hidden h-full w-72 flex-col sm:flex',
+                default: 'hidden h-full w-72 flex-col bg-sidebar sm:flex',
             },
             direction: {
                 right: 'inset-y-0 right-0',
@@ -50,4 +50,4 @@ const SidebarContent = forwardRef<HTMLDivElement, SidebarContentProps>(
 );
 SidebarContent.displayName = Content.displayName;
 
-export { SidebarContent, sidebarContentVariants };
+export { SidebarContent };

@@ -14,12 +14,8 @@ export default function DrawerMenuLinks({ datas, slug }: DrawerMenuLinksProps): 
             {datas.map((item, index) => (
                 <DrawerLink
                     key={index}
-                    href={slug !== undefined ? route(item.route, slug) : route(item.route)}
-                    active={
-                        slug !== undefined
-                            ? route().current(item.route, slug)
-                            : route().current(item.route)
-                    }
+                    href={slug ? route(item.route, slug) : route(item.route)}
+                    active={slug ? route().current(item.route, slug) : route().current(item.route)}
                     method={item.route === 'logout' ? 'post' : undefined}
                     as={item.route === 'logout' ? 'button' : undefined}
                 >

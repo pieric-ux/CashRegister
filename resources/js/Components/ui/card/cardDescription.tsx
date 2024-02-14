@@ -24,4 +24,4 @@ const CardDescription = forwardRef<HTMLParagraphElement, cardDescriptionProps>(
 );
 CardDescription.displayName = 'CardDescription';
 
-export { CardDescription, cardDescriptionVariants };
+export { CardDescription };

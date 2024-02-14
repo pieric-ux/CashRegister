@@ -28,4 +28,4 @@ const DropdownShortcut: FC<DropdownShortcutProps> = ({ className, variant, size,
 };
 DropdownShortcut.displayName = 'DropdownMenuShortcut';
 
-export { DropdownShortcut, dropdownShortcutVariants };
+export { DropdownShortcut };

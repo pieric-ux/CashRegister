@@ -49,7 +49,11 @@ export const columns: ColumnDef<Product>[] = [
             const product = row.original;
 
             return (
-                <UpdateItemsPictureForm item={product} route={route('picture-product.upload')} />
+                <UpdateItemsPictureForm
+                    key={product.id}
+                    item={product}
+                    route={route('picture-product.upload')}
+                />
             );
         },
     },
@@ -76,6 +80,7 @@ export const columns: ColumnDef<Product>[] = [
         cell: ({ row }) => {
             const price = row.original.client_price;
 
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             const formatted = useCurrencyFormatter(price);
 
             return <div className='text-left font-medium'>{formatted}</div>;
@@ -90,6 +95,7 @@ export const columns: ColumnDef<Product>[] = [
         cell: ({ row }) => {
             const price = row.original.cost_price;
 
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             const formatted = useCurrencyFormatter(price);
 
             return <div className='text-left font-medium'>{formatted}</div>;
@@ -139,7 +145,7 @@ export const columns: ColumnDef<Product>[] = [
 
             return (
                 <div className='flex flex-col items-center justify-center gap-2'>
-                    <UpdateProduct product={product} />
+                    <UpdateProduct product={product as ProductWithType} />
                     <DeleteProduct product={product} />
                 </div>
             );

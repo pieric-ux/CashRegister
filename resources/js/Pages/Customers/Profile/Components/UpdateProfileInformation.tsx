@@ -43,14 +43,14 @@ export default function UpdateProfileInformation(): JSX.Element {
                             </Button>
                         </Alert>
                     )}
-                    {status !== null && status !== undefined && (
+                    {status && (
                         <>
                             <Alert variant={'success'}>
                                 <AlertDescription>{t(status)}</AlertDescription>
                             </Alert>
                         </>
                     )}
-                    <CustomerProfileForm isUpdate={true} />
+                    <CustomerProfileForm isUpdate />
                 </CardContent>
             </Card>
         </section>

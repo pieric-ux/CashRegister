@@ -32,7 +32,7 @@ export default function EmployeeProfileForm({
 
     const { cashRegisterModule } = usePage<PageProps>().props;
 
-    const defaultValues = getDefaultValues(employee, isUpdate); // FIXME: check type with Flavien
+    const defaultValues = getDefaultValues(employee);
 
     const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
 
@@ -44,7 +44,7 @@ export default function EmployeeProfileForm({
         e.preventDefault();
 
         isUpdate
-            ? patch(route('employees.update', employee), {
+            ? patch(route('employees.update', employee?.id), {
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               })

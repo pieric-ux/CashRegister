@@ -50,4 +50,4 @@ const DropdownRadioItem = forwardRef<HTMLDivElement, DropdownRadioItemProps>(
 );
 DropdownRadioItem.displayName = RadioItem.displayName;
 
-export { DropdownRadioItem, dropdownRadioItemVariants };
+export { DropdownRadioItem };

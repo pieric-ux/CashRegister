@@ -63,4 +63,4 @@ const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(
 );
 SelectContent.displayName = Content.displayName;
 
-export { SelectContent, selectContentVariants };
+export { SelectContent };

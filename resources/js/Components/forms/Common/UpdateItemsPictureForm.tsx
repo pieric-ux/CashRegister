@@ -6,8 +6,8 @@ import { Svg } from '@/Components/ui/svg/Svg';
 import { Input } from '@/Components/ui/input/input';
 import { type Dish } from '@/Shared/Types/DishTypes';
 import { type Product } from '@/Shared/Types/ProductTypes';
-import { useForm as useFormInertia } from '@inertiajs/react';
 import { Avatar, AvatarImage } from '@/Components/ui/avatar/avatar';
+import { useForm as useFormInertia, router } from '@inertiajs/react';
 import {
     Form,
     FormControl,
@@ -38,24 +38,24 @@ export default function UpdateItemsPictureForm({
 
     const picturePath = item?.media?.[0]?.original_url;
 
-    const { data, setData, post, errors } = useFormInertia(defaultValues);
+    const { data, setData, errors } = useFormInertia(defaultValues);
 
     const form = useForm<FormInput>({
         defaultValues: data,
     });
 
     useEffect(() => {
-        // FIXME: Check with Flavien how i can do without useEffect and without submit button
         onSubmit();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data.picture]);
 
     function onSubmit(): void {
-        if (data.picture !== undefined) {
+        if (data.itemId && data.picture) {
             const formData = new FormData();
-            formData.append('itemId', data.itemId);
+            formData.append('itemId', data.itemId.toString());
             formData.append('picture', data.picture);
 
-            post(route, formData);
+            router.post(route, formData);
         }
     }
 
@@ -67,7 +67,7 @@ export default function UpdateItemsPictureForm({
                     name='picture'
                     render={() => (
                         <FormItem className='flex w-3/4 items-center justify-center'>
-                            {picturePath !== undefined && picturePath !== null ? (
+                            {picturePath ? (
                                 <div className='relative z-30 mx-auto h-16 w-16 backdrop-blur-md transition duration-300 ease-linear'>
                                     <div className='relative h-full w-full drop-shadow-md'>
                                         <Avatar variant={'square'} size={'picture'}>

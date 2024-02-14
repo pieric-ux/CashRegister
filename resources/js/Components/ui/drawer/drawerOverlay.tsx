@@ -29,4 +29,4 @@ const DrawerOverlay = forwardRef<HTMLDivElement, DrawerOverlayProps>(
 );
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
-export { DrawerOverlay, drawerOverlayVariants };
+export { DrawerOverlay };

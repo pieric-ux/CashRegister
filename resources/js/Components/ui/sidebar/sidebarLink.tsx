@@ -45,4 +45,4 @@ const SidebarLink = ({
 );
 SidebarLink.displayName = 'SidebarLink';
 
-export { SidebarLink, sidebarLinkVariants };
+export { SidebarLink };

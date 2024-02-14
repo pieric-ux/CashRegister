@@ -41,7 +41,13 @@ export const columns: ColumnDef<Dish>[] = [
         cell: ({ row }) => {
             const dish = row.original;
 
-            return <UpdateItemsPictureForm item={dish} route={route('picture-dish.upload')} />;
+            return (
+                <UpdateItemsPictureForm
+                    key={dish.id}
+                    item={dish}
+                    route={route('picture-dish.upload')}
+                />
+            );
         },
     },
     {
@@ -67,6 +73,7 @@ export const columns: ColumnDef<Dish>[] = [
         cell: ({ row }) => {
             const price = row.original.client_price;
 
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             const formatted = useCurrencyFormatter(price);
 
             return <div className='text-left font-medium'>{formatted}</div>;
@@ -81,6 +88,7 @@ export const columns: ColumnDef<Dish>[] = [
         cell: ({ row }) => {
             const price = row.original.cost_price;
 
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             const formatted = useCurrencyFormatter(price);
 
             return <div className='text-left font-medium'>{formatted}</div>;

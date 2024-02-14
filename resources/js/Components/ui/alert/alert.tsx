@@ -13,7 +13,7 @@ const alertVariants = cva(
                 destructive:
                     'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',
                 success:
-                    'border-success bg-success/10 dark:border-success [&>svg]:text-success-foreground text-success-foreground',
+                    'border-success bg-success/10 text-success-foreground dark:border-success [&>svg]:text-success-foreground',
             },
         },
         defaultVariants: {
@@ -31,4 +31,4 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(({ className, variant, ...p
 ));
 Alert.displayName = 'Alert';
 
-export { Alert, AlertTitle, AlertDescription, alertVariants };
+export { Alert, AlertTitle, AlertDescription };

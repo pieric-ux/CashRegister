@@ -29,4 +29,4 @@ const DrawerDescription = forwardRef<HTMLParagraphElement, DrawerDescriptionProp
 );
 DrawerDescription.displayName = DrawerPrimitive.Description.displayName;
 
-export { DrawerDescription, drawerDescriptionVariants };
+export { DrawerDescription };

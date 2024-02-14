@@ -68,10 +68,10 @@ export default function Payment({ isCartEmpty }: PaymentProps): JSX.Element {
         setOpen(false);
     };
 
-    const handlePayment = (selectedPaymentMethod: PaymentMethod): void => {
+    const handlePayment = async (selectedPaymentMethod: PaymentMethod): Promise<void> => {
         const filteredCart = cart.items.filter((item) => item.id !== null);
 
-        axios
+        await axios
             .post(route('cashregister.store'), {
                 cart: filteredCart,
                 paymentMethod: selectedPaymentMethod.id,
@@ -79,9 +79,6 @@ export default function Payment({ isCartEmpty }: PaymentProps): JSX.Element {
             .then(() => {
                 closeDialog();
                 setCart(emptyCart);
-            })
-            .catch((error) => {
-                console.error(error); // TODO: Alert dialog with message
             });
     };
 

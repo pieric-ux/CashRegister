@@ -34,4 +34,4 @@ const SelectLabel = forwardRef<HTMLDivElement, SelectLabelProps>(
 );
 SelectLabel.displayName = Label.displayName;
 
-export { SelectLabel, selectLabelVariants };
+export { SelectLabel };

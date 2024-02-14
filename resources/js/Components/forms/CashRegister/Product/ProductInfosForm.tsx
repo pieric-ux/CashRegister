@@ -35,8 +35,13 @@ interface PageProps extends InertiaPageProps {
     };
 }
 
+interface ProductWithType extends Product {
+    cr_categories_products: CategoryProducts;
+    cr_dishes: Dish;
+}
+
 interface ProductInfoFormProps {
-    product?: Product;
+    product?: ProductWithType;
     closeDialog: () => void;
     isUpdate?: boolean;
 }
@@ -53,7 +58,7 @@ export default function ProductInfosForm({
     const categories = cashRegisterModule.cr_categories_products;
     const dishes = cashRegisterModule.cr_dishes;
 
-    const defaultValues = getDefaultValues(product, isUpdate); // FIXME: check type with Flavien
+    const defaultValues = getDefaultValues(product);
 
     const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
 
@@ -65,7 +70,7 @@ export default function ProductInfosForm({
         e.preventDefault();
 
         isUpdate
-            ? patch(route('products.update', product), {
+            ? patch(route('products.update', product?.id), {
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               })

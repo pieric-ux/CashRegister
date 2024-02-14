@@ -3,17 +3,14 @@ import {
     type CashRegisterInfosFormDatas,
 } from '@/Shared/Types/CashRegisterTypes';
 
-export const getDefaultValues = (
-    cashRegisterModule: CashRegister,
-    isUpdate: boolean,
-): Partial<CashRegister> => {
+export const getDefaultValues = (cashRegisterModule?: CashRegister): Partial<CashRegister> => {
     return {
-        name: isUpdate ? cashRegisterModule?.name : '',
-        description: isUpdate ? cashRegisterModule?.description ?? '' : '',
-        start_date: isUpdate ? cashRegisterModule?.start_date ?? '' : '',
-        end_date: isUpdate ? cashRegisterModule?.end_date ?? '' : '',
-        location: isUpdate ? cashRegisterModule?.location ?? '' : '',
-        website: isUpdate ? cashRegisterModule?.website ?? '' : '',
+        name: cashRegisterModule?.name || '',
+        description: cashRegisterModule?.description || '',
+        start_date: cashRegisterModule?.start_date || '',
+        end_date: cashRegisterModule?.end_date || '',
+        location: cashRegisterModule?.location || '',
+        website: cashRegisterModule?.website || '',
     };
 };
 

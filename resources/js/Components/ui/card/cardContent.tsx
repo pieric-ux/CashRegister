@@ -39,4 +39,4 @@ const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
 );
 CardContent.displayName = 'CardContent';
 
-export { CardContent, cardContentVariants };
+export { CardContent };

@@ -39,4 +39,4 @@ const DropdownLabel = forwardRef<HTMLDivElement, DropdownLabelProps>(
 );
 DropdownLabel.displayName = Label.displayName;
 
-export { DropdownLabel, dropdownLabelVariants };
+export { DropdownLabel };

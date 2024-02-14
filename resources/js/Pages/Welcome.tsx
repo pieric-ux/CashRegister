@@ -15,7 +15,7 @@ export default function Welcome(): JSX.Element {
         <GuestLayout>
             <Head title='Welcome' />
             <div className='p-6 text-right sm:fixed sm:right-0 sm:top-0'>
-                {customer !== undefined && customer !== null && (
+                {customer && (
                     <Link
                         href={route('dashboard')}
                         className='font-semibold text-muted-foreground hover:text-muted focus:rounded-sm focus:outline focus:outline-2 focus:outline-ring'

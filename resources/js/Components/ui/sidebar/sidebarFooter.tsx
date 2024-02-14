@@ -22,4 +22,4 @@ const SidebarFooter = ({ className, variant, ...props }: SidebarFooterProps): JS
 );
 SidebarFooter.displayName = 'SidebarFooter';
 
-export { SidebarFooter, sidebarVariants };
+export { SidebarFooter };

@@ -49,4 +49,4 @@ const DropdownSubTrigger = forwardRef<HTMLDivElement, DropdownSubTriggerProps>(
 );
 DropdownSubTrigger.displayName = SubTrigger.displayName;
 
-export { DropdownSubTrigger, dropdownSubTriggerVariants };
+export { DropdownSubTrigger };

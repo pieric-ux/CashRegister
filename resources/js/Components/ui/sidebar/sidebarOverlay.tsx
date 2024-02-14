@@ -33,4 +33,4 @@ const SidebarOverlay = forwardRef<HTMLDivElement, SidebarOverlayProps>(
 );
 SidebarOverlay.displayName = Overlay.displayName;
 
-export { SidebarOverlay, sidebarOverlayVariants };
+export { SidebarOverlay };

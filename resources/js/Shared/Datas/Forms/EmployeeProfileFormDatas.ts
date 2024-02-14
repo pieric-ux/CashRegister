@@ -1,11 +1,11 @@
 import { type Employee, type EmployeeProfileFormDatas } from '@/Shared/Types/EmployeeTypes';
 
-export const getDefaultValues = (employee: Employee, isUpdate: boolean): Partial<Employee> => {
+export const getDefaultValues = (employee?: Employee): Partial<Employee> => {
     return {
-        first_name: isUpdate ? employee?.first_name : '',
-        last_name: isUpdate ? employee?.last_name : '',
-        phone: isUpdate ? employee?.phone ?? '' : '',
-        email: isUpdate ? employee?.email : '',
+        first_name: employee?.first_name || '',
+        last_name: employee?.last_name || '',
+        phone: employee?.phone || '',
+        email: employee?.email || '',
     };
 };
 

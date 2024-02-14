@@ -41,7 +41,7 @@ export default function LoginForm({
     function onSubmit(e: FormEvent): void {
         e.preventDefault();
 
-        isEmployee !== null && isEmployee !== undefined && isEmployee
+        isEmployee
             ? post(route('employees.login', cashRegisterModule?.slug), {
                   preserveScroll: true,
                   onSuccess: () => {
@@ -91,7 +91,7 @@ export default function LoginForm({
                     )}
                 />
                 <CardFooter className='mt-4 flex items-center justify-end space-x-4 p-0'>
-                    {canResetPassword !== null && isEmployee !== null && !isEmployee && (
+                    {canResetPassword && isEmployee && (
                         <Button variant={'link'} asChild>
                             <Link href={route('password.request')}>
                                 {t('Forgot your password?')}

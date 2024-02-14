@@ -24,7 +24,7 @@ export default function CashRegisterInfosForm({
 
     const { cashRegisterModule } = useContext(ShowCashRegisterInfosContext);
 
-    const defaultValues = getDefaultValues(cashRegisterModule, isUpdate);
+    const defaultValues = getDefaultValues(cashRegisterModule);
 
     const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
 

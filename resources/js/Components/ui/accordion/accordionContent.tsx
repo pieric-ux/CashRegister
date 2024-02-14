@@ -31,4 +31,4 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
 );
 AccordionContent.displayName = Content.displayName;
 
-export { AccordionContent, accordionContentVariants };
+export { AccordionContent };

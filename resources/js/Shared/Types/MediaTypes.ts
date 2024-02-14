@@ -10,10 +10,10 @@ export interface Media {
     disk: string;
     conversions_disk: string | null;
     size: number;
-    manipulations: Record<string, any>;
-    custom_properties: Record<string, any>;
-    generated_conversions: Record<string, any>;
-    responsive_images: Record<string, any>;
+    manipulations: Record<string, unknown>;
+    custom_properties: Record<string, unknown>;
+    generated_conversions: Record<string, unknown>;
+    responsive_images: Record<string, unknown>;
     order_column: number | null;
     original_url: string;
     preview_url: string;

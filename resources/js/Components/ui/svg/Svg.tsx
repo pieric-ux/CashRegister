@@ -23,7 +23,10 @@ const svgVariants = cva('', {
     },
 });
 
-type IconType = keyof typeof actionIcons | keyof typeof sideBarIcons | keyof typeof themeIcons;
+export type IconType =
+    | keyof typeof actionIcons
+    | keyof typeof sideBarIcons
+    | keyof typeof themeIcons;
 
 export interface SvgProps extends SVGAttributes<SVGSVGElement>, VariantProps<typeof svgVariants> {
     type: IconType;
@@ -50,4 +53,4 @@ const Svg = forwardRef<SVGSVGElement, SvgProps>(
 
 Svg.displayName = 'Svg';
 
-export { Svg, svgVariants };
+export { Svg };

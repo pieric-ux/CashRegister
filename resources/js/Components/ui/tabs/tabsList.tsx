@@ -26,4 +26,4 @@ const TabsList = forwardRef<HTMLDivElement, TabsListProps>(
 );
 TabsList.displayName = List.displayName;
 
-export { TabsList, tabsListVariants };
+export { TabsList };

@@ -26,4 +26,4 @@ const SidebarTitle = forwardRef<HTMLHeadingElement, SidebarTitleProps>(
 );
 SidebarTitle.displayName = Title.displayName;
 
-export { SidebarTitle, sidebarTitleVariants };
+export { SidebarTitle };

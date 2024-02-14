@@ -21,7 +21,7 @@ export default function DeleteCategoriesProduct({
             <ActionDialogButton datas={deleteCategoriesProductDatas} open={open} setOpen={setOpen}>
                 <ConfirmDeleteForm
                     datas={deleteCategoriesProductDatas}
-                    route={route('categories.destroy', category)} // FIXME:
+                    route={route('categories.destroy', category.id)}
                     closeDialog={closeDialog}
                 />
             </ActionDialogButton>

@@ -26,4 +26,4 @@ const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
 );
 TabsContent.displayName = Content.displayName;
 
-export { TabsContent, tabsContentVariants };
+export { TabsContent };

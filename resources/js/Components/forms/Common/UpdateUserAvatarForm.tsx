@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { Input } from '@/Components/ui/input/input';
-import { useForm as useFormInertia } from '@inertiajs/react';
 import { Avatar, AvatarImage } from '@/Components/ui/avatar/avatar';
+import { useForm as useFormInertia, router } from '@inertiajs/react';
 import {
     Form,
     FormControl,
@@ -32,25 +32,25 @@ export default function UpdateUserAvatarForm({
     avatarPath,
     isEmployee = false,
 }: UpdateUserAvatarFormProps): JSX.Element {
-    const { data, setData, post, errors } = useFormInertia(defaultValues);
+    const { data, setData, errors } = useFormInertia(defaultValues);
 
     const form = useForm<FormInput>({
         defaultValues: data,
     });
 
     useEffect(() => {
-        // FIXME: Check with Flavien how i can do without useEffect and without submit button
         onSubmit();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data.avatar]);
 
     function onSubmit(): void {
-        if (data.avatar !== undefined) {
+        if (data.avatar) {
             const formData = new FormData();
             formData.append('avatar', data.avatar);
 
             isEmployee
-                ? post(route('avatar-employee.upload'), formData)
-                : post(route('avatar.upload'), formData);
+                ? router.post(route('avatar-employee.upload'), formData)
+                : router.post(route('avatar.upload'), formData);
         }
     }
 

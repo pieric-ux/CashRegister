@@ -1,9 +1,9 @@
 import { type Dish } from './DishTypes';
 
 export interface CartItem {
-    id: number | null;
+    id?: number | null;
     quantity: number;
-    name: string;
+    name?: string;
     unit?: string;
     client_price: number;
     picture_url?: string;

@@ -33,7 +33,7 @@ export default function DishInfosForm({
 
     const { cashRegisterModule } = usePage<PageProps>().props;
 
-    const defaultValues = getDefaultValues(dish, isUpdate); // FIXME: check type with Flavien
+    const defaultValues = getDefaultValues(dish);
 
     const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
 
@@ -45,7 +45,7 @@ export default function DishInfosForm({
         e.preventDefault();
 
         isUpdate
-            ? patch(route('dishes.update', dish), {
+            ? patch(route('dishes.update', dish?.id), {
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               })

@@ -36,4 +36,4 @@ const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
 );
 AccordionTrigger.displayName = Trigger.displayName;
 
-export { AccordionTrigger, accordionTriggerVariants };
+export { AccordionTrigger };

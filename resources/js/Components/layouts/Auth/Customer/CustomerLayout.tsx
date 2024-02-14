@@ -6,6 +6,7 @@ import SideBarLinks from '@/Components/layouts/SideBarLinks';
 import { DrawerNavCustomerLayoutDatas } from '@/Shared/Datas/Navigation/DrawerNavDatas';
 import { SideBarNavCustomerLayoutDatas } from '@/Shared/Datas/Navigation/SideBarNavDatas';
 import { DropDownNavCustomerLayoutDatas } from '@/Shared/Datas/Navigation/DropdownNavDatas';
+import { NavigationDatas } from '@/Shared/Types/NavigationTypes';
 
 interface CustomerLayoutProps {
     children: ReactNode;
@@ -14,7 +15,6 @@ interface CustomerLayoutProps {
 export default function CustomerLayout({ children }: CustomerLayoutProps): JSX.Element {
     const { customer } = usePage<InertiaPageProps>().props;
     const avatarPath = customer.media.find(
-        /* eslint-disable @typescript-eslint/naming-convention */
         ({ collection_name }) => collection_name === 'avatars',
     )?.original_url;
 
@@ -28,7 +28,7 @@ export default function CustomerLayout({ children }: CustomerLayoutProps): JSX.E
                     drawerMenuDatas={DrawerNavCustomerLayoutDatas}
                 />
                 <SideBar>
-                    <SideBarLinks datas={SideBarNavCustomerLayoutDatas} />
+                    <SideBarLinks datas={SideBarNavCustomerLayoutDatas as NavigationDatas[]} />
                 </SideBar>
                 <main className='container max-w-5xl space-y-6 py-8'>{children}</main>
             </div>

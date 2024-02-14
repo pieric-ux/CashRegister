@@ -26,7 +26,7 @@ export default function LoginEmployee({
             <Head title={t('Log in')} />
 
             <CardContent>
-                {status != null && (
+                {status && (
                     <>
                         <Alert className='mb-4' variant={'success'}>
                             <AlertDescription>{t(status)}</AlertDescription>
@@ -37,7 +37,7 @@ export default function LoginEmployee({
                     defaultValues={defaultValues}
                     formDatas={employeeFormDatas}
                     cashRegisterModule={cashRegisterModule}
-                    isEmployee={true}
+                    isEmployee
                 />
             </CardContent>
         </GuestLayout>

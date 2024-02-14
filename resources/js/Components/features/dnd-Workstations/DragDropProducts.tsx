@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { usePage } from '@inertiajs/react';
+import { usePage, router } from '@inertiajs/react';
 import DroppableGeneric from './DroppableGeneric';
 import { DraggableGeneric } from './DraggableGeneric';
 import { type Product } from '@/Shared/Types/ProductTypes';
@@ -39,11 +39,7 @@ export default function DragDropProducts({ workstation }: DragDropProductsProps)
     const onDragEnd = async (result: DropResult): Promise<void> => {
         const { destination, source } = result;
 
-        if (
-            destination === null ||
-            destination === undefined ||
-            destination.droppableId === source.droppableId
-        ) {
+        if (!destination || destination.droppableId === source.droppableId) {
             return;
         }
         const sourceId = parseInt(source.droppableId.split('-')[1]);
@@ -63,7 +59,7 @@ export default function DragDropProducts({ workstation }: DragDropProductsProps)
 
         const movedProduct = sourceProducts?.[source.index];
 
-        if (movedProduct !== undefined && movedProduct !== null) {
+        if (movedProduct) {
             if (sourceId === 0) {
                 destinationWorkstation?.cr_products.splice(destination.index, 0, movedProduct);
                 destinationWorkstation?.generalProducts.splice(source.index, 1);
@@ -73,10 +69,11 @@ export default function DragDropProducts({ workstation }: DragDropProductsProps)
             }
         }
 
-        // FIXME: state of updatedWorkstations after request
         await axios.patch(route('products.updateDragAndDrop'), {
             workstations: updatedWorkstations,
         });
+
+        router.reload();
     };
     return (
         <DragDropContext onDragEnd={onDragEnd}>

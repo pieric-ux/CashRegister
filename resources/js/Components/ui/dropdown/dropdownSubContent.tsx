@@ -40,4 +40,4 @@ const DropdownSubContent = forwardRef<HTMLDivElement, DropdownSubContentProps>(
 );
 DropdownSubContent.displayName = SubContent.displayName;
 
-export { DropdownSubContent, dropdownSubContentVariants };
+export { DropdownSubContent };

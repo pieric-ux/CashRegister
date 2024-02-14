@@ -41,7 +41,7 @@ export default function Items(): JSX.Element {
         .map((product) => product.cr_categories_products)
         .filter((category) => category !== null)
         .filter((category, index, self) => self.findIndex((c) => c.id === category.id) === index)
-        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+        .sort((a, b) => (a.order || 0) - (b.order || 0));
 
     const dishes = employee.cr_workstations.cr_modules.cr_dishes;
     const productsDishes = products

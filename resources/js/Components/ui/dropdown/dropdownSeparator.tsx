@@ -37,4 +37,4 @@ const DropdownSeparator = forwardRef<HTMLDivElement, DropdownSeparatorProps>(
 );
 DropdownSeparator.displayName = Separator.displayName;
 
-export { DropdownSeparator, dropdownSeparatorVariants };
+export { DropdownSeparator };

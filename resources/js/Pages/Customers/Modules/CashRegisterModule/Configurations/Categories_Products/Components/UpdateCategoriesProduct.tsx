@@ -22,13 +22,9 @@ export default function UpdateCategoriesProduct({
                 datas={updateCategoriesProductDatas}
                 open={open}
                 setOpen={setOpen}
-                isUpdate={true}
+                isUpdate
             >
-                <CategoryProductsInfosForm
-                    category={category}
-                    closeDialog={closeDialog}
-                    isUpdate={true}
-                />
+                <CategoryProductsInfosForm category={category} closeDialog={closeDialog} isUpdate />
             </ActionDialogButton>
         </section>
     );

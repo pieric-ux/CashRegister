@@ -27,7 +27,6 @@ export default function LanguageSwitcher(): JSX.Element {
         document.documentElement.lang = value;
     };
 
-    // FIXME: check type with Flavien
     return (
         <div>
             <Select value={language} onValueChange={onSubmit}>

@@ -10,7 +10,7 @@ import {
     type CheckboxProps as RadixCheckboxProps,
 } from '@radix-ui/react-checkbox';
 
-const CheckboxVariants = cva(
+const checkboxVariants = cva(
     'peer shrink-0 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-ring data-[state=checked]:text-primary-foreground',
     {
         variants: {
@@ -31,18 +31,18 @@ const CheckboxVariants = cva(
 
 export interface CheckboxProps
     extends ComponentPropsWithoutRef<typeof Root>,
-        VariantProps<typeof CheckboxVariants>,
+        VariantProps<typeof checkboxVariants>,
         RadixCheckboxProps {}
 
 const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
     ({ className, variant, size, ...props }, ref) => (
-        <Root ref={ref} className={cn(CheckboxVariants({ variant, size, className }))} {...props}>
+        <Root ref={ref} className={cn(checkboxVariants({ variant, size, className }))} {...props}>
             <Indicator className={cn('flex items-center justify-center text-current')}>
-                <CheckIcon className={cn(CheckboxVariants({ size }))} />
+                <CheckIcon className={cn(checkboxVariants({ size }))} />
             </Indicator>
         </Root>
     ),
 );
 Checkbox.displayName = Root.displayName;
 
-export { Checkbox, CheckboxVariants };
+export { Checkbox };

@@ -24,4 +24,4 @@ const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
 );
 CardTitle.displayName = 'CardTitle';
 
-export { CardTitle, cardTitleVariants };
+export { CardTitle };

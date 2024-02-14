@@ -22,4 +22,4 @@ const SidebarHeader = ({ className, variant, ...props }: SidebarHeaderProps): JS
 );
 SidebarHeader.displayName = 'SidebarHeader';
 
-export { SidebarHeader, sidebarHeaderVariants };
+export { SidebarHeader };

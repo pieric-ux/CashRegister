@@ -14,13 +14,13 @@ export default function DeleteEmployee({ employee }: DeleteEmployeeProps): JSX.E
     const closeDialog = (): void => {
         setOpen(false);
     };
-    // FIXME: check type with Flavien
+
     return (
         <section>
             <ActionDialogButton datas={deleteEmployeeDatas} open={open} setOpen={setOpen}>
                 <ConfirmDeleteForm
                     datas={deleteEmployeeDatas}
-                    route={route('employees.destroy', employee)}
+                    route={route('employees.destroy', employee.id)}
                     closeDialog={closeDialog}
                 />
             </ActionDialogButton>

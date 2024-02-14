@@ -15,7 +15,7 @@ export default function LoginCustomer(): JSX.Element {
         <>
             <Head title={t('Log in')} />
 
-            {status !== null && status !== undefined && (
+            {status && (
                 <>
                     <Alert className='mb-4' variant={'success'}>
                         <AlertDescription>{t(status)}</AlertDescription>

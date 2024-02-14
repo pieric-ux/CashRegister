@@ -39,4 +39,4 @@ const DrawerContent = forwardRef<HTMLDivElement, DrawerContentProps>(
 );
 DrawerContent.displayName = 'DrawerContent';
 
-export { DrawerContent, drawerContentVariants };
+export { DrawerContent };

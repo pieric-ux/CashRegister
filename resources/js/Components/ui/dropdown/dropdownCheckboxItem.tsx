@@ -51,4 +51,4 @@ const DropdownCheckboxItem = forwardRef<HTMLDivElement, DropdownCheckboxItemProp
 );
 DropdownCheckboxItem.displayName = CheckboxItem.displayName;
 
-export { DropdownCheckboxItem, dropdownCheckboxItemVariants };
+export { DropdownCheckboxItem };

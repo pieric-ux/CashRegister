@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/Components/ui/input/input';
 import {
@@ -7,7 +8,7 @@ import {
     FormLabel,
     FormMessage,
 } from '@/Components/ui/form/form';
-// TODO: check type
+
 export const GenericFormField = ({
     form,
     data,

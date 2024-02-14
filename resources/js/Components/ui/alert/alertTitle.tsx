@@ -28,4 +28,4 @@ const AlertTitle = forwardRef<HTMLHeadingElement, AlertTitleProps>(
 );
 AlertTitle.displayName = 'AlertTitle';
 
-export { AlertTitle, alertTitleVariants };
+export { AlertTitle };

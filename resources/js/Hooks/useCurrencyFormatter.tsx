@@ -4,8 +4,8 @@ export default function useCurrencyFormatter(amount: number): string {
     const locale = document.documentElement.lang;
 
     const codeCountry = locale.split('-')[1];
-
-    const currencyCode = countryToCurrency[codeCountry]; // FIXME: check type with Flavien
+    // @ts-expect-error : FIXME: countryToCurrency type for codeCountry
+    const currencyCode = countryToCurrency[codeCountry];
 
     const formatted = new Intl.NumberFormat(locale, {
         style: 'currency',

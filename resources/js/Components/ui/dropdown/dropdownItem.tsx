@@ -42,4 +42,4 @@ const DropdownItem = forwardRef<HTMLDivElement, DropdownItemProps>(
 );
 DropdownItem.displayName = Item.displayName;
 
-export { DropdownItem, dropdownItemVariants };
+export { DropdownItem };

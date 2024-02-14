@@ -65,4 +65,4 @@ const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
 );
 DialogContent.displayName = Content.displayName;
 
-export { DialogContent, dialogContentVariants };
+export { DialogContent };

@@ -19,7 +19,7 @@ export default function RegenerateEmployeeForm({
     function regenerateEmployeeActivation(e: FormEvent): void {
         e.preventDefault();
 
-        patch(route('employees.regenerate', employee)); // FIXME: check type with Flavien
+        patch(route('employees.regenerate', employee.id));
     }
 
     return (

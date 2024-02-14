@@ -4,11 +4,12 @@ import { type Row } from '@tanstack/react-table';
 import { Button } from '@/Components/ui/button/button';
 import { type CartItem } from '@/Shared/Types/CartTypes';
 import { CashRegisterContext } from '@/Context/CashRegisterContext';
-import { emptyCartItem } from '@/Pages/Employees/CashRegister/Index';
 
 interface RowProps {
     row: Row<CartItem>;
 }
+
+const emptyCartItem = { id: null, name: '', quantity: 0, client_price: 0 };
 
 export default function DeleteRowCart({ row }: RowProps): JSX.Element {
     const { cart, setCart } = useContext(CashRegisterContext);

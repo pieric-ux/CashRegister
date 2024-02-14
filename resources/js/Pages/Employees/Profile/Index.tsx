@@ -19,16 +19,15 @@ export default function Index(): JSX.Element {
     const { t } = useTranslation();
     const { employee } = usePage<InertiaPageProps>().props;
     const avatarPath = employee.media.find(
-        /* eslint-disable @typescript-eslint/naming-convention */
         ({ collection_name }) => collection_name === 'avatars-employees',
     )?.original_url;
 
     const form = useForm<Employee>({
         defaultValues: {
-            first_name: employee.first_name ?? '',
-            last_name: employee.last_name ?? '',
-            phone: employee.phone ?? '',
-            email: employee.email ?? '',
+            first_name: employee.first_name || '',
+            last_name: employee.last_name || '',
+            phone: employee.phone || '',
+            email: employee.email || '',
         },
     });
 
@@ -36,7 +35,7 @@ export default function Index(): JSX.Element {
         <EmployeeLayout>
             <Head title={t('Profile')} />
 
-            <UpdateUserAvatar isEmployee={true} avatarPath={avatarPath} />
+            <UpdateUserAvatar avatarPath={avatarPath} isEmployee />
 
             <section>
                 <Card>

@@ -43,4 +43,4 @@ const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
 );
 SelectTrigger.displayName = Trigger.displayName;
 
-export { SelectTrigger, selectTriggerVariants };
+export { SelectTrigger };

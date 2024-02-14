@@ -10,7 +10,6 @@ export default function Edit(): JSX.Element {
     const { t } = useTranslation();
     const { customer } = usePage<InertiaPageProps>().props;
     const avatarPath = customer.media.find(
-        /* eslint-disable @typescript-eslint/naming-convention */
         ({ collection_name }) => collection_name === 'avatars',
     )?.original_url;
 

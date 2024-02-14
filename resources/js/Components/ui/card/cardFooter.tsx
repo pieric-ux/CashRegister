@@ -39,4 +39,4 @@ const CardFooter = forwardRef<HTMLDivElement, cardFooterProps>(
 );
 CardFooter.displayName = 'CardFooter';
 
-export { CardFooter, cardFooterVariants };
+export { CardFooter };

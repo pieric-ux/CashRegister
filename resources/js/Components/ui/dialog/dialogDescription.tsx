@@ -33,4 +33,4 @@ const DialogDescription = forwardRef<HTMLParagraphElement, DialogDescriptionProp
 );
 DialogDescription.displayName = Description.displayName;
 
-export { DialogDescription, dialogDescriptionVariants };
+export { DialogDescription };

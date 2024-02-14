@@ -25,4 +25,4 @@ const DialogFooter = ({ className, variant, ...props }: DialogFooterProps): JSX.
 );
 DialogFooter.displayName = 'DialogFooter';
 
-export { DialogFooter, dialogFooterVariants };
+export { DialogFooter };

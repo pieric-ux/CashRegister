@@ -14,11 +14,7 @@ export default function DragDropCategoriesProduct({
         const { destination, source } = result;
         const categories = categoriesProducts;
 
-        if (
-            destination === null ||
-            destination === undefined ||
-            destination.index === source.index
-        ) {
+        if (!destination || destination.index === source.index) {
             return;
         }
 

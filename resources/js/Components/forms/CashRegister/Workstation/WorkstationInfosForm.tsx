@@ -37,7 +37,7 @@ export default function WorkstationInfosForm({
     const { t } = useTranslation();
     const { cashRegisterModule } = usePage<PageProps>().props;
 
-    const defaultValues = getDefaultValues(workstation, isUpdate); // FIXME: check type with Flavien
+    const defaultValues = getDefaultValues(workstation);
 
     const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
 
@@ -49,7 +49,7 @@ export default function WorkstationInfosForm({
         e.preventDefault();
 
         isUpdate
-            ? patch(route('workstations.update', workstation), {
+            ? patch(route('workstations.update', workstation?.id), {
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               })

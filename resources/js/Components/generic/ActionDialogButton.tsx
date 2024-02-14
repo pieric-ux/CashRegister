@@ -39,7 +39,7 @@ export default function ActionDialogButton({
     datas,
     open,
     setOpen,
-    isUpdate,
+    isUpdate = false,
     children,
 }: ActionDialogButtonProps): JSX.Element {
     const { t } = useTranslation();
@@ -52,7 +52,7 @@ export default function ActionDialogButton({
             {width < 640 ? (
                 <Drawer open={open} onOpenChange={setOpen}>
                     <DrawerTrigger asChild>
-                        {isUpdate !== null && isUpdate !== undefined ? (
+                        {isUpdate ? (
                             <Button size={'icon'} aria-label={t(buttonAriaLabel)}>
                                 <Svg type={'edit'} />
                             </Button>
@@ -77,7 +77,7 @@ export default function ActionDialogButton({
             ) : (
                 <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
-                        {isUpdate !== null && isUpdate !== undefined ? (
+                        {isUpdate ? (
                             <Button size={'icon'} aria-label={t(buttonAriaLabel)}>
                                 <Svg type={'edit'} />
                             </Button>

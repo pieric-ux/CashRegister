@@ -4,19 +4,16 @@ import {
     type CustomerProfileFormDatasObject,
 } from '@/Shared/Types/CustomerTypes';
 
-export const getDefaultValues = (
-    customer: Customer,
-    isUpdate: boolean,
-): CustomerProfileFormInput => {
+export const getDefaultValues = (customer?: Customer): CustomerProfileFormInput => {
     return {
-        company_name: isUpdate ? customer?.company_name ?? '' : '',
-        first_name: isUpdate ? customer?.first_name : '',
-        last_name: isUpdate ? customer?.last_name : '',
-        address: isUpdate ? customer?.address : '',
-        city: isUpdate ? customer?.city : '',
-        npa: isUpdate ? customer?.npa : '',
-        phone: isUpdate ? customer?.phone ?? '' : '',
-        email: isUpdate ? customer?.email : '',
+        company_name: customer?.company_name || '',
+        first_name: customer?.first_name || '',
+        last_name: customer?.last_name || '',
+        address: customer?.address || '',
+        city: customer?.city || '',
+        npa: customer?.npa || '',
+        phone: customer?.phone || '',
+        email: customer?.email || '',
         password: '',
         password_confirmation: '',
     };

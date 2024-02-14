@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { usePage } from '@inertiajs/react';
+import { usePage, router } from '@inertiajs/react';
 import DroppableGeneric from './DroppableGeneric';
 import { DraggableGeneric } from './DraggableGeneric';
 import { type Product } from '@/Shared/Types/ProductTypes';
@@ -44,11 +44,7 @@ export default function DragDropEmployees({ workstation }: DragDropEmployeesProp
     const onDragEnd = async (result: DropResult): Promise<void> => {
         const { destination, source } = result;
 
-        if (
-            destination === null ||
-            destination === undefined ||
-            destination.droppableId === source.droppableId
-        ) {
+        if (!destination || destination.droppableId === source.droppableId) {
             return;
         }
 
@@ -64,17 +60,18 @@ export default function DragDropEmployees({ workstation }: DragDropEmployeesProp
 
         const movedEmployee = sourceWorkstation?.cr_employees[source.index];
 
-        if (movedEmployee !== undefined && movedEmployee !== null) {
+        if (movedEmployee) {
             sourceWorkstation?.cr_employees.splice(source.index, 1);
             destinationWorkstation?.cr_employees.splice(destination.index, 0, movedEmployee);
         }
-        // FIXME: state of updatedWorkstations after request
+
         await axios.patch(route('employees.updateDragAndDrop'), {
             workstations: updatedWorkstations,
         });
+
+        router.reload();
     };
 
-    // FIXME: check type with Flavien
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <div className='mt-4 flex gap-2'>
@@ -93,7 +90,7 @@ export default function DragDropEmployees({ workstation }: DragDropEmployeesProp
 
                 <div className='border-r border-gray-300 dark:border-gray-700'></div>
 
-                {defaultWorkstation !== null && defaultWorkstation !== undefined && (
+                {defaultWorkstation && (
                     <DroppableGeneric
                         droppableId={`workstation-${defaultWorkstation.id}-employees`}
                         droppableTitle='Employee Free'

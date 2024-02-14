@@ -32,6 +32,7 @@ export const columns: ColumnDef<DetailTransaction>[] = [
         cell: ({ row }) => {
             const price = row.original.client_price;
 
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             const formatted = useCurrencyFormatter(price);
 
             return <div className='text-left font-medium'>{formatted}</div>;
@@ -46,6 +47,7 @@ export const columns: ColumnDef<DetailTransaction>[] = [
         cell: ({ row }) => {
             const total = row.original.quantity * row.original.client_price;
 
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             const formatted = useCurrencyFormatter(total);
 
             return <div className='text-left font-medium'>{formatted}</div>;

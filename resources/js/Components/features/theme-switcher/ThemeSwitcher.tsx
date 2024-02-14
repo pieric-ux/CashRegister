@@ -3,10 +3,9 @@ import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import { Switch, SwitchThumb } from '@/Components/ui/switch/switch';
 
-// FIXME:
 export default function ThemeSwitcher(): JSX.Element {
     const { t } = useTranslation();
-    const { isDarkMode, toggle } = useDarkMode();
+    const { isDarkMode, toggle } = useDarkMode(); // TODO: use may be cookie or state
 
     isDarkMode
         ? document.documentElement.classList.add('dark')

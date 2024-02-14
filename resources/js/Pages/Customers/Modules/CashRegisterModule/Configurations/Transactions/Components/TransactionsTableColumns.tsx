@@ -69,6 +69,7 @@ export const columns: ColumnDef<Transaction>[] = [
         cell: ({ row }) => {
             const total = row.original.total;
 
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             const formatted = useCurrencyFormatter(total);
 
             return <div className='text-left font-medium'>{formatted}</div>;

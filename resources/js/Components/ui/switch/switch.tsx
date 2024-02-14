@@ -42,4 +42,4 @@ const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
 );
 Switch.displayName = Root.displayName;
 
-export { Switch, SwitchThumb, switchVariants };
+export { Switch, SwitchThumb };

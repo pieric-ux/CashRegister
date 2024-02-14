@@ -16,9 +16,9 @@ export default function UpdateCashRegister(): JSX.Element {
                 datas={updateCashRegisterDatas}
                 open={open}
                 setOpen={setOpen}
-                isUpdate={true}
+                isUpdate
             >
-                <CashRegisterInfosForm isUpdate={true} closeDialog={closeDialog} />
+                <CashRegisterInfosForm closeDialog={closeDialog} isUpdate />
             </ActionDialogButton>
         </section>
     );

@@ -40,4 +40,4 @@ const SwitchThumb = forwardRef<HTMLSpanElement, SwitchThumbProps>(
 
 SwitchThumb.displayName = Thumb.displayName;
 
-export { SwitchThumb, switchThumbVariants };
+export { SwitchThumb };

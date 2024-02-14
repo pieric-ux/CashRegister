@@ -7,6 +7,7 @@ import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 import { DrawerNavConfigurationsLayoutDatas } from '@/Shared/Datas/Navigation/DrawerNavDatas';
 import { SideBarNavConfigurationsLayoutDatas } from '@/Shared/Datas/Navigation/SideBarNavDatas';
 import { DropDownNavConfigurationsLayoutDatas } from '@/Shared/Datas/Navigation/DropdownNavDatas';
+import { NavigationDatas } from '@/Shared/Types/NavigationTypes';
 
 interface PageProps extends InertiaPageProps {
     cashRegisterModule: CashRegister;
@@ -21,7 +22,6 @@ export default function CashRegisterConfigurationsLayout({
 }: CashRegisterConfigurationsProps): JSX.Element {
     const { customer, cashRegisterModule } = usePage<PageProps>().props;
     const avatarPath = customer.media.find(
-        /* eslint-disable @typescript-eslint/naming-convention */
         ({ collection_name }) => collection_name === 'avatars',
     )?.original_url;
 
@@ -38,7 +38,7 @@ export default function CashRegisterConfigurationsLayout({
                 />
                 <SideBar>
                     <SideBarLinks
-                        datas={SideBarNavConfigurationsLayoutDatas}
+                        datas={SideBarNavConfigurationsLayoutDatas as NavigationDatas[]}
                         slug={cashRegisterModule.slug}
                     />
                 </SideBar>

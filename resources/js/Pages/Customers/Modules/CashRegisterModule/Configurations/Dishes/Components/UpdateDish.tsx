@@ -16,13 +16,8 @@ export default function UpdateDish({ dish }: UpdateDishProps): JSX.Element {
 
     return (
         <section>
-            <ActionDialogButton
-                datas={updateDishDatas}
-                open={open}
-                setOpen={setOpen}
-                isUpdate={true}
-            >
-                <DishInfosForm dish={dish} closeDialog={closeDialog} isUpdate={true} />
+            <ActionDialogButton datas={updateDishDatas} open={open} setOpen={setOpen} isUpdate>
+                <DishInfosForm dish={dish} closeDialog={closeDialog} isUpdate />
             </ActionDialogButton>
         </section>
     );

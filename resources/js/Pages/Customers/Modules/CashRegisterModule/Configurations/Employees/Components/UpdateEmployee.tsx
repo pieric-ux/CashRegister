@@ -17,17 +17,8 @@ export default function UpdateEmployee({ employee }: UpdateEmployeeProps): JSX.E
 
     return (
         <section>
-            <ActionDialogButton
-                datas={updateEmployeeDatas}
-                open={open}
-                setOpen={setOpen}
-                isUpdate={true}
-            >
-                <EmployeeProfileForm
-                    employee={employee}
-                    closeDialog={closeDialog}
-                    isUpdate={true}
-                />
+            <ActionDialogButton datas={updateEmployeeDatas} open={open} setOpen={setOpen} isUpdate>
+                <EmployeeProfileForm employee={employee} closeDialog={closeDialog} isUpdate />
             </ActionDialogButton>
         </section>
     );

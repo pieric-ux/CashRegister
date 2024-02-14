@@ -20,7 +20,7 @@ export default function DeleteDish({ dish }: DeleteDishProps): JSX.Element {
             <ActionDialogButton datas={deleteDishDatas} open={open} setOpen={setOpen}>
                 <ConfirmDeleteForm
                     datas={deleteDishDatas}
-                    route={route('dishes.destroy', dish)} // FIXME:
+                    route={route('dishes.destroy', dish.id)}
                     closeDialog={closeDialog}
                 />
             </ActionDialogButton>

@@ -15,12 +15,12 @@ createServer((page) =>
         resolve: (name) =>
             resolvePageComponent(`./Pages/${name}.tsx`, import.meta.glob('./Pages/**/*.tsx')),
         setup: ({ App, props }) => {
-            // @ts-expect-error
+            // @ts-expect-error : Laravel Config
             global.route<RouteName> = (name, params, absolute) =>
                 route(name, params, absolute, {
-                    // @ts-expect-error
+                    // @ts-expect-error : Laravel Config
                     ...page.props.ziggy,
-                    // @ts-expect-error
+                    // @ts-expect-error : Laravel Config
                     location: new URL(page.props.ziggy.location),
                 });
 

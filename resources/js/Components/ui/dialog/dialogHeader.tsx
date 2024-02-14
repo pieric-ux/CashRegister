@@ -25,4 +25,4 @@ const DialogHeader = ({ className, variant, ...props }: DialogHeaderProps): JSX.
 );
 DialogHeader.displayName = 'DialogHeader';
 
-export { DialogHeader, dialogHeaderVariants };
+export { DialogHeader };

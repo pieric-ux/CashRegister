@@ -28,4 +28,4 @@ const AlertDescription = forwardRef<HTMLParagraphElement, AlertDescriptionProps>
 );
 AlertDescription.displayName = 'AlertDescription';
 
-export { AlertDescription, alertDescriptionVariants };
+export { AlertDescription };

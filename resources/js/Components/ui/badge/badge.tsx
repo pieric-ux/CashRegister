@@ -38,4 +38,4 @@ function Badge({ className, variant, size, ...props }: BadgeProps): JSX.Element 
     return <div className={cn(badgeVariants({ variant, size, className }))} {...props} />;
 }
 
-export { Badge, badgeVariants };
+export { Badge };

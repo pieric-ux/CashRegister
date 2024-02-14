@@ -3,12 +3,9 @@ import {
     type CategoryProductsFormDatas,
 } from '@/Shared/Types/CategoryProductsTypes';
 
-export const getDefaultValues = (
-    category: CategoryProducts,
-    isUpdate: boolean,
-): CategoryProducts => {
+export const getDefaultValues = (category?: CategoryProducts): CategoryProducts => {
     return {
-        name: isUpdate ? category?.name : '',
+        name: category?.name || '',
     };
 };
 

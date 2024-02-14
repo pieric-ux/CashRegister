@@ -90,7 +90,7 @@ Route::middleware(['auth:customer', 'verified'])->group(function () {
     Route::post('/avatar-upload', [MediaController::class, 'uploadAvatar'])->name('avatar.upload');
     Route::post('/poster-upload', [MediaController::class, 'uploadPoster'])->name('poster.upload');
     Route::post('/picture-product-upload', [MediaController::class, 'uploadProductPicture'])->name('picture-product.upload');
-    Route::post('/picture-dish.upload', [MediaController::class, 'uploadDishPicture'])->name('picture-dish.upload');
+    Route::post('/picture-dish-upload', [MediaController::class, 'uploadDishPicture'])->name('picture-dish.upload');
 });
 
 Route::middleware(['auth:employee', 'logout'])->group(function () {

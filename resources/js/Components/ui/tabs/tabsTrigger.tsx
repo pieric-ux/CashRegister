@@ -26,4 +26,4 @@ const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
 );
 TabsTrigger.displayName = Trigger.displayName;
 
-export { TabsTrigger, tabsTriggerVariants };
+export { TabsTrigger };

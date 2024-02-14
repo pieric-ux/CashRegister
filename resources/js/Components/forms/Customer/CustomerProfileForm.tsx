@@ -23,7 +23,7 @@ export default function CustomerProfileForm({
 
     const { customer } = usePage<InertiaPageProps>().props;
 
-    const defaultValues = getDefaultValues(customer, isUpdate);
+    const defaultValues = getDefaultValues(customer);
 
     const { data, setData, post, patch, processing, errors, reset, recentlySuccessful } =
         useFormInertia(defaultValues);
@@ -36,7 +36,9 @@ export default function CustomerProfileForm({
         e.preventDefault();
 
         isUpdate
-            ? patch(route('profile.update'))
+            ? patch(route('profile.update'), {
+                  preserveScroll: true,
+              })
             : post(route('customers.register'), {
                   onSuccess: () => {
                       reset('password', 'password_confirmation');
@@ -58,7 +60,7 @@ export default function CustomerProfileForm({
                     />
                 ))}
 
-                {formDatas.flex !== undefined && formDatas.flex !== null && (
+                {formDatas.flex && (
                     <div className='flex gap-4'>
                         {formDatas.flex.map((formData) => (
                             <GenericFormField
@@ -83,7 +85,7 @@ export default function CustomerProfileForm({
                         />
                     ))}
 
-                {formDatas.end !== undefined && formDatas.end !== null && (
+                {formDatas.end && (
                     <GenericFormField
                         form={form}
                         setData={setData}

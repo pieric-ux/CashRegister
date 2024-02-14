@@ -32,7 +32,7 @@ export default function CategoryProductsInfosForm({
 
     const { cashRegisterModule } = usePage<PageProps>().props;
 
-    const defaultValues = getDefaultValues(category, isUpdate); // FIXME: check type with Flavien
+    const defaultValues = getDefaultValues(category);
 
     const { data, setData, post, patch, processing, errors } = useFormInertia(defaultValues);
 
@@ -44,7 +44,7 @@ export default function CategoryProductsInfosForm({
         e.preventDefault();
 
         isUpdate
-            ? patch(route('categories.update', category), {
+            ? patch(route('categories.update', category?.id), {
                   preserveScroll: true,
                   onSuccess: () => closeDialog(),
               })

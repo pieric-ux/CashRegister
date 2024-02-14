@@ -33,4 +33,4 @@ const SidebarDescription = forwardRef<HTMLParagraphElement, SidebarDescriptionPr
 );
 SidebarDescription.displayName = Description.displayName;
 
-export { SidebarDescription, sidebarDescriptionVariants };
+export { SidebarDescription };

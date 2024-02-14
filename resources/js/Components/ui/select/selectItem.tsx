@@ -47,4 +47,4 @@ const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(
 );
 SelectItem.displayName = Item.displayName;
 
-export { SelectItem, selectItemVariants };
+export { SelectItem };

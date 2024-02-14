@@ -36,4 +36,4 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({ className, variant, ...pro
 ));
 Card.displayName = 'Card';
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, cardVariants };
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };

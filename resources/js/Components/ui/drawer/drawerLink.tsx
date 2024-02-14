@@ -34,7 +34,7 @@ const DrawerLink = ({
         className={cn(
             drawerLinkVariants({ variant, className }),
             active &&
-                'text-ring-foreground focus:border-ring-foreground dark:focus:bg-ring-foreground border-ring bg-ring/10 focus:bg-ring/30 dark:text-white dark:focus:border-ring',
+                'border-ring bg-ring/10 text-ring-foreground focus:border-ring-foreground focus:bg-ring/30 dark:text-white dark:focus:border-ring dark:focus:bg-ring-foreground',
             !active &&
                 'border-transparent text-foreground hover:border-foreground/60 hover:bg-foreground/10 focus:border-foreground/60 focus:bg-foreground/10 ',
         )}
@@ -46,4 +46,4 @@ const DrawerLink = ({
 );
 DrawerLink.displayName = 'DrawerLink';
 
-export { DrawerLink, drawerLinkVariants };
+export { DrawerLink };

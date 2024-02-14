@@ -20,7 +20,7 @@ export default function DeleteProduct({ product }: DeleteProductProps): JSX.Elem
             <ActionDialogButton datas={deleteProductDatas} open={open} setOpen={setOpen}>
                 <ConfirmDeleteForm
                     datas={deleteProductDatas}
-                    route={route('products.destroy', product)} // FIXME:
+                    route={route('products.destroy', product.id)}
                     closeDialog={closeDialog}
                 />
             </ActionDialogButton>

@@ -27,12 +27,12 @@ export default function UpdateWorkstation({ workstation }: UpdateWorkstationProp
                 datas={updateWorkstationDatas}
                 open={open}
                 setOpen={setOpen}
-                isUpdate={true}
+                isUpdate
             >
                 <WorkstationInfosForm
                     workstation={workstation}
                     closeDialog={closeDialog}
-                    isUpdate={true}
+                    isUpdate
                 />
             </ActionDialogButton>
         </section>

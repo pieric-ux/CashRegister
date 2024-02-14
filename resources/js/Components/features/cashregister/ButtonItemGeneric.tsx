@@ -20,19 +20,15 @@ export default function ButtonItemGeneric({
 }: ButtonItemGenericProps): JSX.Element {
     const { cart, setCart } = useContext(CashRegisterContext);
 
-    const addToCart = (item: CartItem, itemType: string): void => {
+    const addToCart = (item: Partial<CartItem>, itemType: string): void => {
         const newCart = { ...cart };
-        let price = item.client_price * 1;
+        let price = item.client_price && item.client_price * 1;
 
-        if (itemType === 'return') {
+        if (itemType === 'return' && price) {
             price *= -1;
         }
 
-        if (
-            item.cr_dishes !== undefined &&
-            item.cr_dishes !== null &&
-            item.cr_dishes.is_consigned
-        ) {
+        if (item.cr_dishes?.is_consigned && price) {
             price += item.cr_dishes.client_price * 1;
         }
 
@@ -40,7 +36,7 @@ export default function ButtonItemGeneric({
             (cartItem) => cartItem.id === item.id && cartItem.type === itemType,
         );
 
-        if (foundItem !== null && foundItem !== undefined) {
+        if (foundItem) {
             foundItem.quantity += 1;
         } else {
             const emptyIndex = newCart.items.findIndex((cartItem) => cartItem.id === null);
@@ -48,11 +44,16 @@ export default function ButtonItemGeneric({
                 newCart.items[emptyIndex] = {
                     ...item,
                     quantity: 1,
-                    client_price: price,
+                    client_price: price || 0,
                     type: itemType,
                 };
             } else {
-                newCart.items.push({ ...item, quantity: 1, client_price: price, type: itemType });
+                newCart.items.push({
+                    ...item,
+                    quantity: 1,
+                    client_price: price || 0,
+                    type: itemType,
+                });
             }
         }
 
@@ -79,18 +80,18 @@ export default function ButtonItemGeneric({
             disabled={isDragging}
             onClick={() => {
                 if (!isDragging) {
-                    addToCart(data, itemType); // FIXME: check with Flavien
+                    addToCart(data, itemType);
                 }
             }}
         >
             <Avatar variant={'square'}>
-                <AvatarImage src={data?.media?.[0].original_url} />
+                <AvatarImage src={data?.media?.[0]?.original_url} />
                 <AvatarFallback>{data.name}</AvatarFallback>
             </Avatar>
 
             <p>{data.unit}</p>
 
-            {getQuantityInCart() !== null && (
+            {getQuantityInCart() && (
                 <Badge variant={'rounded'} size={'rounded'}>
                     {getQuantityInCart()}
                 </Badge>

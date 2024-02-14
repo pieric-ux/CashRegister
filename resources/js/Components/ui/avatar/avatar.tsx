@@ -39,4 +39,4 @@ const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(
 );
 Avatar.displayName = Root.displayName;
 
-export { Avatar, AvatarImage, AvatarFallback, avatarVariants };
+export { Avatar, AvatarImage, AvatarFallback };

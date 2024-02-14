@@ -48,7 +48,7 @@ class EmployeeLoginController extends Controller
     {
         Auth::guard('employee')->logout();
 
-        $request->session()->invalidate(); // FIXME: logged with customer and employee use the same session
+        $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         return redirect('/');

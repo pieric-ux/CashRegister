@@ -29,4 +29,4 @@ const DrawerTitle = forwardRef<HTMLHeadingElement, DrawerTitleProps>(
 );
 DrawerTitle.displayName = DrawerPrimitive.Title.displayName;
 
-export { DrawerTitle, drawerTitleVariants };
+export { DrawerTitle };

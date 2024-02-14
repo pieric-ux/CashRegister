@@ -20,13 +20,13 @@ export default function DeleteWorkstation({ workstation }: DeleteWorkstationProp
     const closeDialog = (): void => {
         setOpen(false);
     };
-    // FIXME: check type with Flavien
+
     return (
         <section>
             <ActionDialogButton datas={deleteWorkstationDatas} open={open} setOpen={setOpen}>
                 <ConfirmDeleteForm
                     datas={deleteWorkstationDatas}
-                    route={route('workstations.destroy', workstation)}
+                    route={route('workstations.destroy', workstation.id)}
                     closeDialog={closeDialog}
                 />
             </ActionDialogButton>

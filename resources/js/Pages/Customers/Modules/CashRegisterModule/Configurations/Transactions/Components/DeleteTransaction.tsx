@@ -19,7 +19,7 @@ export default function DeleteTransaction({ transaction }: DeleteTransactionProp
         <section>
             <ActionDialogButton datas={deleteTransactionDatas} open={open} setOpen={setOpen}>
                 <ConfirmDeleteForm
-                    route={route('transactions.destroy', transaction)} // FIXME:
+                    route={route('transactions.destroy', transaction.id)}
                     closeDialog={closeDialog}
                     datas={deleteTransactionDatas}
                 />

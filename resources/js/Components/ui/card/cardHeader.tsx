@@ -39,4 +39,4 @@ const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
 );
 CardHeader.displayName = 'CardHeader';
 
-export { CardHeader, cardHeaderVariants };
+export { CardHeader };

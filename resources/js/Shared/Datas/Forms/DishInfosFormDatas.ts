@@ -1,13 +1,13 @@
 import { type Dish, type DishInfosFormDatas } from '@/Shared/Types/DishTypes';
 
-export const getDefaultValues = (dish: Dish, isUpdate: boolean): Dish => {
+export const getDefaultValues = (dish?: Dish): Dish => {
     return {
-        name: isUpdate ? dish?.name : '',
-        unit: isUpdate ? dish?.unit : '',
-        client_price: isUpdate ? dish?.client_price : 0,
-        cost_price: isUpdate ? dish?.cost_price : 0,
-        is_consigned: isUpdate ? Boolean(dish?.is_consigned) : true,
-        is_soldSeparately: isUpdate ? Boolean(dish?.is_soldSeparately) : false,
+        name: dish?.name || '',
+        unit: dish?.unit || '',
+        client_price: dish?.client_price || 0,
+        cost_price: dish?.cost_price || 0,
+        is_consigned: Boolean(dish?.is_consigned) || true,
+        is_soldSeparately: Boolean(dish?.is_soldSeparately) || false,
     };
 };
 

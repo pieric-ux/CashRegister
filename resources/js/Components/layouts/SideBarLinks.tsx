@@ -15,15 +15,15 @@ export default function SideBarLinks({ datas, slug }: SideBarLinksProps): JSX.El
             {datas.map((item, index) => (
                 <SidebarLink
                     key={index}
-                    href={slug !== undefined ? route(item.route, slug) : route(item.route)}
+                    href={slug ? route(item.route, slug) : route(item.route)}
                     active={
-                        slug !== undefined
+                        slug
                             ? route().current(item.route, slug)
-                            : item.active !== undefined
+                            : item.active
                               ? route().current(item.route) || route().current(item.active)
                               : route().current(item.route)
                     }
-                    svg={<Svg type={item.typeSvg} variant={'sideBar'} />} // FIXME: check type with Flavien
+                    svg={item.typeSvg ? <Svg type={item.typeSvg} variant={'sideBar'} /> : undefined}
                 >
                     {t(item.label)}
                 </SidebarLink>
