@@ -1,15 +1,10 @@
 import { cn } from '@/lib/utils';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
+import { Close, Content, Portal } from '@radix-ui/react-dialog';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { DialogOverlay } from '@/Components/ui/dialog/dialogOverlay';
-import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react';
-import {
-    Close,
-    Content,
-    Portal,
-    type DialogContentProps as RadixDialogContentProps,
-} from '@radix-ui/react-dialog';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const dialogContentVariants = cva(
     'fixed left-[50%] top-[50%] z-50 w-full translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg transition duration-300 ease-linear data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg',
@@ -37,12 +32,9 @@ const dialogContentVariants = cva(
 
 export interface DialogContentProps
     extends ComponentPropsWithoutRef<typeof Content>,
-        VariantProps<typeof dialogContentVariants>,
-        RadixDialogContentProps {
-    children?: ReactNode;
-}
+        VariantProps<typeof dialogContentVariants> {}
 
-const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
+const DialogContent = forwardRef<ElementRef<typeof Content>, DialogContentProps>(
     ({ className, variant, size, children, ...props }, ref) => {
         const { t } = useTranslation();
         return (

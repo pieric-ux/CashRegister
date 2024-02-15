@@ -2,9 +2,9 @@
 
 import { cn } from '@/lib/utils';
 import { SwitchThumb } from './switchThumb';
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
+import { Root } from '@radix-ui/react-switch';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Root, type SwitchProps as RadixSwitchProps } from '@radix-ui/react-switch';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const switchVariants = cva(
     'peer inline-flex shrink-0 cursor-pointer items-center rounded-full transition duration-75 ease-linear disabled:cursor-not-allowed disabled:opacity-50',
@@ -28,12 +28,11 @@ const switchVariants = cva(
 
 export interface SwitchProps
     extends ComponentPropsWithoutRef<typeof Root>,
-        VariantProps<typeof switchVariants>,
-        RadixSwitchProps {
+        VariantProps<typeof switchVariants> {
     asChild?: boolean;
 }
 
-const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
+const Switch = forwardRef<ElementRef<typeof Root>, SwitchProps>(
     ({ className, variant, size, asChild = false, children, ...props }, ref) => (
         <Root className={cn(switchVariants({ variant, size, className }))} ref={ref} {...props}>
             {asChild ? children : <SwitchThumb />}

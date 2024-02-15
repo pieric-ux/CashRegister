@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
 import { Drawer as DrawerPrimitive } from 'vaul';
 import { DrawerPortal } from '@/Components/ui/drawer/drawer';
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { DrawerOverlay } from '@/Components/ui/drawer/drawerOverlay';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const drawerContentVariants = cva('z-50 focus:outline-none', {
     variants: {
@@ -21,7 +21,7 @@ export interface DrawerContentProps
     extends ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>,
         VariantProps<typeof drawerContentVariants> {}
 
-const DrawerContent = forwardRef<HTMLDivElement, DrawerContentProps>(
+const DrawerContent = forwardRef<ElementRef<typeof DrawerPrimitive.Content>, DrawerContentProps>(
     ({ className, variant, children, ...props }, ref) => (
         <DrawerPortal>
             <DrawerOverlay />

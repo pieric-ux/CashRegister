@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { Content } from '@radix-ui/react-tabs';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const tabsContentVariants = cva('', {
     variants: {
@@ -19,7 +19,7 @@ export interface TabsContentProps
     extends ComponentPropsWithoutRef<typeof Content>,
         VariantProps<typeof tabsContentVariants> {}
 
-const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
+const TabsContent = forwardRef<ElementRef<typeof Content>, TabsContentProps>(
     ({ className, variant, ...props }, ref) => (
         <Content ref={ref} className={cn(tabsContentVariants({ variant, className }))} {...props} />
     ),

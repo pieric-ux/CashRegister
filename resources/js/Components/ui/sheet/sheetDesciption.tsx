@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
 import { Description } from '@radix-ui/react-dialog';
+import { VariantProps, cva } from 'class-variance-authority';
 import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
 
-const dialogDescriptionVariants = cva('', {
+const sheetDescriptionVariants = cva('', {
     variants: {
         variant: {
             default: 'text-sm text-muted-foreground',
@@ -14,19 +14,19 @@ const dialogDescriptionVariants = cva('', {
     },
 });
 
-export interface DialogDescriptionProps
+export interface SheetDescriptionProps
     extends ComponentPropsWithoutRef<typeof Description>,
-        VariantProps<typeof dialogDescriptionVariants> {}
+        VariantProps<typeof sheetDescriptionVariants> {}
 
-const DialogDescription = forwardRef<ElementRef<typeof Description>, DialogDescriptionProps>(
+const SheetDescription = forwardRef<ElementRef<typeof Description>, SheetDescriptionProps>(
     ({ className, variant, ...props }, ref) => (
         <Description
-            className={cn(dialogDescriptionVariants({ variant, className }))}
             ref={ref}
+            className={cn(sheetDescriptionVariants({ variant, className }))}
             {...props}
         />
     ),
 );
-DialogDescription.displayName = Description.displayName;
+SheetDescription.displayName = Description.displayName;
 
-export { DialogDescription };
+export { SheetDescription };

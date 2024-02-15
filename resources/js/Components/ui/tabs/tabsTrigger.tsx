@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { Trigger } from '@radix-ui/react-tabs';
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const tabsTriggerVariants = cva('', {
     variants: {
@@ -19,7 +19,7 @@ export interface TabsTriggerProps
     extends ComponentPropsWithoutRef<typeof Trigger>,
         VariantProps<typeof tabsTriggerVariants> {}
 
-const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
+const TabsTrigger = forwardRef<ElementRef<typeof Trigger>, TabsTriggerProps>(
     ({ className, variant, ...props }, ref) => (
         <Trigger ref={ref} className={cn(tabsTriggerVariants({ variant, className }))} {...props} />
     ),

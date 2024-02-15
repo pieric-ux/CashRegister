@@ -3,10 +3,10 @@ import { Title } from '@radix-ui/react-dialog';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
-const dialogTitleVariants = cva('', {
+const sheetTitleVariants = cva('', {
     variants: {
         variant: {
-            default: 'text-lg font-medium',
+            default: 'text-lg font-semibold text-foreground',
         },
     },
     defaultVariants: {
@@ -14,15 +14,15 @@ const dialogTitleVariants = cva('', {
     },
 });
 
-export interface DialogTitleProps
+export interface SheetTitleProps
     extends ComponentPropsWithoutRef<typeof Title>,
-        VariantProps<typeof dialogTitleVariants> {}
+        VariantProps<typeof sheetTitleVariants> {}
 
-const DialogTitle = forwardRef<ElementRef<typeof Title>, DialogTitleProps>(
+const SheetTitle = forwardRef<ElementRef<typeof Title>, SheetTitleProps>(
     ({ className, variant, ...props }, ref) => (
-        <Title className={cn(dialogTitleVariants({ variant, className }))} ref={ref} {...props} />
+        <Title ref={ref} className={cn(sheetTitleVariants({ variant, className }))} {...props} />
     ),
 );
-DialogTitle.displayName = Title.displayName;
+SheetTitle.displayName = Title.displayName;
 
-export { DialogTitle };
+export { SheetTitle };

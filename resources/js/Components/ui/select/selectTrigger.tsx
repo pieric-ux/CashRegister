@@ -1,10 +1,7 @@
 import { cn } from '@/lib/utils';
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
+import { Trigger } from '@radix-ui/react-select';
 import { cva, type VariantProps } from 'class-variance-authority';
-import {
-    Trigger,
-    type SelectTriggerProps as RadixSelectTriggerProps,
-} from '@radix-ui/react-select';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const selectTriggerVariants = cva(
     'flex whitespace-nowrap transition duration-300 ease-linear disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
@@ -27,10 +24,9 @@ const selectTriggerVariants = cva(
 
 export interface SelectTriggerProps
     extends ComponentPropsWithoutRef<typeof Trigger>,
-        VariantProps<typeof selectTriggerVariants>,
-        RadixSelectTriggerProps {}
+        VariantProps<typeof selectTriggerVariants> {}
 
-const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
+const SelectTrigger = forwardRef<ElementRef<typeof Trigger>, SelectTriggerProps>(
     ({ className, variant, size, children, ...props }, ref) => (
         <Trigger
             ref={ref}

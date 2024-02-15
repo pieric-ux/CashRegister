@@ -1,12 +1,11 @@
 'use client';
 
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
+import { cn } from '@/lib/utils';
+import { Root } from '@radix-ui/react-avatar';
 import { AvatarImage } from '@/Components/ui/avatar/avatarImage';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { AvatarFallback } from '@/Components/ui/avatar/avatarFallback';
-import { Root, type AvatarProps as RadixAvatarProps } from '@radix-ui/react-avatar';
-
-import { cn } from '@/lib/utils';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const avatarVariants = cva('relative overflow-hidden', {
     variants: {
@@ -29,10 +28,9 @@ const avatarVariants = cva('relative overflow-hidden', {
 
 export interface AvatarProps
     extends ComponentPropsWithoutRef<typeof Root>,
-        VariantProps<typeof avatarVariants>,
-        RadixAvatarProps {}
+        VariantProps<typeof avatarVariants> {}
 
-const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(
+const Avatar = forwardRef<ElementRef<typeof Root>, AvatarProps>(
     ({ className, variant, size, ...props }, ref) => (
         <Root className={cn(avatarVariants({ variant, size, className }))} ref={ref} {...props} />
     ),

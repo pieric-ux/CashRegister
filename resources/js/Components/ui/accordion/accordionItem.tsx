@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { Item } from '@radix-ui/react-accordion';
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const accordionItemVariants = cva('', {
     variants: {
@@ -18,7 +18,7 @@ export interface AccordionItemProps
     extends ComponentPropsWithoutRef<typeof Item>,
         VariantProps<typeof accordionItemVariants> {}
 
-const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
+const AccordionItem = forwardRef<ElementRef<typeof Item>, AccordionItemProps>(
     ({ className, variant, ...props }, ref) => (
         <Item ref={ref} className={cn(accordionItemVariants({ variant, className }))} {...props} />
     ),

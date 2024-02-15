@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 import { Header, Trigger } from '@radix-ui/react-accordion';
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const accordionTriggerVariants = cva('', {
@@ -20,7 +20,7 @@ export interface AccordionTriggerProps
     extends ComponentPropsWithoutRef<typeof Trigger>,
         VariantProps<typeof accordionTriggerVariants> {}
 
-const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
+const AccordionTrigger = forwardRef<ElementRef<typeof Trigger>, AccordionTriggerProps>(
     ({ className, variant, children, ...props }, ref) => (
         <Header className='flex'>
             <Trigger

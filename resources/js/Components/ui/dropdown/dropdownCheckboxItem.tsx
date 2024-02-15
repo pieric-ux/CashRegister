@@ -1,12 +1,8 @@
 import { cn } from '@/lib/utils';
 import { CheckIcon } from '@radix-ui/react-icons';
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import {
-    CheckboxItem,
-    ItemIndicator,
-    type DropdownMenuCheckboxItemProps as RadixDropdownMenuCheckboxItemProps,
-} from '@radix-ui/react-dropdown-menu';
+import { CheckboxItem, ItemIndicator } from '@radix-ui/react-dropdown-menu';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const dropdownCheckboxItemVariants = cva(
     'relative flex cursor-default select-none transition duration-300 ease-linear data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
@@ -29,10 +25,9 @@ const dropdownCheckboxItemVariants = cva(
 
 export interface DropdownCheckboxItemProps
     extends ComponentPropsWithoutRef<typeof CheckboxItem>,
-        VariantProps<typeof dropdownCheckboxItemVariants>,
-        RadixDropdownMenuCheckboxItemProps {}
+        VariantProps<typeof dropdownCheckboxItemVariants> {}
 
-const DropdownCheckboxItem = forwardRef<HTMLDivElement, DropdownCheckboxItemProps>(
+const DropdownCheckboxItem = forwardRef<ElementRef<typeof CheckboxItem>, DropdownCheckboxItemProps>(
     ({ className, variant, size, children, checked, ...props }, ref) => (
         <CheckboxItem
             className={cn(dropdownCheckboxItemVariants({ variant, size, className }))}

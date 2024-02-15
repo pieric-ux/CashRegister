@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
+import { Image } from '@radix-ui/react-avatar';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Image, type AvatarImageProps as RadixAvatarImageProps } from '@radix-ui/react-avatar';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const avatarImageVariants = cva('aspect-square h-full w-full', {
     variants: {
@@ -16,10 +16,9 @@ const avatarImageVariants = cva('aspect-square h-full w-full', {
 
 export interface AvatarImageProps
     extends ComponentPropsWithoutRef<typeof Image>,
-        VariantProps<typeof avatarImageVariants>,
-        RadixAvatarImageProps {}
+        VariantProps<typeof avatarImageVariants> {}
 
-const AvatarImage = forwardRef<HTMLImageElement, AvatarImageProps>(
+const AvatarImage = forwardRef<ElementRef<typeof Image>, AvatarImageProps>(
     ({ className, variant, ...props }, ref) => (
         <Image className={cn(avatarImageVariants({ variant, className }))} ref={ref} {...props} />
     ),

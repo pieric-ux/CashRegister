@@ -1,12 +1,8 @@
 import { cn } from '@/lib/utils';
 import { DotFilledIcon } from '@radix-ui/react-icons';
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import {
-    RadioItem,
-    ItemIndicator,
-    type DropdownMenuRadioItemProps as RadixDropdownMenuRadioItemProps,
-} from '@radix-ui/react-dropdown-menu';
+import { RadioItem, ItemIndicator } from '@radix-ui/react-dropdown-menu';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const dropdownRadioItemVariants = cva(
     'relative flex cursor-default select-none transition data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
@@ -29,10 +25,9 @@ const dropdownRadioItemVariants = cva(
 
 export interface DropdownRadioItemProps
     extends ComponentPropsWithoutRef<typeof RadioItem>,
-        VariantProps<typeof dropdownRadioItemVariants>,
-        RadixDropdownMenuRadioItemProps {}
+        VariantProps<typeof dropdownRadioItemVariants> {}
 
-const DropdownRadioItem = forwardRef<HTMLDivElement, DropdownRadioItemProps>(
+const DropdownRadioItem = forwardRef<ElementRef<typeof RadioItem>, DropdownRadioItemProps>(
     ({ className, variant, size, children, ...props }, ref) => (
         <RadioItem
             className={cn(dropdownRadioItemVariants({ variant, size, className }))}

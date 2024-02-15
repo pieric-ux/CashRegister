@@ -1,10 +1,7 @@
 import { cn } from '@/lib/utils';
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
+import { Separator } from '@radix-ui/react-dropdown-menu';
 import { cva, type VariantProps } from 'class-variance-authority';
-import {
-    Separator,
-    type DropdownMenuSeparatorProps as RadixDropdownMenuSeparatorProps,
-} from '@radix-ui/react-dropdown-menu';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const dropdownSeparatorVariants = cva('', {
     variants: {
@@ -23,10 +20,9 @@ const dropdownSeparatorVariants = cva('', {
 
 export interface DropdownSeparatorProps
     extends ComponentPropsWithoutRef<typeof Separator>,
-        VariantProps<typeof dropdownSeparatorVariants>,
-        RadixDropdownMenuSeparatorProps {}
+        VariantProps<typeof dropdownSeparatorVariants> {}
 
-const DropdownSeparator = forwardRef<HTMLDivElement, DropdownSeparatorProps>(
+const DropdownSeparator = forwardRef<ElementRef<typeof Separator>, DropdownSeparatorProps>(
     ({ className, variant, size, ...props }, ref) => (
         <Separator
             className={cn(dropdownSeparatorVariants({ variant, size, className }))}

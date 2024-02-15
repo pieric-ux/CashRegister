@@ -1,10 +1,7 @@
 import { cn } from '@/lib/utils';
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
+import { Item } from '@radix-ui/react-dropdown-menu';
 import { cva, type VariantProps } from 'class-variance-authority';
-import {
-    Item,
-    type DropdownMenuItemProps as RadixDropdownMenuItemProps,
-} from '@radix-ui/react-dropdown-menu';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const dropdownItemVariants = cva(
     'relative flex cursor-default select-none transition ease-linear data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
@@ -26,12 +23,11 @@ const dropdownItemVariants = cva(
 
 export interface DropdownItemProps
     extends ComponentPropsWithoutRef<typeof Item>,
-        VariantProps<typeof dropdownItemVariants>,
-        RadixDropdownMenuItemProps {
+        VariantProps<typeof dropdownItemVariants> {
     inset?: boolean;
 }
 
-const DropdownItem = forwardRef<HTMLDivElement, DropdownItemProps>(
+const DropdownItem = forwardRef<ElementRef<typeof Item>, DropdownItemProps>(
     ({ className, variant, size, inset = false, ...props }, ref) => (
         <Item
             ref={ref}

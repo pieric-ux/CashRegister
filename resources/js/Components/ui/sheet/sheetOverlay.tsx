@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
 import { Overlay } from '@radix-ui/react-dialog';
-import { cva, type VariantProps } from 'class-variance-authority';
 import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
+import { cva, type VariantProps } from 'class-variance-authority';
 
-const dialogOverlayVariants = cva(
+const sheetOverlayVariants = cva(
     'fixed inset-0 z-50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
     {
         variants: {
@@ -17,19 +17,19 @@ const dialogOverlayVariants = cva(
     },
 );
 
-export interface DialogOverlayProps
+export interface SheetOverlayProps
     extends ComponentPropsWithoutRef<typeof Overlay>,
-        VariantProps<typeof dialogOverlayVariants> {}
+        VariantProps<typeof sheetOverlayVariants> {}
 
-const DialogOverlay = forwardRef<ElementRef<typeof Overlay>, DialogOverlayProps>(
+const SheetOverlay = forwardRef<ElementRef<typeof Overlay>, SheetOverlayProps>(
     ({ className, variant, ...props }, ref) => (
         <Overlay
-            className={cn(dialogOverlayVariants({ variant, className }))}
+            className={cn(sheetOverlayVariants({ variant, className }))}
             ref={ref}
             {...props}
         />
     ),
 );
-DialogOverlay.displayName = Overlay.displayName;
+SheetOverlay.displayName = Overlay.displayName;
 
-export { DialogOverlay };
+export { SheetOverlay };

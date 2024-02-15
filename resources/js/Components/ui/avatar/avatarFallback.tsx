@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import {
     Fallback,
@@ -22,7 +22,7 @@ export interface AvatarFallbackProps
         VariantProps<typeof avatarFallbackVariants>,
         RadixAvatarFallbackProps {}
 
-const AvatarFallback = forwardRef<HTMLSpanElement, AvatarFallbackProps>(
+const AvatarFallback = forwardRef<ElementRef<typeof Fallback>, AvatarFallbackProps>(
     ({ className, variant, ...props }, ref) => (
         <Fallback
             className={cn(avatarFallbackVariants({ variant, className }))}

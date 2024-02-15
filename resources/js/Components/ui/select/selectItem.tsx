@@ -1,13 +1,8 @@
 import { cn } from '@/lib/utils';
 import { CheckIcon } from '@radix-ui/react-icons';
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import {
-    Item,
-    ItemIndicator,
-    ItemText,
-    type SelectItemProps as RadixSelectItemProps,
-} from '@radix-ui/react-select';
+import { Item, ItemIndicator, ItemText } from '@radix-ui/react-select';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const selectItemVariants = cva(
     'relative flex cursor-default select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
@@ -30,10 +25,9 @@ const selectItemVariants = cva(
 
 export interface SelectItemProps
     extends ComponentPropsWithoutRef<typeof Item>,
-        VariantProps<typeof selectItemVariants>,
-        RadixSelectItemProps {}
+        VariantProps<typeof selectItemVariants> {}
 
-const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(
+const SelectItem = forwardRef<ElementRef<typeof Item>, SelectItemProps>(
     ({ className, variant, size, children, ...props }, ref) => (
         <Item className={cn(selectItemVariants({ variant, size, className }))} ref={ref} {...props}>
             <span className='absolute right-2 flex h-3.5 w-3.5 items-center justify-center'>

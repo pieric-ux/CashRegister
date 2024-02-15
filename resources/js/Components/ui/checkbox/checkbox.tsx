@@ -2,13 +2,9 @@
 
 import { cn } from '@/lib/utils';
 import { CheckIcon } from '@radix-ui/react-icons';
+import { Root, Indicator } from '@radix-ui/react-checkbox';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
-import {
-    Root,
-    Indicator,
-    type CheckboxProps as RadixCheckboxProps,
-} from '@radix-ui/react-checkbox';
+import { forwardRef, type ElementRef, type ComponentPropsWithoutRef } from 'react';
 
 const checkboxVariants = cva(
     'peer shrink-0 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-ring data-[state=checked]:text-primary-foreground',
@@ -31,10 +27,9 @@ const checkboxVariants = cva(
 
 export interface CheckboxProps
     extends ComponentPropsWithoutRef<typeof Root>,
-        VariantProps<typeof checkboxVariants>,
-        RadixCheckboxProps {}
+        VariantProps<typeof checkboxVariants> {}
 
-const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
+const Checkbox = forwardRef<ElementRef<typeof Root>, CheckboxProps>(
     ({ className, variant, size, ...props }, ref) => (
         <Root ref={ref} className={cn(checkboxVariants({ variant, size, className }))} {...props}>
             <Indicator className={cn('flex items-center justify-center text-current')}>
