@@ -1,11 +1,13 @@
-import { useDarkMode } from 'usehooks-ts';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
+import { useTernaryDarkMode } from 'usehooks-ts';
 import { Switch, SwitchThumb } from '@/Components/ui/switch/switch';
 
 export default function ThemeSwitcher(): JSX.Element {
     const { t } = useTranslation();
-    const { isDarkMode, toggle } = useDarkMode(); // TODO: use may be cookie or state
+    const { isDarkMode, ternaryDarkMode, toggleTernaryDarkMode } = useTernaryDarkMode({
+        localStorageKey: 'darkMode',
+    });
 
     isDarkMode
         ? document.documentElement.classList.add('dark')
@@ -13,14 +15,20 @@ export default function ThemeSwitcher(): JSX.Element {
 
     return (
         <Switch
-            onClick={toggle}
+            onClick={toggleTernaryDarkMode}
             checked={isDarkMode}
             size={'theme'}
             aria-label={t('Toggle between light and dark themes')}
             asChild
         >
             <SwitchThumb size={'theme'}>
-                {isDarkMode ? <Svg type='dark' size={'sm'} /> : <Svg type='light' size={'sm'} />}
+                {ternaryDarkMode === 'dark' ? (
+                    <Svg type='dark' size={'sm'} />
+                ) : ternaryDarkMode === 'light' ? (
+                    <Svg type='light' size={'sm'} />
+                ) : (
+                    <Svg type='system' size={'sm'} />
+                )}
             </SwitchThumb>
         </Switch>
     );
