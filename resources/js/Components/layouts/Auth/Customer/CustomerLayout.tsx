@@ -3,10 +3,10 @@ import { usePage } from '@inertiajs/react';
 import Header from '@/Components/layouts/Header';
 import SideBar from '@/Components/layouts/SideBar';
 import SideBarLinks from '@/Components/layouts/SideBarLinks';
+import { NavigationDatas } from '@/Shared/Types/NavigationTypes';
 import { DrawerNavCustomerLayoutDatas } from '@/Shared/Datas/Navigation/DrawerNavDatas';
 import { SideBarNavCustomerLayoutDatas } from '@/Shared/Datas/Navigation/SideBarNavDatas';
 import { DropDownNavCustomerLayoutDatas } from '@/Shared/Datas/Navigation/DropdownNavDatas';
-import { NavigationDatas } from '@/Shared/Types/NavigationTypes';
 
 interface CustomerLayoutProps {
     children: ReactNode;

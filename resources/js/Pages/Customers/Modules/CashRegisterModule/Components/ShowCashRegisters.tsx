@@ -15,7 +15,7 @@ export default function ShowCashRegisters(): JSX.Element {
 
     return (
         <>
-            {cashRegisterModules.length > 0 ? (
+            {cashRegisterModules ? (
                 <ul className='space-y-4'>
                     {cashRegisterModules.map((cashRegisterModule) => (
                         <li key={cashRegisterModule.id}>
