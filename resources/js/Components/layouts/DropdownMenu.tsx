@@ -20,6 +20,7 @@ export default function DropdownMenu({
         <Dropdown>
             <DropdownTrigger className='flex items-center justify-center text-sm font-medium leading-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background'>
                 {user.first_name}
+                {/* FIXME: flickering effect due to avatar fallback */}
                 <Avatar className='ml-2'>
                     <AvatarImage src={avatarPath} alt='avatar' />
                     <AvatarFallback>
