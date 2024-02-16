@@ -44,7 +44,7 @@ export default function Index(): JSX.Element {
     const isCartEmpty = cart.items.every((item) => item.id === null || item.quantity === 0);
 
     return (
-        <EmployeeLayout>
+        <>
             <Head title={t(`${employee.cr_workstations.name}`)} />
 
             <Card className='h-full'>
@@ -69,6 +69,8 @@ export default function Index(): JSX.Element {
                     </CashRegisterContext.Provider>
                 </CardHeader>
             </Card>
-        </EmployeeLayout>
+        </>
     );
 }
+
+Index.layout = (page: JSX.Element) => <EmployeeLayout children={page} />;

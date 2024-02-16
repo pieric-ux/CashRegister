@@ -21,7 +21,7 @@ export default function Index(): JSX.Element {
     const employees = cashRegisterModule.cr_employees;
 
     return (
-        <CashRegisterConfigurationsLayout>
+        <>
             <Head title={cashRegisterModule.name} />
 
             <CreateEmployee />
@@ -36,6 +36,8 @@ export default function Index(): JSX.Element {
                     />
                 </CardHeader>
             </Card>
-        </CashRegisterConfigurationsLayout>
+        </>
     );
 }
+
+Index.layout = (page: JSX.Element) => <CashRegisterConfigurationsLayout children={page} />;

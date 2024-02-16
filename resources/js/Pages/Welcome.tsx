@@ -12,7 +12,7 @@ export default function Welcome(): JSX.Element {
     const { customer } = usePage<InertiaPageProps>().props;
 
     return (
-        <GuestLayout>
+        <>
             <Head title='Welcome' />
             <div className='p-6 text-right sm:fixed sm:right-0 sm:top-0'>
                 {customer && (
@@ -38,6 +38,8 @@ export default function Welcome(): JSX.Element {
                     </TabsContent>
                 </Tabs>
             </CardContent>
-        </GuestLayout>
+        </>
     );
 }
+
+Welcome.layout = (page: JSX.Element) => <GuestLayout children={page} />;

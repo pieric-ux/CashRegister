@@ -28,7 +28,7 @@ export default function Index(): JSX.Element {
         }));
 
     return (
-        <CashRegisterConfigurationsLayout>
+        <>
             <Head title={cashRegisterModule.name} />
 
             <CreateDish />
@@ -43,6 +43,8 @@ export default function Index(): JSX.Element {
                     />
                 </CardHeader>
             </Card>
-        </CashRegisterConfigurationsLayout>
+        </>
     );
 }
+
+Index.layout = (page: JSX.Element) => <CashRegisterConfigurationsLayout children={page} />;

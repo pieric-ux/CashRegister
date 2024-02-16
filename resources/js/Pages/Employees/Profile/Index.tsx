@@ -32,7 +32,7 @@ export default function Index(): JSX.Element {
     });
 
     return (
-        <EmployeeLayout>
+        <>
             <Head title={t('Profile')} />
 
             <UpdateUserAvatar avatarPath={avatarPath} isEmployee />
@@ -72,6 +72,8 @@ export default function Index(): JSX.Element {
                     </CardContent>
                 </Card>
             </section>
-        </EmployeeLayout>
+        </>
     );
 }
+
+Index.layout = (page: JSX.Element) => <EmployeeLayout children={page} />;

@@ -24,7 +24,7 @@ export default function Index(): JSX.Element {
     const { cashRegisterModule } = usePage<PageProps>().props;
     const products = cashRegisterModule.cr_products;
     return (
-        <CashRegisterConfigurationsLayout>
+        <>
             <Head title={cashRegisterModule.name} />
 
             <CreateProduct />
@@ -39,6 +39,8 @@ export default function Index(): JSX.Element {
                     />
                 </CardHeader>
             </Card>
-        </CashRegisterConfigurationsLayout>
+        </>
     );
 }
+
+Index.layout = (page: JSX.Element) => <CashRegisterConfigurationsLayout children={page} />;

@@ -28,7 +28,7 @@ export default function Header({
     slug,
 }: HeaderProps): JSX.Element {
     const { t } = useTranslation();
-    const { width } = useWindowSize();
+    const { width } = useWindowSize(); // FIXME: cause flickering and rerender
     return (
         <header className='sticky top-0 z-40 flex h-20 w-full border-b border-border bg-card drop-shadow-sm transition duration-300 ease-linear'>
             {title && (

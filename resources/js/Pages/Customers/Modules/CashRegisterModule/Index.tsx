@@ -8,11 +8,13 @@ export default function Index(): JSX.Element {
     const { t } = useTranslation();
 
     return (
-        <CustomerLayout>
+        <>
             <Head title={t('Applications')} />
 
             <CreateCashRegister />
             <ShowCashRegisters />
-        </CustomerLayout>
+        </>
     );
 }
+
+Index.layout = (page: JSX.Element) => <CustomerLayout children={page} />;

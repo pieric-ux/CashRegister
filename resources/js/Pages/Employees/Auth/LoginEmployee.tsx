@@ -22,7 +22,7 @@ export default function LoginEmployee({
         passwordless,
     };
     return (
-        <GuestLayout>
+        <>
             <Head title={t('Log in')} />
 
             <CardContent>
@@ -40,6 +40,8 @@ export default function LoginEmployee({
                     isEmployee
                 />
             </CardContent>
-        </GuestLayout>
+        </>
     );
 }
+
+LoginEmployee.layout = (page: JSX.Element) => <GuestLayout children={page} />;

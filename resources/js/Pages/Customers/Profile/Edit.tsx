@@ -14,7 +14,7 @@ export default function Edit(): JSX.Element {
     )?.original_url;
 
     return (
-        <CustomerLayout>
+        <>
             <Head title={t('Profile')} />
 
             <UpdateUserAvatar avatarPath={avatarPath} />
@@ -24,6 +24,8 @@ export default function Edit(): JSX.Element {
             <UpdatePassword />
 
             <DeleteUser />
-        </CustomerLayout>
+        </>
     );
 }
+
+Edit.layout = (page: JSX.Element) => <CustomerLayout children={page} />;

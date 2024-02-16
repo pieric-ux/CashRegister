@@ -11,12 +11,14 @@ export default function Dashboard(): JSX.Element {
     const { cashRegisterModule } = usePage<PageProps>().props;
 
     return (
-        <CashRegisterConfigurationsLayout>
+        <>
             <Head title={cashRegisterModule.name} />
 
             <Card>
                 <CardHeader>{cashRegisterModule.name}</CardHeader>
             </Card>
-        </CashRegisterConfigurationsLayout>
+        </>
     );
 }
+
+Dashboard.layout = (page: JSX.Element) => <CashRegisterConfigurationsLayout children={page} />;

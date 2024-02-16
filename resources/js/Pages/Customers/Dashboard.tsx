@@ -7,7 +7,7 @@ export default function Dashboard(): JSX.Element {
     const { t } = useTranslation();
 
     return (
-        <CustomerLayout>
+        <>
             <Head title={t('Dashboard')} />
 
             <Card>
@@ -15,6 +15,8 @@ export default function Dashboard(): JSX.Element {
                     <CardTitle>{t('Welcome')}</CardTitle>
                 </CardHeader>
             </Card>
-        </CustomerLayout>
+        </>
     );
 }
+
+Dashboard.layout = (page: JSX.Element) => <CustomerLayout children={page} />;

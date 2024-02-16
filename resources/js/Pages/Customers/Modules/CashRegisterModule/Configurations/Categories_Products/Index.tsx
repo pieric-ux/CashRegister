@@ -20,7 +20,7 @@ export default function Index(): JSX.Element {
     const categoriesProducts = cashRegisterModule.cr_categories_products;
 
     return (
-        <CashRegisterConfigurationsLayout>
+        <>
             <Head title={cashRegisterModule.name} />
 
             <CreateCategoriesProduct />
@@ -34,6 +34,8 @@ export default function Index(): JSX.Element {
                     </CardHeader>
                 </Card>
             )}
-        </CashRegisterConfigurationsLayout>
+        </>
     );
 }
+
+Index.layout = (page: JSX.Element) => <CashRegisterConfigurationsLayout children={page} />;
