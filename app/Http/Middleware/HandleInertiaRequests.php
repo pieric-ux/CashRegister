@@ -32,7 +32,7 @@ class HandleInertiaRequests extends Middleware
     {
         $sharedProps = [
             ...parent::share($request),
-            'localization' => [
+            'localization' => fn() => [
                 'locale' => app()->getLocale(),
                 'locales' => config('app.locales'),
             ],
@@ -45,13 +45,13 @@ class HandleInertiaRequests extends Middleware
         $customer = $request->user('customer');
         if($customer) {
             $customer->getAvatarUrl();
-            $sharedProps['customer'] = $customer;
+            $sharedProps['customer'] = fn() => $customer;
         }
 
         $employee = $request->user('employee');
         if($employee) {
             $employee->getAvatarUrl();
-            $sharedProps['employee'] = $employee;
+            $sharedProps['employee'] = fn() => $employee;
         }
 
         return $sharedProps;

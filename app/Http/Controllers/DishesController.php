@@ -27,7 +27,7 @@ class DishesController extends Controller
         });
         
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Dishes/Index', [
-            'cashRegisterModule' => $module,
+            'cashRegisterModule' => fn () => $module,
         ]);
     }
 

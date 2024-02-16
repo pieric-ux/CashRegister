@@ -29,7 +29,7 @@ class CashRegisterModulesController extends Controller
         });
 
         return Inertia::render('Customers/Modules/CashRegisterModule/Index', [
-            'cashRegisterModules' => $cashRegisterModules,
+            'cashRegisterModules' => fn () => $cashRegisterModules,
         ]);
     }
 
@@ -59,7 +59,7 @@ class CashRegisterModulesController extends Controller
     public function show(ShowCashRegisterModulesRequest $request, CR_Module $module): Response
     {
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Dashboard', [
-            'cashRegisterModule' => $module,
+            'cashRegisterModule' => fn () => $module,
         ]);
     }
 

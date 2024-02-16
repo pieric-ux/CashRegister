@@ -29,7 +29,7 @@ class TransactionsController extends Controller
         $module->cr_transactions = $transactions;
 
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Transactions/Index', [
-            'cashRegisterModule' => $module,
+            'cashRegisterModule' => fn () => $module,
         ]);
     }
 

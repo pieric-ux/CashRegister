@@ -38,7 +38,7 @@ class ProductsController extends Controller
         $module->cr_dishes;
 
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Products/Index', [
-            'cashRegisterModule' => $module,
+            'cashRegisterModule' => fn () => $module,
         ]);
     }
 

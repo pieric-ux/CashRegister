@@ -29,7 +29,7 @@ class EmployeesController extends Controller
         $module->cr_employees = $employees;
 
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Employees/Index', [
-            'cashRegisterModule' => $module,
+            'cashRegisterModule' => fn () => $module,
         ]);
     }
 

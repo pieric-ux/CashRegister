@@ -23,7 +23,7 @@ class EmployeeLoginController extends Controller
         $module = $request->route('module');
 
         return Inertia::render('Employees/Auth/LoginEmployee', [
-            'cashRegisterModule' => $module,
+            'cashRegisterModule' => fn () => $module,
             'status' => session('status'),
             'passwordless' => $code,
         ]);

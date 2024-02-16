@@ -24,7 +24,7 @@ class CategoriesProductsController extends Controller
         $module->cr_categories_products;
 
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Categories_Products/Index', [
-            'cashRegisterModule' => $module,
+            'cashRegisterModule' => fn () => $module,
         ]);
     }
 

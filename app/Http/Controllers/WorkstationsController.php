@@ -36,7 +36,7 @@ class WorkstationsController extends Controller
         }
 
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Workstations/Index', [
-            'cashRegisterModule' => $module,
+            'cashRegisterModule' => fn () => $module,
         ]);
     }
 
