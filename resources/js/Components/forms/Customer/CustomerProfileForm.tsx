@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Form } from '@/Components/ui/form/form';
 import { Button } from '@/Components/ui/button/button';
 import { CardFooter } from '@/Components/ui/card/cardFooter';
-import { Link, useForm as useFormInertia, usePage } from '@inertiajs/react';
+import { useForm as useFormInertia, usePage } from '@inertiajs/react';
 import { type CustomerProfileFormInput } from '@/Shared/Types/CustomerTypes';
 import { GenericFormField } from '@/Components/ui/form/templates/GenericFormField';
 import { formDatas, getDefaultValues } from '@/Shared/Datas/Forms/CustomerProfileFormDatas';
@@ -125,9 +125,6 @@ export default function CustomerProfileForm({
                     </CardFooter>
                 ) : (
                     <CardFooter className='mt-4 flex items-center justify-end p-0'>
-                        <Button variant={'link'} asChild>
-                            <Link href={route('customers.login')}>{t('Already registered?')}</Link>
-                        </Button>
                         <Button disabled={processing}>{t('Register')}</Button>
                     </CardFooter>
                 )}
