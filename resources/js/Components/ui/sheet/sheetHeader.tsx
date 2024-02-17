@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import { type HTMLAttributes } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-const sheetHeaderVariants = cva('grid gap-1.5 p-4 text-center sm:text-left', {
+const sheetHeaderVariants = cva('grid gap-1.5 p-4 pt-0 text-center sm:text-left', {
     variants: {
         variant: {
             default: '',
