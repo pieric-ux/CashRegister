@@ -8,6 +8,7 @@ import { DrawerNavConfigurationsLayoutDatas } from '@/Shared/Datas/Navigation/Dr
 import { SideBarNavConfigurationsLayoutDatas } from '@/Shared/Datas/Navigation/SideBarNavDatas';
 import { DropDownNavConfigurationsLayoutDatas } from '@/Shared/Datas/Navigation/DropdownNavDatas';
 import { NavigationDatas } from '@/Shared/Types/NavigationTypes';
+import { Toaster } from '@/Components/ui/toast/toaster';
 
 interface PageProps extends InertiaPageProps {
     cashRegisterModule: CashRegister;
@@ -43,6 +44,7 @@ export default function CashRegisterConfigurationsLayout({
                     />
                 </SideBar>
                 <main className='container max-w-5xl space-y-6 py-8'>{children}</main>
+                <Toaster />
             </div>
         </div>
     );

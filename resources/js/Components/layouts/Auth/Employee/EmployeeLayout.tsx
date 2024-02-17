@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import { usePage } from '@inertiajs/react';
 import Header from '@/Components/layouts/Header';
 import { type Dish } from '@/Shared/Types/DishTypes';
+import { Toaster } from '@/Components/ui/toast/toaster';
 import { type Product } from '@/Shared/Types/ProductTypes';
 import { type Employee } from '@/Shared/Types/EmployeeTypes';
 import { type Workstation } from '@/Shared/Types/WorkstationTypes';
@@ -52,6 +53,7 @@ export default function EmployeeLayout({ children }: EmployeeLayoutProps): JSX.E
                 <main className='container h-[calc(100vh-5rem)] space-y-6 py-4 md:py-6 lg:py-8'>
                     {children}
                 </main>
+                <Toaster />
             </div>
         </div>
     );

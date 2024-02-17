@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import { usePage } from '@inertiajs/react';
 import Header from '@/Components/layouts/Header';
 import SideBar from '@/Components/layouts/SideBar';
+import { Toaster } from '@/Components/ui/toast/toaster';
 import SideBarLinks from '@/Components/layouts/SideBarLinks';
 import { NavigationDatas } from '@/Shared/Types/NavigationTypes';
 import { DrawerNavCustomerLayoutDatas } from '@/Shared/Datas/Navigation/DrawerNavDatas';
@@ -31,6 +32,7 @@ export default function CustomerLayout({ children }: CustomerLayoutProps): JSX.E
                     <SideBarLinks datas={SideBarNavCustomerLayoutDatas as NavigationDatas[]} />
                 </SideBar>
                 <main className='container max-w-5xl space-y-6 py-8'>{children}</main>
+                <Toaster />
             </div>
         </div>
     );

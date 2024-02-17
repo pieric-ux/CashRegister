@@ -70,6 +70,7 @@ export default function SideBar({ children }: SideBarProps): JSX.Element {
                 {children}
                 <SheetFooter>
                     <SheetClose
+                        asChild
                         onClick={() => setOpen(false)}
                         className='absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none 2xl:hidden'
                     >
