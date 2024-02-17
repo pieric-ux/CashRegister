@@ -2,24 +2,27 @@ import clsx from 'clsx';
 import { type ReactNode } from 'react';
 import { Link } from '@inertiajs/react';
 import { Svg } from '@/Components/ui/svg/Svg';
+import { Cross2Icon } from '@radix-ui/react-icons';
 import { Button } from '@/Components/ui/button/button';
 import ApplicationLogo from '@/Components/logos/ApplicationLogo';
 import ApplicationLogoDark from '@/Components/logos/ApplicationLogoDark';
 import { useWindowSize, useEventListener, useLocalStorage } from 'usehooks-ts';
 import {
-    Sidebar,
-    SidebarClose,
-    SidebarContent,
-    SidebarFooter,
-    SidebarHeader,
-    SidebarTrigger,
-} from '@/Components/ui/sidebar/sidebar';
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetFooter,
+    SheetHeader,
+    SheetTrigger,
+} from '../ui/sheet/sheet';
+import { useTranslation } from 'react-i18next';
 
 interface SideBarProps {
     children: ReactNode;
 }
 
 export default function SideBar({ children }: SideBarProps): JSX.Element {
+    const { t } = useTranslation();
     const [open, setOpen] = useLocalStorage('sideBarOpen', true);
     const { width } = useWindowSize();
 
@@ -37,11 +40,11 @@ export default function SideBar({ children }: SideBarProps): JSX.Element {
     };
 
     return (
-        <Sidebar open={open} modal={isModal}>
-            <SidebarTrigger
+        <Sheet open={open} modal={isModal}>
+            <SheetTrigger
                 asChild
                 className={clsx(
-                    'fixed left-5 top-5 z-50 hidden',
+                    'fixed left-4 top-4 z-50 hidden',
                     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
                     { 'sm:flex': !open },
                 )}
@@ -50,13 +53,9 @@ export default function SideBar({ children }: SideBarProps): JSX.Element {
                 <Button variant={'outline'} size={'icon'}>
                     <Svg variant={'sideBar'} type={'hamburger'} />
                 </Button>
-            </SidebarTrigger>
-            <SidebarContent
-                onEscapeKeyDown={handleClose}
-                onPointerDownOutside={handleClose}
-                className='space-y-2 px-3'
-            >
-                <SidebarHeader>
+            </SheetTrigger>
+            <SheetContent onEscapeKeyDown={handleClose} onPointerDownOutside={handleClose}>
+                <SheetHeader>
                     <Link
                         href='/'
                         className={
@@ -67,20 +66,20 @@ export default function SideBar({ children }: SideBarProps): JSX.Element {
                         <ApplicationLogo className='block dark:hidden' />
                         <ApplicationLogoDark className='hidden dark:block' />
                     </Link>
-                </SidebarHeader>
+                </SheetHeader>
                 {children}
-                <SidebarFooter>
-                    <SidebarClose
-                        asChild
-                        className='absolute left-60 top-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background 2xl:hidden'
+                <SheetFooter>
+                    <SheetClose
                         onClick={() => setOpen(false)}
+                        className='absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none 2xl:hidden'
                     >
-                        <Button variant={'outline'} size={'icon'}>
-                            <Svg variant={'sideBar'} type={'close'} />
+                        <Button variant={'outline'} size={'sm_icon'}>
+                            <Cross2Icon className='h-4 w-4' />
+                            <span className='sr-only'>{t('Close')}</span>
                         </Button>
-                    </SidebarClose>
-                </SidebarFooter>
-            </SidebarContent>
-        </Sidebar>
+                    </SheetClose>
+                </SheetFooter>
+            </SheetContent>
+        </Sheet>
     );
 }

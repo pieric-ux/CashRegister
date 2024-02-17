@@ -20,10 +20,10 @@ export default function LanguageSwitcher(): JSX.Element {
 
     const [language, setLanguage] = useState(i18n.language);
 
-    const onSubmit = async (value: string): Promise<void> => {
+    const onSubmit = (value: string): void => {
         setLanguage(value);
-        await axios.get(`/language-switch/${value}`);
-        await i18n.changeLanguage(value);
+        i18n.changeLanguage(value);
+        axios.get(`/language-switch/${value}`);
         document.documentElement.lang = value;
     };
 

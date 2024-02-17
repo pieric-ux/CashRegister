@@ -1,6 +1,6 @@
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
-import { SidebarLink } from '@/Components/ui/sidebar/sidebarLink';
+import { SheetLink } from '@/Components/ui/sheet/sheetLink';
 import { type NavigationDatas } from '@/Shared/Types/NavigationTypes';
 
 interface SideBarLinksProps {
@@ -13,7 +13,7 @@ export default function SideBarLinks({ datas, slug }: SideBarLinksProps): JSX.El
     return (
         <>
             {datas.map((item, index) => (
-                <SidebarLink
+                <SheetLink
                     key={index}
                     href={slug ? route(item.route, slug) : route(item.route)}
                     active={
@@ -26,7 +26,7 @@ export default function SideBarLinks({ datas, slug }: SideBarLinksProps): JSX.El
                     svg={item.typeSvg ? <Svg type={item.typeSvg} variant={'sideBar'} /> : undefined}
                 >
                     {t(item.label)}
-                </SidebarLink>
+                </SheetLink>
             ))}
         </>
     );
