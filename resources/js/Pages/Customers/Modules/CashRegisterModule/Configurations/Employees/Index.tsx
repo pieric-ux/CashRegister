@@ -2,10 +2,10 @@ import { useTranslation } from 'react-i18next';
 import { Head, usePage } from '@inertiajs/react';
 import CreateEmployee from './Components/CreateEmployee';
 import { columns } from './Components/EmployeesTableColumn';
+import { EmployeesTable } from './Components/EmployeesTable';
 import { Card, CardHeader } from '@/Components/ui/card/card';
 import { type Employee } from '@/Shared/Types/EmployeeTypes';
 import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
-import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
 interface PageProps extends InertiaPageProps {
@@ -28,7 +28,7 @@ export default function Index(): JSX.Element {
 
             <Card>
                 <CardHeader>
-                    <DataTable
+                    <EmployeesTable
                         columns={columns}
                         data={employees}
                         filterPlaceholder={t('Search employees')}

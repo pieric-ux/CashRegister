@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Products;
 
+use App\Models\CR_Products;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,10 +14,28 @@ class DeleteProductRequest extends FormRequest
     public function authorize(): bool
     {
         $product = $this->route('product');
+        $products = $this->input('multipleDeleteDatas');
 
-        $module = $product->cr_categories_products->cr_modules;
+        if ($product !== null) {
+            $module = $product->cr_categories_products->cr_modules;
+    
+            return $module->isOwnedBy(Auth::user());
+        }
 
-        return $module->isOwnedBy(Auth::user());
+        if (count($products) > 0) {
+            foreach($products as $productData) {
+                $productId = $productData['id'];
+                $product = CR_Products::find($productId);
+
+                $module = $product->cr_categories_products->cr_modules;
+                
+                if (!$module->isOwnedBy(Auth::user())) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     /**

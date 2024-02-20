@@ -67,24 +67,48 @@ class DishesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeleteDishRequest $request, CR_Dishes $dish): RedirectResponse
+    public function destroy(DeleteDishRequest $request, CR_Dishes $dish = null): RedirectResponse
     {
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
 
-        $defaultDish = $dish->where('fk_cr_modules_id', $dish->fk_cr_modules_id)->where('name', 'No dish')->first();
-        $products = $dish->cr_products;
+        if($dish !== null) {
+            $defaultDish = $dish->where('fk_cr_modules_id', $dish->fk_cr_modules_id)->where('name', 'No dish')->first();
+            $products = $dish->cr_products;
+            
+            $module = $dish->cr_modules;
+            
+            if ($products) {
+                foreach ($products as $product) {
+                    $product->fk_dishes_id = $defaultDish->id;
+                    $product->save();
+                }
+            }
 
-        if ($products) {
-            foreach ($products as $product) {
-                $product->fk_dishes_id = $defaultDish->id;
-                $product->save();
+            $dish->delete();
+        } else {
+            $datas = $request->input('multipleDeleteDatas');
+
+            if(is_array($datas) && count($datas) > 0) {
+                foreach ($datas as $data) {
+                    $dishToDelete = CR_Dishes::find($data['id']);
+                    $defaultDish = CR_Dishes::where('fk_cr_modules_id', $dishToDelete->fk_cr_modules_id)->where('name', 'No dish')->first();
+                    
+                    $module = $dishToDelete->cr_modules;
+
+                    $products = $dishToDelete->cr_products;
+                    if ($products) {
+                        foreach ($products as $product) {
+                            $product->fk_dishes_id = $defaultDish->id;
+                            $product->save();
+                        }
+                    }
+                    $dishToDelete->delete();
+                }
             }
         }
 
-        $dish->delete();
-
-        return Redirect::route('dishes.index', $dish->cr_modules);
+        return Redirect::route('dishes.index', $module);
     }
 }

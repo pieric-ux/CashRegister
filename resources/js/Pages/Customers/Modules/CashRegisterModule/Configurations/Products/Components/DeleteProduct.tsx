@@ -5,10 +5,16 @@ import ConfirmDeleteForm from '@/Components/forms/Auth/ConfirmDeleteForm';
 import { deleteProductDatas } from '@/Shared/Datas/Configs/Products/DeleteProductDatas';
 
 interface DeleteProductProps {
-    product: Product;
+    product?: Product;
+    products?: Product[];
+    disabled?: boolean;
 }
 
-export default function DeleteProduct({ product }: DeleteProductProps): JSX.Element {
+export default function DeleteProduct({
+    product,
+    products,
+    disabled = false,
+}: DeleteProductProps): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {
@@ -17,11 +23,17 @@ export default function DeleteProduct({ product }: DeleteProductProps): JSX.Elem
 
     return (
         <section>
-            <ActionDialogButton datas={deleteProductDatas} open={open} setOpen={setOpen}>
+            <ActionDialogButton
+                datas={deleteProductDatas}
+                open={open}
+                setOpen={setOpen}
+                disabled={disabled}
+            >
                 <ConfirmDeleteForm
-                    datas={deleteProductDatas}
-                    route={route('products.destroy', product.id)}
+                    route={route('products.destroy', product?.id)}
                     closeDialog={closeDialog}
+                    datas={deleteProductDatas}
+                    multipleDeleteDatas={products}
                 />
             </ActionDialogButton>
         </section>

@@ -2,10 +2,10 @@ import { useTranslation } from 'react-i18next';
 import { Head, usePage } from '@inertiajs/react';
 import { Card, CardHeader } from '@/Components/ui/card/card';
 import { columns } from './Components/TransactionsTableColumns';
+import { TransactionsTable } from './Components/TransactionsTable';
 import { type Transaction } from '@/Shared/Types/TransactionTypes';
 import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 import { type PaymentMethod } from '@/Shared/Types/PaymentMethodsTypes';
-import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 import { type DetailTransaction } from '@/Shared/Types/DetailTransactionTypes';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
@@ -29,7 +29,7 @@ export default function Index(): JSX.Element {
             <Head title={cashRegisterModule.name} />
             <Card>
                 <CardHeader>
-                    <DataTable
+                    <TransactionsTable
                         columns={columns}
                         data={transactions}
                         filterPlaceholder={t('Search transactions')}

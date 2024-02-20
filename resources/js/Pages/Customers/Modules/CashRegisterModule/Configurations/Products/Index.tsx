@@ -6,9 +6,9 @@ import { type Product } from '@/Shared/Types/ProductTypes';
 import { columns } from './Components/ProductsTableColumns';
 import { Card, CardHeader } from '@/Components/ui/card/card';
 import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
-import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
+import { ProductsTable } from './Components/ProductsTable';
 
 interface PageProps extends InertiaPageProps {
     cashRegisterModule: CashRegister & {
@@ -31,7 +31,7 @@ export default function Index(): JSX.Element {
 
             <Card>
                 <CardHeader>
-                    <DataTable
+                    <ProductsTable
                         columns={columns}
                         data={products}
                         filterPlaceholder={t('Search products')}

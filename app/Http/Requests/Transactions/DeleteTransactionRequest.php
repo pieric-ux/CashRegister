@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Transactions;
 
+use App\Models\CR_Transactions;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,10 +14,29 @@ class DeleteTransactionRequest extends FormRequest
     public function authorize(): bool
     {
         $transaction = $this->route('transaction');
+        $transactions = $this->input('multipleDeleteDatas');
+        
+        if ($transaction !== null) {
+            $module = $transaction->cr_payment_methods->cr_modules;
+    
+            return $module->isOwnedBy(Auth::user());
+        }
 
-        $module = $transaction->cr_payment_methods->cr_modules;
+        if (count($transactions) > 0 ) {
+            foreach($transactions as $transactionData ) {
+                $transactionId = $transactionData['id'];
+                $transaction = CR_Transactions::find($transactionId);
 
-        return $module->isOwnedBy(Auth::user());
+                $module = $transaction->cr_payment_methods->cr_modules;
+               
+                if (!$module->isOwnedBy(Auth::user())) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        return false;
     }
 
     /**

@@ -5,10 +5,16 @@ import ConfirmDeleteForm from '@/Components/forms/Auth/ConfirmDeleteForm';
 import { deleteEmployeeDatas } from '@/Shared/Datas/Configs/Employees/DeleteEmployeeDatas';
 
 interface DeleteEmployeeProps {
-    employee: Employee;
+    employee?: Employee;
+    employees?: Employee[];
+    disabled?: boolean;
 }
 
-export default function DeleteEmployee({ employee }: DeleteEmployeeProps): JSX.Element {
+export default function DeleteEmployee({
+    employee,
+    employees,
+    disabled = false,
+}: DeleteEmployeeProps): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {
@@ -17,11 +23,17 @@ export default function DeleteEmployee({ employee }: DeleteEmployeeProps): JSX.E
 
     return (
         <section>
-            <ActionDialogButton datas={deleteEmployeeDatas} open={open} setOpen={setOpen}>
+            <ActionDialogButton
+                datas={deleteEmployeeDatas}
+                open={open}
+                setOpen={setOpen}
+                disabled={disabled}
+            >
                 <ConfirmDeleteForm
-                    datas={deleteEmployeeDatas}
-                    route={route('employees.destroy', employee.id)}
+                    route={route('employees.destroy', employee?.id)}
                     closeDialog={closeDialog}
+                    datas={deleteEmployeeDatas}
+                    multipleDeleteDatas={employees}
                 />
             </ActionDialogButton>
         </section>

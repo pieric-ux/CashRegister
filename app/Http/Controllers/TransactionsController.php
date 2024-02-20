@@ -36,14 +36,31 @@ class TransactionsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeleteTransactionRequest $request, CR_Transactions $transaction): RedirectResponse
+    public function destroy(DeleteTransactionRequest $request, CR_Transactions $transaction = null): RedirectResponse
     {
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
 
-        $transaction->delete();
+        if($transaction !== null) {
+            $transaction->delete();
+            
+            $module = $transaction->cr_payment_methods->cr_modules;
+            
+        } else {
+            $datas = $request->input('multipleDeleteDatas');
 
-        return Redirect::route('transactions.index', $transaction->cr_payment_methods->cr_modules);
+            if(is_array($datas) && count($datas) > 0) {
+                $ids = array_column($datas, 'id');
+                $transaction = CR_Transactions::find($ids[0]);
+
+                $module = $transaction->cr_payment_methods->cr_modules;
+                
+                CR_Transactions::whereIn('id', $ids)->delete();
+
+            }
+        }
+        
+        return Redirect::route('transactions.index', $module);
     }
 }

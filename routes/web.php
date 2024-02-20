@@ -65,7 +65,7 @@ Route::middleware(['auth:customer', 'verified'])->group(function () {
     Route::get('/apps/{module}/employees', [EmployeesController::class, 'index'])->name('employees.index');
     Route::patch('/employees/update/{employee}', [EmployeesController::class, 'update'])->name('employees.update');
     Route::patch('/employees/update', [EmployeesController::class, 'updateDragAndDrop'])->name('employees.updateDragAndDrop');
-    Route::delete('/employees/{employee}', [EmployeesController::class, 'destroy'])->name('employees.destroy');
+    Route::delete('/employees/{employee?}', [EmployeesController::class, 'destroy'])->name('employees.destroy');
 
     Route::get('/apps/{module}/categories-products', [CategoriesProductsController::class, 'index'])->name('categories.index');
     Route::post('/apps/{module}/categories-products', [CategoriesProductsController::class, 'store'])->name('categories.store');
@@ -76,16 +76,16 @@ Route::middleware(['auth:customer', 'verified'])->group(function () {
     Route::get('/apps/{module}/dishes', [DishesController::class, 'index'])->name('dishes.index');
     Route::post('/apps/{module}/dishes', [DishesController::class, 'store'])->name('dishes.store');
     Route::patch('/apps/dishes/update/{dish}', [DishesController::class, 'update'])->name('dishes.update');
-    Route::delete('/dishes/{dish}', [DishesController::class, 'destroy'])->name('dishes.destroy');
+    Route::delete('/dishes/{dish?}', [DishesController::class, 'destroy'])->name('dishes.destroy');
 
     Route::get('/apps/{module}/products', [ProductsController::class, 'index'])->name('products.index');
     Route::post('/apps/{module}/products', [ProductsController::class, 'store'])->name('products.store');
     Route::patch('/apps/products/update/{product}', [ProductsController::class, 'update'])->name('products.update');
     Route::patch('/apps/products/update', [ProductsController::class, 'updateDragAndDrop'])->name('products.updateDragAndDrop');
-    Route::delete('/products/{product}', [ProductsController::class, 'destroy'])->name('products.destroy');
+    Route::delete('/products/{product?}', [ProductsController::class, 'destroy'])->name('products.destroy');
 
     Route::get('/apps/{module}/transactions', [TransactionsController::class, 'index'])->name('transactions.index');
-    Route::delete('/transactions/{transaction}', [TransactionsController::class, 'destroy'])->name('transactions.destroy');
+    Route::delete('/transactions/{transaction?}', [TransactionsController::class, 'destroy'])->name('transactions.destroy');
 
     Route::post('/avatar-upload', [MediaController::class, 'uploadAvatar'])->name('avatar.upload');
     Route::post('/poster-upload', [MediaController::class, 'uploadPoster'])->name('poster.upload');

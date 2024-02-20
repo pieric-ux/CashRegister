@@ -18,17 +18,19 @@ interface Datas {
     buttonAriaLabel: string;
 }
 
-interface ConfirmDeleteFormProps {
+interface ConfirmDeleteFormProps<T> {
     route: string;
     closeDialog: () => void;
     datas: Datas;
+    multipleDeleteDatas?: T[];
 }
 
-export default function ConfirmDeleteForm({
+export default function ConfirmDeleteForm<T>({
     route,
     closeDialog,
+    multipleDeleteDatas,
     datas,
-}: ConfirmDeleteFormProps): JSX.Element {
+}: ConfirmDeleteFormProps<T>): JSX.Element {
     const { t } = useTranslation();
     const { width } = useWindowSize();
 
@@ -41,11 +43,14 @@ export default function ConfirmDeleteForm({
         processing,
         errors,
         reset,
+        transform,
     } = useFormInertia(defaultValues);
 
     const form = useForm<Auth>({
         defaultValues: data,
     });
+
+    transform((data) => ({ ...data, multipleDeleteDatas }));
 
     function onSubmit(e: FormEvent): void {
         e.preventDefault();
@@ -63,6 +68,7 @@ export default function ConfirmDeleteForm({
     return (
         <Form {...form}>
             <form onSubmit={onSubmit}>
+                <input type='email' className='hidden' autoComplete='username' />
                 <GenericFormField
                     form={form}
                     setData={setData}

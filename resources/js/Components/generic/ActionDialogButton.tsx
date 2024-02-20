@@ -32,6 +32,7 @@ interface ActionDialogButtonProps {
     open: boolean;
     setOpen: Dispatch<SetStateAction<boolean>>;
     isUpdate?: boolean;
+    disabled?: boolean;
     children: ReactNode;
 }
 
@@ -40,6 +41,7 @@ export default function ActionDialogButton({
     open,
     setOpen,
     isUpdate = false,
+    disabled = false,
     children,
 }: ActionDialogButtonProps): JSX.Element {
     const { t } = useTranslation();
@@ -61,6 +63,7 @@ export default function ActionDialogButton({
                                 variant={'destructive'}
                                 size={'icon'}
                                 aria-label={t(buttonAriaLabel)}
+                                disabled={disabled}
                             >
                                 <Svg type={'delete'} variant={'destructive'} />
                             </Button>
@@ -86,6 +89,7 @@ export default function ActionDialogButton({
                                 variant={'destructive'}
                                 size={'icon'}
                                 aria-label={t(buttonAriaLabel)}
+                                disabled={disabled}
                             >
                                 <Svg type={'delete'} variant={'destructive'} />
                             </Button>

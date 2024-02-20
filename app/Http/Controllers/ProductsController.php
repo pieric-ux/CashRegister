@@ -105,14 +105,30 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeleteProductRequest $request, CR_Products $product): RedirectResponse
+    public function destroy(DeleteProductRequest $request, CR_Products $product = null): RedirectResponse
     {
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
 
-        $product->delete();
+        if($product !== null) {
+            $product->delete();
+            
+            $module = $product->cr_categories_products->cr_modules;
+            
+        } else {
+            $datas = $request->input('multipleDeleteDatas');
 
-        return Redirect::route('products.index', $product->cr_categories_products->cr_modules);
+            if(is_array($datas) && count($datas) > 0) {
+                $ids = array_column($datas, 'id');
+                $product = CR_Products::find($ids[0]);
+
+                $module = $product->cr_categories_products->cr_modules;
+                
+                CR_Products::whereIn('id', $ids)->delete();
+
+            }
+        }
+        return Redirect::route('products.index', $module);
     }
 }

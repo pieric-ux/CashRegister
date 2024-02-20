@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Dishes;
 
+use App\Models\CR_Dishes;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,10 +14,28 @@ class DeleteDishRequest extends FormRequest
     public function authorize(): bool
     {
         $dish = $this->route('dish');
+        $dishes = $this->input('multipleDeleteDatas');
 
-        $module = $dish->cr_modules;
+        if ($dish !== null) {
+            $module = $dish->cr_modules;
 
-        return $module->isOwnedBy(Auth::user());
+            return $module->isOwnedBy(Auth::user());
+        }
+
+        if (count($dishes) > 0) {
+            foreach($dishes as $dishData) {
+                $dishId = $dishData['id'];
+                $dish = CR_Dishes::find($dishId);
+
+                $module = $dish->cr_modules;
+
+                if(!$module->isOwnedBy(Auth::user())) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     /**

@@ -77,7 +77,7 @@ export const columns: ColumnDef<Transaction>[] = [
     },
     {
         id: 'Payment Method',
-        accessorKey: 'cr_payment_methods',
+        accessorKey: 'cr_payment_methods.name',
         header: ({ column }) => {
             return <ColumnHeader column={column} title={i18n.t('Payment Method')} />;
         },

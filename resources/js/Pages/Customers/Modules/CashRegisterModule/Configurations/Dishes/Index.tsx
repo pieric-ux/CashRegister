@@ -2,10 +2,10 @@ import { useTranslation } from 'react-i18next';
 import { Head, usePage } from '@inertiajs/react';
 import CreateDish from './Components/CreateDish';
 import { type Dish } from '@/Shared/Types/DishTypes';
+import { DishesTable } from './Components/DishesTable';
 import { columns } from './Components/DishesTableColumn';
 import { Card, CardHeader } from '@/Components/ui/card/card';
 import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
-import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
 
 interface PageProps extends InertiaPageProps {
@@ -35,7 +35,7 @@ export default function Index(): JSX.Element {
 
             <Card>
                 <CardHeader>
-                    <DataTable
+                    <DishesTable
                         columns={columns}
                         data={dishesFilter}
                         filterPlaceholder={t('Search dishes')}

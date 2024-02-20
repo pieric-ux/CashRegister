@@ -5,7 +5,6 @@ import { Button } from '@/Components/ui/button/button';
 import { columns } from './DetailsTransactionsTableColumns';
 import { type Transaction } from '@/Shared/Types/TransactionTypes';
 import { type PaymentMethod } from '@/Shared/Types/PaymentMethodsTypes';
-import { DataTable } from '@/Components/ui/table/templates/table/DataTable';
 import { type DetailTransaction } from '@/Shared/Types/DetailTransactionTypes';
 import {
     Dialog,
@@ -14,6 +13,7 @@ import {
     DialogFooter,
     DialogTrigger,
 } from '@/Components/ui/dialog/dialog';
+import { DetailsTransactionsTable } from './DetailsTransactionsTable';
 
 interface TransactionWithType {
     transaction: Transaction & {
@@ -42,13 +42,7 @@ export default function ShowDetailsTransaction({ transaction }: TransactionWithT
                     </Button>
                 </DialogTrigger>
                 <DialogContent size={'2xl'}>
-                    <DataTable
-                        className='mt-6'
-                        columns={columns}
-                        data={data}
-                        withFilter={false}
-                        withPagination={false}
-                    />
+                    <DetailsTransactionsTable columns={columns} data={data} />
                     <DialogFooter>
                         <DialogClose asChild>
                             <Button

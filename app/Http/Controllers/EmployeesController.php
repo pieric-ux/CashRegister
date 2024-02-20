@@ -74,13 +74,26 @@ class EmployeesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeleteEmployeeRequest $request, CR_Employees $employee): RedirectResponse
+    public function destroy(DeleteEmployeeRequest $request, CR_Employees $employee = null): RedirectResponse
     {
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
 
-        $employee->delete();
+        if($employee !== null) {
+            $employee->delete();
+        } else {
+            $datas = $request->input('multipleDeleteDatas');
+
+            if(is_array($datas) && count($datas) > 0) {
+                $ids = array_column($datas, 'id');
+                $employee = CR_Employees::find($ids[0]);
+
+                $module = $employee->cr_workstations->cr_modules;
+
+                CR_Employees::whereIn('id', $ids)->delete();
+            }
+        }
 
         return Redirect::route('employees.index', $employee->cr_workstations->cr_modules);
     }

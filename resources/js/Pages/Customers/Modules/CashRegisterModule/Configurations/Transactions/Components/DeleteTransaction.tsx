@@ -5,10 +5,18 @@ import ConfirmDeleteForm from '@/Components/forms/Auth/ConfirmDeleteForm';
 import { deleteTransactionDatas } from '@/Shared/Datas/Configs/Transactions/DeleteTransactionDatas';
 
 interface DeleteTransactionProps {
-    transaction: Transaction;
+    transaction?: Transaction;
+    transactions?: Transaction[];
+    disabled?: boolean;
+    className?: string;
 }
 
-export default function DeleteTransaction({ transaction }: DeleteTransactionProps): JSX.Element {
+export default function DeleteTransaction({
+    transaction,
+    transactions,
+    disabled = false,
+    className,
+}: DeleteTransactionProps): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {
@@ -16,12 +24,18 @@ export default function DeleteTransaction({ transaction }: DeleteTransactionProp
     };
 
     return (
-        <section>
-            <ActionDialogButton datas={deleteTransactionDatas} open={open} setOpen={setOpen}>
+        <section className={className}>
+            <ActionDialogButton
+                datas={deleteTransactionDatas}
+                open={open}
+                setOpen={setOpen}
+                disabled={disabled}
+            >
                 <ConfirmDeleteForm
-                    route={route('transactions.destroy', transaction.id)}
+                    route={route('transactions.destroy', transaction?.id)}
                     closeDialog={closeDialog}
                     datas={deleteTransactionDatas}
+                    multipleDeleteDatas={transactions}
                 />
             </ActionDialogButton>
         </section>

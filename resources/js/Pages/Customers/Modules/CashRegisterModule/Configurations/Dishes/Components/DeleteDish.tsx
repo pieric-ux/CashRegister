@@ -5,10 +5,16 @@ import ConfirmDeleteForm from '@/Components/forms/Auth/ConfirmDeleteForm';
 import { deleteDishDatas } from '@/Shared/Datas/Configs/Dishes/DeleteDishDatas';
 
 interface DeleteDishProps {
-    dish: Dish;
+    dish?: Dish;
+    dishes?: Dish[];
+    disabled?: boolean;
 }
 
-export default function DeleteDish({ dish }: DeleteDishProps): JSX.Element {
+export default function DeleteDish({
+    dish,
+    dishes,
+    disabled = false,
+}: DeleteDishProps): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const closeDialog = (): void => {
@@ -17,11 +23,17 @@ export default function DeleteDish({ dish }: DeleteDishProps): JSX.Element {
 
     return (
         <section>
-            <ActionDialogButton datas={deleteDishDatas} open={open} setOpen={setOpen}>
+            <ActionDialogButton
+                datas={deleteDishDatas}
+                open={open}
+                setOpen={setOpen}
+                disabled={disabled}
+            >
                 <ConfirmDeleteForm
-                    datas={deleteDishDatas}
-                    route={route('dishes.destroy', dish.id)}
+                    route={route('dishes.destroy', dish?.id)}
                     closeDialog={closeDialog}
+                    datas={deleteDishDatas}
+                    multipleDeleteDatas={dishes}
                 />
             </ActionDialogButton>
         </section>
