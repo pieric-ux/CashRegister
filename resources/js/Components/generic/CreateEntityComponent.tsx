@@ -1,6 +1,7 @@
 import { useWindowSize } from 'usehooks-ts';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
+import { ScrollArea } from '../ui/scrollarea/scrollArea';
 import { type Dispatch, type SetStateAction, type ReactNode } from 'react';
 import {
     Card,
@@ -66,11 +67,15 @@ export default function CreateEntityComponent({
                                 <Button aria-label={t(buttonAriaLabel)}>{t('Create')}</Button>
                             </DrawerTrigger>
                             <DrawerContent>
-                                <DrawerHeader>
-                                    <DrawerTitle>{t(dialogTitle)}</DrawerTitle>
-                                    <DrawerDescription>{t(dialogDescription)}</DrawerDescription>
-                                </DrawerHeader>
-                                {children}
+                                <ScrollArea>
+                                    <DrawerHeader>
+                                        <DrawerTitle>{t(dialogTitle)}</DrawerTitle>
+                                        <DrawerDescription>
+                                            {t(dialogDescription)}
+                                        </DrawerDescription>
+                                    </DrawerHeader>
+                                    {children}
+                                </ScrollArea>
                             </DrawerContent>
                         </Drawer>
                     ) : (

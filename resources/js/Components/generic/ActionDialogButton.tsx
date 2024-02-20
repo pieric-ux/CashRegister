@@ -1,8 +1,8 @@
-// TODO: scrollable form inside drawer
 import { useWindowSize } from 'usehooks-ts';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/Components/ui/button/button';
+import { ScrollArea } from '../ui/scrollarea/scrollArea';
 import { type ReactNode, type Dispatch, type SetStateAction } from 'react';
 import {
     Dialog,
@@ -69,12 +69,15 @@ export default function ActionDialogButton({
                             </Button>
                         )}
                     </DrawerTrigger>
+
                     <DrawerContent>
-                        <DrawerHeader>
-                            <DrawerTitle>{t(dialogTitle)}</DrawerTitle>
-                            <DrawerDescription>{t(dialogDescription)}</DrawerDescription>
-                        </DrawerHeader>
-                        {children}
+                        <ScrollArea>
+                            <DrawerHeader>
+                                <DrawerTitle>{t(dialogTitle)}</DrawerTitle>
+                                <DrawerDescription>{t(dialogDescription)}</DrawerDescription>
+                            </DrawerHeader>
+                            {children}
+                        </ScrollArea>
                     </DrawerContent>
                 </Drawer>
             ) : (
