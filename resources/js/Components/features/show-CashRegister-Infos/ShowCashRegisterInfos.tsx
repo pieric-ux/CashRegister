@@ -34,7 +34,7 @@ export default function ShowCashRegisterInfos(): JSX.Element {
                     <DeleteCashRegister />
                 </div>
             </CardHeader>
-            <CardContent variant={'flex-row'} className='items-center gap-10 lg:gap-12'>
+            <CardContent variant={'flex-col'} className='items-center gap-10 sm:flex-row lg:gap-12'>
                 <div className='mt-8 flex items-center justify-center md:mt-0'>
                     <UpdateModulePosterForm />
                 </div>
