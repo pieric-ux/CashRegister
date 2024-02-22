@@ -13,7 +13,6 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from '@/Components/ui/drawer/drawer';
-import { ScrollArea } from '@radix-ui/react-scroll-area';
 
 interface DrawerMenuProps {
     user: Customer | Employee;
@@ -32,23 +31,21 @@ export default function DrawerMenu({ user, children }: DrawerMenuProps): JSX.Ele
                 </Button>
             </DrawerTrigger>
             <DrawerContent>
-                <ScrollArea>
-                    <DrawerHeader>
-                        <DrawerTitle>{user.first_name}</DrawerTitle>
-                        <DrawerDescription>{user.email}</DrawerDescription>
-                    </DrawerHeader>
-                    {children}
-                    <DrawerFooter>
-                        <DrawerClose
-                            asChild
-                            className='self-end focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background'
-                        >
-                            <Button variant={'outline'} size={'icon'}>
-                                <Svg variant={'sideBar'} type={'close'} />
-                            </Button>
-                        </DrawerClose>
-                    </DrawerFooter>
-                </ScrollArea>
+                <DrawerHeader>
+                    <DrawerTitle>{user.first_name}</DrawerTitle>
+                    <DrawerDescription>{user.email}</DrawerDescription>
+                </DrawerHeader>
+                {children}
+                <DrawerFooter>
+                    <DrawerClose
+                        asChild
+                        className='self-end focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background'
+                    >
+                        <Button variant={'outline'} size={'icon'}>
+                            <Svg variant={'sideBar'} type={'close'} />
+                        </Button>
+                    </DrawerClose>
+                </DrawerFooter>
             </DrawerContent>
         </Drawer>
     );
