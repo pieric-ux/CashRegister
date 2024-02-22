@@ -24,7 +24,7 @@ export function DataTable<TData, TValue>({
     className,
 }: DataTableProps<TData, TValue>): JSX.Element {
     return (
-        <div className={clsx('rounded-md border', className)}>
+        <div className={clsx('overflow-auto rounded-md border', className)}>
             <Table>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
