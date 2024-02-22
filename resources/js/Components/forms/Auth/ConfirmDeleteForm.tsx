@@ -33,6 +33,7 @@ export default function ConfirmDeleteForm<T>({
 }: ConfirmDeleteFormProps<T>): JSX.Element {
     const { t } = useTranslation();
     const { width } = useWindowSize();
+    const isMobile = width < 640;
 
     const { buttonTitle, buttonAriaLabel } = datas;
 
@@ -75,7 +76,7 @@ export default function ConfirmDeleteForm<T>({
                     errors={errors}
                     formData={formDatas}
                 />
-                {width < 640 ? (
+                {isMobile ? (
                     <DrawerFooter>
                         <DialogClose asChild>
                             <Button variant={'secondary'} onClick={closeDialog}>

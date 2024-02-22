@@ -29,6 +29,7 @@ export default function Header({
 }: HeaderProps): JSX.Element {
     const { t } = useTranslation();
     const { width } = useWindowSize();
+    const isMobile = width < 640;
 
     return (
         <header className='sticky top-0 z-40 flex h-20 w-full border-b border-border bg-card drop-shadow-sm transition duration-300 ease-linear'>
@@ -45,7 +46,7 @@ export default function Header({
 
                 <ThemeSwitcher />
 
-                {width < 640 ? (
+                {isMobile ? (
                     <DrawerMenu user={user}>
                         <DrawerMenuLinks datas={drawerMenuDatas} slug={slug} />
                     </DrawerMenu>

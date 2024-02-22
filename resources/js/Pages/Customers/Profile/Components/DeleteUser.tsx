@@ -32,6 +32,7 @@ export default function DeleteUser(): JSX.Element {
     const { t } = useTranslation();
     const [open, setOpen] = useState(false);
     const { width } = useWindowSize();
+    const isMobile = width < 640;
 
     const closeDialog = (): void => {
         setOpen(false);
@@ -45,7 +46,7 @@ export default function DeleteUser(): JSX.Element {
                     <CardDescription>{t(deleteCustomerDatas.cardDescription)}</CardDescription>
                 </CardHeader>
                 <CardFooter size={'xl'}>
-                    {width < 640 ? (
+                    {isMobile ? (
                         <Drawer open={open} onOpenChange={setOpen}>
                             <DrawerTrigger asChild>
                                 <Button

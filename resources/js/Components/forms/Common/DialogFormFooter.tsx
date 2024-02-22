@@ -20,10 +20,11 @@ export default function DialogFormFooter({
 }: DialogFormFooterProps): JSX.Element {
     const { t } = useTranslation();
     const { width } = useWindowSize();
+    const isMobile = width < 640;
 
     return (
         <>
-            {width < 640 ? (
+            {isMobile ? (
                 <DrawerFooter>
                     <DrawerClose asChild>
                         <Button variant={'secondary'} onClick={closeDialog}>
