@@ -46,12 +46,13 @@ export default function ActionDialogButton({
 }: ActionDialogButtonProps): JSX.Element {
     const { t } = useTranslation();
     const { width } = useWindowSize();
+    const isMobile = width < 640;
 
     const { buttonAriaLabel, dialogTitle, dialogDescription } = datas;
 
     return (
         <section>
-            {width < 640 ? (
+            {isMobile ? (
                 <Drawer open={open} onOpenChange={setOpen}>
                     <DrawerTrigger asChild>
                         {isUpdate ? (

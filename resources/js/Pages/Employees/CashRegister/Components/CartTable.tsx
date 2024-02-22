@@ -33,11 +33,11 @@ export function CartTable<TData, TValue>({
     });
 
     return (
-        <div className='overflow-hidden rounded-md border'>
-            <Table div={'cart'}>
+        <div className='shrink overflow-auto rounded-md border'>
+            <Table>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
-                        <TableRow key={headerGroup.id} className='sticky top-0 bg-card'>
+                        <TableRow key={headerGroup.id}>
                             {headerGroup.headers.map((header) => {
                                 return (
                                     <TableHead key={header.id}>

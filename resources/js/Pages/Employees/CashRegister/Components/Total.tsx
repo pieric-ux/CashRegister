@@ -13,7 +13,7 @@ export default function Total(): JSX.Element {
 
     return (
         <Card variant={'secondary'}>
-            <CardHeader variant={'flex-row'}>
+            <CardHeader variant={'flex-row'} className='items-center justify-center py-[5%]'>
                 <span className='mr-2 text-xl font-medium sm:text-2xl'>{t('Total')}:</span>
                 <span className='text-xl font-bold sm:text-2xl'>{formatted}</span>
             </CardHeader>

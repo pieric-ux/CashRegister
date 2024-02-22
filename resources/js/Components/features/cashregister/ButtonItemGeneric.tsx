@@ -75,7 +75,7 @@ export default function ButtonItemGeneric({
 
     return (
         <Button
-            size={'touchItem'}
+            size={'touch'}
             className='relative flex-col'
             disabled={isDragging}
             onClick={() => {

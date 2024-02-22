@@ -55,7 +55,10 @@ export default function Payment({ isCartEmpty }: PaymentProps): JSX.Element {
     const emptyCart = { items: Array(5).fill(emptyCartItem), total: 0 };
 
     const { t } = useTranslation();
+
     const { width } = useWindowSize();
+    const isMobile = width < 640;
+
     const { employee } = usePage<PageProps>().props;
 
     const paymentMethods = employee.cr_workstations.cr_modules.cr_payment_methods;
@@ -84,7 +87,7 @@ export default function Payment({ isCartEmpty }: PaymentProps): JSX.Element {
 
     return (
         <>
-            {width < 640 ? (
+            {isMobile ? (
                 <Drawer open={open} onOpenChange={setOpen}>
                     <DrawerTrigger asChild>
                         <Button variant={'ring'} disabled={isCartEmpty}>
@@ -138,6 +141,7 @@ export default function Payment({ isCartEmpty }: PaymentProps): JSX.Element {
                             {paymentMethods.map((paymentMethod) => {
                                 return (
                                     <Button
+                                        className='flex-col gap-2'
                                         size={'touch'}
                                         key={paymentMethod.id}
                                         onClick={() => handlePayment(paymentMethod)}

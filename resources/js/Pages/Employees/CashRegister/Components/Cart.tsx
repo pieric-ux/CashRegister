@@ -1,7 +1,7 @@
 import { useContext } from 'react';
+import { CartTable } from './CartTable';
 import { columns } from './CartTableColumns';
 import { CashRegisterContext } from '@/Context/CashRegisterContext';
-import { CartTable } from '@/Components/ui/table/templates/table/CartTable';
 
 export default function Cart(): JSX.Element {
     const { cart } = useContext(CashRegisterContext);

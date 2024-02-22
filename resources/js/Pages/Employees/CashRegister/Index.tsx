@@ -50,18 +50,24 @@ export default function Index(): JSX.Element {
             <Card className='h-full'>
                 <CardHeader className='h-full'>
                     <CashRegisterContext.Provider value={{ cart, setCart }}>
-                        <Tabs defaultValue='Cart' className='relative h-full space-y-6'>
-                            <TabsContent value='Cart' className='h-full space-y-6'>
-                                <Cart />
-                                <div className='flex items-center justify-end'>
-                                    <Total />
+                        <Tabs defaultValue='Cart' className='h-full'>
+                            <TabsContent value='Cart' className='h-[calc(100%-2.25rem)] pb-4'>
+                                <div className='flex h-full flex-col justify-between space-y-4'>
+                                    <Cart />
+                                    <div className='max-h-[40%] flex-col space-y-4'>
+                                        <div className='flex items-center justify-end'>
+                                            <Total />
+                                        </div>
+                                        <Payment isCartEmpty={isCartEmpty} />
+                                    </div>
                                 </div>
-                                <Payment isCartEmpty={isCartEmpty} />
                             </TabsContent>
-                            <TabsContent value='Products' className='space-y-6'>
-                                <Items />
+                            <TabsContent value='Products' className='h-[calc(100%-2.25rem)] pb-4'>
+                                <div className='flex h-full flex-col overflow-auto'>
+                                    <Items />
+                                </div>
                             </TabsContent>
-                            <TabsList className='absolute bottom-0 grid w-full grid-cols-2'>
+                            <TabsList className='grid w-full grid-cols-2'>
                                 <TabsTrigger value='Cart'>{t('Cart')}</TabsTrigger>
                                 <TabsTrigger value='Products'>{t('Products')}</TabsTrigger>
                             </TabsList>

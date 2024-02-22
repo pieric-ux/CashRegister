@@ -50,6 +50,7 @@ export default function CreateEntityComponent({
 }: CreateEntityComponentProps): JSX.Element {
     const { t } = useTranslation();
     const { width } = useWindowSize();
+    const isMobile = width < 640;
 
     const { cardTitle, cardDescription, buttonAriaLabel, dialogTitle, dialogDescription } = datas;
 
@@ -61,7 +62,7 @@ export default function CreateEntityComponent({
                     <CardDescription>{t(cardDescription)}</CardDescription>
                 </CardHeader>
                 <CardFooter size={'xl'}>
-                    {width < 640 ? (
+                    {isMobile ? (
                         <Drawer open={open} onOpenChange={setOpen}>
                             <DrawerTrigger asChild>
                                 <Button aria-label={t(buttonAriaLabel)}>{t('Create')}</Button>

@@ -41,8 +41,8 @@ export default function EmployeeLayout({ children }: EmployeeLayoutProps): JSX.E
     )?.original_url;
 
     return (
-        <div className='bg-background transition duration-300 ease-linear'>
-            <div className='min-h-screen flex-col'>
+        <div className='bg-background transition duration-300 ease-linear portrait:h-dvh'>
+            <div className='h-full flex-col'>
                 <Header
                     user={employee}
                     avatarPath={avatarPath}
@@ -50,7 +50,7 @@ export default function EmployeeLayout({ children }: EmployeeLayoutProps): JSX.E
                     dropdownMenuDatas={DropDownNavEmployeeLayoutDatas}
                     drawerMenuDatas={DrawerNavEmployeeLayoutDatas}
                 />
-                <main className='container h-[calc(100vh-5rem)] space-y-6 py-4 md:py-6 lg:py-8'>
+                <main className='container space-y-6 py-4 md:py-6 lg:py-8 portrait:h-[calc(100dvh-5rem)]'>
                     {children}
                 </main>
                 <Toaster />
