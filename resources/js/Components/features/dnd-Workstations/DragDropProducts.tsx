@@ -38,34 +38,49 @@ export default function DragDropProducts({ workstation }: DragDropProductsProps)
 
     const onDragEnd = async (result: DropResult): Promise<void> => {
         const { destination, source } = result;
-
-        if (!destination || destination.droppableId === source.droppableId) {
+        if (!destination) {
             return;
         }
+
         const sourceId = parseInt(source.droppableId.split('-')[1]);
         const destinationId = parseInt(destination.droppableId.split('-')[1]);
 
         const sourceWorkstation = updatedWorkstations.find(
             (workstation) => workstation.id === sourceId,
         );
+
         const destinationWorkstation = updatedWorkstations.find(
             (workstation) => workstation.id === destinationId,
         );
 
-        const sourceProducts =
-            sourceId === 0
-                ? destinationWorkstation?.generalProducts
-                : sourceWorkstation?.cr_products;
+        if (destinationId === 0 && sourceId === 0) {
+            return;
+        }
 
-        const movedProduct = sourceProducts?.[source.index];
-
-        if (movedProduct) {
-            if (sourceId === 0) {
+        if (destination.droppableId === source.droppableId) {
+            if (destination.index === source.index) {
+                return;
+            }
+            const movedProduct = sourceWorkstation?.cr_products.splice(source.index, 1)[0];
+            if (movedProduct) {
                 destinationWorkstation?.cr_products.splice(destination.index, 0, movedProduct);
-                destinationWorkstation?.generalProducts.splice(source.index, 1);
-            } else {
-                sourceWorkstation?.generalProducts.splice(destination.index, 0, movedProduct);
-                sourceWorkstation?.cr_products.splice(source.index, 1);
+            }
+        } else {
+            const sourceProducts =
+                sourceId === 0
+                    ? destinationWorkstation?.generalProducts
+                    : sourceWorkstation?.cr_products;
+
+            const movedProduct = sourceProducts?.[source.index];
+
+            if (movedProduct) {
+                if (sourceId === 0) {
+                    destinationWorkstation?.cr_products.splice(destination.index, 0, movedProduct);
+                    destinationWorkstation?.generalProducts.splice(source.index, 1);
+                } else {
+                    sourceWorkstation?.generalProducts.splice(destination.index, 0, movedProduct);
+                    sourceWorkstation?.cr_products.splice(source.index, 1);
+                }
             }
         }
 

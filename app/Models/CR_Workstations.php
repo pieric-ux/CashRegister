@@ -33,6 +33,6 @@ class CR_Workstations extends Model
 
     public function cr_products()
     {
-        return $this->belongsToMany(CR_Products::class, 'cr_workstations_products', 'fk_workstations_id', 'fk_products_id');
+        return $this->belongsToMany(CR_Products::class, 'cr_workstations_products', 'fk_workstations_id', 'fk_products_id')->orderBy('cr_workstations_products.order_products');
     }
 }

@@ -17,6 +17,7 @@ class CR_Workstations_Products extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'order_products',
         'fk_workstations_id',
         'fk_products_id',
     ];

@@ -95,9 +95,14 @@ class ProductsController extends Controller
         foreach ($workstations as $workstationData) {
             $workstation = CR_Workstations::find($workstationData['id']);
 
-            $productIds = collect($workstationData['cr_products'])->pluck('id')->all();
+            $productsWithOrder = $workstationData['cr_products'];
 
-            $workstation->cr_products()->sync($productIds);
+            $syncData = [];
+            foreach ($productsWithOrder as $index => $product) {
+                $syncData[$product['id']] = ['order_products' => $index];
+            }
+
+            $workstation->cr_products()->sync($syncData);
         }
     }
 

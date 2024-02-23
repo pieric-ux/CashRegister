@@ -17,6 +17,7 @@ class CR_Workstations_ProductsFactory extends Factory
     public function definition(): array
     {
         return [
+            'order_products' => 0,
             'fk_workstations_id' => function () {
                 return \App\Models\CR_Workstations::factory()->create()->id;
             },

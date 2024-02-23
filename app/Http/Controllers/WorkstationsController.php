@@ -26,10 +26,11 @@ class WorkstationsController extends Controller
 
         $generalProducts = $categories->flatMap(function ($category) {
             return $category->cr_products;
-        });
+        })->sortBy('created_at');
 
         foreach ($workstations as $workstation) {
             $assignedProductIds = $workstation->cr_products->pluck('id')->toArray();
+
             $workstation->generalProducts = $generalProducts->filter(function ($product) use ($assignedProductIds) {
                 return !in_array($product->id, $assignedProductIds);
             })->values()->toArray();
