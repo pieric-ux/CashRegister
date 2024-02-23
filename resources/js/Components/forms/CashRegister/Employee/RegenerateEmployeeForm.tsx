@@ -24,8 +24,13 @@ export default function RegenerateEmployeeForm({
         patch(route('employees.regenerate', employee.id), {
             onSuccess: () => {
                 toast({
-                    title: 'E-mail send',
-                    description: 'Test',
+                    title: t('E-mail sent'),
+                    description:
+                        t(
+                            'A passwordless regeneration email has been successfully sent to the employee at ',
+                        ) +
+                        employee.email +
+                        '.',
                 });
             },
         });
