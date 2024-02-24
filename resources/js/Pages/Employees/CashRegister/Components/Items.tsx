@@ -53,7 +53,7 @@ export default function Items(): JSX.Element {
     const returnDishes = [...soldSeparatelyDishes, ...productsDishes].filter(
         (dish, index, self) => self.findIndex((d) => d.id === dish.id) === index,
     );
-
+    // FIXME: defaultValues
     return (
         <Accordion type='single' defaultValue='Return Dishes' collapsible>
             {returnDishes.length > 0 && (

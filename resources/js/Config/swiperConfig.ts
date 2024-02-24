@@ -8,7 +8,7 @@ export const swiperSetting: SwiperOptions = {
         el: '.swiper-pagination',
         type: 'progressbar',
         renderProgressbar: function (progressbarFillClass) {
-            return '<span class="' + progressbarFillClass + ' !bg-sky-500"></span>';
+            return '<span class="' + progressbarFillClass + ' !bg-sky-500"></span>'; // FIXME:
         },
     },
 
