@@ -44,5 +44,10 @@ class DatabaseSeeder extends Seeder
             'fk_workstations_id' => $workstation->id,
             'fk_products_id' => $product->id,
         ]);
+
+        $transactions = \App\Models\CR_Transactions::factory()->count(200)->create([
+            'employee' => $employee->first_name . ' ' . $employee->last_name,
+            'workstation' => $workstation->name,
+        ]);
     }
 }

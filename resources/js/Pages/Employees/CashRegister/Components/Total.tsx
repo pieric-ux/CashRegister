@@ -9,13 +9,13 @@ export default function Total(): JSX.Element {
 
     const { cart } = useContext(CashRegisterContext);
 
-    const formatted = useCurrencyFormatter(cart.total);
+    const { formattedAmount } = useCurrencyFormatter(cart.total);
 
     return (
         <Card variant={'secondary'}>
             <CardHeader variant={'flex-row'} className='items-center justify-center py-[5%]'>
                 <span className='mr-2 text-xl font-medium sm:text-2xl'>{t('Total')}:</span>
-                <span className='text-xl font-bold sm:text-2xl'>{formatted}</span>
+                <span className='text-xl font-bold sm:text-2xl'>{formattedAmount}</span>
             </CardHeader>
         </Card>
     );

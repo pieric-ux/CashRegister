@@ -58,6 +58,10 @@ class CashRegisterModulesController extends Controller
      */
     public function show(ShowCashRegisterModulesRequest $request, CR_Module $module): Response
     {
+        $module->cr_payment_methods->flatMap(function ($paymentMethod) {
+            $paymentMethod->getPictureUrl();
+            return $paymentMethod->cr_transactions;
+        });
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Dashboard', [
             'cashRegisterModule' => fn () => $module,
         ]);

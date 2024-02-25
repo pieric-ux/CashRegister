@@ -74,9 +74,9 @@ export const columns: ColumnDef<Dish>[] = [
             const price = row.original.client_price;
 
             // eslint-disable-next-line react-hooks/rules-of-hooks
-            const formatted = useCurrencyFormatter(price);
+            const { formattedAmount } = useCurrencyFormatter(price);
 
-            return <div className='text-left font-medium'>{formatted}</div>;
+            return <div className='text-left font-medium'>{formattedAmount}</div>;
         },
     },
     {
@@ -89,9 +89,9 @@ export const columns: ColumnDef<Dish>[] = [
             const price = row.original.cost_price;
 
             // eslint-disable-next-line react-hooks/rules-of-hooks
-            const formatted = useCurrencyFormatter(price);
+            const { formattedAmount } = useCurrencyFormatter(price);
 
-            return <div className='text-left font-medium'>{formatted}</div>;
+            return <div className='text-left font-medium'>{formattedAmount}</div>;
         },
     },
     {

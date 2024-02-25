@@ -40,9 +40,9 @@ export const columns: ColumnDef<CartItem>[] = [
             const price = row.original.client_price;
 
             // eslint-disable-next-line react-hooks/rules-of-hooks
-            const formatted = useCurrencyFormatter(price);
+            const { formattedAmount } = useCurrencyFormatter(price);
 
-            return <div className='text-left font-medium'>{formatted}</div>;
+            return <div className='text-left font-medium'>{formattedAmount}</div>;
         },
     },
     {
@@ -56,9 +56,9 @@ export const columns: ColumnDef<CartItem>[] = [
             const subTotal = row.original.quantity * row.original.client_price;
 
             // eslint-disable-next-line react-hooks/rules-of-hooks
-            const formatted = useCurrencyFormatter(subTotal);
+            const { formattedAmount } = useCurrencyFormatter(subTotal);
 
-            return <div className='hidden text-left font-medium sm:block'>{formatted}</div>;
+            return <div className='hidden text-left font-medium sm:block'>{formattedAmount}</div>;
         },
     },
     {
