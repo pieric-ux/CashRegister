@@ -29,6 +29,16 @@ class CR_Products extends Model implements HasMedia
         'fk_dishes_id',
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'fk_categories_products_id',
+        'fk_dishes_id',
+    ];
+
     public function cr_categories_products()
     {
         return $this->belongsTo(CR_Categories_Products::class, 'fk_categories_products_id');

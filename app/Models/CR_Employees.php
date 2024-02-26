@@ -40,7 +40,9 @@ class CR_Employees extends Authenticatable implements HasMedia
      */
     protected $hidden = [
         'passwordless',
+        'logout',
         'remember_token',
+        'fk_workstations_id',
     ];
 
     public function cr_workstations()

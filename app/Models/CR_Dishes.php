@@ -30,6 +30,15 @@ class CR_Dishes extends Model implements HasMedia
         'fk_cr_modules_id',
     ];
 
+     /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'fk_cr_modules_id',
+    ];
+
     public function cr_modules()
     {
         return $this->belongsTo(CR_Module::class, 'fk_cr_modules_id');

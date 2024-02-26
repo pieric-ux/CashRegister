@@ -31,6 +31,15 @@ class CR_Module extends Model implements HasMedia
         'fk_customer_id',
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'fk_customer_id',
+    ];
+
     public function customers()
     {
         return $this->belongsTo(Customer::class, 'fk_customer_id');

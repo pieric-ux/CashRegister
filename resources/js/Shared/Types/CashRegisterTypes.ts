@@ -9,7 +9,6 @@ export interface CashRegister {
     end_date: string;
     location: string;
     website: string;
-    fk_customer_id?: number;
     created_at?: string;
     updated_at?: string;
     media: Media[];

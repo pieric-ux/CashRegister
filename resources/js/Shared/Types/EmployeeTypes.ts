@@ -7,8 +7,6 @@ export interface Employee {
     phone: string;
     email: string;
     passwordless?: string;
-    logout?: boolean;
-    fk_workstations_id?: number;
     created_at?: string;
     updated_at?: string;
     media: Media[];

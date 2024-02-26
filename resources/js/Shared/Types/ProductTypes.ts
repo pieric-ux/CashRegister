@@ -7,9 +7,7 @@ export interface Product {
     client_price: number;
     cost_price: number;
     category?: string;
-    fk_categories_products_id?: string;
     dish?: string;
-    fk_dishes_id?: string;
     created_at?: string;
     updated_at?: string;
     media?: Media[];

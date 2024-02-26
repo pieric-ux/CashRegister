@@ -24,6 +24,15 @@ class CR_Transactions extends Model
         'fk_paymentMethods_id',
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'fk_paymentMethods_id',
+    ];
+
     public function cr_payment_methods()
     {
         return $this->belongsTo(CR_PaymentMethods::class, 'fk_paymentMethods_id');
