@@ -1,11 +1,11 @@
 import { usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import { Avatar, AvatarImage } from '../ui/avatar/avatar';
+import { Avatar, AvatarImage } from '../../ui/avatar/avatar';
 import { type Transaction } from '@/Shared/Types/TransactionTypes';
 import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 import { type PaymentMethod } from '@/Shared/Types/PaymentMethodsTypes';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card/card';
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/card/card';
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 
 interface PageProps extends InertiaPageProps {
     cashRegisterModule: CashRegister & {
@@ -20,10 +20,10 @@ export default function PreferredPaymentMethodPie() {
 
     const CustomLegend = () => {
         return (
-            <div className='flex items-center justify-center gap-6'>
+            <div className='mt-4 flex items-center justify-center gap-7'>
                 {cashRegisterModule.cr_payment_methods.map((paymentMethod, index) => (
                     <div key={index} className='flex items-center justify-center gap-2'>
-                        <Avatar variant={'square'} className='h-10 w-10'>
+                        <Avatar variant={'square'} className='h-6 w-6 md:h-10 md:w-10'>
                             <AvatarImage
                                 src={paymentMethod.media[0].original_url}
                                 alt={paymentMethod.name}
@@ -31,7 +31,7 @@ export default function PreferredPaymentMethodPie() {
                         </Avatar>
 
                         <span
-                            className='text-xl font-semibold'
+                            className='font-semibold md:text-xl'
                             style={{ color: COLORS[index % COLORS.length] }}
                         >
                             {t(paymentMethod.name)}
@@ -77,7 +77,7 @@ export default function PreferredPaymentMethodPie() {
             </CardHeader>
             <CardContent className='h-52 items-center justify-center'>
                 <ResponsiveContainer>
-                    <PieChart title={t('Preferred Payment Methods')} margin={{ top: 10 }}>
+                    <PieChart title={t('Preferred Payment Methods')} margin={{ top: 20 }}>
                         <Pie
                             data={data}
                             cy='90%'
@@ -94,6 +94,7 @@ export default function PreferredPaymentMethodPie() {
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
                         </Pie>
+                        <Tooltip />
                         <Legend content={<CustomLegend />} />
                     </PieChart>
                 </ResponsiveContainer>
