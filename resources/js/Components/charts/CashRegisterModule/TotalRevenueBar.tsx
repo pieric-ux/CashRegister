@@ -91,7 +91,7 @@ export default function TotalRevenueBar() {
             </CardHeader>
             <CardContent className='h-52 items-center justify-center'>
                 <ResponsiveContainer>
-                    <BarChart title={t('Total Revenue')} data={data} margin={{ top: 20 }}>
+                    <BarChart title={t('Total Revenue')} data={data} className='mt-5'>
                         <Bar dataKey='value' label={CustomLabel}>
                             {data.map((entry, index) => (
                                 <Cell

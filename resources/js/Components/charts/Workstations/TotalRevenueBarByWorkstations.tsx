@@ -77,7 +77,7 @@ export default function TotalRevenueBarByWorkstations() {
             </CardHeader>
             <CardContent className='h-52 items-center justify-center'>
                 <ResponsiveContainer>
-                    <BarChart title={t('Total Revenue')} data={data} margin={{ top: 20 }}>
+                    <BarChart title={t('Total Revenue')} data={data} className='mt-5'>
                         <XAxis dataKey='name' />
                         <YAxis />
                         <Tooltip />

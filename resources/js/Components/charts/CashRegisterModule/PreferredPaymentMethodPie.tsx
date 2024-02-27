@@ -4,8 +4,8 @@ import { Avatar, AvatarImage } from '../../ui/avatar/avatar';
 import { type Transaction } from '@/Shared/Types/TransactionTypes';
 import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 import { type PaymentMethod } from '@/Shared/Types/PaymentMethodsTypes';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/card/card';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/card/card';
 
 interface PageProps extends InertiaPageProps {
     cashRegisterModule: CashRegister & {
@@ -77,7 +77,7 @@ export default function PreferredPaymentMethodPie() {
             </CardHeader>
             <CardContent className='h-52 items-center justify-center'>
                 <ResponsiveContainer>
-                    <PieChart title={t('Preferred Payment Methods')} margin={{ top: 20 }}>
+                    <PieChart title={t('Preferred Payment Methods')} className='mt-5'>
                         <Pie
                             data={data}
                             cy='90%'
