@@ -10,6 +10,8 @@ export interface Customer {
     npa: string;
     phone: string;
     email: string;
+    email_verified_at: string;
+    password: string;
     created_at?: string;
     updated_at?: string;
     media: Media[];
