@@ -15,7 +15,7 @@
         <link rel="manifest" href="/manifest.webmanifest" nonce="{{ Vite::cspNonce() }}">
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link rel="preconnect" href="https://fonts.bunny.net" nonce="{{ Vite::cspNonce() }}" >
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" nonce="{{ Vite::cspNonce() }}" />
 
         <!-- Scripts -->
