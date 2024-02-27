@@ -42,7 +42,6 @@ class UpdateDragAndDropCategorieProductRequest extends FormRequest
             'categories.*.id' => 'required|exists:cr_categories_products,id',
             'categories.*.name' => 'required|string',
             'categories.*.order' => 'required|integer',
-            'categories.*.fk_cr_modules_id' => 'required|exists:cr_modules,id',
         ];
     }
 }

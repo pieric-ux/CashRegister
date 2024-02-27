@@ -12,25 +12,22 @@ interface PageProps extends InertiaPageProps {
     };
 }
 
-export default function TotalEmployees() {
+export default function TotalWorkstations() {
     const { t } = useTranslation();
     const { cashRegisterModule } = usePage<PageProps>().props;
 
-    const getCountEmployees = cashRegisterModule.cr_workstations.reduce(
-        (count, workstation) => count + workstation.cr_employees.length,
-        0,
-    );
+    const getCountWorkstations = cashRegisterModule.cr_workstations.length - 1;
 
     return (
         <Card>
             <CardHeader>
                 <div className='flex items-center justify-between'>
-                    <CardTitle>{t('Employees')}</CardTitle>
-                    <Svg type='employees' variant='sideBar' />
+                    <CardTitle>{t('Workstations')}</CardTitle>
+                    <Svg type='workstations' variant='sideBar' />
                 </div>
             </CardHeader>
             <CardContent>
-                <div className='text-2xl font-bold'>{getCountEmployees}</div>
+                <div className='text-2xl font-bold'>{getCountWorkstations}</div>
             </CardContent>
         </Card>
     );

@@ -5,7 +5,7 @@ import useCurrencyFormatter from '@/Hooks/useCurrencyFormatter';
 import { type Transaction } from '@/Shared/Types/TransactionTypes';
 import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
 import { type PaymentMethod } from '@/Shared/Types/PaymentMethodsTypes';
-import { Bar, BarChart, Cell, LabelProps, Legend, ResponsiveContainer, Tooltip } from 'recharts';
+import { Bar, BarChart, Cell, LabelProps, Legend, ResponsiveContainer } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/card/card';
 
 interface PageProps extends InertiaPageProps {
@@ -16,7 +16,7 @@ interface PageProps extends InertiaPageProps {
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 
-export default function TotalRevenue() {
+export default function TotalRevenueBar() {
     const { t } = useTranslation();
     const { currencySymbol } = useCurrencyFormatter();
     const { cashRegisterModule } = usePage<PageProps>().props;

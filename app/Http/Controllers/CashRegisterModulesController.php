@@ -58,18 +58,25 @@ class CashRegisterModulesController extends Controller
      */
     public function show(ShowCashRegisterModulesRequest $request, CR_Module $module): Response
     {
+        $module->cr_workstations->flatMap(function ($workstation) {
+            return $workstation->cr_employees;
+        });
+        
+        $module->cr_categories_products->flatMap(function ($category) {
+            return $category->cr_products;
+        });
+
+        $module->cr_dishes->flatMap(function ($dish) {
+            return $dish->cr_products;
+        });
+        
         $module->cr_payment_methods->flatMap(function ($paymentMethod) {
             $paymentMethod->getPictureUrl();
             return $paymentMethod->cr_transactions;
         });
 
-        $totalEmployees = $module->cr_workstations->flatMap(function ($workstation) {
-            return $workstation->cr_employees;
-        })->count();
-
         return Inertia::render('Customers/Modules/CashRegisterModule/Configurations/Dashboard', [
             'cashRegisterModule' => fn () => $module,
-            'totalEmployees' => fn () => $totalEmployees,
         ]);
     }
 

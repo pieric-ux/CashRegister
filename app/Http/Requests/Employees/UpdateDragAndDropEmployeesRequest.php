@@ -55,8 +55,7 @@ class UpdateDragAndDropEmployeesRequest extends FormRequest
         return [
             'workstations' => 'required|array',
             'workstations.*.id' => 'required|exists:cr_workstations,id',
-            'workstations.*.name' => 'required|string',
-            'workstations.*.fk_cr_modules_id' => 'required|exists:cr_modules,id',
+            'workstations.*.name' => 'required|string',         
             'workstations.*.cr_employees' => 'nullable|array',
             'workstations.*.cr_employees.*.id' => 'nullable|exists:cr_employees,id',
             'workstations.*.cr_employees.*.first_name' => 'nullable|string',

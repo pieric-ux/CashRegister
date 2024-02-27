@@ -20,7 +20,7 @@ class CR_TransactionsFactory extends Factory
             'or_number' => $this->faker->ean8(),
             'employee' => '',
             'workstation' => '',
-            'total' => $this->faker->randomFloat(2, 0, 1000),
+            'total' => $this->faker->randomFloat(2, 0, 100),
             'fk_paymentMethods_id' => $this->faker->randomElement([1, 2, 3]),
         ];
     }

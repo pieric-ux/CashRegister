@@ -13,11 +13,13 @@ class CR_TransactionsSeeder extends Seeder
     public function run(): void
     {
         $employee = \App\Models\CR_Employees::first();
-        $workstation = \App\Models\CR_Workstations::first();
+        $workstations = \App\Models\CR_Workstations::whereNotIn('id', [1])->inRandomOrder()->get();
         
-        \App\Models\CR_Transactions::factory()->count(20)->create([
+        $randomWorkstation = $workstations->random();
+
+        \App\Models\CR_Transactions::factory()->count(500)->create([
             'employee' => $employee->first_name . ' ' . $employee->last_name,
-            'workstation' => $workstation->name,
+            'workstation' => $randomWorkstation->name,
         ]);
     }
 }

@@ -1,36 +1,33 @@
 import { usePage } from '@inertiajs/react';
 import { Svg } from '@/Components/ui/svg/Svg';
 import { useTranslation } from 'react-i18next';
-import { type Employee } from '@/Shared/Types/EmployeeTypes';
-import { type Workstation } from '@/Shared/Types/WorkstationTypes';
+import { type Product } from '@/Shared/Types/ProductTypes';
 import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
+import { type CategoryProducts } from '@/Shared/Types/CategoryProductsTypes';
 import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card/card';
 
 interface PageProps extends InertiaPageProps {
     cashRegisterModule: CashRegister & {
-        cr_workstations: (Workstation & { cr_employees: Employee[] })[];
+        cr_categories_products: (CategoryProducts & { cr_products: Product[] })[];
     };
 }
 
-export default function TotalEmployees() {
+export default function TotalCategoriesProducts() {
     const { t } = useTranslation();
     const { cashRegisterModule } = usePage<PageProps>().props;
 
-    const getCountEmployees = cashRegisterModule.cr_workstations.reduce(
-        (count, workstation) => count + workstation.cr_employees.length,
-        0,
-    );
+    const getCountCategoriesProducts = cashRegisterModule.cr_categories_products.length - 1;
 
     return (
         <Card>
             <CardHeader>
                 <div className='flex items-center justify-between'>
-                    <CardTitle>{t('Employees')}</CardTitle>
-                    <Svg type='employees' variant='sideBar' />
+                    <CardTitle>{t('Categories')}</CardTitle>
+                    <Svg type='categories' variant='sideBar' />
                 </div>
             </CardHeader>
             <CardContent>
-                <div className='text-2xl font-bold'>{getCountEmployees}</div>
+                <div className='text-2xl font-bold'>{getCountCategoriesProducts}</div>
             </CardContent>
         </Card>
     );

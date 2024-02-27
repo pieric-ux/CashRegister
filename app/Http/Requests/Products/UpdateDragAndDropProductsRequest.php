@@ -54,7 +54,6 @@ class UpdateDragAndDropProductsRequest extends FormRequest
             'workstations' => 'required|array',
             'workstations.*.id' => 'required|exists:cr_workstations,id',
             'workstations.*.name' => 'required|string',
-            'workstations.*.fk_cr_modules_id' => 'required|exists:cr_modules,id',
             'workstations.*.cr_products' => 'nullable|array',
             'workstations.*.cr_products.*.id' => 'nullable|exists:cr_products,id',
             'workstations.*.cr_products.*.name' => 'nullable|string',
