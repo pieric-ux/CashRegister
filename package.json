@@ -1,4 +1,5 @@
 {
+    "name": "cash_register",
     "private": true,
     "type": "module",
     "scripts": {

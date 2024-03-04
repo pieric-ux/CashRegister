@@ -14,6 +14,9 @@ docker run --rm \
 # Start Sail
 ./vendor/bin/sail up -d
 
+# Wait for the container to be ready
+sleep 5
+
 # Generate APP_KEY
 ./vendor/bin/sail artisan key:generate
 
