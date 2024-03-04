@@ -27,7 +27,8 @@
                 "esbenp.prettier-vscode",
                 "bradlc.vscode-tailwindcss",
                 "burkeholland.simple-react-snippets",
-                "tombonnike.vscode-status-bar-format-toggle"
+                "tombonnike.vscode-status-bar-format-toggle",
+                "xdebug.php-debug"
             ],
             "settings": {}
         }
