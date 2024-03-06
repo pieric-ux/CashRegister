@@ -8,7 +8,7 @@
 
 ## About
 
-The **Cash Register** project is an application that simulates a cash register. It is a POS application that allows events to **manage their transactions, products, and returnable dishes**. The application offers an easy way to track sales and returns. Deposit calculations are **automatically added** to the various products, all through a **user-friendly interface**.
+The **Cash Register** project is an application that simulates a cash register. It is a POS application that allows events to **manage their transactions, products, and reusable dishes**. The application offers an easy way to track sales and returns. Deposit calculations are **automatically added** to the various products, all through a **user-friendly interface**.
 
 ## Features
 
@@ -155,7 +155,7 @@ This script performs the following steps:
     <img width="266" alt="Pay" src="https://github.com/pieric-ux/CashRegister/assets/93613004/716976df-a4d4-470b-a738-d05875345692">
  </div>
 
-9. **CashRegister**: To log on to the cash register as an employee, check your e-mails. When an employee is created, an e-mail is generated with login information. Once on the cash register page, you can toggle between the cart tab and the product tab. You can swipe products if they are not all displayed.
+9. **CashRegister**: To log in to the cash register as an employee, check your e-mails. When an employee is created, an e-mail is generated with login information. Once on the cash register page, you can toggle between the cart tab and the product tab. You can swipe products if they are not all displayed.
 <div align="center">
     <img width="800" alt="Dashboard" src="https://github.com/pieric-ux/CashRegister/assets/93613004/0400784d-3aa3-4eb0-9aee-6984f9bcd620">
 </div>
