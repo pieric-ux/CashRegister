@@ -146,6 +146,7 @@ export default function ProductInfosForm({
                                         </FormControl>
                                         <SelectContent position='popper'>
                                             {dishes?.map((dish) => (
+                                                // FIXME: select value with same name
                                                 <SelectItem key={dish.id} value={dish.name}>
                                                     {dish.name === 'No dish'
                                                         ? t('No dish')
