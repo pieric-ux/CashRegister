@@ -9,7 +9,7 @@ By accessing this code repository, you agree to the following terms:
 
 2. **Modification**: You are not authorized to modify, adapt, or extend the codebase for any purpose, including but not limited to commercial projects or open-source contributions.
 
-3. **Distribution**: Distribution of this code or any derived works is strictly prohibited without prior written consent from Demont Pieric.
+3. **Distribution**: Distribution of this code or any derived work is strictly prohibited without prior written consent from Demont Pieric.
 
 4. **Non-Commercial Use**: You may not use this code, in whole or in part, for commercial purposes, including but not limited to selling, licensing, or providing services based on this code.
 
