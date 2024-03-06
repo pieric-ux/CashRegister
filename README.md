@@ -108,55 +108,83 @@ This script performs the following steps:
 ## Use
 
 <div align="center">
-    <img width="800" alt="CreateApp" src="https://github.com/pieric-ux/CashRegister/assets/93613004/803c71da-b1aa-482b-8e60-02d37ea5900d">
+    <img width="800" alt="Application" src="https://github.com/pieric-ux/CashRegister/assets/93613004/6fbca4b6-7b83-46ec-8b87-abc7cea9a461">
 </div>
+
 
 1. **Create an application**: Create an application, and insert the requested data.
 
 <div align="center">
-    <img width="800" alt="ConfigureApp" src="https://github.com/pieric-ux/CashRegister/assets/93613004/5730c105-a45c-4108-9904-e8e81423c101">
+    <img width="800" alt="ConfigureApplication" src="https://github.com/pieric-ux/CashRegister/assets/93613004/cec17328-39b6-4a38-8983-dddfaa2fb838">
 </div>
 
 2. **Configure the application**: On the applications page, select the configuration wheel.
  <div align="center">
-    <img width="800" alt="ConfigureEmployees" src="https://github.com/pieric-ux/CashRegister/assets/93613004/d863f518-9568-4a37-a4de-be0b689f18d5">
+     <img width="800" alt="GenerateCode" src="https://github.com/pieric-ux/CashRegister/assets/93613004/099dbed0-d82c-481a-9b43-aa54709d17bb">
  </div>
 
 3. **Employee management**: On the employee page, you can manage employees, as well as generate a new code for each employee.
  <div align="center">
-    <img width="800" alt="ConfigureWorkstations" src="https://github.com/pieric-ux/CashRegister/assets/93613004/c9f3eb79-25b1-4f98-bcba-cdc0e0b5f5ba">
+     <img width="800" alt="ConfigureWorkstations" src="https://github.com/pieric-ux/CashRegister/assets/93613004/989f42d9-c3d6-425d-936a-19d810ba0ce0">
  </div>
 
 4. **Workstation management**: The workstation page lets you manage the assignment of employees and products to each workstation. To do this, simply drag-and-drop employees and products into the various columns. You can also change the order in which products are displayed for each workstation with drag-and-drop.
  <div align="center">
-    <img width="800" alt="ConfigureCategories" src="https://github.com/pieric-ux/CashRegister/assets/93613004/06199406-5972-4774-b2d8-789d64936a7b">
+     <img width="800" alt="ConfigureCategories" src="https://github.com/pieric-ux/CashRegister/assets/93613004/87e1b1b3-0dfd-466d-8696-ab02159ccede">
  </div>
 
 5. **Category management**: Categories can be added or modified in the control panel. Their display order in this view will be reflected on the cash register application. To change the order, drag-and-drop between categories.
  <div align="center">
-    <img width="800" alt="ConfigureDishes" src="https://github.com/pieric-ux/CashRegister/assets/93613004/3eca8782-29aa-4c7f-8dbf-ca9f346dac99">
+     <img width="800" alt="ConfigureDishes" src="https://github.com/pieric-ux/CashRegister/assets/93613004/631ce9b9-4611-4350-b74a-092563403277">
  </div>
 
 6. **Dishes management**: Dishes can be used with or without deposits, and if you wish to sell a dish, you can choose to sell it separately.
  <div align="center">
-     <img width="800" alt="ConfigureProducts" src="https://github.com/pieric-ux/CashRegister/assets/93613004/8b78ccaf-f2f4-4e92-972c-40c0a24a09a3">
+     <img width="800" alt="ConfigureProducts" src="https://github.com/pieric-ux/CashRegister/assets/93613004/e587c055-762b-481a-b4f2-ceb60f2a383f">
  </div>
 
 7. **Product management**: Products can be sold with a dishware item. At this point, if the dishware has a deposit, the deposit will be added automatically for each sale of the product. You can also add the product category.
- <div align="center"> 
-    <img width="800" alt="ShowTransactions" src="https://github.com/pieric-ux/CashRegister/assets/93613004/3065fa65-ffc7-49de-9f2e-f6c67ada835d">
+ <div align="center">
+     <img width="800" alt="DisplayTransactions" src="https://github.com/pieric-ux/CashRegister/assets/93613004/c9dae7b1-c3e2-4c97-992f-665780309fee">
  </div>
 
 8. **Transaction display**: The transactions page displays all transactions carried out on the application. You can also view the details of each transaction.
  <div align="center">
-     <img width="400" alt="Capture d’écran 2023-08-24 à 17 11 43" src="https://github.com/pieric-ux/CashRegister/assets/93613004/fb4a26d8-d947-4ddf-846f-bc3f66628d9e">
-     <img width="400" alt="Capture d’écran 2023-08-24 à 17 16 17" src="https://github.com/pieric-ux/CashRegister/assets/93613004/180d9e6a-7169-4bc5-8297-9b5adef4c361">
+    <img width="268" alt="Cart" src="https://github.com/pieric-ux/CashRegister/assets/93613004/17ee28c4-1ed0-4ec0-8fae-517171f5fc23">
+    <img width="266" alt="Products" src="https://github.com/pieric-ux/CashRegister/assets/93613004/f7a13ec8-c753-4a20-8acb-eb5c0023c075">
+    <img width="266" alt="Pay" src="https://github.com/pieric-ux/CashRegister/assets/93613004/716976df-a4d4-470b-a738-d05875345692">
  </div>
 
 9. **CashRegister**: To log on to the cash register as an employee, check your e-mails. When an employee is created, an e-mail is generated with login information. Once on the cash register page, you can toggle between the cart tab and the product tab. You can swipe products if they are not all displayed.
+<div align="center">
+    <img width="800" alt="Dashboard" src="https://github.com/pieric-ux/CashRegister/assets/93613004/0400784d-3aa3-4eb0-9aee-6984f9bcd620">
+</div>
+
+10. **Dashbaord**: The Dashboard section provides an insightful overview of various key metrics and data points related to your business operations. Through interactive charts and visualizations, you can easily monitor sales information, employee statistics, workstation details, and more. 
 
 ## Security and Vulnerabilities
 
 If you discover a security vulnerability within CashRegister, please send an e-mail to Demont Pieric via [demont.pieric@gmail.com](mailto:demont.pieric@gmail.com). All security vulnerabilities will be **addressed promptly**.
 
-2023 Demont Pieric. All rights reserved.
+## Intellectual Property
+
+### Code Ownership
+
+The codebase and its associated components, including but not limited to scripts, documentation, and configurations, are the intellectual property of Demont Pieric. All rights are reserved.
+
+### Usage and Distribution
+
+This code is made publicly accessible on GitHub for the purpose of showcasing skills and serving as a portfolio. It is not open source, and usage or distribution without explicit permission is prohibited.
+
+### License
+
+This project is not licensed for open-source use. No permission is granted to use, modify, or distribute the codebase, except for the purpose of reviewing and assessing the showcased skills.
+
+### Contribution and Attribution
+
+Contributions to this project are not accepted at this time. The project is maintained solely for personal and portfolio purposes.
+
+### Reporting Issues and Contact
+
+For any issues or inquiries related to this project, please contact [demont.pieric@gmail.com](mailto:demont.pieric@gmail.com).
+
