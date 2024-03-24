@@ -1,6 +1,10 @@
 import { Head, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { type Employee } from '@/Shared/Types/EmployeeTypes';
+import { type Workstation } from '@/Shared/Types/WorkstationTypes';
+import { type Transaction } from '@/Shared/Types/TransactionTypes';
 import { type CashRegister } from '@/Shared/Types/CashRegisterTypes';
+import { type PaymentMethod } from '@/Shared/Types/PaymentMethodsTypes';
 import TotalDishes from '@/Components/charts/CashRegisterModule/TotalDishes';
 import TotalProducts from '@/Components/charts/CashRegisterModule/TotalProducts';
 import TotalEmployees from '@/Components/charts/CashRegisterModule/TotalEmployees';
@@ -12,14 +16,20 @@ import TotalCategoriesProducts from '@/Components/charts/CashRegisterModule/Tota
 import PreferredPaymentMethodPie from '@/Components/charts/CashRegisterModule/PreferredPaymentMethodPie';
 import TotalRevenueBarByWorkstations from '@/Components/charts/Workstations/TotalRevenueBarByWorkstations';
 import CashRegisterConfigurationsLayout from '@/Components/layouts/Auth/Customer/CashRegisterConfigurationsLayout';
+import { Card, CardHeader } from '@/Components/ui/card/card';
 
 interface PageProps extends InertiaPageProps {
-    cashRegisterModule: CashRegister;
+    cashRegisterModule: CashRegister & {
+        cr_payment_methods: (PaymentMethod & { cr_transactions: Transaction[] })[];
+        cr_workstations: (Workstation & { cr_employees: Employee[] })[];
+    };
 }
 
 export default function Dashboard(): JSX.Element {
     const { t } = useTranslation();
     const { cashRegisterModule } = usePage<PageProps>().props;
+
+    const workstations = cashRegisterModule.cr_workstations.slice(1);
 
     return (
         <>
@@ -45,9 +55,17 @@ export default function Dashboard(): JSX.Element {
                     </div>
                 </TabsContent>
                 <TabsContent value='Workstations'>
-                    <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-                        <TotalRevenueBarByWorkstations />
-                    </div>
+                {workstations.length > 0 ? (
+                        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+                            <TotalRevenueBarByWorkstations />
+                        </div>
+                ) : (
+                    <Card>
+                        <CardHeader size={'xl'} className='items-center'>
+                            {t('No workstation found.')}
+                        </CardHeader>
+                    </Card>
+                )}
                 </TabsContent>
             </Tabs>
         </>
