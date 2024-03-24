@@ -61,15 +61,15 @@ export default function TotalRevenueBar() {
 
         const validIndex = typeof index === 'number' ? index : 0;
         const validX = typeof x === 'number' ? x : 0;
+        const validY = typeof y === 'number' ? y : 0;
         const validWidth = typeof width === 'number' ? width : 0;
 
         return (
             <text
                 x={validX + validWidth / 2}
-                y={y}
+                y={validY}
                 fill={COLORS[validIndex]}
                 textAnchor='middle'
-                dy={-6}
                 className='text-sm md:text-base'
             >
                 {`${formattedAmount}`}
