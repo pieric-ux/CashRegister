@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'customer',
-        'passwords' => 'customers',
+        'guard' => env('AUTH_GUARD', 'customer'),
+        'passwords' => env('AUTH_PASSWORD_BROKER', 'customers'),
     ],
 
     /*
@@ -66,11 +66,11 @@ return [
     'providers' => [
         'customers' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Customer::class,
+            'model' => env('AUTH_MODEL_CUSTOMERS',App\Models\Customer::class),
         ],
         'employees' => [
             'driver' => 'eloquent',
-            'model' => App\Models\CR_Employees::class,
+            'model' => env('AUTH_MODEL_EMMPLOYEES',App\Models\CR_Employees::class),
         ],
     ],
 
@@ -96,7 +96,7 @@ return [
     'passwords' => [
         'customers' => [
             'provider' => 'customers',
-            'table' => 'password_reset_tokens',
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,
         ],
@@ -113,6 +113,7 @@ return [
     |
     */
 
-    'password_timeout' => 10800,
+    'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
+
 
 ];

@@ -57,8 +57,6 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'asset_url' => env('ASSET_URL'),
-
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -70,7 +68,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
@@ -83,7 +81,7 @@ return [
     |
     */
 
-    'locale' => 'en-US',
+    'locale' => env('APP_LOCALE','en-US'),
 
     /*
     |--------------------------------------------------------------------------
@@ -110,7 +108,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en-US',
+    'fallback_locale' => env('APP_FALLBACK_LOCALE','en-US'),
 
     /*
     |--------------------------------------------------------------------------
@@ -123,7 +121,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en-US',
+    'faker_locale' => env('APP_FAKER_LOCALE','en-US'),
 
     /*
     |--------------------------------------------------------------------------
@@ -154,8 +152,8 @@ return [
     */
 
     'maintenance' => [
-        'driver' => 'file',
-        // 'store'  => 'redis',
+        'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
+        //'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
     /*
