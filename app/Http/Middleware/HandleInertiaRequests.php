@@ -37,7 +37,7 @@ class HandleInertiaRequests extends Middleware
                 'locales' => config('app.locales'),
             ],
             'ziggy' => fn() => [
-                ...(new Ziggy)->toArray(),
+                ...(new Ziggy())->toArray(),
                 'location' => $request->url(),
             ],
         ];

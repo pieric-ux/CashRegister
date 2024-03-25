@@ -1,4 +1,4 @@
-import type ziggyRoute from 'ziggy-js';
+import { Config } from 'ziggy-js';
 import { type Customer } from '@/Shared/Types/CustomerTypes';
 import { type Employee } from '@/Shared/Types/EmployeeTypes';
 import { type Page, type PageProps, type Errors, type ErrorBag } from '@inertiajs/core';
@@ -12,7 +12,7 @@ declare global {
             locale: string;
             locales: string[];
         };
-        ziggy: typeof ziggyRoute;
+        ziggy: Config & { location: string };
         [key: string]: unknown;
     }
 }

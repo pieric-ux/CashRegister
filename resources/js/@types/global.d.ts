@@ -1,5 +1,5 @@
-import { type AxiosInstance } from 'axios';
-import type ziggyRoute from 'ziggy-js';
+import { AxiosInstance } from 'axios';
+import { route as ziggyRoute } from 'ziggy-js';
 
 declare global {
     interface Window {

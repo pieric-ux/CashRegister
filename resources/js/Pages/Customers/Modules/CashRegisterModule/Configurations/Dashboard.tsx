@@ -55,17 +55,17 @@ export default function Dashboard(): JSX.Element {
                     </div>
                 </TabsContent>
                 <TabsContent value='Workstations'>
-                {workstations.length > 0 ? (
+                    {workstations.length > 0 ? (
                         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
                             <TotalRevenueBarByWorkstations />
                         </div>
-                ) : (
-                    <Card>
-                        <CardHeader size={'xl'} className='items-center'>
-                            {t('No workstation found.')}
-                        </CardHeader>
-                    </Card>
-                )}
+                    ) : (
+                        <Card>
+                            <CardHeader size={'xl'} className='items-center'>
+                                {t('No workstation found.')}
+                            </CardHeader>
+                        </Card>
+                    )}
                 </TabsContent>
             </Tabs>
         </>
