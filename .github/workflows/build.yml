@@ -56,7 +56,8 @@ jobs:
           port: ${{ secrets.SERVER_SSH_PORT }}
           script: |
             cd ~/sites/cashregister.ch/CashRegister
-            git pull origin master
+            git fetch origin master
+            git reset --hard origin/master
 
       - name: Transfer Build
         uses: appleboy/scp-action@v0.1.7
@@ -80,6 +81,7 @@ jobs:
           script: |
             export PATH=/opt/php8.2/bin:$PATH
             cd ~/sites/cashregister.ch/CashRegister/
+            php artisan ziggy:generate
             php artisan view:clear
             php artisan cache:clear
             php artisan view:cache
